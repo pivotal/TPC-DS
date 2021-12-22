@@ -1,91 +1,87 @@
-########################################################################################
-TPC-DS benchmark scripts for Greenplum database.
-########################################################################################
-Supported versions:
-Greenplum 4.3, 5.*, 6.*
-Open Source Greenplum 5.*, 6.*
-Beta: PostgreSQL 10.*
+# TPC-DS benchmark scripts for Greenplum database.
 
-########################################################################################
-TPC-DS Information
-########################################################################################
-Version 2.x now uses TPC-DS version 2.1 for the standard queries.  
+Supported versions:
+- Greenplum 4.3, 5.*, 6.*
+- Open Source Greenplum 5.*, 6.*
+- Beta: PostgreSQL 10.*
+
+## TPC-DS Information
+
+Version 2.x now uses TPC-DS version 2.1 for the standard queries.
 
 Version 2.2.x now supports Greenplum version 5.x.
 
-########################################################################################
-Prerequisites
-########################################################################################
+## Dependencies
+
 Install the dependencies for this benchmark
 
-```
+```bash
 yum -y install gcc make
 ```
 
-########################################################################################
-Query Options
-########################################################################################
-You can have the queries execute with "EXPLAIN ANALYZE" in order to see exactly the 
-query plan used, the cost, the memory used, etc.  This is done in tpcds_variables.sh
+## Query Options
+
+You can have the queries execute with `EXPLAIN ANALYZE` in order to see exactly the
+query plan used, the cost, the memory used, etc.  This is done in `tpcds_variables.sh`
 like this:
+
+```sql
 EXPLAIN_ANALYZE="true"
+```
 
-########################################################################################
-Storage Options
-########################################################################################
-Table storage is defined in functions.sh and is configured for optimal performance.
+## Storage Options
+Table storage is defined in `functions.sh` and is configured for optimal performance.
 
-########################################################################################
-Prerequisites
-########################################################################################
+# Prerequisites
+
 1. Greenplum Database or PostgreSQL 10.x
-2. Connectivity is possible to the MASTER_HOST and from the Data Nodes / Segment Hosts
+2. Connectivity is possible to the `MASTER_HOST` and from the Data Nodes / Segment Hosts
 3. Root access
 
-########################################################################################
-Variables and Configuration
-########################################################################################
-By default, the installation will create the scripts in /dsbenchmark/TPC-DS on the 
-Master host.  This can be changed by editing the dynamically configured 
-tpcds_variables.sh file that is created the first time tpcds.sh is run.  
 
-Also by default, TPC-DS files are generated on each Segment Host / Data Node in the 
-Segement's PGDATA/dsbenchmark directory.  If there isn't enough space in this directory
-in each Segment, you can create a symbolic link to a drive location that does have 
-enough space.
+# Variables and Configuration
 
-########################################################################################
-Execution
-########################################################################################
-1. Execute tpcds.sh
+By default, the installation will create the scripts in `/dsbenchmark/TPC-DS` on the Master host.
+This can be changed by editing the dynamically configured `tpcds_variables.sh` file that is created the first time `tpcds.sh` is run.
+
+Also by default, TPC-DS files are generated on each Segment Host / Data Node in the Segement's PGDATA/dsbenchmark directory.
+If there isn't enough space in this directory in each Segment, you can create a symbolic link to a drive location that does have enough space.
+
+# Execution
+
+Example of running tpcds as root as a background process:
+
+```bash
 nohup ./tpcds.sh > tpcds.log 2>&1 < tpcds.log &
+```
 
-########################################################################################
-Notes
-########################################################################################
-- tpcds_variables.sh file will be created with variables you can adjust
-- Files for the benchmark will be created in a sub-directory named dsbenchmark located 
-in each segment directory on each segment host / data node.
-You can update these directories to be symbolic links to better utilize the disk 
-volumes you have available.
-- Example of running tpcds as root as a background process:
+## Notes
 
-########################################################################################
-TPC-DS Minor Modifications
-########################################################################################
-1.  Change to SQL queries that subtracted or added days were modified slightly:
+- `tpcds_variables.sh` file will be created with variables you can adjust
+- Files for the benchmark will be created in a sub-directory named `dsbenchmark` located in each segment directory on each segment host / data node.
+  You can update these directories to be symbolic links to better utilize the disk volumes you have available.
+
+# TPC-DS Minor Modifications
+
+## 1. Change to SQL queries that subtracted or added days were modified slightly:
 
 Old:
+```sql
 and (cast('2000-02-28' as date) + 30 days)
+```
 
 New:
+
+```sql
 and (cast('2000-02-28' as date) + '30 days'::interval)
+```
 
 This was done on queries: 5, 12, 16, 20, 21, 32, 37, 40, 77, 80, 82, 92, 94, 95, and 98.
 
-2.  Change to queries with ORDER BY on column alias to use sub-select.
+## 2. Change to queries with ORDER BY on column alias to use sub-select.
 
-Old: 
+Old:
+```sql
 select  
     sum(ss_net_profit) as total_sum
    ,s_state
@@ -121,8 +117,10 @@ select
   ,case when lochierarchy = 0 then s_state end
   ,rank_within_parent
  limit 100;
+```
 
 New:
+```sql
 select * from ( --new
 select  
     sum(ss_net_profit) as total_sum
@@ -160,20 +158,21 @@ select
   ,case when lochierarchy = 0 then s_state end
   ,rank_within_parent
  limit 100;
+```
 
 This was done on queries: 36 and 70.
 
-3. Query templates were modified to exclude columns not found in the query.  In these cases, the common 
-table expression used aliased columns but the dynamic filters included both the alias name as well as the
-original name.  Referencing the original column name instead of the alias causes the query parser to not
-find the column. 
+## 3. Query templates were modified to exclude columns not found in the query.
+
+In these cases, the common table expression used aliased columns but the dynamic filters included both the alias name as well as the original name.
+Referencing the original column name instead of the alias causes the query parser to not find the column.
 
 This was done on query 86.
 
-4.  Added table aliases.
+## 4. Added table aliases.
 This was done on queries: 2, 14, and 23.
 
-5.  Added "limit 100" to very large result set queries.  For the larger tests (e.g. 15TB), a few of the 
-TPC-DS queries can output a very large number of rows which are just discarded.  
-This was done on queries: 64, 34, and 71.
+## 5. Added `limit 100` to very large result set queries.
+For the larger tests (e.g. 15TB), a few of the TPC-DS queries can output a very large number of rows which are just discarded.
 
+This was done on queries: 64, 34, and 71.
