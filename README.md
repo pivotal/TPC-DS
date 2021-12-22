@@ -1,9 +1,9 @@
 # TPC-DS benchmark scripts for Greenplum database.
 
 Supported versions:
-- Greenplum 4.3, 5.*, 6.*
-- Open Source Greenplum 5.*, 6.*
-- Beta: PostgreSQL 10.*
+- Greenplum `4.3`, `5.*`, `6.*`
+- Open Source Greenplum `5.*`, `6.*`
+- Beta: PostgreSQL `10.*`
 
 ## TPC-DS Information
 
