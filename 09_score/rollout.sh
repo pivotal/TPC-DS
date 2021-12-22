@@ -20,19 +20,19 @@ fi
 step="score"
 init_log $step
 
-load_time=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select sum(extract('epoch' from duration)) from tpcds_reports.load where tuples > 0")
-analyze_time=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select sum(extract('epoch' from duration)) from tpcds_reports.load where tuples = 0")
-queries_time=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select sum(extract('epoch' from duration)) from (SELECT split_part(description, '.', 2) AS id,  min(duration) AS duration FROM tpcds_reports.sql GROUP BY split_part(description, '.', 2)) as sub")
-concurrent_queries_time=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select sum(extract('epoch' from duration)) from tpcds_testing.sql")
+load_time=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select round(sum(extract('epoch' from duration))) from tpcds_reports.load where tuples > 0")
+analyze_time=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select round(sum(extract('epoch' from duration))) from tpcds_reports.load where tuples = 0")
+queries_time=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select round(sum(extract('epoch' from duration))) from (SELECT split_part(description, '.', 2) AS id,  min(duration) AS duration FROM tpcds_reports.sql GROUP BY split_part(description, '.', 2)) as sub")
+concurrent_queries_time=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select round(sum(extract('epoch' from duration))) from tpcds_testing.sql")
 
-q=$((3*MULTI_USER_COUNT*99))
+q=$(( 3 * MULTI_USER_COUNT * 99 ))
 
-tpt=$(echo "$queries_time*$MULTI_USER_COUNT" | bc)
+tpt=$(( queries_time * MULTI_USER_COUNT ))
+tld=$(( MULTI_USER_COUNT * load_time / 100 ))
 
-tld=$(echo "0.01*$MULTI_USER_COUNT*$load_time" | bc)
-num_score=$(echo "$GEN_DATA_SCALE*$q" | bc)
-dem_score=$(echo "$tpt+2*$concurrent_queries_time+$tld" | bc)
-score=$(echo "$num_score/$dem_score" | bc)
+num_score=$(( GEN_DATA_SCALE * q ))
+dem_score=$(( tpt + 2 * concurrent_queries_time + tld ))
+score=$(( num_score / dem_score ))
 
 echo -e "Scale Factor\t$GEN_DATA_SCALE"
 echo -e "Load\t$load_time"

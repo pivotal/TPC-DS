@@ -19,7 +19,7 @@ Prerequisites
 Install the dependencies for this benchmark
 
 ```
-yum -y install gcc git bc make
+yum -y install gcc make
 ```
 
 ########################################################################################
