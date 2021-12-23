@@ -1,10 +1,17 @@
+# environment options
 ADMIN_USER="gpadmin"
 INSTALL_DIR="/dsbenchmark"
-EXPLAIN_ANALYZE="false"
+
+# benchmark options
 RANDOM_DISTRIBUTION="false"
 MULTI_USER_COUNT="2"
 GEN_DATA_SCALE="1"
 SINGLE_USER_ITERATIONS="1"
+
+# query options
+EXPLAIN_ANALYZE="false"
+
+# step options
 RUN_COMPILE_TPCDS="true"
 RUN_GEN_DATA="true"
 RUN_INIT="true"

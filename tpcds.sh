@@ -39,12 +39,12 @@ check_variables()
 	fi
 	local count=$(grep "MULTI_USER_COUNT" $MYVAR | wc -l)
 	if [ "$count" -eq "0" ]; then
-		echo "MULTI_USER_COUNT=\"5\"" >> $MYVAR
+		echo "MULTI_USER_COUNT=\"2\"" >> $MYVAR
 		new_variable=$(($new_variable + 1))
 	fi
 	local count=$(grep "GEN_DATA_SCALE" $MYVAR | wc -l)
 	if [ "$count" -eq "0" ]; then
-		echo "GEN_DATA_SCALE=\"3000\"" >> $MYVAR
+		echo "GEN_DATA_SCALE=\"1\"" >> $MYVAR
 		new_variable=$(($new_variable + 1))
 	fi
 	local count=$(grep "SINGLE_USER_ITERATIONS" $MYVAR | wc -l)
@@ -55,13 +55,13 @@ check_variables()
 	#00
 	local count=$(grep "RUN_COMPILE_TPCDS" $MYVAR | wc -l)
 	if [ "$count" -eq "0" ]; then
-		echo "RUN_COMPILE_TPCDS=\"false\"" >> $MYVAR
+		echo "RUN_COMPILE_TPCDS=\"true\"" >> $MYVAR
 		new_variable=$(($new_variable + 1))
 	fi
 	#01
 	local count=$(grep "RUN_GEN_DATA" $MYVAR | wc -l)
 	if [ "$count" -eq "0" ]; then
-		echo "RUN_GEN_DATA=\"false\"" >> $MYVAR
+		echo "RUN_GEN_DATA=\"true\"" >> $MYVAR
 		new_variable=$(($new_variable + 1))
 	fi
 	#02

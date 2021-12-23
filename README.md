@@ -1,53 +1,234 @@
-# TPC-DS benchmark scripts for Greenplum database.
+# Decision Support Benchmark for Greenplum database.
 
-Supported versions:
-- Greenplum `4.3`, `5.*`, `6.*`
-- Open Source Greenplum `5.*`, `6.*`
-- Beta: PostgreSQL `10.*`
+This is the decision support (DS) benchmark derived from [TPC-DS](http://tpc.org/tpcds/).
+This repo contains automation of running the DS benchmark against an existing Greenplum cluster.
 
-## TPC-DS Information
+## Context
+### Supported Greenplum Versions
 
-Version 2.x now uses TPC-DS version 2.1 for the standard queries.
+- [VMware Tanzu Greenplum](https://network.tanzu.vmware.com/products/vmware-tanzu-greenplum/) `4.3.x`, `5.x`, `6.x`
+- [Open Source Greenplum Databases](https://network.tanzu.vmware.com/products/greenplum-database/) `5.x`, `6.x`
 
-Version 2.2.x now supports Greenplum version 5.x.
+### Supported TPC-DS Versions
 
-## Dependencies
+TPC has published the following TPC-DS standards over time:
+| TPC-DS Benchmark Version | Published Date | Standard Specification |
+|-|-|-|
+| 3.2.0 (latest) | 2021/06/15 | http://www.tpc.org/tpc_documents_current_versions/pdf/tpc-ds_v3.2.0.pdf |
+| 2.1.0 | 2015/11/12 | http://www.tpc.org/tpc_documents_current_versions/pdf/tpc-ds_v2.1.0.pdf |
+| 1.3.1 (earliest) | 2015/02/19 | http://www.tpc.org/tpc_documents_current_versions/pdf/tpc-ds_v1.3.1.pdf |
 
-Install the dependencies for this benchmark
+These are the combined versions of TPC-DS and Greenplum:
+| DS Benchmark Version | TPC-DS Benchmark Version | Greenplum Version |
+|-|-|-|
+| 3.0.0 | 2.1.0 | 4.3.x, 5.x, 6.x |
+| 2.2.x | 2.1.0 | 4.3.x, 5.x |
+| 2.x | 2.1.0 | 4.3.x |
+
+## Setup
+### Prerequisites
+
+1. A running Greenplum Database with `gpadmin` access
+2. `gpadmin` database is created
+3. `root` access on the master node `mdw`
+4. `ssh` connections between `mdw` and the segment nodes `sdw1..n`
+
+All the following examples are using standard host name convention of Greenplum using `mdw` for master node, and `sdw1..n` for the segment nodes.
+### Download and Install
+
+Visit the repo at https://github.com/pivotal/TPC-DS/releases and download the tarball to the `mdw` node.
+
+```bash
+ssh root@mdw
+cd /
+mkdir -p /dsbenchmark
+curl -LO https://github.com/pivotal/TPC-DS/archive/refs/tags/v3.0.0.tar.gz
+tar xzf v3.0.0.tar.gz
+mv TPC-DS-3.0.0 TPC-DS
+```
+### TPC-DS Tools Dependencies
+
+Install the dependencies on `mdw` for compiling the `dsdgen` (data generation) and `dsqgen` (query generation).
 
 ```bash
 yum -y install gcc make
 ```
 
-## Query Options
+The original source code is from http://tpc.org/tpc_documents_current_versions/current_specifications5.asp.
 
-You can have the queries execute with `EXPLAIN ANALYZE` in order to see exactly the
-query plan used, the cost, the memory used, etc.  This is done in `tpcds_variables.sh`
-like this:
+## Usage
 
-```sql
-EXPLAIN_ANALYZE="true"
+To run the benchmark, just login as `root` on `mdw:
+
+```
+cd /dsbenchmark/TPC-DS
+./tpcds.sh
 ```
 
-## Storage Options
+By default, it will run a scale 1 (1G) and with 2 concurrent users, from data generation to score computation.
+
+### Configuration Options
+
+By changing the `tpcds_variables.sh`, we can control how this benchmark will run.
+
+This is the default example at [tpcds_variables.sh](https://github.com/pivotal/TPC-DS/blob/main/tpcds_variables.sh)
+
+```shell
+# environment options
+ADMIN_USER="gpadmin"
+INSTALL_DIR="/dsbenchmark"
+
+# benchmark options
+MULTI_USER_COUNT="2"
+GEN_DATA_SCALE="1"
+SINGLE_USER_ITERATIONS="1"
+
+# schema and query options
+EXPLAIN_ANALYZE="false"
+RANDOM_DISTRIBUTION="false"
+
+# step options
+RUN_COMPILE_TPCDS="true"
+RUN_GEN_DATA="true"
+RUN_INIT="true"
+RUN_DDL="true"
+RUN_LOAD="true"
+RUN_SQL="true"
+RUN_SINGLE_USER_REPORT="true"
+RUN_MULTI_USER="true"
+RUN_MULTI_USER_REPORT="true"
+RUN_SCORE="true"
+```
+
+If the `tpcds_variables.sh` is missing, `tpcds.sh` will generate one with default values.
+Then rerun the `tpcds.sh` to proceed.
+
+#### Environment Options
+
+```shell
+# environment options
+ADMIN_USER="gpadmin"
+INSTALL_DIR="/dsbenchmark"
+```
+
+These are the setup related variables:
+- `ADMIN_USER`: default `gpadmin`.
+  It is the default database administrator account, as well as the user accessible to all `mdw` and `sdw1..n` machines.
+- `INSTALL_DIR`: default `dsbenchmark`.
+  It controls the benchmark related files on each segment node in the segment's `${PGDATA}/dsbenchmark` directory.
+  If there isn't enough space in this directory in each Segment, you can create a symbolic link to a drive location that does have enough space.
+
+In most cases, we just leave them to the default.
+
+#### Benchmark Options
+
+```shell
+# benchmark options
+MULTI_USER_COUNT="2"
+GEN_DATA_SCALE="1"
+SINGLE_USER_ITERATIONS="1"
+```
+
+These are the benchmark controlling variables:
+- `MULTI_USER_COUNT`: default `2`.
+  It's also usually referred as `CU`, i.e. concurrent user.
+  It controls how many concurrent streams to run during the throughput run.
+- `GEN_DATA_SCALE`: default `1`.
+  Scale 1 is 1G.
+- `SINGLE_USER_ITERATION`: default `1`.
+
+
+If evaluating Greenplum cluster across different platforms, we recommend to change this section to 3TB with 5CU:
+```shell
+# benchmark options
+MULTI_USER_COUNT="5"
+GEN_DATA_SCALE="3000"
+SINGLE_USER_ITERATIONS="1"
+```
+#### Schema and Query Options
+
+```shell
+# schema and query options
+EXPLAIN_ANALYZE="false"
+RANDOM_DISTRIBUTION="false"
+```
+
+These are schema and query controlling variables:
+- `EXPLAIN_ANALYZE`: default `false`.
+  If you set to `true`, you can have the queries execute with `EXPLAIN ANALYZE` in order to see exactly the query plan used, the cost, the memory used, etc.
+- `RANDOM_DISTRIBUTION`: default `false`.
+  If you set to `true`, the fact tables are distributed randomly other than following a pre-defined distribution column.
+
+#### Step Options
+
+```shell
+# step options
+RUN_COMPILE_TPCDS="true"
+RUN_GEN_DATA="true"
+RUN_INIT="true"
+RUN_DDL="true"
+RUN_LOAD="true"
+RUN_SQL="true"
+RUN_SINGLE_USER_REPORT="true"
+RUN_MULTI_USER="true"
+RUN_MULTI_USER_REPORT="true"
+RUN_SCORE="true"
+```
+
+There are multiple steps running the benchmark and controlled by these variables:
+- `RUN_COMPILE_TPCDS`: default `true`.
+  It will compile the `dsdgen` and `dsqgen`.
+  Usually we only want to compile those binaries once.
+  In the rerun, just set this value to `false`.
+- `RUN_GEN_DATA`: default `true`.
+  It will use the `dsdgen` compiled above to generate the flat files for the benchmark.
+  The flat files are generated in parallel on all segment nodes.
+  Those files are stored under `${PGDATA}/dsbenchmark` directory.
+  In the rerun, just set this value to `false`.
+- `RUN_INIT`: default `true`.
+  It will setup the GUCs for the Greenplum as well as remember the segment configurations.
+  It's only required if the Greenplum cluster is reconfigured.
+  It can be always `true` to ensure proper Greenplum cluster configuration.
+  In the rerun, just set this value to `false`.
+- `RUN_DDL`: default `true`.
+  It will recreate all the schemas and tables (including external tables for loading).
+  If you want to keep the data and just rerun the queries, please set this value to `false`, otherwise all the existing loaded data will be gone.
+- `RUN_LOAD`: default `true`.
+  It will load data from flat files into tables.
+  After the load, the statistics will be computed in this step.
+  If you just want to rerun the queries, please set this value to `false`.
+- `RUN_SQL`: default `true`.
+  It will run the power run of the benchmark.
+- `RUN_SINGLE_USER_REPORT`: default `true`.
+  It will upload the results to the Greenplum database `gpadmin` under schema `tpcds_reports`.
+  These tables are required later on in the `RUN_SCORE` step.
+  Recommend to keep it `true` if above step of `RUN_SQL` is `true`.
+- `RUN_MULTI_USER`: default `true`.
+  It will run the throughput run of the benchmark.
+  Before running the queries, multiple streams will be generated by the `dsqgen`.
+  `dsqgen` will sample the database to find proper filters.
+  For very large database and a lot of streams, this process can take a long time to just generate the queries.
+- `RUN_MULTI_USER_REPORT`: default `true`.
+  It will upload the results to the Greenplum database `gpadmin` under schema `tpcds_reports`.
+  Recommend to keep it `true` if above step of `RUN_MULTI_USER` is `true`.
+- `RUN_SCORE`: default `true`.
+  It will query the results from `tpcds_reports` and compute the QphDS based on supported benchmark standard.
+  Recommend to keep it `true` if you want to see the final score of the run.
+
+If any above variable is missing, it will be treated as `true`, e.g. that specific step will run.
+
+**WARNING**: Please don't remove `log/` folder, since the above variables depends on the files under `log/` to skip individual steps.
+If `log/` folder is missing, all the steps will be executed.
+
+### Storage Options
+
 Table storage is defined in `functions.sh` and is configured for optimal performance.
+`get_version()` function defines different storage options for different scale of the benchmark.
+- `SMALL_STORAGE`: All the dimension tables
+- `MEDIUM_STORAGE`: `catalog_returns` and `store_returns`
+- `LARGE_STORAGE`: `catalog_sales`, `inventory`, `store_sales`, and `web_sales`
 
-# Prerequisites
-
-1. Greenplum Database or PostgreSQL 10.x
-2. Connectivity is possible to the `MASTER_HOST` and from the Data Nodes / Segment Hosts
-3. Root access
-
-
-# Variables and Configuration
-
-By default, the installation will create the scripts in `/dsbenchmark/TPC-DS` on the Master host.
-This can be changed by editing the dynamically configured `tpcds_variables.sh` file that is created the first time `tpcds.sh` is run.
-
-Also by default, TPC-DS files are generated on each Segment Host / Data Node in the Segement's PGDATA/dsbenchmark directory.
-If there isn't enough space in this directory in each Segment, you can create a symbolic link to a drive location that does have enough space.
-
-# Execution
+### Execution
 
 Example of running tpcds as root as a background process:
 
@@ -55,15 +236,9 @@ Example of running tpcds as root as a background process:
 nohup ./tpcds.sh > tpcds.log 2>&1 < tpcds.log &
 ```
 
-## Notes
+## TPC-DS Minor Modifications
 
-- `tpcds_variables.sh` file will be created with variables you can adjust
-- Files for the benchmark will be created in a sub-directory named `dsbenchmark` located in each segment directory on each segment host / data node.
-  You can update these directories to be symbolic links to better utilize the disk volumes you have available.
-
-# TPC-DS Minor Modifications
-
-## 1. Change to SQL queries that subtracted or added days were modified slightly:
+### 1. Change to SQL queries that subtracted or added days were modified slightly:
 
 Old:
 ```sql
@@ -78,7 +253,7 @@ and (cast('2000-02-28' as date) + '30 days'::interval)
 
 This was done on queries: 5, 12, 16, 20, 21, 32, 37, 40, 77, 80, 82, 92, 94, 95, and 98.
 
-## 2. Change to queries with ORDER BY on column alias to use sub-select.
+### 2. Change to queries with ORDER BY on column alias to use sub-select.
 
 Old:
 ```sql
@@ -162,17 +337,17 @@ select
 
 This was done on queries: 36 and 70.
 
-## 3. Query templates were modified to exclude columns not found in the query.
+### 3. Query templates were modified to exclude columns not found in the query.
 
 In these cases, the common table expression used aliased columns but the dynamic filters included both the alias name as well as the original name.
 Referencing the original column name instead of the alias causes the query parser to not find the column.
 
 This was done on query 86.
 
-## 4. Added table aliases.
+### 4. Added table aliases.
 This was done on queries: 2, 14, and 23.
 
-## 5. Added `limit 100` to very large result set queries.
+### 5. Added `limit 100` to very large result set queries.
 For the larger tests (e.g. 15TB), a few of the TPC-DS queries can output a very large number of rows which are just discarded.
 
 This was done on queries: 64, 34, and 71.
