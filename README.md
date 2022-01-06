@@ -41,8 +41,8 @@ Visit the repo at https://github.com/pivotal/TPC-DS/releases and download the ta
 
 ```bash
 ssh root@mdw
-cd /
 mkdir -p /dsbenchmark
+cd /dsbenchmark
 curl -LO https://github.com/pivotal/TPC-DS/archive/refs/tags/v3.0.0.tar.gz
 tar xzf v3.0.0.tar.gz
 mv TPC-DS-3.0.0 TPC-DS
