@@ -128,6 +128,19 @@ check_variables()
 	source $MYVAR
 }
 
+check_user()
+{
+	### Make sure gpadmin is executing the script. ###
+	echo "############################################################################"
+	echo "Make sure gpadmin is executing this script."
+	echo "############################################################################"
+	echo ""
+	local WHOAMI=`whoami`
+	if [ "$WHOAMI" != "gpadmin" ]; then
+		echo "Script must be executed as gpadmin!"
+		exit 1
+	fi
+}
 
 echo_variables()
 {
@@ -143,6 +156,7 @@ echo_variables()
 # Body
 ##################################################################################################################################################
 
+check_user
 check_variables
 echo_variables
 
