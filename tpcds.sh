@@ -24,9 +24,13 @@ check_variables()
 	fi
 	local count=$(grep "INSTALL_DIR=" $MYVAR | wc -l)
 	if [ "$count" -eq "0" ]; then
-		echo "INSTALL_DIR=\"/dsbenchmark\"" >> $MYVAR
+		echo "INSTALL_DIR=\"$PWD/..\"" >> $MYVAR
 		new_variable=$(($new_variable + 1))
+	else
+		# If variable file already present, INSTALL_DIR gets updated based on $PWD
+		sed -i "/^INSTALL_DIR/c\INSTALL_DIR=\"$PWD/..\"" $MYVAR
 	fi
+
 	local count=$(grep "EXPLAIN_ANALYZE=" $MYVAR | wc -l)
 	if [ "$count" -eq "0" ]; then
 		echo "EXPLAIN_ANALYZE=\"false\"" >> $MYVAR
@@ -124,19 +128,6 @@ check_variables()
 	source $MYVAR
 }
 
-check_user()
-{
-	### Make sure root is executing the script. ###
-	echo "############################################################################"
-	echo "Make sure root is executing this script."
-	echo "############################################################################"
-	echo ""
-	local WHOAMI=`whoami`
-	if [ "$WHOAMI" != "root" ]; then
-		echo "Script must be executed as root!"
-		exit 1
-	fi
-}
 
 echo_variables()
 {
@@ -152,7 +143,6 @@ echo_variables()
 # Body
 ##################################################################################################################################################
 
-check_user
 check_variables
 echo_variables
 
@@ -160,4 +150,5 @@ echo_variables
 chown -R $ADMIN_USER:$ADMIN_USER "$INSTALL_DIR"
 
 # run the benchmark
-su -l $ADMIN_USER -c "cd \"$INSTALL_DIR/TPC-DS\"; ./rollout.sh $GEN_DATA_SCALE $EXPLAIN_ANALYZE $RANDOM_DISTRIBUTION $MULTI_USER_COUNT $RUN_COMPILE_TPCDS $RUN_GEN_DATA $RUN_INIT $RUN_DDL $RUN_LOAD $RUN_SQL $RUN_SINGLE_USER_REPORT $RUN_MULTI_USER $RUN_MULTI_USER_REPORT $RUN_SCORE $SINGLE_USER_ITERATIONS"
+cd "$INSTALL_DIR/TPC-DS"
+./rollout.sh $GEN_DATA_SCALE $EXPLAIN_ANALYZE $RANDOM_DISTRIBUTION $MULTI_USER_COUNT $RUN_COMPILE_TPCDS $RUN_GEN_DATA $RUN_INIT $RUN_DDL $RUN_LOAD $RUN_SQL $RUN_SINGLE_USER_REPORT $RUN_MULTI_USER $RUN_MULTI_USER_REPORT $RUN_SCORE $SINGLE_USER_ITERATIONS
