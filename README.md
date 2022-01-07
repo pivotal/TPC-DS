@@ -30,28 +30,17 @@ These are the combined versions of TPC-DS and Greenplum:
 
 1. A running Greenplum Database with `gpadmin` access
 2. `gpadmin` database is created
-3. `root` access on the master node `mdw`
+3. `root` access on the master node `mdw` for installing dependencies
 4. `ssh` connections between `mdw` and the segment nodes `sdw1..n`
 
 All the following examples are using standard host name convention of Greenplum using `mdw` for master node, and `sdw1..n` for the segment nodes.
 
-### Download and Install
-
-Visit the repo at https://github.com/pivotal/TPC-DS/releases and download the tarball to the `mdw` node.
-
-```bash
-ssh root@mdw
-mkdir -p /dsbenchmark
-cd /dsbenchmark
-curl -LO https://github.com/pivotal/TPC-DS/archive/refs/tags/v3.0.0.tar.gz
-tar xzf v3.0.0.tar.gz
-mv TPC-DS-3.0.0 TPC-DS
-```
 ### TPC-DS Tools Dependencies
 
 Install the dependencies on `mdw` for compiling the `dsdgen` (data generation) and `dsqgen` (query generation).
 
 ```bash
+ssh root@mdw
 yum -y install gcc make
 ```
 
@@ -63,12 +52,24 @@ yum -y install build-essential
 
 The original source code is from http://tpc.org/tpc_documents_current_versions/current_specifications5.asp.
 
+### Download and Install
+
+Visit the repo at https://github.com/pivotal/TPC-DS/releases and download the tarball to the `mdw` node.
+
+```bash
+ssh gpadmin@mdw
+curl -LO https://github.com/pivotal/TPC-DS/archive/refs/tags/v3.0.0.tar.gz
+tar xzf v3.0.0.tar.gz
+mv TPC-DS-3.0.0 TPC-DS
+```
+
 ## Usage
 
-To run the benchmark, just login as `root` on `mdw:
+To run the benchmark, just login as `gpadmin` on `mdw:
 
 ```
-cd /dsbenchmark/TPC-DS
+ssh gpadmin@mdw
+cd ~/TPC-DS
 ./tpcds.sh
 ```
 
@@ -83,7 +84,7 @@ This is the default example at [tpcds_variables.sh](https://github.com/pivotal/T
 ```shell
 # environment options
 ADMIN_USER="gpadmin"
-INSTALL_DIR="/dsbenchmark"
+INSTALL_DIR="/home/gpadmin"
 
 # benchmark options
 GEN_DATA_SCALE="1"
@@ -108,6 +109,7 @@ RANDOM_DISTRIBUTION="false"
 ```
 
 If the `tpcds_variables.sh` is missing, `tpcds.sh` will generate one with default values.
+
 Then rerun the `tpcds.sh` to proceed.
 
 #### Environment Options
@@ -115,14 +117,16 @@ Then rerun the `tpcds.sh` to proceed.
 ```shell
 # environment options
 ADMIN_USER="gpadmin"
-INSTALL_DIR="/dsbenchmark"
+INSTALL_DIR="/home/gpadmin"
 ```
 
 These are the setup related variables:
 - `ADMIN_USER`: default `gpadmin`.
   It is the default database administrator account, as well as the user accessible to all `mdw` and `sdw1..n` machines.
-- `INSTALL_DIR`: default `dsbenchmark`.
-  It controls the benchmark related files on each segment node in the segment's `${PGDATA}/dsbenchmark` directory.
+- `INSTALL_DIR`: default `/home/gpadmin`
+  It is the default location of TPC-DS installation directory on `mdw` but user can download `TPC-DS` tool to any location and run from it.
+
+  Note: The benchmark related files for each segment node are located in the segment's `${PGDATA}/dsbenchmark` directory.
   If there isn't enough space in this directory in each segment, you can create a symbolic link to a drive location that does have enough space.
 
 In most cases, we just leave them to the default.
