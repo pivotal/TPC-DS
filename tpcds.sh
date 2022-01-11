@@ -1,152 +1,73 @@
 #!/bin/bash
 set -e
 
-PWD=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-
-MYCMD="tpcds.sh"
-MYVAR="tpcds_variables.sh"
+VARS_FILE="tpcds_variables.sh"
 ##################################################################################################################################################
 # Functions
 ##################################################################################################################################################
-check_variables()
-{
-  new_variable="0"
+check_variable() {
+  local var_name="$1"; shift
 
-  ### Make sure variables file is available
-  if [ ! -f "$PWD/$MYVAR" ]; then
-    touch $PWD/$MYVAR
-    new_variable=$(($new_variable + 1))
-  fi
-  local count=$(grep "ADMIN_USER=" $MYVAR | wc -l)
-  if [ "$count" -eq "0" ]; then
-    echo "ADMIN_USER=\"gpadmin\"" >> $MYVAR
-    new_variable=$(($new_variable + 1))
-  fi
-  local count=$(grep "INSTALL_DIR=" $MYVAR | wc -l)
-  if [ "$count" -eq "0" ]; then
-    echo "INSTALL_DIR=\"$PWD/..\"" >> $MYVAR
-    new_variable=$(($new_variable + 1))
-  else
-    # If variable file already present, INSTALL_DIR gets updated based on $PWD
-    sed -i "/^INSTALL_DIR/c\INSTALL_DIR=\"$PWD/..\"" $MYVAR
-  fi
-
-  local count=$(grep "EXPLAIN_ANALYZE=" $MYVAR | wc -l)
-  if [ "$count" -eq "0" ]; then
-    echo "EXPLAIN_ANALYZE=\"false\"" >> $MYVAR
-    new_variable=$(($new_variable + 1))
-  fi
-  local count=$(grep "RANDOM_DISTRIBUTION=" $MYVAR | wc -l)
-  if [ "$count" -eq "0" ]; then
-    echo "RANDOM_DISTRIBUTION=\"false\"" >> $MYVAR
-    new_variable=$(($new_variable + 1))
-  fi
-  local count=$(grep "MULTI_USER_COUNT" $MYVAR | wc -l)
-  if [ "$count" -eq "0" ]; then
-    echo "MULTI_USER_COUNT=\"2\"" >> $MYVAR
-    new_variable=$(($new_variable + 1))
-  fi
-  local count=$(grep "GEN_DATA_SCALE" $MYVAR | wc -l)
-  if [ "$count" -eq "0" ]; then
-    echo "GEN_DATA_SCALE=\"1\"" >> $MYVAR
-    new_variable=$(($new_variable + 1))
-  fi
-  local count=$(grep "SINGLE_USER_ITERATIONS" $MYVAR | wc -l)
-  if [ "$count" -eq "0" ]; then
-    echo "SINGLE_USER_ITERATIONS=\"1\"" >> $MYVAR
-    new_variable=$(($new_variable + 1))
-  fi
-  #00
-  local count=$(grep "RUN_COMPILE_TPCDS" $MYVAR | wc -l)
-  if [ "$count" -eq "0" ]; then
-    echo "RUN_COMPILE_TPCDS=\"true\"" >> $MYVAR
-    new_variable=$(($new_variable + 1))
-  fi
-  #01
-  local count=$(grep "RUN_GEN_DATA" $MYVAR | wc -l)
-  if [ "$count" -eq "0" ]; then
-    echo "RUN_GEN_DATA=\"true\"" >> $MYVAR
-    new_variable=$(($new_variable + 1))
-  fi
-  #02
-  local count=$(grep "RUN_INIT" $MYVAR | wc -l)
-  if [ "$count" -eq "0" ]; then
-    echo "RUN_INIT=\"true\"" >> $MYVAR
-    new_variable=$(($new_variable + 1))
-  fi
-  #03
-  local count=$(grep "RUN_DDL" $MYVAR | wc -l)
-  if [ "$count" -eq "0" ]; then
-    echo "RUN_DDL=\"true\"" >> $MYVAR
-    new_variable=$(($new_variable + 1))
-  fi
-  #04
-  local count=$(grep "RUN_LOAD" $MYVAR | wc -l)
-  if [ "$count" -eq "0" ]; then
-    echo "RUN_LOAD=\"true\"" >> $MYVAR
-    new_variable=$(($new_variable + 1))
-  fi
-  #05
-  local count=$(grep "RUN_SQL" $MYVAR | wc -l)
-  if [ "$count" -eq "0" ]; then
-    echo "RUN_SQL=\"true\"" >> $MYVAR
-    new_variable=$(($new_variable + 1))
-  fi
-  #06
-  local count=$(grep "RUN_SINGLE_USER_REPORT" $MYVAR | wc -l)
-  if [ "$count" -eq "0" ]; then
-    echo "RUN_SINGLE_USER_REPORT=\"true\"" >> $MYVAR
-    new_variable=$(($new_variable + 1))
-  fi
-  #07
-  local count=$(grep "RUN_MULTI_USER" $MYVAR | wc -l)
-  if [ "$count" -eq "0" ]; then
-    echo "RUN_MULTI_USER=\"true\"" >> $MYVAR
-    new_variable=$(($new_variable + 1))
-  fi
-  #08
-  local count=$(grep "RUN_MULTI_USER_REPORT" $MYVAR | wc -l)
-  if [ "$count" -eq "0" ]; then
-    echo "RUN_MULTI_USER_REPORT=\"true\"" >> $MYVAR
-    new_variable=$(($new_variable + 1))
-  fi
-  #09
-  local count=$(grep "RUN_SCORE" $MYVAR | wc -l)
-  if [ "$count" -eq "0" ]; then
-    echo "RUN_SCORE=\"true\"" >> $MYVAR
-    new_variable=$(($new_variable + 1))
-  fi
-
-  if [ "$new_variable" -gt "0" ]; then
-    echo "There are new variables in the tpcds_variables.sh file.  Please review to ensure the values are correct and then re-run this script."
+  if [ ! -n "${!var_name}" ]; then
+    echo "${var_name} is not defined in ${VARS_FILE}. Exiting."
     exit 1
   fi
-  echo "############################################################################"
-  echo "Sourcing $MYVAR"
-  echo "############################################################################"
-  echo ""
-  source $MYVAR
 }
 
-check_user()
-{
-  ### Make sure gpadmin is executing the script. ###
+check_variables() {
+  ### Make sure variables file is available
   echo "############################################################################"
-  echo "Make sure gpadmin is executing this script."
+  echo "Sourcing $VARS_FILE"
   echo "############################################################################"
   echo ""
-  local WHOAMI=`whoami`
-  if [ "$WHOAMI" != "gpadmin" ]; then
+  source $VARS_FILE 2> /dev/null
+  if [ $? -ne 0 ]; then
+    echo "${VARS_FILE} does not exist. Please ensure that this file exists before running TPC-DS. Exiting."
+    exit 1
+  fi
+
+  check_variable "ADMIN_USER"
+  check_variable "EXPLAIN_ANALYZE"
+  check_variable "RANDOM_DISTRIBUTION"
+  check_variable "MULTI_USER_COUNT"
+  check_variable "GEN_DATA_SCALE"
+  check_variable "SINGLE_USER_ITERATIONS"
+  #00
+  check_variable "RUN_COMPILE_TPCDS"
+  #01
+  check_variable "RUN_GEN_DATA"
+  #02
+  check_variable "RUN_INIT"
+  #03
+  check_variable "RUN_DDL"
+  #04
+  check_variable "RUN_LOAD"
+  #05
+  check_variable "RUN_SQL"
+  #06
+  check_variable "RUN_SINGLE_USER_REPORT"
+  #07
+  check_variable "RUN_MULTI_USER"
+  #08
+  check_variable "RUN_MULTI_USER_REPORT"
+  #09
+  check_variable "RUN_SCORE"
+}
+
+check_user() {
+  echo "############################################################################"
+  echo "Ensure gpadmin is executing this script."
+  echo "############################################################################"
+  echo ""
+  if [ "$(whoami)" != "gpadmin" ]; then
     echo "Script must be executed as gpadmin!"
     exit 1
   fi
 }
 
-echo_variables()
-{
+echo_variables() {
   echo "############################################################################"
   echo "ADMIN_USER: $ADMIN_USER"
-  echo "INSTALL_DIR: $INSTALL_DIR"
   echo "MULTI_USER_COUNT: $MULTI_USER_COUNT"
   echo "############################################################################"
   echo ""
@@ -160,9 +81,5 @@ check_user
 check_variables
 echo_variables
 
-# make sure the $ADMIN_USER owns the $INSTALL_DIR
-chown -R $ADMIN_USER:$ADMIN_USER "$INSTALL_DIR"
-
 # run the benchmark
-cd "$INSTALL_DIR/TPC-DS"
 ./rollout.sh $GEN_DATA_SCALE $EXPLAIN_ANALYZE $RANDOM_DISTRIBUTION $MULTI_USER_COUNT $RUN_COMPILE_TPCDS $RUN_GEN_DATA $RUN_INIT $RUN_DDL $RUN_LOAD $RUN_SQL $RUN_SINGLE_USER_REPORT $RUN_MULTI_USER $RUN_MULTI_USER_REPORT $RUN_SCORE $SINGLE_USER_ITERATIONS

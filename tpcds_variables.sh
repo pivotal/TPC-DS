@@ -1,6 +1,5 @@
 # environment options
 ADMIN_USER="gpadmin"
-INSTALL_DIR="/home/gpadmin"
 
 # benchmark options
 GEN_DATA_SCALE="1"

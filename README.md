@@ -84,7 +84,6 @@ This is the default example at [tpcds_variables.sh](https://github.com/pivotal/T
 ```shell
 # environment options
 ADMIN_USER="gpadmin"
-INSTALL_DIR="/home/gpadmin"
 
 # benchmark options
 GEN_DATA_SCALE="1"
@@ -117,14 +116,11 @@ Then rerun the `tpcds.sh` to proceed.
 ```shell
 # environment options
 ADMIN_USER="gpadmin"
-INSTALL_DIR="/home/gpadmin"
 ```
 
 These are the setup related variables:
 - `ADMIN_USER`: default `gpadmin`.
   It is the default database administrator account, as well as the user accessible to all `mdw` and `sdw1..n` machines.
-- `INSTALL_DIR`: default `/home/gpadmin`
-  It is the default location of TPC-DS installation directory on `mdw` but user can download `TPC-DS` tool to any location and run from it.
 
   Note: The benchmark related files for each segment node are located in the segment's `${PGDATA}/dsbenchmark` directory.
   If there isn't enough space in this directory in each segment, you can create a symbolic link to a drive location that does have enough space.
