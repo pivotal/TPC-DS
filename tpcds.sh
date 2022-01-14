@@ -56,11 +56,11 @@ check_variables() {
 
 check_user() {
   echo "############################################################################"
-  echo "Ensure gpadmin is executing this script."
+  echo "Ensure ${ADMIN_USER} is executing this script."
   echo "############################################################################"
   echo ""
-  if [ "$(whoami)" != "gpadmin" ]; then
-    echo "Script must be executed as gpadmin!"
+  if [ "$(whoami)" != "${ADMIN_USER}" ]; then
+    echo "Script must be executed as ${ADMIN_USER}!"
     exit 1
   fi
 }

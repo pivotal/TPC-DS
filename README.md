@@ -65,7 +65,7 @@ mv TPC-DS-3.0.0 TPC-DS
 
 ## Usage
 
-To run the benchmark, just login as `gpadmin` on `mdw:
+To run the benchmark, login as `gpadmin` on `mdw:
 
 ```
 ssh gpadmin@mdw
