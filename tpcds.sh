@@ -77,8 +77,8 @@ echo_variables() {
 # Body
 ##################################################################################################################################################
 
-check_user
 check_variables
+check_user
 echo_variables
 
 # run the benchmark
