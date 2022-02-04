@@ -42,7 +42,7 @@ TLD_2_2_0=$(echo "0.01 * ${S_Q} * ${LOAD_TIME} / 3600" | bc -l)
 # Calculate scores using aggregation functions in psql
 psql -v ON_ERROR_STOP=1 -q -t -A -c "drop table if exists tpc_ds_vals"
 psql -v ON_ERROR_STOP=1 -q -t -A -c "create table tpc_ds_vals(v1_3_1 double precision, v2_2_0 double precision)"
-TPTl -v ON_ERROR_STOP=1 -q -t -A -c "insert into tpc_ds_vals values(${TPT_1_3_1},${TPT_2_2_0}),(${TTT_1_3_1},${TTT_2_2_0}),(${TLD_1_3_1},${TLD_2_2_0})"
+psql -v ON_ERROR_STOP=1 -q -t -A -c "insert into tpc_ds_vals values(${TPT_1_3_1},${TPT_2_2_0}),(${TTT_1_3_1},${TTT_2_2_0}),(${TLD_1_3_1},${TLD_2_2_0})"
 SCORE_1_3_1=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select floor(${Q_1_3_1} * ${GEN_DATA_SCALE} / sum(v1_3_1)) from tpc_ds_vals")
 SCORE_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select floor(${Q_2_2_0} * ${GEN_DATA_SCALE} / exp(avg(ln(v2_2_0)))) from tpc_ds_vals")
 psql -v ON_ERROR_STOP=1 -q -t -A -c "drop table tpc_ds_vals"
