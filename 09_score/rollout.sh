@@ -40,13 +40,13 @@ ESTIMATED_THROUGHPUT_ELAPSED_TIME=$(( CONCURRENT_QUERY_TIME / S_Q ))
 
 # Calculate operands for v2.2.0 of the TPC-DS score
 Q_2_2_0=$(( S_Q * 99 ))
-TPT_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select ${QUERIES_TIME} * ${S_Q} / 3600")
-TTT_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select 2 * ${ESTIMATED_THROUGHPUT_ELAPSED_TIME} / 3600")
-TLD_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select 0.01 * ${S_Q} * ${LOAD_TIME} / 3600")
+TPT_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select ${QUERIES_TIME} * ${S_Q} / 3600.0")
+TTT_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select 2 * ${ESTIMATED_THROUGHPUT_ELAPSED_TIME} / 3600.0")
+TLD_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select 0.01 * ${S_Q} * ${LOAD_TIME} / 3600.0")
 
 # Calculate scores using aggregation functions in psql
 SCORE_1_3_1=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select floor( ${Q_1_3_1} * ${SF} / (${TPT_1_3_1} + ${TTT_1_3_1} + ${TLD_1_3_1}) )")
-SCORE_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select floor( ${Q_2_2_0} * ${SF} / exp( (ln(${TPT_2_2_0}) + ln(${TTT_2_2_0}) + ln(${TLD_2_2_0})) / 3) )")
+SCORE_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select floor( ${Q_2_2_0} * ${SF} / exp( (ln(${TPT_2_2_0}) + ln(${TTT_2_2_0}) + ln(${TLD_2_2_0})) / 3.0) )")
 
 echo -e "Number of Streams (Sq)\t${S_Q}"
 echo -e "Scale Factor (SF)\t${SF}"
