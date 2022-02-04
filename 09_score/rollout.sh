@@ -25,17 +25,19 @@ ANALYZE_TIME=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select round(sum(extract('ep
 QUERIES_TIME=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select round(sum(extract('epoch' from duration))) from (SELECT split_part(description, '.', 2) AS id, min(duration) AS duration FROM tpcds_reports.sql GROUP BY split_part(description, '.', 2)) as sub")
 CONCURRENT_QUERY_TIME=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select round(sum(extract('epoch' from duration))) from tpcds_testing.sql")
 
+S_Q=${MULTI_USER_COUNT}
+
 # Calculate operands for v1.3.1 of the TPC-DS score
-Q_1_3_1=$(( 3 * MULTI_USER_COUNT * 99 ))
-TPT_1_3_1=$(( QUERIES_TIME * MULTI_USER_COUNT ))
+Q_1_3_1=$(( 3 * S_Q * 99 ))
+TPT_1_3_1=$(( QUERIES_TIME * S_Q ))
 TTT_1_3_1=$(( 2 * CONCURRENT_QUERY_TIME ))
-TLD_1_3_1=$(( MULTI_USER_COUNT * LOAD_TIME / 100 ))
+TLD_1_3_1=$(( S_Q * LOAD_TIME / 100 ))
 
 # Calculate operands for v2.2.0 of the TPC-DS score
-Q_2_2_0=$(( MULTI_USER_COUNT * 99 ))
-TPT_2_2_0=$(echo "$QUERIES_TIME * $MULTI_USER_COUNT / 3600" | bc -l)
+Q_2_2_0=$(( S_Q * 99 ))
+TPT_2_2_0=$(echo "${QUERIES_TIME} * ${S_Q} / 3600" | bc -l)
 TTT_2_2_0=$(echo "2 * ${CONCURRENT_QUERY_TIME} / 3600" | bc -l)
-TLD_2_2_0=$(echo "0.01 * $MULTI_USER_COUNT * ${LOAD_TIME} / 3600" | bc -l)
+TLD_2_2_0=$(echo "0.01 * ${S_Q} * ${LOAD_TIME} / 3600" | bc -l)
 
 # Calculate scores using aggregation functions in psql
 psql -v ON_ERROR_STOP=1 -q -t -A -c "drop table if exists tpc_ds_vals"
@@ -45,7 +47,7 @@ SCORE_1_3_1=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select floor(${Q_1_3_1} * ${G
 SCORE_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select floor(${Q_2_2_0} * ${GEN_DATA_SCALE} / exp(avg(ln(v2_2_0)))) from tpc_ds_vals")
 psql -v ON_ERROR_STOP=1 -q -t -A -c "drop table tpc_ds_vals"
 
-echo -e "Number of Streams (Sq)\t${MULTI_USER_COUNT}"
+echo -e "Number of Streams (Sq)\t${S_Q}"
 echo -e "Scale Factor (SF)\t${GEN_DATA_SCALE}"
 echo -e "Load\t\t\t${LOAD_TIME}"
 echo -e "Analyze\t\t\t${ANALYZE_TIME}"
