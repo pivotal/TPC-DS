@@ -26,6 +26,7 @@ QUERIES_TIME=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select round(sum(extract('ep
 CONCURRENT_QUERY_TIME=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select round(sum(extract('epoch' from duration))) from tpcds_testing.sql")
 
 S_Q=${MULTI_USER_COUNT}
+SF=${GEN_DATA_SCALE}
 
 # Calculate operands for v1.3.1 of the TPC-DS score
 Q_1_3_1=$(( 3 * S_Q * 99 ))
@@ -33,22 +34,22 @@ TPT_1_3_1=$(( QUERIES_TIME * S_Q ))
 TTT_1_3_1=$(( 2 * CONCURRENT_QUERY_TIME ))
 TLD_1_3_1=$(( S_Q * LOAD_TIME / 100 ))
 
+# Since we cannot measure the real throughput of the TPC-DS workload,
+# we will estimate by dividing the total time by the number of streams.
+ESTIMATED_THROUGHPUT_ELAPSE_TIME=$(( CONCURRENT_QUERY_TIME / S_Q ))
+
 # Calculate operands for v2.2.0 of the TPC-DS score
 Q_2_2_0=$(( S_Q * 99 ))
-TPT_2_2_0=$(echo "${QUERIES_TIME} * ${S_Q} / 3600" | bc -l)
-TTT_2_2_0=$(echo "2 * ${CONCURRENT_QUERY_TIME} / 3600" | bc -l)
-TLD_2_2_0=$(echo "0.01 * ${S_Q} * ${LOAD_TIME} / 3600" | bc -l)
+TPT_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select ${QUERIES_TIME} * ${S_Q} / 3600")
+TTT_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select 2 * ${ESTIMATED_THROUGHPUT_ELAPSE_TIME} / 3600")
+TLD_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select 0.01 * ${S_Q} * ${LOAD_TIME} / 3600")
 
 # Calculate scores using aggregation functions in psql
-psql -v ON_ERROR_STOP=1 -q -t -A -c "drop table if exists tpc_ds_vals"
-psql -v ON_ERROR_STOP=1 -q -t -A -c "create table tpc_ds_vals(v1_3_1 double precision, v2_2_0 double precision)"
-psql -v ON_ERROR_STOP=1 -q -t -A -c "insert into tpc_ds_vals values(${TPT_1_3_1},${TPT_2_2_0}),(${TTT_1_3_1},${TTT_2_2_0}),(${TLD_1_3_1},${TLD_2_2_0})"
-SCORE_1_3_1=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select floor(${Q_1_3_1} * ${GEN_DATA_SCALE} / sum(v1_3_1)) from tpc_ds_vals")
-SCORE_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select floor(${Q_2_2_0} * ${GEN_DATA_SCALE} / exp(avg(ln(v2_2_0)))) from tpc_ds_vals")
-psql -v ON_ERROR_STOP=1 -q -t -A -c "drop table tpc_ds_vals"
+SCORE_1_3_1=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select floor( ${Q_1_3_1} * ${SF} / (${TPT_1_3_1} + ${TTT_1_3_1} + ${TLD_1_3_1}) )")
+SCORE_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select floor( ${Q_2_2_0} * ${SF} / exp( (ln(${TPT_2_2_0}) + ln(${TTT_2_2_0}) + ln(${TLD_2_2_0})) / 3) )")
 
 echo -e "Number of Streams (Sq)\t${S_Q}"
-echo -e "Scale Factor (SF)\t${GEN_DATA_SCALE}"
+echo -e "Scale Factor (SF)\t${SF}"
 echo -e "Load\t\t\t${LOAD_TIME}"
 echo -e "Analyze\t\t\t${ANALYZE_TIME}"
 echo -e "1 User Queries\t\t${QUERIES_TIME}"
