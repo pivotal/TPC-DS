@@ -36,12 +36,12 @@ TLD_1_3_1=$(( S_Q * LOAD_TIME / 100 ))
 
 # Since we cannot measure the real throughput of the TPC-DS workload,
 # we will estimate by dividing the total time by the number of streams.
-ESTIMATED_THROUGHPUT_ELAPSE_TIME=$(( CONCURRENT_QUERY_TIME / S_Q ))
+ESTIMATED_THROUGHPUT_ELAPSED_TIME=$(( CONCURRENT_QUERY_TIME / S_Q ))
 
 # Calculate operands for v2.2.0 of the TPC-DS score
 Q_2_2_0=$(( S_Q * 99 ))
 TPT_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select ${QUERIES_TIME} * ${S_Q} / 3600")
-TTT_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select 2 * ${ESTIMATED_THROUGHPUT_ELAPSE_TIME} / 3600")
+TTT_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select 2 * ${ESTIMATED_THROUGHPUT_ELAPSED_TIME} / 3600")
 TLD_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select 0.01 * ${S_Q} * ${LOAD_TIME} / 3600")
 
 # Calculate scores using aggregation functions in psql
