@@ -60,34 +60,57 @@ echo "##########################################################################
 echo ""
 if [ "$RUN_COMPILE_TPCDS" == "true" ]; then
   rm -f $PWD/log/end_compile_tpcds.log
+else
+  touch $PWD/log/end_compile_tpcds.log
 fi
 if [ "$RUN_GEN_DATA" == "true" ]; then
   rm -f $PWD/log/end_gen_data.log
+else
+  touch $PWD/log/end_gen_data.log
 fi
 if [ "$RUN_INIT" == "true" ]; then
   rm -f $PWD/log/end_init.log
+else
+  touch $PWD/log/end_init.log
 fi
 if [ "$RUN_DDL" == "true" ]; then
   rm -f $PWD/log/end_ddl.log
+else
+  touch $PWD/log/end_ddl.log
 fi
 if [ "$RUN_LOAD" == "true" ]; then
   rm -f $PWD/log/end_load.log
+else
+  touch $PWD/log/end_load.log
 fi
 if [ "$RUN_SQL" == "true" ]; then
   rm -f $PWD/log/end_sql.log
+else
+  touch $PWD/log/end_sql.log
 fi
 if [ "$RUN_SINGLE_USER_REPORT" == "true" ]; then
   rm -f $PWD/log/end_single_user_reports.log
+else
+  touch $PWD/log/end_single_user_reports.log
 fi
 if [ "$RUN_MULTI_USER" == "true" ]; then
-        rm -f $PWD/log/end_multi_user.log
+  rm -f $PWD/log/end_multi_user.log
   rm -f $PWD/log/end_testing_*.log
+else
+  touch $PWD/log/end_multi_user.log
+  for i in $(seq 1 ${MULTI_USER_COUNT}); do
+    touch $PWD/log/end_testing_"${i}".log
+  done
 fi
 if [ "$RUN_MULTI_USER_REPORT" == "true" ]; then
   rm -f $PWD/log/end_multi_user_reports.log
+else
+  touch $PWD/log/end_multi_user_reports.log
 fi
 if [ "$RUN_SCORE" == "true" ]; then
   rm -f $PWD/log/end_score.log
+else
+  touch $PWD/log/end_score.log
 fi
 
 for i in $(ls -d $PWD/0*); do
