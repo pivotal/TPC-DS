@@ -5,7 +5,8 @@ PWD=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 source $PWD/../functions.sh
 source_bashrc
 
-GEN_DATA_SCALE=$1
+GEN_DATA_SCALE=${1}
+BENCH_ROLE=${6}
 
 if [ "$GEN_DATA_SCALE" == "" ]; then
 	echo "You must provide the scale as a parameter in terms of Gigabytes."
@@ -107,20 +108,25 @@ gen_data
 
 echo ""
 get_count_generate_data
-echo "Now generating data.  This make take a while."
-echo -ne "Generating data"
+echo "Now generating data.  This may take a while."
+minutes=0
+echo -ne "Generating data duration: "
+tput sc
 while [ "$count" -gt "0" ]; do
-	echo -ne "."
-	sleep 5
+	tput rc
+	echo -ne "${minutes} minute(s)"
+	sleep 60
+	minutes=$(( minutes + 1 ))
 	get_count_generate_data
 done
 
+echo ""
 echo "Done generating data"
 echo ""
 
 echo "Generate queries based on scale"
 cd $PWD
-$PWD/generate_queries.sh $GEN_DATA_SCALE
+$PWD/generate_queries.sh ${GEN_DATA_SCALE} ${BENCH_ROLE}
 
 log
 

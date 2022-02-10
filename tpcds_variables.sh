@@ -1,5 +1,6 @@
 # environment options
 ADMIN_USER="gpadmin"
+BENCH_ROLE="dsbench"
 
 # benchmark options
 GEN_DATA_SCALE="1"

@@ -10,8 +10,9 @@ EXPLAIN_ANALYZE=$2
 RANDOM_DISTRIBUTION=$3
 MULTI_USER_COUNT=$4
 SINGLE_USER_ITERATIONS=$5
+BENCH_ROLE=$6
 
-if [[ "$GEN_DATA_SCALE" == "" || "$EXPLAIN_ANALYZE" == "" || "$RANDOM_DISTRIBUTION" == "" || "$MULTI_USER_COUNT" == "" || "$SINGLE_USER_ITERATIONS" == "" ]]; then
+if [[ "${GEN_DATA_SCALE}" == "" || "${EXPLAIN_ANALYZE}" == "" || "${RANDOM_DISTRIBUTION}" == "" || "${MULTI_USER_COUNT}" == "" || "${SINGLE_USER_ITERATIONS}" == "" || "${BENCH_ROLE}" == "" ]]; then
 	echo "You must provide the scale as a parameter in terms of Gigabytes, true/false to run queries with EXPLAIN ANALYZE option, true/false to use random distrbution, multi-user count, and the number of sql iterations."
 	echo "Example: ./rollout.sh 100 false false 5 1"
 	exit 1
@@ -112,5 +113,28 @@ if [ "$filter" == "gpdb" ]; then
 		log
 	done
 fi
+
+Qquery="select count(1) from gp_toolkit.gp_resqueue_status where rsqname = '${BENCH_ROLE}'"
+CreateQueue="CREATE RESOURCE QUEUE ${BENCH_ROLE} WITH (ACTIVE_STATEMENTS=5)"
+DropRole="DROP ROLE IF EXISTS ${BENCH_ROLE}"
+CreateRole="CREATE ROLE ${BENCH_ROLE} WITH RESOURCE QUEUE ${BENCH_ROLE}"
+GrantSchemaPrivileges="GRANT ALL PRIVILEGES ON SCHEMA tpcds TO ${BENCH_ROLE}"
+GrantTablePrivileges="GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA tpcds TO ${BENCH_ROLE}"
+
+if [ $(psql -v ON_ERROR_STOP=0 -t -q -P pager=off -c "${Qquery}") -eq 0 ]; then
+	echo "Creating Resource Queue: ${BENCH_ROLE}"
+	psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${CreateQueue}"
+else
+	echo "Resource Queue, ${BENCH_ROLE}, already exists"
+fi
+
+echo "Dropping role ${BENCH_ROLE} if it exists"
+psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${DropRole}"
+echo "Creating role ${BENCH_ROLE}"
+psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${CreateRole}"
+echo "Grant schema privileges to role ${BENCH_ROLE}"
+psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${GrantSchemaPrivileges}"
+echo "Grant table privileges to role ${BENCH_ROLE}"
+psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${GrantTablePrivileges}"
 
 end_step $step

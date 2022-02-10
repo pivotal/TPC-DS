@@ -48,6 +48,7 @@ source_bashrc()
     fi
   fi
 }
+
 get_version()
 {
   #need to call source_bashrc first
@@ -69,6 +70,7 @@ get_version()
     LARGE_STORAGE=""
   fi
 }
+
 init_log()
 {
   if [ -f $LOCAL_PWD/log/end_$1.log ]; then

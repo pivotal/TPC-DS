@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PWD=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-source $PWD/../functions.sh
+source $PWD/../tpcds_variables.sh
 source_bashrc
 
 set -e
@@ -9,11 +9,12 @@ set -e
 query_id=1
 file_id=101
 
-GEN_DATA_SCALE=$1
+GEN_DATA_SCALE=${1}
+BENCH_ROLE=${2}
 
-if [ "$GEN_DATA_SCALE" == "" ]; then
-	echo "Usage: generate_queries.sh scale"
-	echo "Example: ./generate_queries.sh 100"
+if [ "$GEN_DATA_SCALE" == "" || "$BENCH_ROLE" == "" ]; then
+	echo "Usage: generate_queries.sh scale rolename"
+	echo "Example: ./generate_queries.sh 100 dsbench"
 	echo "This creates queries for 100GB of data."
 	exit 1
 fi
@@ -23,11 +24,11 @@ rm -f $PWD/query_0.sql
 echo "$PWD/dsqgen -input $PWD/query_templates/templates.lst -directory $PWD/query_templates -dialect pivotal -scale $GEN_DATA_SCALE -verbose y -output $PWD"
 $PWD/dsqgen -input $PWD/query_templates/templates.lst -directory $PWD/query_templates -dialect pivotal -scale $GEN_DATA_SCALE -verbose y -output $PWD
 
-rm -f $PWD/../05_sql/*.query.*.sql
+rm -f $PWD/../05_sql/*.${BENCH_ROLE}.*.sql*
 
 for p in $(seq 1 99); do
 	q=$(printf %02d $query_id)
-	filename=$file_id.tpcds.$q.sql
+	filename=$file_id.${BENCH_ROLE}.$q.sql
 	template_filename=query$p.tpl
 	start_position=""
 	end_position=""
@@ -39,9 +40,8 @@ for p in $(seq 1 99); do
 		fi
 	done
 
-	echo "echo \":EXPLAIN_ANALYZE\" > $PWD/../05_sql/$filename"
-	echo ":EXPLAIN_ANALYZE" > $PWD/../05_sql/$filename
-	echo "sed -n \"$start_position\",\"$end_position\"p $PWD/query_0.sql >> $PWD/../05_sql/$filename"
+	echo "Creating: $PWD/../05_sql/$filename"
+	printf "set role ${BENCH_ROLE};\n:EXPLAIN_ANALYZE\n" > $PWD/../05_sql/$filename
 	sed -n "$start_position","$end_position"p $PWD/query_0.sql >> $PWD/../05_sql/$filename
 	query_id=$(($query_id + 1))
 	file_id=$(($file_id + 1))
@@ -51,16 +51,17 @@ done
 echo ""
 echo "queries 114, 123, 124, and 139 have 2 queries in each file.  Need to add :EXPLAIN_ANALYZE to second query in these files"
 echo ""
-arr=("114.tpcds.14.sql" "123.tpcds.23.sql" "124.tpcds.24.sql" "139.tpcds.39.sql")
+arr=("114.${BENCH_ROLE}.14.sql" "123.${BENCH_ROLE}.23.sql" "124.${BENCH_ROLE}.24.sql" "139.${BENCH_ROLE}.39.sql")
 
 for z in "${arr[@]}"; do
 	echo $z
 	myfilename=$PWD/../05_sql/$z
-	echo "myfilename: $myfilename"
-	pos=$(grep -n ";" $myfilename | awk -F ':' '{print $1}' | head -1)
+	echo "Modifying: $myfilename"
+	pos=$(grep -n ";" $myfilename | awk -F ':' ' { if (NR > 1) print $1 }' | head -1)
 	pos=$(($pos+1))
 	echo "pos: $pos"
 	sed -i ''$pos'i\'$'\n'':EXPLAIN_ANALYZE'$'\n' $myfilename
+	echo "Modified: $myfilename"
 
 done
 
