@@ -41,10 +41,13 @@ if [ "$file_count" -ne "${MULTI_USER_COUNT}" ]; then
 	rm -f ${PWD}/../log/testing*.log
 	rm -f ${PWD}/../log/rollout_testing_*.log
 	rm -f ${PWD}/../log/*multi.explain_analyze.log
-
 	rm -f ${PWD}/query_*.sql
 
-	#create each session's directory
+	AlterQueue="ALTER RESOURCE QUEUE ${BENCH_ROLE} WITH (ACTIVE_STATEMENTS=$(( MULTI_USER_COUNT + 1 )))"
+	echo "${AlterQueue}"
+	psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${AlterQueue}"
+
+	#create each user's directory
 	sql_dir=${PWD}
 	echo "sql_dir: $sql_dir"
 	for i in $(seq 1 ${MULTI_USER_COUNT}); do

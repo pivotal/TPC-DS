@@ -115,7 +115,8 @@ if [ "$filter" == "gpdb" ]; then
 fi
 
 Qquery="select count(1) from gp_toolkit.gp_resqueue_status where rsqname = '${BENCH_ROLE}'"
-CreateQueue="CREATE RESOURCE QUEUE ${BENCH_ROLE} WITH (ACTIVE_STATEMENTS=5)"
+CreateQueue="CREATE RESOURCE QUEUE ${BENCH_ROLE} WITH (ACTIVE_STATEMENTS=$(( MULTI_USER_COUNT + 1 )))"
+AlterQueue="ALTER RESOURCE QUEUE ${BENCH_ROLE} WITH (ACTIVE_STATEMENTS=$(( MULTI_USER_COUNT + 1 )))"
 DropRole="DROP ROLE IF EXISTS ${BENCH_ROLE}"
 CreateRole="CREATE ROLE ${BENCH_ROLE} WITH RESOURCE QUEUE ${BENCH_ROLE}"
 GrantSchemaPrivileges="GRANT ALL PRIVILEGES ON SCHEMA tpcds TO ${BENCH_ROLE}"
@@ -126,6 +127,8 @@ if [ $(psql -v ON_ERROR_STOP=0 -t -q -P pager=off -c "${Qquery}") -eq 0 ]; then
 	psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${CreateQueue}"
 else
 	echo "Resource Queue, ${BENCH_ROLE}, already exists"
+	echo "Altering Resource Queue: ${BENCH_ROLE}"
+	psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${AlterQueue}"
 fi
 
 echo "Dropping role ${BENCH_ROLE} if it exists"
