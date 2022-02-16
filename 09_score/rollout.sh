@@ -25,6 +25,8 @@ ANALYZE_TIME=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select round(sum(extract('ep
 QUERIES_TIME=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select round(sum(extract('epoch' from duration))) from (SELECT split_part(description, '.', 2) AS id, min(duration) AS duration FROM tpcds_reports.sql GROUP BY split_part(description, '.', 2)) as sub")
 CONCURRENT_QUERY_TIME=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select round(sum(extract('epoch' from duration))) from tpcds_testing.sql")
 
+THROUGHPUT_ELAPSED_TIME=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select max(end_epoch_seconds) - min(start_epoch_seconds) from tpcds_testing.sql")
+
 S_Q=${MULTI_USER_COUNT}
 SF=${GEN_DATA_SCALE}
 
@@ -34,14 +36,10 @@ TPT_1_3_1=$(( QUERIES_TIME * S_Q ))
 TTT_1_3_1=$(( 2 * CONCURRENT_QUERY_TIME ))
 TLD_1_3_1=$(( S_Q * LOAD_TIME / 100 ))
 
-# Since we cannot measure the real throughput of the TPC-DS workload,
-# we will estimate by dividing the total time by the number of streams.
-ESTIMATED_THROUGHPUT_ELAPSED_TIME=$(( CONCURRENT_QUERY_TIME / S_Q ))
-
 # Calculate operands for v2.2.0 of the TPC-DS score
 Q_2_2_0=$(( S_Q * 99 ))
 TPT_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select ${QUERIES_TIME} * ${S_Q} / 3600.0")
-TTT_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select 2 * ${ESTIMATED_THROUGHPUT_ELAPSED_TIME} / 3600.0")
+TTT_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select 2 * ${THROUGHPUT_ELAPSED_TIME} / 3600.0")
 TLD_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select 0.01 * ${S_Q} * ${LOAD_TIME} / 3600.0")
 
 # Calculate scores using aggregation functions in psql
@@ -54,6 +52,7 @@ printf "Load\t\t\t%d\n" "${LOAD_TIME}"
 printf "Analyze\t\t\t%d\n" "${ANALYZE_TIME}"
 printf "1 User Queries\t\t%d\n" "${QUERIES_TIME}"
 printf "Concurrent Queries\t%d\n" "${CONCURRENT_QUERY_TIME}"
+printf "Throughput Test Elapsed Time\t%d\n" "${THROUGHPUT_ELAPSED_TIME}"
 printf "\n"
 printf "TPC-DS v1.3.1 (QphDS@SF = floor(SF * Q / sum(TPT, TTT, TLD)))\n"
 printf "Q (3 * Sq * 99)\t\t%d\n" "${Q_1_3_1}"
