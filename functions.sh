@@ -81,28 +81,15 @@ init_log()
 
 start_log()
 {
-  if [ "$OSVERSION" == "Linux" ]; then
-    T="$(date +%s%N)"
-  else
-    T="$(date +%s)"
-  fi
+  T_START="$(date +%s)"
 }
 
 log()
 {
   #duration
-  if [ "$OSVERSION" == "Linux" ]; then
-    T="$(($(date +%s%N)-T))"
-    # seconds
-    S="$((T/1000000000))"
-    # milliseconds
-    M="$((T/1000000))"
-  else
-    #must be OSX which doesn't have nano-seconds
-    T="$(($(date +%s)-T))"
-    S=$T
-    M=0
-  fi
+  T_END="$(date +%s)"
+  T_DURATION="$((T_END-T_START))"
+  S_DURATION=$T_DURATION
 
   #this is done for steps that don't have id values
   if [ "$id" == "" ]; then
@@ -116,7 +103,7 @@ log()
     tuples="0"
   fi
 
-  printf "$id|$schema_name.$table_name|$tuples|%02d:%02d:%02d.%03d\n" "$((S/3600%24))" "$((S/60%60))" "$((S%60))" "${M}" >> $LOCAL_PWD/log/$logfile
+  printf "$id|$schema_name.$table_name|$tuples|%02d:%02d:%02d|%d|%d\n" "$((S_DURATION/3600%24))" "$((S_DURATION/60%60))" "$((S_DURATION%60))" "${T_START}" "${T_END}" >> $LOCAL_PWD/log/$logfile
 }
 
 end_step()
