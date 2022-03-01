@@ -68,4 +68,4 @@ printf "TTT (hours)\t\t%.3f\n" "${TTT_2_2_0}"
 printf "TLD (hours)\t\t%.3f\n" "${TLD_2_2_0}"
 printf "Score\t\t\t%d\n" "${SCORE_2_2_0}"
 
-end_step ${STEP}
+echo "Finished ""$step"

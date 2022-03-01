@@ -167,4 +167,4 @@ else
 	done
 fi
 
-end_step $step
+echo "Finished ""$step"

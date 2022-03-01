@@ -140,4 +140,4 @@ psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${GrantSchemaPrivileges}"
 echo "Grant table privileges to role ${BENCH_ROLE}"
 psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${GrantTablePrivileges}"
 
-end_step $step
+echo "Finished ""$step"

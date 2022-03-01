@@ -38,4 +38,4 @@ psql -v ON_ERROR_STOP=1 -t -A -c "select 'analyze ' || n.nspname || '.' || c.rel
 psql -v ON_ERROR_STOP=1 -F $'\t' -A -P pager=off -f $PWD/detailed_report.sql
 echo ""
 
-end_step $step
+echo "Finished ""$step"

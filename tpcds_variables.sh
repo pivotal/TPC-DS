@@ -13,9 +13,9 @@ RUN_INIT="true"
 RUN_DDL="true"
 RUN_LOAD="true"
 RUN_SQL="true"
-RUN_SINGLE_USER_REPORT="true"
+RUN_SINGLE_USER_REPORTS="true"
 RUN_MULTI_USER="true"
-RUN_MULTI_USER_REPORT="true"
+RUN_MULTI_USER_REPORTS="true"
 RUN_SCORE="true"
 
 # misc options

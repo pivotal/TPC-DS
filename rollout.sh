@@ -15,9 +15,9 @@ RUN_INIT="${7}"
 RUN_DDL="${8}"
 RUN_LOAD="${9}"
 RUN_SQL="${10}"
-RUN_SINGLE_USER_REPORT="${11}"
+RUN_SINGLE_USER_REPORTS="${11}"
 RUN_MULTI_USER="${12}"
-RUN_MULTI_USER_REPORT="${13}"
+RUN_MULTI_USER_REPORTS="${13}"
 RUN_SCORE="${14}"
 SINGLE_USER_ITERATIONS="${15}"
 BENCH_ROLE="${16}"
@@ -32,9 +32,9 @@ if [[ "${GEN_DATA_SCALE}" == "" \
   || "${RUN_DDL}" == "" \
   || "${RUN_LOAD}" == "" \
   || "${RUN_SQL}" == "" \
-  || "${RUN_SINGLE_USER_REPORT}" == "" \
+  || "${RUN_SINGLE_USER_REPORTS}" == "" \
   || "${RUN_MULTI_USER}" == "" \
-  || "${RUN_MULTI_USER_REPORT}" == "" \
+  || "${RUN_MULTI_USER_REPORTS}" == "" \
   || "${RUN_SCORE}" == "" \
   || "${SINGLE_USER_ITERATIONS}" == "" \
   || "${BENCH_ROLE}" == "" ]]; then
@@ -69,68 +69,27 @@ echo "RUN_DDL: ${RUN_DDL}"
 echo "RUN_LOAD: ${RUN_LOAD}"
 echo "RUN_SQL: ${RUN_SQL}"
 echo "SINGLE_USER_ITERATIONS: ${SINGLE_USER_ITERATIONS}"
-echo "RUN_SINGLE_USER_REPORT: ${RUN_SINGLE_USER_REPORT}"
+echo "RUN_SINGLE_USER_REPORTS: ${RUN_SINGLE_USER_REPORTS}"
 echo "RUN_MULTI_USER: ${RUN_MULTI_USER}"
-echo "RUN_MULTI_USER_REPORT: ${RUN_MULTI_USER_REPORT}"
+echo "RUN_MULTI_USER_REPORTS: ${RUN_MULTI_USER_REPORTS}"
 echo "BENCH_ROLE: ${BENCH_ROLE}"
 echo "############################################################################"
 echo ""
-if [ "$RUN_COMPILE_TPCDS" == "true" ]; then
-  rm -f $PWD/log/end_compile_tpcds.log
-else
-  touch $PWD/log/end_compile_tpcds.log
-fi
-if [ "$RUN_GEN_DATA" == "true" ]; then
-  rm -f $PWD/log/end_gen_data.log
-else
-  touch $PWD/log/end_gen_data.log
-fi
-if [ "$RUN_INIT" == "true" ]; then
-  rm -f $PWD/log/end_init.log
-else
-  touch $PWD/log/end_init.log
-fi
-if [ "$RUN_DDL" == "true" ]; then
-  rm -f $PWD/log/end_ddl.log
-else
-  touch $PWD/log/end_ddl.log
-fi
-if [ "$RUN_LOAD" == "true" ]; then
-  rm -f $PWD/log/end_load.log
-else
-  touch $PWD/log/end_load.log
-fi
-if [ "$RUN_SQL" == "true" ]; then
-  rm -f $PWD/log/end_sql.log
-else
-  touch $PWD/log/end_sql.log
-fi
-if [ "$RUN_SINGLE_USER_REPORT" == "true" ]; then
-  rm -f $PWD/log/end_single_user_reports.log
-else
-  touch $PWD/log/end_single_user_reports.log
-fi
-if [ "$RUN_MULTI_USER" == "true" ]; then
-  rm -f $PWD/log/end_multi_user.log
-  rm -f $PWD/log/end_testing_*.log
-else
-  touch $PWD/log/end_multi_user.log
-  for i in $(seq 1 ${MULTI_USER_COUNT}); do
-    touch $PWD/log/end_testing_"${i}".log
-  done
-fi
-if [ "$RUN_MULTI_USER_REPORT" == "true" ]; then
-  rm -f $PWD/log/end_multi_user_reports.log
-else
-  touch $PWD/log/end_multi_user_reports.log
-fi
-if [ "$RUN_SCORE" == "true" ]; then
-  rm -f $PWD/log/end_score.log
-else
-  touch $PWD/log/end_score.log
-fi
 
+# We assume that the flag variable names are consistent with the corresponding directory names.
+# For example, `00_compile_tpcds directory` name will be used to get `true` or `false` value from `RUN_COMPILE_TPCDS` in `tpcds_variables.sh`.
 for i in $(ls -d $PWD/0*); do
-  echo "${i}/rollout.sh ${GEN_DATA_SCALE} ${EXPLAIN_ANALYZE} ${RANDOM_DISTRIBUTION} ${MULTI_USER_COUNT} ${SINGLE_USER_ITERATIONS} ${BENCH_ROLE}"
-  $i/rollout.sh ${GEN_DATA_SCALE} ${EXPLAIN_ANALYZE} ${RANDOM_DISTRIBUTION} ${MULTI_USER_COUNT} ${SINGLE_USER_ITERATIONS} ${BENCH_ROLE}
+  step_name=${i#*_} # split by the first underscore and extract the step name.
+  flag_name="RUN_""$(echo $step_name|tr [a-z] [A-Z])" # convert to upper case and concatenate "RUN_" in the front to get the flag name.
+  run_flag=${!flag_name} # use indirect reference to convert flag name string to its value as "true" or "false".
+
+  if [ "$run_flag" == "true" ]; then
+    echo "Run $i/rollout.sh ${GEN_DATA_SCALE} ${EXPLAIN_ANALYZE} ${RANDOM_DISTRIBUTION} ${MULTI_USER_COUNT} ${SINGLE_USER_ITERATIONS} ${BENCH_ROLE}"
+    $i/rollout.sh ${GEN_DATA_SCALE} ${EXPLAIN_ANALYZE} ${RANDOM_DISTRIBUTION} ${MULTI_USER_COUNT} ${SINGLE_USER_ITERATIONS} ${BENCH_ROLE}
+  elif [ "$run_flag" == "false" ]; then
+    echo "Skip $i/rollout.sh"
+  else
+    echo "Aborting script because ${flag_name} is not properly specified: must be either \"true\" or \"false\"."
+    exit 1
+  fi
 done

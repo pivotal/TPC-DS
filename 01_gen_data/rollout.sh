@@ -130,4 +130,4 @@ $PWD/generate_queries.sh ${GEN_DATA_SCALE} ${BENCH_ROLE}
 
 log
 
-end_step $step
+echo "Finished ""$step"

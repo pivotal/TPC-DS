@@ -122,4 +122,4 @@ set_search_path
 
 log
 
-end_step $step
+echo "Finished ""$step"

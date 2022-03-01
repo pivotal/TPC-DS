@@ -56,4 +56,4 @@ echo "Queries"
 echo "********************************************************************************"
 psql -F $'\t' -A -v ON_ERROR_STOP=1 -P pager=off -f $PWD/queries_report.sql
 echo ""
-end_step $step
+echo "Finished ""$step"

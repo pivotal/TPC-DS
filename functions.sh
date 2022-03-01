@@ -73,10 +73,6 @@ get_version()
 
 init_log()
 {
-  if [ -f $LOCAL_PWD/log/end_$1.log ]; then
-    exit 0
-  fi
-
   logfile=rollout_$1.log
   rm -f $LOCAL_PWD/log/$logfile
 }

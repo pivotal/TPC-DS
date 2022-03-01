@@ -48,4 +48,4 @@ copy_tpc
 copy_queries
 log
 
-end_step $step
+echo "Finished ""$step"

@@ -42,4 +42,4 @@ for i in $(ls $PWD/*.${BENCH_ROLE}.*.sql); do
 	done
 done
 
-end_step $step
+echo "Finished ""$step"
