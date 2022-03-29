@@ -33,7 +33,7 @@
 -- Contributors:
 -- 
  define BPONE= text({"1001-5000",1},{">10000",1},{"501-1000",1});
- define BPTWO= text({"0-500",1},{"unknown",1},{"5001-10000",1});
+ define BPTWO= text({"0-500",1},{"Unknown",1},{"5001-10000",1});
  define YEAR= random(1998, 2000, uniform);
  define COUNTYNUMBER=ulist(random(1, rowcount("active_counties", "store"), uniform), 8);
  define COUNTY_A=distmember(fips_county, [COUNTYNUMBER.1], 2);
@@ -73,6 +73,5 @@
     group by ss_ticket_number,ss_customer_sk) dn,customer
     where ss_customer_sk = c_customer_sk
       and cnt between 15 and 20
-    order by c_last_name,c_first_name,c_salutation,c_preferred_cust_flag desc
- limit 100;
+    order by c_last_name,c_first_name,c_salutation,c_preferred_cust_flag desc, ss_ticket_number;
 
