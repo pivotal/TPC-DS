@@ -113,11 +113,9 @@ set_search_path()
 }
 
 get_version
-if [[ "$VERSION" == *"gpdb"* ]]; then
-	set_segment_bashrc
-	check_gucs
-	copy_config
-fi
+set_segment_bashrc
+check_gucs
+copy_config
 set_search_path
 
 log

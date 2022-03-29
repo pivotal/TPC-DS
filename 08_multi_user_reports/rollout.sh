@@ -9,14 +9,7 @@ step="multi_user_reports"
 init_log $step
 
 get_version
-if [[ "$VERSION" == *"gpdb"* ]]; then
-	filter="gpdb"
-elif [ "$VERSION" == "postgresql" ]; then
-	filter="postgresql"
-else
-	echo "ERROR: Unsupported VERSION!"
-	exit 1
-fi
+filter="gpdb"
 
 for i in $(ls $PWD/*.$filter.*.sql); do
 	echo "psql -v ON_ERROR_STOP=1 -a -f $i"
