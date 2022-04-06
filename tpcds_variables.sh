@@ -1,4 +1,6 @@
+#!/bin/bash
 # environment options
+# shellcheck disable=SC2034 # used as environment for run
 ADMIN_USER="gpadmin"
 BENCH_ROLE="dsbench"
 

@@ -11,13 +11,13 @@ init_log $step
 get_version
 filter="gpdb"
 
-for i in $(ls $PWD/*.$filter.*.sql); do
+for i in "$PWD"/*."$filter".*.sql; do
 	echo "psql -v ON_ERROR_STOP=1 -a -f $i"
 	psql -v ON_ERROR_STOP=1 -a -f $i
 	echo ""
 done
 
-for i in $(ls $PWD/*.copy.*.sql); do
+for i in "$PWD"/*.copy.*.sql; do
 	logstep=$(echo $i | awk -F 'copy.' '{print $2}' | awk -F '.' '{print $1}')
 	logfile="$PWD""/../log/rollout_""$logstep"".log"
 	logfile="'""$logfile""'"

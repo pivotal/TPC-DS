@@ -20,7 +20,8 @@ check_variables() {
   echo "Sourcing $VARS_FILE"
   echo "############################################################################"
   echo ""
-  source $VARS_FILE 2> /dev/null
+  # shellcheck source=tpcds_variables.sh
+  source "$VARS_FILE" 2> /dev/null
   if [ $? -ne 0 ]; then
     echo "${VARS_FILE} does not exist. Please ensure that this file exists before running TPC-DS. Exiting."
     exit 1

@@ -35,51 +35,51 @@ get_file_count()
 }
 
 
-rm -f ${PWD}/../log/end_testing_*.log
-rm -f ${PWD}/../log/testing*.log
-rm -f ${PWD}/../log/rollout_testing_*.log
-rm -f ${PWD}/../log/*multi.explain_analyze.log
-rm -f ${PWD}/query_*.sql
+rm -f "${PWD}"/../log/end_testing_*.log
+rm -f "${PWD}"/../log/testing*.log
+rm -f "${PWD}"/../log/rollout_testing_*.log
+rm -f "${PWD}"/../log/*multi.explain_analyze.log
+rm -f "${PWD}"/query_*.sql
 
-AlterQueue="ALTER RESOURCE QUEUE ${BENCH_ROLE} WITH (ACTIVE_STATEMENTS=$(( MULTI_USER_COUNT + 1 )))"
+AlterQueue="ALTER RESOURCE QUEUE ${BENCH_ROLE} WITH (ACTIVE_STATEMENTS=$(( $MULTI_USER_COUNT + 1 )))"
 echo "${AlterQueue}"
 psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${AlterQueue}"
 
 #create each user's directory
-sql_dir=${PWD}
+sql_dir="${PWD}"
 echo "sql_dir: $sql_dir"
 for i in $(seq 1 ${MULTI_USER_COUNT}); do
 	sql_dir="${PWD}/${i}"
 	echo "checking for directory $sql_dir"
 	if [ ! -d "$sql_dir" ]; then
 		echo "mkdir $sql_dir"
-		mkdir $sql_dir
+		mkdir "$sql_dir"
 	fi
 	echo "rm -f $sql_dir/*.sql"
-	rm -f $sql_dir/*.sql
+	rm -f "$sql_dir"/*.sql
 done
 
 #Create queries
 echo "cd ${PWD}"
-cd ${PWD}
+cd "${PWD}"
 echo "${PWD}/dsqgen -streams ${MULTI_USER_COUNT} -input ${PWD}/query_templates/templates.lst -directory ${PWD}/query_templates -dialect pivotal -scale ${GEN_DATA_SCALE} -verbose y -output ${PWD}"
-${PWD}/dsqgen -streams ${MULTI_USER_COUNT} -input ${PWD}/query_templates/templates.lst -directory ${PWD}/query_templates -dialect pivotal -scale ${GEN_DATA_SCALE} -verbose y -output ${PWD}
+"${PWD}"/dsqgen -streams "${MULTI_USER_COUNT}" -input "${PWD}"/query_templates/templates.lst -directory "${PWD}"/query_templates -dialect pivotal -scale "${GEN_DATA_SCALE}" -verbose y -output "${PWD}"
 
 #move the query_x.sql file to the correct session directory
-for i in $(ls ${PWD}/query_*.sql); do
+for i in "${PWD}"/query_*.sql; do
 	stream_number=$(basename $i | awk -F '.' '{print $1}' | awk -F '_' '{print $2}')
 	#going from base 0 to base 1
-	stream_number=$((stream_number+1))
+	stream_number=$(($stream_number + 1))
 	echo "stream_number: $stream_number"
-	sql_dir=${PWD}/$stream_number
+	sql_dir="${PWD}"/"$stream_number"
 	echo "mv $i $sql_dir/"
-	mv $i $sql_dir/
+	mv "$i" "$sql_dir"/
 done
 
-for session_id in $(seq 1 ${MULTI_USER_COUNT}); do
+for session_id in $(seq 1 "${MULTI_USER_COUNT}"); do
 	session_log=${PWD}/../log/testing_session_${session_id}.log
 	echo "${PWD}/test.sh ${GEN_DATA_SCALE} ${session_id} ${EXPLAIN_ANALYZE} ${BENCH_ROLE}"
-	${PWD}/test.sh ${GEN_DATA_SCALE} ${session_id} ${EXPLAIN_ANALYZE} ${BENCH_ROLE} > $session_log 2>&1 < $session_log &
+	"${PWD}"/test.sh "${GEN_DATA_SCALE}" "${session_id}" "${EXPLAIN_ANALYZE}" "${BENCH_ROLE}" > "$session_log" 2>&1 < "$session_log" &
 done
 
 sleep 60
@@ -92,7 +92,7 @@ while [ "$psql_count" -gt "0" ]; do
 	tput rc
 	echo -ne "${minutes} minute(s)"
 	sleep 60
-	minutes=$(( minutes + 1 ))
+	minutes=$(($minutes + 1))
 	get_psql_count
 done
 echo ""
@@ -107,4 +107,4 @@ if [ "$file_count" -ne "${MULTI_USER_COUNT}" ]; then
 	exit 1
 fi
 
-rm -f $PWD/../log/end_testing_*.log # remove the counter log file if successful.
+rm -f "$PWD"/../log/end_testing_*.log # remove the counter log file if successful.
