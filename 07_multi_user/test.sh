@@ -74,11 +74,15 @@ for z in "${arr[@]}"; do
 done
 
 tuples="0"
-for i in $(ls $sql_dir/*.sql); do
+for i in "$sql_dir"/*.sql; do
 
 	start_log
+	# shellcheck disable=SC2034
+	# id, schema_name and table_name are used in log(): functions.sh
 	id=$i
+	# shellcheck disable=SC2034
 	schema_name=$session_id
+	# shellcheck disable=SC2034
 	table_name=$(basename $i | awk -F '.' '{print $3}')
 
 	if [ "${EXPLAIN_ANALYZE}" == "false" ]; then

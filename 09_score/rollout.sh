@@ -2,7 +2,7 @@
 set -e
 
 PWD=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-source ${PWD}/../functions.sh
+source "${PWD}"/../functions.sh
 source_bashrc
 
 GEN_DATA_SCALE=${1}
@@ -68,4 +68,4 @@ printf "TTT (hours)\t\t%.3f\n" "${TTT_2_2_0}"
 printf "TLD (hours)\t\t%.3f\n" "${TLD_2_2_0}"
 printf "Score\t\t\t%d\n" "${SCORE_2_2_0}"
 
-echo "Finished ""$step"
+echo "Finished $STEP"

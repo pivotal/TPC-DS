@@ -2,7 +2,8 @@
 
 set -e
 PWD=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-source $PWD/functions.sh
+# shellcheck source=functions.sh
+source "$PWD"/functions.sh
 source_bashrc
 
 GEN_DATA_SCALE="${1}"
@@ -41,14 +42,14 @@ if [[ "${GEN_DATA_SCALE}" == "" \
   echo "Please run this script from tpcds.sh so the correct parameters are passed to it."
   exit 1
 fi
-
-QUIET=$5
+# shellcheck disable=SC2034
+QUIET="${5}"
 
 create_directories()
 {
-  if [ ! -d $LOCAL_PWD/log ]; then
+  if [ ! -d "$LOCAL_PWD"/log ]; then
     echo "Creating log directory"
-    mkdir $LOCAL_PWD/log
+    mkdir "$LOCAL_PWD"/log
   fi
 }
 
@@ -78,14 +79,14 @@ echo ""
 
 # We assume that the flag variable names are consistent with the corresponding directory names.
 # For example, `00_compile_tpcds directory` name will be used to get `true` or `false` value from `RUN_COMPILE_TPCDS` in `tpcds_variables.sh`.
-for i in $(ls -d $PWD/0*); do
+for i in "$PWD"/0*; do
   step_name=${i#*_} # split by the first underscore and extract the step name.
-  flag_name="RUN_""$(echo $step_name|tr [a-z] [A-Z])" # convert to upper case and concatenate "RUN_" in the front to get the flag name.
+  flag_name="RUN_$(echo "$step_name"|tr 'a-z' 'A-Z')" # convert to upper case and concatenate "RUN_" in the front to get the flag name.
   run_flag=${!flag_name} # use indirect reference to convert flag name string to its value as "true" or "false".
 
   if [ "$run_flag" == "true" ]; then
     echo "Run $i/rollout.sh ${GEN_DATA_SCALE} ${EXPLAIN_ANALYZE} ${RANDOM_DISTRIBUTION} ${MULTI_USER_COUNT} ${SINGLE_USER_ITERATIONS} ${BENCH_ROLE}"
-    $i/rollout.sh ${GEN_DATA_SCALE} ${EXPLAIN_ANALYZE} ${RANDOM_DISTRIBUTION} ${MULTI_USER_COUNT} ${SINGLE_USER_ITERATIONS} ${BENCH_ROLE}
+    "$i"/rollout.sh "${GEN_DATA_SCALE}" "${EXPLAIN_ANALYZE}" "${RANDOM_DISTRIBUTION}" "${MULTI_USER_COUNT}" "${SINGLE_USER_ITERATIONS}" "${BENCH_ROLE}"
   elif [ "$run_flag" == "false" ]; then
     echo "Skip $i/rollout.sh"
   else

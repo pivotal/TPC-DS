@@ -6,6 +6,10 @@ export SUPER_LINTER_VERSION='v4.8.5'
 
 .PHONY: lint
 lint:
+	find . -name "*.sh" -not -path './00_compile_tpcds/t*' | xargs shellcheck
+
+.PHONY: super-linter
+super-linter:
 	docker run --rm \
 		-e VALIDATE_BASH=true \
 		-e VALIDATE_BASH_EXEC=true \

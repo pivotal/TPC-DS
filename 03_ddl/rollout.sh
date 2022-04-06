@@ -25,8 +25,10 @@ get_version
 filter="gpdb"
 
 #Create tables
-for i in $(ls "$PWD"/*.$filter.*.sql); do
-	#id=$(echo "$i" | awk -F '.' '{print $1}') TODO delete later not used
+for i in "$PWD"/*."$filter".*.sql; do
+	# shellcheck disable=SC2034
+	# id used in log(): functions.sh
+	id=$(echo "$i" | awk -F '.' '{print $1}')
 	schema_name=$(echo "$i" | awk -F '.' '{print $2}')
 	table_name=$(echo "$i" | awk -F '.' '{print $3}')
 	start_log
@@ -60,7 +62,10 @@ for i in "$PWD"/*.ext_tpcds.*.sql; do
 	start_log
 
 	#id=$(echo "$i" | awk -F '.' '{print $1}') TODO delete later not used
+	# shellcheck disable=SC2034
+	# schema_name and table_name are used in log(): functions.sh
 	schema_name=$(echo "$i" | awk -F '.' '{print $2}')
+	# shellcheck disable=SC2034
 	table_name=$(echo "$i" | awk -F '.' '{print $3}')
 
 	counter=0
@@ -76,7 +81,7 @@ for i in "$PWD"/*.ext_tpcds.*.sql; do
 			else
 				LOCATION+="', '"
 			fi
-			LOCATION+="gpfdist://$EXT_HOST:$PORT/"$table_name"_[0-9]*_[0-9]*.dat"
+			LOCATION+="gpfdist://${EXT_HOST}:${PORT}/${table_name}_[0-9]*_[0-9]*.dat"
 
 			counter=$(($counter + 1))
 		done
@@ -91,7 +96,7 @@ for i in "$PWD"/*.ext_tpcds.*.sql; do
 			else
 				LOCATION+="', '"
 			fi
-			LOCATION+="gpfdist://${EXT_HOST}:${PORT}/"${table_name}"_[0-9]*_[0-9]*.dat"
+			LOCATION+="gpfdist://${EXT_HOST}:${PORT}/${table_name}_[0-9]*_[0-9]*.dat"
 
 			counter=$((counter + 1))
 		done
@@ -112,7 +117,7 @@ CreateRole="CREATE ROLE ${BENCH_ROLE} WITH RESOURCE QUEUE ${BENCH_ROLE}"
 GrantSchemaPrivileges="GRANT ALL PRIVILEGES ON SCHEMA tpcds TO ${BENCH_ROLE}"
 GrantTablePrivileges="GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA tpcds TO ${BENCH_ROLE}"
 
-if [ $(psql -v ON_ERROR_STOP=0 -t -q -P pager=off -c "${Qquery}") -eq 0 ]; then
+if [ "$(psql -v ON_ERROR_STOP=0 -t -q -P pager=off -c "${Qquery}")" -eq 0 ]; then
 	echo "Creating Resource Queue: ${BENCH_ROLE}"
 	psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${CreateQueue}"
 else

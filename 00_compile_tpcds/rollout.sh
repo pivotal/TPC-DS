@@ -2,12 +2,12 @@
 set -e
 
 PWD=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-
+# shellcheck source=functions.sh
 source "$PWD"/../functions.sh
 source_bashrc
 
-step=compile_tpcds
-init_log $step
+step='compile_tpcds'
+init_log "$step"
 start_log
 
 make_tpc()
@@ -29,7 +29,7 @@ copy_tpc()
 	#copy the compiled dsdgen program to the segment nodes
 	for i in $(cat "$PWD"/../segment_hosts.txt); do
 		echo "copy tpcds binaries to $i:$ADMIN_HOME"
-		scp tools/dsdgen tools/tpcds.idx "$i:$ADMIN_HOME"/
+		scp tools/dsdgen tools/tpcds.idx "${i}:${ADMIN_HOME}"/
 	done
 }
 

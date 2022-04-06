@@ -36,9 +36,9 @@ cd "$PWD"
 declare -a tables=("call_center" "catalog_page" "catalog_returns" "catalog_sales" "customer" "customer_address" "customer_demographics" "date_dim" "household_demographics" "income_band" "inventory" "item" "promotion" "reason" "ship_mode" "store" "store_returns" "store_sales" "time_dim" "warehouse" "web_page" "web_returns" "web_sales" "web_site")
 
 for i in "${tables[@]}"; do
-	filename="$DATA_DIRECTORY/"$i"_"$CHILD"_"$PARALLEL".dat"
+	filename="${DATA_DIRECTORY}/${i}_${CHILD}_${PARALLEL}.dat"
 	echo "$filename"
-	if [ ! -f "$filename"]; then
+	if [ ! -f "$filename" ]; then
 		touch "$filename"
 	fi
 done
@@ -53,7 +53,7 @@ if [ "$SINGLE_SEGMENT" -eq "1" ]; then
 	declare -a tables=("call_center" "catalog_page" "catalog_returns" "catalog_sales" "customer" "customer_address" "customer_demographics" "date_dim" "household_demographics" "income_band" "inventory" "item" "promotion" "reason" "ship_mode" "store" "store_returns" "store_sales" "time_dim" "warehouse" "web_page" "web_returns" "web_sales" "web_site")
 
 	for i in "${tables[@]}"; do
-		filename="$DATA_DIRECTORY/"$i"_"$CHILD"_"$PARALLEL".dat"
+		filename="${DATA_DIRECTORY}/${i}_${CHILD}_${PARALLEL}.dat"
 		echo "$filename"
 		if [ ! -f "$filename" ]; then
 			touch "$filename"

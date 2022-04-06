@@ -1,6 +1,7 @@
 #!/bin/bash
 
 PWD=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+# shellcheck source=./tpcds_variables.sh
 source "$PWD"/../tpcds_variables.sh
 source_bashrc
 

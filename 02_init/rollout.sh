@@ -4,11 +4,15 @@ set -e
 PWD=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 source "$PWD"/../functions.sh
 source_bashrc
-
+# shellcheck disable=SC2034
+# some variables are used in other functions
+# schema_name and table_name are used in log(): functions.sh
 step=init
 init_log $step
 start_log
+# shellcheck disable=SC2034
 schema_name="tpcds"
+# shellcheck disable=SC2034
 table_name="init"
 
 set_segment_bashrc()
