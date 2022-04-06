@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+# shellcheck disable=SC2164
 PWD=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 GEN_DATA_SCALE="$1"
