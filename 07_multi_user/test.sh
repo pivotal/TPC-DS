@@ -67,10 +67,10 @@ for z in "${arr[@]}"; do
 	echo "$z"
 	myfilename="$sql_dir/$z"
 	echo "myfilename: $myfilename"
-	pos=$(grep -n ";" "$myfilename" | awk -F ':' '{ if (NR > 1) print $1}' | head -1)
+	pos=$(grep -n ";" $myfilename | awk -F ':' '{ if (NR > 1) print $1}' | head -1)
 	pos=$((pos+1))
 	echo "pos: $pos"
-	sed -i ''$pos'i\'$'\n'':EXPLAIN_ANALYZE'$'\n' "$myfilename"
+	sed -i ''$pos'i\'$'\n'':EXPLAIN_ANALYZE'$'\n' $myfilename
 done
 
 tuples="0"

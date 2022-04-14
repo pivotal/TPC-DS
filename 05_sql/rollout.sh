@@ -23,7 +23,7 @@ init_log $step
 
 rm -f "$PWD"/../log/*single.explain_analyze.log
 for i in "$PWD"/*."${BENCH_ROLE}".*.sql; do
-	for (( n=1; n < "${SINGLE_USER_ITERATIONS}"; n++)); do
+	for (( x=0; x < "${SINGLE_USER_ITERATIONS}"; x++)); do
 		# shellcheck disable=SC2034
 		# id, schema_name and table_name are used in log(): functions.sh
 		id=$(echo "$i" | awk -F '.' '{print $1}')
