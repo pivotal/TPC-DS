@@ -35,7 +35,7 @@ set_segment_bashrc()
 				echo "copy new .bashrc to $ext_host:$ADMIN_HOME"
 				scp "$PWD"/segment_bashrc "$ext_host":"$ADMIN_HOME"/.bashrc
 			else
-				count=$(ssh $ext_host "grep -c greenplum_path ~/.bashrc")
+				count=$(ssh "$ext_host" "grep -c greenplum_path ~/.bashrc")
 				if [ "$count" -eq 0 ]; then
 					echo "Adding greenplum_path to $ext_host .bashrc"
 					ssh "$ext_host" "echo \"source $GREENPLUM_PATH\" >> ~/.bashrc"

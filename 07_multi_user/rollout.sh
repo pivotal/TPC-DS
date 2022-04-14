@@ -21,7 +21,7 @@ if [ "${MULTI_USER_COUNT}" -eq "0" ]; then
 fi
 
 PWD=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-source ${PWD}/../functions.sh
+source "${PWD}"/../functions.sh
 source_bashrc
 
 get_psql_count()
@@ -31,7 +31,7 @@ get_psql_count()
 
 get_file_count()
 {
-	file_count=$(ls ${PWD}/../log/end_testing* 2> /dev/null | wc -l)
+	file_count=$(ls "${PWD}"/../log/end_testing* 2> /dev/null | wc -l)
 }
 
 
@@ -41,14 +41,14 @@ rm -f "${PWD}"/../log/rollout_testing_*.log
 rm -f "${PWD}"/../log/*multi.explain_analyze.log
 rm -f "${PWD}"/query_*.sql
 
-AlterQueue="ALTER RESOURCE QUEUE ${BENCH_ROLE} WITH (ACTIVE_STATEMENTS=$(( $MULTI_USER_COUNT + 1 )))"
+AlterQueue="ALTER RESOURCE QUEUE ${BENCH_ROLE} WITH (ACTIVE_STATEMENTS=$(( MULTI_USER_COUNT + 1 )))"
 echo "${AlterQueue}"
 psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${AlterQueue}"
 
 #create each user's directory
 sql_dir="${PWD}"
 echo "sql_dir: $sql_dir"
-for i in $(seq 1 ${MULTI_USER_COUNT}); do
+for i in $(seq 1 "${MULTI_USER_COUNT}"); do
 	sql_dir="${PWD}/${i}"
 	echo "checking for directory $sql_dir"
 	if [ ! -d "$sql_dir" ]; then
@@ -67,9 +67,9 @@ echo "${PWD}/dsqgen -streams ${MULTI_USER_COUNT} -input ${PWD}/query_templates/t
 
 #move the query_x.sql file to the correct session directory
 for i in "${PWD}"/query_*.sql; do
-	stream_number=$(basename $i | awk -F '.' '{print $1}' | awk -F '_' '{print $2}')
+	stream_number=$(basename "$i" | awk -F '.' '{print $1}' | awk -F '_' '{print $2}')
 	#going from base 0 to base 1
-	stream_number=$(($stream_number + 1))
+	stream_number=$((stream_number + 1))
 	echo "stream_number: $stream_number"
 	sql_dir="${PWD}"/"$stream_number"
 	echo "mv $i $sql_dir/"
@@ -92,7 +92,7 @@ while [ "$psql_count" -gt "0" ]; do
 	tput rc
 	echo -ne "${minutes} minute(s)"
 	sleep 60
-	minutes=$(($minutes + 1))
+	minutes=$((minutes + 1))
 	get_psql_count
 done
 echo ""

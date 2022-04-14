@@ -25,7 +25,7 @@ get_count_generate_data()
 		if ! [[ $next_count =~ $check ]] ; then
 			next_count="1"
 		fi
-		count=$(($count + $next_count))
+		count=$((count + next_count))
 	done < "$PWD"/../segment_hosts.txt
 }
 kill_orphaned_data_gen()
@@ -99,7 +99,7 @@ while [ "$count" -gt "0" ]; do
 	tput rc
 	echo -ne "${minutes} minute(s)"
 	sleep 60
-	minutes=$(($minutes + 1))
+	minutes=$((minutes + 1))
 	get_count_generate_data
 done
 

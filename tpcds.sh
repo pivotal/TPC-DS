@@ -8,7 +8,7 @@ VARS_FILE="tpcds_variables.sh"
 check_variable() {
   local var_name="$1"; shift
 
-  if [ ! -n "${!var_name}" ]; then
+  if [ -z "${!var_name}" ]; then
     echo "${var_name} is not defined in ${VARS_FILE}. Exiting."
     exit 1
   fi

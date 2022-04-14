@@ -2,7 +2,7 @@
 set -e
 
 PWD=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-source $PWD/../functions.sh
+source "$PWD"/../functions.sh
 source_bashrc
 
 GEN_DATA_SCALE="${1}"
@@ -22,7 +22,7 @@ step=sql
 init_log $step
 
 rm -f "$PWD"/../log/*single.explain_analyze.log
-for i in "$PWD"/*.${BENCH_ROLE}.*.sql; do
+for i in "$PWD"/*."${BENCH_ROLE}".*.sql; do
 	for (( n=1; n < "${SINGLE_USER_ITERATIONS}"; n++)); do
 		# shellcheck disable=SC2034
 		# id, schema_name and table_name are used in log(): functions.sh
@@ -37,7 +37,7 @@ for i in "$PWD"/*.${BENCH_ROLE}.*.sql; do
 			tuples=$(psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f "$i" | wc -l; exit "${PIPESTATUS[0]}")
 		else
 			myfilename=$(basename "$i")
-			mylogfile=$PWD/../log/$myfilename.single.explain_analyze.log
+			mylogfile="$PWD"/../log/$myfilename.single.explain_analyze.log
 			echo "psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE=\"EXPLAIN ANALYZE\" -f $i > $mylogfile"
 			psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="EXPLAIN ANALYZE" -f "$i" > "$mylogfile"
 			tuples="0"

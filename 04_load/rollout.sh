@@ -40,7 +40,7 @@ start_gpfdist()
 			EXT_HOST=$(echo "$i" | awk -F '|' '{print $2}')
 			GEN_DATA_PATH=$(echo "$i" | awk -F '|' '{print $3}')
 			GEN_DATA_PATH=$GEN_DATA_PATH/dsbenchmark
-			PORT=$(($GPFDIST_PORT + $CHILD"))
+			PORT=$((GPFDIST_PORT + CHILD))
 			echo "executing on $EXT_HOST ./start_gpfdist.sh $PORT $GEN_DATA_PATH"
 			ssh -n -f "$EXT_HOST" "bash -c 'cd ~/; ./start_gpfdist.sh $PORT $GEN_DATA_PATH'"
 			sleep 1
@@ -51,7 +51,7 @@ start_gpfdist()
 			EXT_HOST=$(echo "$i" | awk -F '|' '{print $2}')
 			GEN_DATA_PATH=$(echo "$i" | awk -F '|' '{print $3}')
 			GEN_DATA_PATH="$GEN_DATA_PATH"/dsbenchmark
-			PORT=$(($GPFDIST_PORT + $CHILD"))
+			PORT=$((GPFDIST_PORT + CHILD))
 			echo "executing on $EXT_HOST ./start_gpfdist.sh $PORT $GEN_DATA_PATH"
 			ssh -n -f "$EXT_HOST" "bash -c 'cd ~/; ./start_gpfdist.sh $PORT $GEN_DATA_PATH'"
 			sleep 1
