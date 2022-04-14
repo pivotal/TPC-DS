@@ -35,12 +35,12 @@ set_segment_bashrc()
 				echo "copy new .bashrc to $ext_host:$ADMIN_HOME"
 				scp "$PWD"/segment_bashrc "$ext_host":"$ADMIN_HOME"/.bashrc
 			else
-				count=$(ssh "$ext_host" "grep -c greenplum_path ~/.bashrc")
+				count=$(ssh "$ext_host" "grep -c greenplum_path ~/.bashrc || true")
 				if [ "$count" -eq 0 ]; then
 					echo "Adding greenplum_path to $ext_host .bashrc"
 					ssh "$ext_host" "echo \"source $GREENPLUM_PATH\" >> ~/.bashrc"
 				fi
-				count=$(ssh "$ext_host" "grep -c LD_PRELOAD ~/.bashrc")
+				count=$(ssh "$ext_host" "grep -c LD_PRELOAD ~/.bashrc || true")
 				if [ "$count" -eq 0 ]; then
 					echo "Adding LD_PRELOAD to $ext_host .bashrc"
 					ssh "$ext_host" "echo \"export LD_PRELOAD=/lib64/libz.so.1 ps\" >> ~/.bashrc"
@@ -54,7 +54,7 @@ check_gucs()
 	update_config=false
 
 	if [ "$VERSION" == "gpdb_5" ]; then
-		counter=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "show optimizer_join_arity_for_associativity_commutativity" | grep -ic "18")
+		counter=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "show optimizer_join_arity_for_associativity_commutativity" | grep -ic "18" || true)
 		if [ "$counter" -eq 0 ]; then
 			echo "setting optimizer_join_arity_for_associativity_commutativity"
 			gpconfig -c optimizer_join_arity_for_associativity_commutativity -v 18 --skipvalidation
@@ -63,7 +63,7 @@ check_gucs()
 	fi
 
 	echo "check optimizer"
-	counter=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "show optimizer" | grep -ic "on")
+	counter=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "show optimizer" | grep -ic "on" || true)
 
 	if [ "$counter" -eq 0 ]; then
 		echo "enabling optimizer"
@@ -72,7 +72,7 @@ check_gucs()
 	fi
 
 	echo "check analyze_root_partition"
-	counter=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "show optimizer_analyze_root_partition" | grep -ic "on")
+	counter=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "show optimizer_analyze_root_partition" | grep -ic "on" || true)
 	if [ "$counter" -eq 0 ]; then
 		echo "enabling analyze_root_partition"
 		gpconfig -c optimizer_analyze_root_partition -v on --masteronly
@@ -80,7 +80,7 @@ check_gucs()
 	fi
 
 	echo "check gp_autostats_mode"
-	counter=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "show gp_autostats_mode" | grep -ic "none")
+	counter=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "show gp_autostats_mode" | grep -ic "none" || true)
 	if [ "$counter" -eq 0 ]; then
 		echo "changing gp_autostats_mode to none"
 		gpconfig -c gp_autostats_mode -v none --masteronly
@@ -88,7 +88,7 @@ check_gucs()
 	fi
 
 	echo "check default_statistics_target"
-	counter=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "show default_statistics_target" | grep -c "100")
+	counter=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "show default_statistics_target" | grep -c "100" || true)
 	if [ "$counter" -eq 0 ]; then
 		echo "changing default_statistics_target to 100"
 		gpconfig -c default_statistics_target -v 100

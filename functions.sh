@@ -1,11 +1,11 @@
 #!/bin/bash
 set -e
 
-count=$(alias | grep -cw grep)
+count=$(alias | grep -cw grep || true)
 if [ "$count" -gt "0" ]; then
   unalias grep
 fi
-count=$(alias | grep -cw ls)
+count=$(alias | grep -cw ls || true)
 if [ "$count" -gt "0" ]; then
   unalias ls
 fi
@@ -45,7 +45,7 @@ source_bashrc()
     # don't fail if an error is happening in the admin's profile
     source "$HOME/.bashrc" || true
   fi
-  count=$(grep -v "^#" "$HOME/.bashrc" | grep -c "greenplum_path")
+  count=$(grep -v "^#" "$HOME/.bashrc" | grep -c "greenplum_path" || true)
   if [ "$count" -eq "0" ]; then
     get_version
     if [[ "$VERSION" == *"gpdb"* ]]; then

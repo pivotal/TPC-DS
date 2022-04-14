@@ -10,7 +10,7 @@ pid=$!
 if [ "$pid" -ne "0" ]; then
 	sleep .4
 	# shellcheck disable=SC2009 #pgrep work on process name
-	count=$(ps -ef 2> /dev/null | grep -v grep | awk -F ' ' '{print $2}' | grep -c $pid)
+	count=$(ps -ef 2> /dev/null | grep -v grep | awk -F ' ' '{print $2}' | grep -c $pid || true)
 	if [ "$count" -eq "1" ]; then
 		echo "Started gpfdist on port $GPFDIST_PORT"
 	else
