@@ -12,7 +12,7 @@ dependencies:
 
 .PHONY: lint
 lint:
-	find . -name "*.sh" -not -path './00_compile_tpcds/t*' | xargs shellcheck
+	find . -name "*.sh" -not -path './00_compile_tpcds/t*' | xargs shellcheck -S warning
 
 .PHONY: super-linter
 super-linter:
