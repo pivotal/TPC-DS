@@ -19,6 +19,16 @@ make_tpc()
 	cd ..
 }
 
+log_binary_versions()
+{
+	# only below binaries have option to get version information
+	# we need to update list if we have additinoal binary in future release
+	echo "logging TPC-DS tools binary versions: log/tpcds_tools_version.txt"
+	"$PWD"/tools/dsdgen -re | head -1 > "$PWD"/../log/tpcds_tools_version.txt
+	"$PWD"/tools/dsqgen -re | head -1 >> "$PWD"/../log/tpcds_tools_version.txt
+	"$PWD"/tools/distcomp HELP | head -1 >> "$PWD"/../log/tpcds_tools_version.txt
+}
+
 copy_tpc()
 {
 	cp "$PWD"/tools/dsqgen ../*_gen_data/
@@ -42,6 +52,7 @@ copy_queries()
 }
 
 make_tpc
+log_binary_versions
 create_hosts_file
 copy_tpc
 copy_queries

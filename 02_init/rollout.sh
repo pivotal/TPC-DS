@@ -116,11 +116,28 @@ set_search_path()
 	psql -v ON_ERROR_STOP=1 -q -A -t -c "ALTER USER $USER SET search_path=$schema_name,public;"
 }
 
+log_gpdb_version()
+{
+	echo "logging gpdb version: log/gpdb_version.txt"
+	psql -v ON_ERROR_STOP=1 -q -A -t -c "SELECT version();" -o "$PWD"/../log/gpdb_version.txt
+}
+
+log_gpdb_gucs()
+{
+	echo "logging all gpdb guc settings: log/gpdb_gucs.txt"
+	for i in $(gpconfig -l | awk '{print $2}' | tr -d ']'); do
+		gpconfig -s ${i}
+	done > "$PWD"/../log/gpdb_gucs.txt
+}
+
+
 get_version
 set_segment_bashrc
 check_gucs
 copy_config
 set_search_path
+log_gpdb_version
+log_gpdb_gucs
 
 log
 
