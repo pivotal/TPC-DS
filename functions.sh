@@ -116,6 +116,11 @@ log()
   printf "$id|$schema_name.$table_name|$tuples|%02d:%02d:%02d|%d|%d\n" "$((S_DURATION/3600%24))" "$((S_DURATION/60%60))" "$((S_DURATION%60))" "${T_START}" "${T_END}" >> "${LOCAL_PWD}/log/${logfile}"
 }
 
+log_time()
+{
+ printf "[%s] %s\n" "$(date '+%Y-%m-%d %H:%M:%S')" "$1"
+}
+
 end_step()
 {
   local logfile=end_$1.log

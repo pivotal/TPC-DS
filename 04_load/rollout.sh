@@ -70,7 +70,7 @@ for i in "$PWD"/*."$filter".*.sql; do
 	schema_name=$(echo "$i" | awk -F '.' '{print $2}')
 	table_name=$(echo "$i" | awk -F '.' '{print $3}')
 
-	echo "psql -v ON_ERROR_STOP=1 -f $i | grep INSERT | awk -F ' ' '{print \$3}'"
+	log_time "psql -v ON_ERROR_STOP=1 -f $i | grep INSERT | awk -F ' ' '{print \$3}'"
 	tuples=$(psql -v ON_ERROR_STOP=1 -f "$i" | grep INSERT | awk -F ' ' '{print $3}')
 
 	log "$tuples"
@@ -102,7 +102,7 @@ if [ "$VERSION" == "gpdb_6" ]; then
 		schema_name=$(echo "$t" | awk -F '|' '{print $1}')
 		table_name=$(echo "$t" | awk -F '|' '{print $2}')
 		echo "Missing root stats for $schema_name.$table_name"
-		echo "psql -v ON_ERROR_STOP=1 -q -t -A -c \"ANALYZE ROOTPARTITION $schema_name.$table_name;\""
+		log_time "psql -v ON_ERROR_STOP=1 -q -t -A -c \"ANALYZE ROOTPARTITION $schema_name.$table_name;\""
 		psql -v ON_ERROR_STOP=1 -q -t -A -c "ANALYZE ROOTPARTITION $schema_name.$table_name;"
 	done
 elif [ "$VERSION" == "gpdb_5" ]; then
@@ -110,7 +110,7 @@ elif [ "$VERSION" == "gpdb_5" ]; then
 		schema_name=$(echo "$t" | awk -F '|' '{print $1}')
 		table_name=$(echo "$t" | awk -F '|' '{print $2}')
 		echo "Missing root stats for $schema_name.$table_name"
-		echo "psql -v ON_ERROR_STOP=1 -q -t -A -c \"ANALYZE ROOTPARTITION $schema_name.$table_name;\""
+		log_time "psql -v ON_ERROR_STOP=1 -q -t -A -c \"ANALYZE ROOTPARTITION $schema_name.$table_name;\""
 		psql -v ON_ERROR_STOP=1 -q -t -A -c "ANALYZE ROOTPARTITION $schema_name.$table_name;"
 	done
 fi

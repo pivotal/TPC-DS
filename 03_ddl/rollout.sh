@@ -49,7 +49,7 @@ for i in "$PWD"/*."$filter".*.sql; do
 		DISTRIBUTED_BY=""
 	fi
 
-	echo "psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f $i -v SMALL_STORAGE=\"$SMALL_STORAGE\" -v MEDIUM_STORAGE=\"$MEDIUM_STORAGE\" -v LARGE_STORAGE=\"$LARGE_STORAGE\" -v DISTRIBUTED_BY=\"$DISTRIBUTED_BY\""
+	log_time "psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f $i -v SMALL_STORAGE=\"$SMALL_STORAGE\" -v MEDIUM_STORAGE=\"$MEDIUM_STORAGE\" -v LARGE_STORAGE=\"$LARGE_STORAGE\" -v DISTRIBUTED_BY=\"$DISTRIBUTED_BY\""
 	psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f "$i" -v SMALL_STORAGE="$SMALL_STORAGE" -v MEDIUM_STORAGE="$MEDIUM_STORAGE" -v LARGE_STORAGE="$LARGE_STORAGE" -v DISTRIBUTED_BY="$DISTRIBUTED_BY"
 
 	log
@@ -103,7 +103,7 @@ for i in "$PWD"/*.ext_tpcds.*.sql; do
 	fi
 	LOCATION+="'"
 
-	echo "psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f $i -v LOCATION=\"$LOCATION\""
+	log_time "psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f $i -v LOCATION=\"$LOCATION\""
 	psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f "$i" -v LOCATION="$LOCATION"
 
 	log

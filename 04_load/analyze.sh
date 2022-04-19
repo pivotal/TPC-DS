@@ -41,7 +41,7 @@ else
 		schema_name=$(echo "$i" | awk -F '.' '{print $2}')
 		table_name=$(echo "$i" | awk -F '.' '{print $3}')
 
-		echo "psql -a -v ON_ERROR_STOP=ON -c \"ANALYZE $schema_name.$table_name\""
+		log_time "psql -a -v ON_ERROR_STOP=ON -c \"ANALYZE $schema_name.$table_name\""
 		psql -a -v ON_ERROR_STOP=ON -c "ANALYZE $schema_name.$table_name"
 		tuples="0"
 		log $tuples
@@ -57,7 +57,7 @@ else
 		schema_name=$(echo "$i" | awk -F '.' '{print $2}')
 		table_name=$(echo "$i" | awk -F '.' '{print $3}')
 
-		echo "psql -a -v ON_ERROR_STOP=ON -c \"ANALYZE ROOTPARTITION $schema_name.$table_name\""
+		log_time "psql -a -v ON_ERROR_STOP=ON -c \"ANALYZE ROOTPARTITION $schema_name.$table_name\""
 		psql -a -v ON_ERROR_STOP=ON -c "ANALYZE ROOTPARTITION $schema_name.$table_name"
 		tuples="0"
 		log "$tuples"

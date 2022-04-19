@@ -62,7 +62,7 @@ done
 #Create queries
 echo "cd ${PWD}"
 cd "${PWD}"
-echo "${PWD}/dsqgen -streams ${MULTI_USER_COUNT} -input ${PWD}/query_templates/templates.lst -directory ${PWD}/query_templates -dialect pivotal -scale ${GEN_DATA_SCALE} -verbose y -output ${PWD}"
+log_time "${PWD}/dsqgen -streams ${MULTI_USER_COUNT} -input ${PWD}/query_templates/templates.lst -directory ${PWD}/query_templates -dialect pivotal -scale ${GEN_DATA_SCALE} -verbose y -output ${PWD}"
 "${PWD}"/dsqgen -streams "${MULTI_USER_COUNT}" -input "${PWD}"/query_templates/templates.lst -directory "${PWD}"/query_templates -dialect pivotal -scale "${GEN_DATA_SCALE}" -verbose y -output "${PWD}"
 
 #move the query_x.sql file to the correct session directory
@@ -78,7 +78,7 @@ done
 
 for session_id in $(seq 1 "${MULTI_USER_COUNT}"); do
 	session_log=${PWD}/../log/testing_session_${session_id}.log
-	echo "${PWD}/test.sh ${GEN_DATA_SCALE} ${session_id} ${EXPLAIN_ANALYZE} ${BENCH_ROLE}"
+	log_time "${PWD}/test.sh ${GEN_DATA_SCALE} ${session_id} ${EXPLAIN_ANALYZE} ${BENCH_ROLE}"
 	"${PWD}"/test.sh "${GEN_DATA_SCALE}" "${session_id}" "${EXPLAIN_ANALYZE}" "${BENCH_ROLE}" > "$session_log" 2>&1 < "$session_log" &
 done
 

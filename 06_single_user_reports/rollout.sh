@@ -12,7 +12,7 @@ get_version
 filter="gpdb"
 
 for i in "$PWD"/*."$filter".*.sql; do
-	echo "psql -v ON_ERROR_STOP=1 -a -f $i"
+	log_time "psql -v ON_ERROR_STOP=1 -a -f $i"
 	psql -v ON_ERROR_STOP=1 -a -f "$i"
 	echo ""
 done
@@ -21,7 +21,7 @@ for i in "$PWD"/*.copy.*.sql; do
 	logstep=$(echo "$i" | awk -F 'copy.' '{print $2}' | awk -F '.' '{print $1}')
 	logfile="$PWD""/../log/rollout_""$logstep"".log"
 	logfile="'""$logfile""'"
-	echo "psql -v ON_ERROR_STOP=1 -a -f $i -v LOGFILE=\"$logfile\""
+	log_time "psql -v ON_ERROR_STOP=1 -a -f $i -v LOGFILE=\"$logfile\""
 	psql -v ON_ERROR_STOP=1 -a -f "$i" -v LOGFILE="$logfile"
 	echo ""
 done
