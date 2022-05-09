@@ -2,87 +2,20 @@
 set -e
 
 VARS_FILE="tpcds_variables.sh"
-##################################################################################################################################################
-# Functions
-##################################################################################################################################################
-check_variable() {
-  local var_name="$1"; shift
+FUNCTIONS_FILE="functions.sh"
 
-  if [ -z "${!var_name}" ]; then
-    echo "${var_name} is not defined in ${VARS_FILE}. Exiting."
-    exit 1
-  fi
-}
+source ./${VARS_FILE}
+source ./${FUNCTIONS_FILE}
+source_bashrc
 
-check_variables() {
-  ### Make sure variables file is available
-  echo "############################################################################"
-  echo "Sourcing $VARS_FILE"
-  echo "############################################################################"
-  echo ""
-  # shellcheck source=tpcds_variables.sh
-  source "$VARS_FILE" 2> /dev/null
-  if [ $? -ne 0 ]; then
-    echo "${VARS_FILE} does not exist. Please ensure that this file exists before running TPC-DS. Exiting."
-    exit 1
-  fi
+export TPC_DS_DIR=$(get_pwd ${BASH_SOURCE[0]})
 
-  check_variable "ADMIN_USER"
-  check_variable "EXPLAIN_ANALYZE"
-  check_variable "RANDOM_DISTRIBUTION"
-  check_variable "MULTI_USER_COUNT"
-  check_variable "GEN_DATA_SCALE"
-  check_variable "SINGLE_USER_ITERATIONS"
-  #00
-  check_variable "RUN_COMPILE_TPCDS"
-  #01
-  check_variable "RUN_GEN_DATA"
-  #02
-  check_variable "RUN_INIT"
-  #03
-  check_variable "RUN_DDL"
-  #04
-  check_variable "RUN_LOAD"
-  #05
-  check_variable "RUN_SQL"
-  #06
-  check_variable "RUN_SINGLE_USER_REPORTS"
-  #07
-  check_variable "RUN_MULTI_USER"
-  #08
-  check_variable "RUN_MULTI_USER_REPORTS"
-  #09
-  check_variable "RUN_SCORE"
-  #10
-  check_variable "BENCH_ROLE"
-}
-
-check_user() {
-  echo "############################################################################"
-  echo "Ensure ${ADMIN_USER} is executing this script."
-  echo "############################################################################"
-  echo ""
-  if [ "$(whoami)" != "${ADMIN_USER}" ]; then
-    echo "Script must be executed as ${ADMIN_USER}!"
-    exit 1
-  fi
-}
-
-echo_variables() {
-  echo "############################################################################"
-  echo "ADMIN_USER: $ADMIN_USER"
-  echo "MULTI_USER_COUNT: $MULTI_USER_COUNT"
-  echo "############################################################################"
-  echo ""
-}
-
-##################################################################################################################################################
-# Body
-##################################################################################################################################################
-
+# Check that pertinent variables are set in the variable file.
 check_variables
-check_user
-echo_variables
+# Make sure this is being run as gpadmin
+check_admin_user
+# Output admin user and multi-user count to standard out
+print_header
 
 # run the benchmark
-./rollout.sh ${GEN_DATA_SCALE} ${EXPLAIN_ANALYZE} ${RANDOM_DISTRIBUTION} ${MULTI_USER_COUNT} ${RUN_COMPILE_TPCDS} ${RUN_GEN_DATA} ${RUN_INIT} ${RUN_DDL} ${RUN_LOAD} ${RUN_SQL} ${RUN_SINGLE_USER_REPORTS} ${RUN_MULTI_USER} ${RUN_MULTI_USER_REPORTS} ${RUN_SCORE} ${SINGLE_USER_ITERATIONS} ${BENCH_ROLE}
+./rollout.sh
