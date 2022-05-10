@@ -190,6 +190,12 @@ function end_step() {
 }
 export -f end_step
 
+function log_time()
+{
+	printf "[%s] %s\n" "$(date '+%Y-%m-%d %H:%M:%S')" "$1"
+}
+export -f log_time
+
 function create_hosts_file() {
   # not used for this function
   # get_version

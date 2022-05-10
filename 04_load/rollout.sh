@@ -55,7 +55,7 @@ for i in $(ls ${PWD}/*.${filter}.*.sql); do
 	schema_name=$(echo ${i} | awk -F '.' '{print $2}')
 	table_name=$(echo ${i} | awk -F '.' '{print $3}')
 
-	echo "psql -v ON_ERROR_STOP=1 -f ${i} | grep INSERT | awk -F ' ' '{print \$3}'"
+	log_time "psql -v ON_ERROR_STOP=1 -f ${i} | grep INSERT | awk -F ' ' '{print \$3}'"
 	tuples=$(psql -v ON_ERROR_STOP=1 -f ${i} | grep INSERT | awk -F ' ' '{print $3}'; exit ${PIPESTATUS[0]})
 
 	print_log ${tuples}
@@ -93,7 +93,7 @@ for t in $(psql -v ON_ERROR_STOP=1 -q -t -A -c "${SQL_QUERY}"); do
 	table_name=$(echo ${t} | awk -F '|' '{print $2}')
 	echo "Missing root stats for ${schema_name}.${table_name}"
 	SQL_QUERY="ANALYZE ROOTPARTITION ${schema_name}.${table_name}"
-	echo "psql -v ON_ERROR_STOP=1 -q -t -A -c \"${SQL_QUERY}\""
+	log_time "psql -v ON_ERROR_STOP=1 -q -t -A -c \"${SQL_QUERY}\""
 	psql -v ON_ERROR_STOP=1 -q -t -A -c "${SQL_QUERY}"
 done
 
