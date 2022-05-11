@@ -3,7 +3,7 @@ set -e
 
 PWD=$(get_pwd ${BASH_SOURCE[0]})
 
-step=sql
+step="sql"
 init_log ${step}
 
 rm -f ${TPC_DS_DIR}/log/*single.explain_analyze.log

@@ -3,7 +3,7 @@ set -e
 
 PWD=$(get_pwd ${BASH_SOURCE[0]})
 
-step=init
+step="init"
 init_log ${step}
 start_log
 schema_name="tpcds"
@@ -20,7 +20,7 @@ function set_segment_bashrc()
   chmod 755 ${PWD}/segment_bashrc
 
   echo "set up .bashrc on segment hosts"
-  for ext_host in $(cat ${PWD}/../segment_hosts.txt); do
+  for ext_host in $(cat ${TPC_DS_DIR}/segment_hosts.txt); do
     # don't overwrite the master.  Only needed on single node installs
     shortname=$(echo ${ext_host} | awk -F '.' '{print $1}')
     if [ "$MASTER_HOST" != "$shortname" ]; then

@@ -3,7 +3,7 @@ set -e
 
 PWD=$(get_pwd ${BASH_SOURCE[0]})
 
-step=single_user_reports
+step="single_user_reports"
 
 init_log ${step}
 

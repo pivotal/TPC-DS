@@ -6,7 +6,7 @@ PWD=$(get_pwd ${BASH_SOURCE[0]})
 
 session_id=${1}
 
-step=testing_${session_id}
+step="testing_${session_id}"
 
 init_log ${step}
 
