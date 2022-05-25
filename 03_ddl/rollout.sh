@@ -17,20 +17,16 @@ if [ "${DROP_EXISTING_TABLES}" == "true" ]; then
     table_name=$(echo ${i} | awk -F '.' '{print $3}')
     start_log
 
-    if [ "${filter}" == "gpdb" ]; then
-      if [ "${RANDOM_DISTRIBUTION}" == "true" ]; then
-        DISTRIBUTED_BY="DISTRIBUTED RANDOMLY"
-      else
-        for z in $(cat ${PWD}/distribution.txt); do
-          table_name2=$(echo ${z} | awk -F '|' '{print $2}')
-          if [ "${table_name2}" == "${table_name}" ]; then
-            distribution=$(echo ${z} | awk -F '|' '{print $3}')
-          fi
-        done
-        DISTRIBUTED_BY="DISTRIBUTED BY (${distribution})"
-      fi
+    if [ "${RANDOM_DISTRIBUTION}" == "true" ]; then
+      DISTRIBUTED_BY="DISTRIBUTED RANDOMLY"
     else
-      DISTRIBUTED_BY=""
+      for z in $(cat ${PWD}/distribution.txt); do
+        table_name2=$(echo ${z} | awk -F '|' '{print $2}')
+        if [ "${table_name2}" == "${table_name}" ]; then
+          distribution=$(echo ${z} | awk -F '|' '{print $3}')
+        fi
+      done
+      DISTRIBUTED_BY="DISTRIBUTED BY (${distribution})"
     fi
 
     log_time "psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f ${i} -v SMALL_STORAGE=\"${SMALL_STORAGE}\" -v MEDIUM_STORAGE=\"${MEDIUM_STORAGE}\" -v LARGE_STORAGE=\"${LARGE_STORAGE}\" -v DISTRIBUTED_BY=\"${DISTRIBUTED_BY}\""
@@ -79,38 +75,28 @@ if [ "${DROP_EXISTING_TABLES}" == "true" ]; then
   done
 fi
 
+DropRole="DROP ROLE IF EXISTS ${BENCH_ROLE}"
+CreateRole="CREATE ROLE ${BENCH_ROLE}"
+GrantSchemaPrivileges="GRANT ALL PRIVILEGES ON SCHEMA tpcds TO ${BENCH_ROLE}"
+GrantTablePrivileges="GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA tpcds TO ${BENCH_ROLE}"
+SetSearchPath="ALTER database gpadmin SET search_path=tpcds, \"\${user}\", public"
+
+start_log
+
 if [ "${BENCH_ROLE}" != "gpadmin" ]; then
-  start_log
-  Qquery="select count(1) from pg_resqueue where rsqname = '${BENCH_ROLE}'"
-  Rquery="select count(1) from pg_roles where rolname = '${BENCH_ROLE}'"
-  CreateQueue="CREATE RESOURCE QUEUE ${BENCH_ROLE} WITH (ACTIVE_STATEMENTS=$(( MULTI_USER_COUNT + 1 )))"
-  DropResourceQueue="DROP RESOURCE QUEUE ${BENCH_ROLE}"
-  AlterQueue="ALTER RESOURCE QUEUE ${BENCH_ROLE} WITH (ACTIVE_STATEMENTS=$(( MULTI_USER_COUNT + 1 )))"
-  DropRole="DROP ROLE IF EXISTS ${BENCH_ROLE}"
-  CreateRole="CREATE ROLE ${BENCH_ROLE} WITH RESOURCE QUEUE ${BENCH_ROLE}"
-  GrantSchemaPrivileges="GRANT ALL PRIVILEGES ON SCHEMA tpcds TO ${BENCH_ROLE}"
-  GrantTablePrivileges="GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA tpcds TO ${BENCH_ROLE}"
-
-  if [ $(psql -v ON_ERROR_STOP=0 -t -q -P pager=off -c "${Qquery}") -eq 0 ]; then
-    log_time "Creating Resource Queue: ${BENCH_ROLE}"
-    psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${CreateQueue}"
-  else
-    log_time "Resource Queue, ${BENCH_ROLE}, already exists"
-    log_time "Altering Resource Queue: ${BENCH_ROLE}"
-    psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${AlterQueue}"
-  fi
-
-  if [ $(psql -v ON_ERROR_STOP=0 -t -q -P pager=off -c "${Rquery}") -eq 0 ]; then
-    log_time "Creating role ${BENCH_ROLE}"
-    psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${CreateRole}"
-  fi
-
+  log_time "Drop role ${BENCH_ROLE}"
+  psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${DropRole}"
+  log_time "Creating role ${BENCH_ROLE}"
+  psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${CreateRole}"
   log_time "Grant schema privileges to role ${BENCH_ROLE}"
   psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${GrantSchemaPrivileges}"
   log_time "Grant table privileges to role ${BENCH_ROLE}"
   psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${GrantTablePrivileges}"
-
-  print_log
 fi
+
+log_time "Set search_path for database gpadmin"
+psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${SetSearchPath}"
+
+print_log
 
 echo "Finished ${step}"
