@@ -23,13 +23,13 @@ TLD_1_3_1=$(( S_Q * LOAD_TIME / 100 ))
 
 # Calculate operands for v2.2.0 of the TPC-DS score
 Q_2_2_0=$(( S_Q * 99 ))
-TPT_2_2_0=$(echo "scale=3; ${QUERIES_TIME} * ${S_Q} / 3600.0" | bc -l)
-TTT_2_2_0=$(echo "scale=3; 2 * ${THROUGHPUT_ELAPSED_TIME} / 3600.0" | bc -l)
-TLD_2_2_0=$(echo "scale=3; 0.01 * ${S_Q} * ${LOAD_TIME} / 3600.0" | bc -l)
+TPT_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select cast(${QUERIES_TIME} as decimal) * cast(${S_Q} as decimal) / cast(3600.0 as decimal)")
+TTT_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select cast(2 as decimal) * cast(${THROUGHPUT_ELAPSED_TIME} as decimal) / cast(3600.0 as decimal)")
+TLD_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select cast(0.01 as decimal) * cast(${S_Q} as decimal) * cast(${LOAD_TIME} as decimal) / cast(3600.0 as decimal)")
 
 # Calculate scores using aggregation functions in psql
-SCORE_1_3_1=$(echo "${Q_1_3_1} * ${SF} / (${TPT_1_3_1} + ${TTT_1_3_1} + ${TLD_1_3_1})" | bc)
-SCORE_2_2_0=$(echo "${Q_2_2_0} * ${SF} / e((l(${TPT_2_2_0}) + l(${TTT_2_2_0}) + l(${TLD_2_2_0})) / 3.0)" | bc)
+SCORE_1_3_1=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select floor(cast(${Q_1_3_1} as decimal) * cast(${SF} as decimal) / (cast(${TPT_1_3_1} as decimal) + cast(${TTT_1_3_1} as decimal) + cast(${TLD_1_3_1} as decimal)))")
+SCORE_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select floor(cast(${Q_2_2_0} as decimal) * cast(${SF} as decimal) / exp((ln(cast(${TPT_2_2_0} as decimal)) + ln(cast(${TTT_2_2_0} as decimal)) + ln(cast(${TLD_2_2_0} as decimal))) / cast(3.0 as decimal)))")
 
 printf "Number of Streams (Sq)\t%d\n" "${S_Q}"
 printf "Scale Factor (SF)\t%d\n" "${SF}"
