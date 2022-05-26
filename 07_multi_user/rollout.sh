@@ -26,12 +26,6 @@ rm -f ${TPC_DS_DIR}/log/rollout_testing_*.log
 rm -f ${TPC_DS_DIR}/log/*multi.explain_analyze.log
 rm -f ${PWD}/query_*.sql
 
-if [ "${BENCH_ROLE}" != "gpadmin" ]; then
-	AlterQueue="ALTER RESOURCE QUEUE ${BENCH_ROLE} WITH (ACTIVE_STATEMENTS=$(( MULTI_USER_COUNT + 1 )))"
-	echo "${AlterQueue}"
-	psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${AlterQueue}"
-fi
-
 #create each user's directory
 sql_dir=${PWD}
 echo "sql_dir: ${sql_dir}"

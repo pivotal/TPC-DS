@@ -87,7 +87,7 @@ function source_bashrc() {
     # don't fail if an error is happening in the admin's profile
     source ${HOME}/.bashrc || true
   fi
-  count=$(sed -e 's/#.*$//' ${HOME}/.bashrc | grep -c "greenplum_path")
+  count=$(egrep -c "source .*/greenplum_path.sh|\. .*/greenplum_path.sh" ${HOME}/.bashrc)
   if [ ${count} -eq 0 ]; then
       echo "${HOME}/.bashrc does not contain greenplum_path.sh"
       echo "Please update your ${startup_file} for ${ADMIN_USER} and try again."

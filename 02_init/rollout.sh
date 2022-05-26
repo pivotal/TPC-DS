@@ -106,17 +106,10 @@ function copy_config()
   psql -v ON_ERROR_STOP=1 -q -A -t -c "SELECT * FROM gp_segment_configuration" -o ${TPC_DS_DIR}/log/gp_segment_configuration.txt
 }
 
-function set_search_path()
-{
-  echo "psql -v ON_ERROR_STOP=1 -q -A -t -c \"ALTER USER ${BENCH_ROLE} SET search_path=${schema_name},public;\""
-  psql -v ON_ERROR_STOP=1 -q -A -t -c "ALTER USER ${BENCH_ROLE} SET search_path=${schema_name},public;"
-}
-
 get_version
 set_segment_bashrc
 check_gucs
 copy_config
-set_search_path
 
 print_log
 
