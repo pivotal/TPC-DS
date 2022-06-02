@@ -29,6 +29,8 @@ export DROP_EXISTING_TABLES="true"
 export RUN_LOAD="true"
 export RUN_SQL="true"
 export RUN_SINGLE_USER_REPORTS="true"
+
+export RUN_QGEN="true"
 export RUN_MULTI_USER="true"
 export RUN_MULTI_USER_REPORTS="true"
 export RUN_SCORE="true"
