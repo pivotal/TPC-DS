@@ -11,7 +11,7 @@ filter="gpdb"
 
 if [ "${DROP_EXISTING_TABLES}" == "true" ]; then
   #Create tables
-  for i in $(ls ${PWD}/*.${filter}.*.sql); do
+  for i in ${PWD}/*.${filter}.*.sql; do
     id=$(echo ${i} | awk -F '.' '{print $1}')
     schema_name=$(echo ${i} | awk -F '.' '{print $2}')
     table_name=$(echo ${i} | awk -F '.' '{print $3}')
@@ -38,7 +38,7 @@ if [ "${DROP_EXISTING_TABLES}" == "true" ]; then
   #external tables are the same for all gpdb
   get_gpfdist_port
 
-  for i in $(ls ${PWD}/*.ext_tpcds.*.sql); do
+  for i in ${PWD}/*.ext_tpcds.*.sql; do
     start_log
 
     id=$(echo ${i} | awk -F '.' '{print $1}')

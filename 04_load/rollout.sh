@@ -53,7 +53,7 @@ function start_gpfdist()
 copy_script
 start_gpfdist
 
-for i in $(ls ${PWD}/*.${filter}.*.sql); do
+for i in ${PWD}/*.${filter}.*.sql; do
   start_log
 
   id=$(echo ${i} | awk -F '.' '{print $1}')

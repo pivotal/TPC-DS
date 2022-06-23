@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ## getLogResults.sh
 ## Parameter ${1} is the tpcds log file from the run
 ## You will need to fill in columns A-K in the GPV TPC-DS.xlsx spreadsheet

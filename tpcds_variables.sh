@@ -1,3 +1,4 @@
+# shellcheck disable=SC2148
 # environment options
 export ADMIN_USER="gpadmin"
 export BENCH_ROLE="dsbench"
