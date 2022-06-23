@@ -14,6 +14,10 @@ dependencies:
 lint:
 	find . -name "*.sh" -not -path './00_compile_tpcds/t*' | xargs shellcheck -S warning
 
+.PHONY: lint-error-ci
+lint-error-ci:
+	find . -name "*.sh" -not -path './00_compile_tpcds/t*' | xargs shellcheck -S error
+
 .PHONY: super-linter
 super-linter:
 	docker run --rm \
