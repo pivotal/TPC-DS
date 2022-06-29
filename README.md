@@ -1,3 +1,6 @@
+Pipeline Status: ![CommitStatus](https://github.com/pivotal/TPC-DS/actions/workflows/main.yml/badge.svg)
+---
+
 # Decision Support Benchmark for Greenplum database.
 
 This is the decision support (DS) benchmark derived from [TPC-DS](http://tpc.org/tpcds/).
