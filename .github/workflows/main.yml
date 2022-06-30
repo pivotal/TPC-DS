@@ -30,4 +30,4 @@ jobs:
         run: |
           sudo apt install xz-utils
           shellcheck --version
-          make lint-error-ci
+          make lint
