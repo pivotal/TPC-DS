@@ -12,10 +12,13 @@ filter="gpdb"
 if [ "${DROP_EXISTING_TABLES}" == "true" ]; then
   #Create tables
   for i in ${PWD}/*.${filter}.*.sql; do
-    id=$(echo ${i} | awk -F '.' '{print $1}')
-    schema_name=$(echo ${i} | awk -F '.' '{print $2}')
-    table_name=$(echo ${i} | awk -F '.' '{print $3}')
     start_log
+    id=$(echo ${i} | awk -F '.' '{print $1}')
+    export id
+    schema_name=$(echo ${i} | awk -F '.' '{print $2}')
+    export schema_name
+    table_name=$(echo ${i} | awk -F '.' '{print $3}')
+    export table_name
 
     if [ "${RANDOM_DISTRIBUTION}" == "true" ]; then
       DISTRIBUTED_BY="DISTRIBUTED RANDOMLY"

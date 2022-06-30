@@ -6,8 +6,6 @@ PWD=$(get_pwd ${BASH_SOURCE[0]})
 step="load"
 init_log ${step}
 
-ADMIN_HOME=$(eval echo ~$ADMIN_USER)
-
 get_version
 filter="gpdb"
 
@@ -57,6 +55,7 @@ for i in ${PWD}/*.${filter}.*.sql; do
   start_log
 
   id=$(echo ${i} | awk -F '.' '{print $1}')
+  export id
   schema_name=$(echo ${i} | awk -F '.' '{print $2}')
   table_name=$(echo ${i} | awk -F '.' '{print $3}')
 

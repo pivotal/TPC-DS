@@ -1,10 +1,10 @@
 #!/bin/bash
 set -e
 
-if [ $(alias | grep -wc grep) -gt 0 ]; then
+if [ "$(alias | grep -wc grep)" -gt 0 ]; then
   unalias grep
 fi
-if [ $(alias | grep -wc ls) -gt 0 ]; then
+if [ "$(alias | grep -wc ls)" -gt 0 ]; then
   unalias ls
 fi
 
@@ -26,6 +26,7 @@ function check_variables() {
   echo "Sourcing ${VARS_FILE}"
   echo "############################################################################"
   echo ""
+  # shellcheck source=tpcds_variables.sh
   source ./${VARS_FILE} 2> /dev/null
   if [ $? -ne 0 ]; then
     echo "./${VARS_FILE} does not exist. Please ensure that this file exists before running TPC-DS. Exiting."
@@ -82,9 +83,13 @@ function print_header() {
   echo ""
 }
 
+# we need to declare this outside, otherwise, the declare will wipe out the
+# value within a function
+declare startup_file
 function source_bashrc() {
   if [ -f ${HOME}/.bashrc ]; then
     # don't fail if an error is happening in the admin's profile
+    # shellcheck disable=SC1090
     source ${HOME}/.bashrc || true
   fi
   count=$(egrep -c "source .*/greenplum_path.sh|\. .*/greenplum_path.sh" ${HOME}/.bashrc)
@@ -110,7 +115,7 @@ function get_pwd() {
   # Change to dirname of x
   cd ${x%/*}
   # Combine new pwd with basename of x
-  echo $(dirname $(pwd -P)/${x##*/})
+  echo "$(dirname "$(pwd -P)/${x##*/}")"
   cd ${OLDPWD}
 }
 export -f get_pwd
@@ -123,6 +128,7 @@ function get_gpfdist_port() {
   for i in $(seq 4 9); do
     if [ "${primary_base}" -ne "${i}" ] && [ "$mirror_base" -ne "${i}" ]; then
       GPFDIST_PORT="${i}000"
+      export GPFDIST_PORT
       break
     fi
   done
@@ -148,6 +154,10 @@ function get_version() {
     MEDIUM_STORAGE=""
     LARGE_STORAGE=""
   fi
+
+  export SMALL_STORAGE
+  export MEDIUM_STORAGE
+  export LARGE_STORAGE
 }
 export -f get_version
 
@@ -162,6 +172,10 @@ function start_log() {
 }
 export -f start_log
 
+# we need to declare this outside, otherwise, the declare will wipe out the
+# value within a function
+declare schema_name
+declare table_name
 function print_log() {
   #duration
   T_END="$(date +%s)"
@@ -179,6 +193,7 @@ function print_log() {
   if [ "${tuples}" == "" ]; then
     tuples="0"
   fi
+
   # calling function adds schema_name and table_name
   printf "%s|%s.%s|%s|%02d:%02d:%02d|%d|%d\n" ${id} ${schema_name} ${table_name} ${tuples} "$((S_DURATION/3600%24))" "$((S_DURATION/60%60))" "$((S_DURATION%60))" "${T_START}" "${T_END}" >> ${TPC_DS_DIR}/log/${logfile}
 }
@@ -192,7 +207,7 @@ export -f end_step
 
 function log_time()
 {
-	printf "[%s] %s\n" "$(date '+%Y-%m-%d %H:%M:%S')" "$1"
+  printf "[%s] %s\n" "$(date '+%Y-%m-%d %H:%M:%S')" "$1"
 }
 export -f log_time
 

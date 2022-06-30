@@ -65,7 +65,9 @@ step="gen_data"
 init_log ${step}
 start_log
 schema_name="tpcds"
+export schema_name
 table_name="gen_data"
+export table_name
 
 if [ "${GEN_NEW_DATA}" == "true" ]; then
   kill_orphaned_data_gen

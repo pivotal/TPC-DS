@@ -47,11 +47,12 @@ echo ""
 
 # We assume that the flag variable names are consistent with the corresponding directory names.
 # For example, `00_compile_tpcds directory` name will be used to get `true` or `false` value from `RUN_COMPILE_TPCDS` in `tpcds_variables.sh`.
-for i in $(ls -d ${PWD}/0*); do
+for i in ${PWD}/0*/; do
   # split by the first underscore and extract the step name.
   step_name=${i#*_}
+  step_name=${step_name%%/}
   # convert to upper case and concatenate "RUN_" in the front to get the flag name.
-  flag_name="RUN_$(echo ${step_name} | tr [:lower:] [:upper:])"
+  flag_name="RUN_$(echo ${step_name} | tr "[:lower:]" "[:upper:]")"
   # use indirect reference to convert flag name string to its value as "true" or "false".
   run_flag=${!flag_name}
 

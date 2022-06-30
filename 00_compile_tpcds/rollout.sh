@@ -7,7 +7,9 @@ step="compile_tpcds"
 init_log ${step}
 start_log
 schema_name="tpcds"
+export schema_name
 table_name="compile"
+export table_name
 
 function make_tpc()
 {
