@@ -38,7 +38,7 @@ function generate_queries()
 
     #add explain analyze
     echo "print \"set role ${BENCH_ROLE};\\n:EXPLAIN_ANALYZE\\n\" > ${sql_dir}/${filename}"
-    printf "set role ${BENCH_ROLE};\n:EXPLAIN_ANALYZE\n" > ${sql_dir}/${filename}
+    printf "set role ${BENCH_ROLE};\nset search_path=${SCHEMA_NAME},public;\nset optimizer=${ORCA_OPTIMIZER};\nset statement_mem=\"${STATEMENT_MEM_MULTI_USER}\";\n:EXPLAIN_ANALYZE\n" > ${sql_dir}/${filename}
 
     echo "sed -n ${start_position},${end_position}p ${sql_dir}/${tpcds_query_name} >> ${sql_dir}/${filename}"
     sed -n ${start_position},${end_position}p ${sql_dir}/${tpcds_query_name} >> ${sql_dir}/${filename}

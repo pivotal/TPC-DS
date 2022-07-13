@@ -2,6 +2,8 @@
 # environment options
 export ADMIN_USER="gpadmin"
 export BENCH_ROLE="dsbench"
+export SCHEMA_NAME="tpcds"
+ 
 
 # benchmark options
 export GEN_DATA_SCALE="1"
@@ -40,6 +42,9 @@ export RUN_SCORE="true"
 export SINGLE_USER_ITERATIONS="1"
 export EXPLAIN_ANALYZE="false"
 export RANDOM_DISTRIBUTION="false"
+export ORCA_OPTIMIZER="true"
+export STATEMENT_MEM="2GB"
+export STATEMENT_MEM_MULTI_USER="1GB"
 
 # Set gpfdist location where gpfdist will run p (primary) or m (mirror)
 export GPFDIST_LOCATION="p"

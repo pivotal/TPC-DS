@@ -36,7 +36,7 @@ for p in $(seq 1 99); do
 	done
 
 	echo "Creating: ${TPC_DS_DIR}/05_sql/${filename}"
-	printf "set role ${BENCH_ROLE};\n:EXPLAIN_ANALYZE\n" > ${TPC_DS_DIR}/05_sql/${filename}
+	printf "set role ${BENCH_ROLE};\nset search_path=${SCHEMA_NAME},public;\nset optimizer=${ORCA_OPTIMIZER};\nset statement_mem=\"${STATEMENT_MEM}\";\n:EXPLAIN_ANALYZE\n" > ${TPC_DS_DIR}/05_sql/${filename}
 	sed -n ${start_position},${end_position}p ${PWD}/query_0.sql >> ${TPC_DS_DIR}/05_sql/${filename}
 	query_id=$((query_id + 1))
 	file_id=$((file_id + 1))
