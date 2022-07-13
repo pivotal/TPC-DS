@@ -11,11 +11,14 @@ filter="gpdb"
 
 if [ "${DROP_EXISTING_TABLES}" == "true" ]; then
   #Create tables
-  for i in $(ls ${PWD}/*.${filter}.*.sql); do
-    id=$(echo ${i} | awk -F '.' '{print $1}')
-    schema_name=$(echo ${i} | awk -F '.' '{print $2}')
-    table_name=$(echo ${i} | awk -F '.' '{print $3}')
+  for i in ${PWD}/*.${filter}.*.sql; do
     start_log
+    id=$(echo ${i} | awk -F '.' '{print $1}')
+    export id
+    schema_name=$(echo ${i} | awk -F '.' '{print $2}')
+    export schema_name
+    table_name=$(echo ${i} | awk -F '.' '{print $3}')
+    export table_name
 
     if [ "${RANDOM_DISTRIBUTION}" == "true" ]; then
       DISTRIBUTED_BY="DISTRIBUTED RANDOMLY"
@@ -38,7 +41,7 @@ if [ "${DROP_EXISTING_TABLES}" == "true" ]; then
   #external tables are the same for all gpdb
   get_gpfdist_port
 
-  for i in $(ls ${PWD}/*.ext_tpcds.*.sql); do
+  for i in ${PWD}/*.ext_tpcds.*.sql; do
     start_log
 
     id=$(echo ${i} | awk -F '.' '{print $1}')

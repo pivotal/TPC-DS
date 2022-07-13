@@ -7,7 +7,9 @@ step="init"
 init_log ${step}
 start_log
 schema_name="tpcds"
+export schema_name
 table_name="init"
+export table_name
 
 function set_segment_bashrc()
 {

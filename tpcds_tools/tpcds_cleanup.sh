@@ -7,9 +7,9 @@ fi
 echo "Cleaning generated sql files: 05_sql/*.sql"
 rm -f ${HOME}/TPC-DS/05_sql/*.sql
 echo "Cleaning binaries: 00_compile_tpcds/tools"
-cd ${HOME}/TPC-DS/00_compile_tpcds/tools
+cd ${HOME}/TPC-DS/00_compile_tpcds/tools || exit 1
 make clean
-cd -
+cd - || exit 1
 echo "Cleaning multi-user sql scripts(default 5CU): 07_multi_user/[1-5]"
 rm -rf ${HOME}/TPC-DS/07_multi_user/[1-5]
 echo "Cleaning all tpcds remnents from segment nodes: binary, logs, data, etc."
