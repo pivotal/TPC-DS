@@ -1,0 +1,704 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AddBuffer	StringBuffer.c	/^int AddBuffer(StringBuffer_t *pBuf, char *pStr)$/;"	f
+AddDistribution	dcgram.c	/^AddDistribution (distindex_t * pDistIndex, char *szName)$/;"	f
+AddLine	grammar.c	/^AddLine (char *line)$/;"	f
+AddQuerySegment	query_handler.c	/^AddQuerySegment(template_t *pQuery, char *szText)$/;"	f
+AddQuerySubstitution	substitution.c	/^AddQuerySubstitution(template_t *t, char *szName, int nUse, int bEndSuffix)$/;"	f
+CurrentFile	dcomp.c	/^file_ref_t CurrentFile;$/;"	v
+CurrentFile	driver.c	/^file_ref_t CurrentFile;$/;"	v
+CurrentFile	grammar_support.c	/^file_ref_t CurrentFile;$/;"	v
+CurrentFileName	dcomp.c	/^char *CurrentFileName = NULL;$/;"	v
+DECLARER	QgenMain.c	36;"	d	file:
+DECLARER	dcomp.c	37;"	d	file:
+DECLARER	driver.c	36;"	d	file:
+DECLARER	text.c	195;"	d	file:
+D_CHARS	date.c	50;"	d	file:
+D_NAME_LEN	dist.c	78;"	d	file:
+DistNameIndex	dist.c	/^DistNameIndex(char *szDist, int nNameType, char *szName)$/;"	f
+DistSizeToShiftWidth	dist.c	/^int DistSizeToShiftWidth(char *szDist, int nWeightSet)$/;"	f
+Errors	error_msg.c	/^err_msg_t Errors[MAX_ERROR + 2] = {$/;"	v
+EvalArithmetic	eval.c	/^EvalArithmetic(expr_t *pExpr, Expr_Val_t *pValue, Expr_Val_t *pParams)$/;"	f
+EvalDateExpr	eval.c	/^EvalDateExpr(expr_t *pExpr, Expr_Val_t *pBuf, Expr_Val_t *pParams, int bIsParam)$/;"	f
+EvalDistExpr	eval.c	/^EvalDistExpr(expr_t *pExpr, Expr_Val_t *pBuf, Expr_Val_t *pParams, int bIsParam)$/;"	f
+EvalExpr	eval.c	/^	EvalExpr(expr_t *pExpr, Expr_Val_t *pValue, int bIsParam, int nQueryNumber)$/;"	f
+EvalKeywordExpr	eval.c	/^	EvalKeywordExpr(expr_t *pExpr, Expr_Val_t *pV)$/;"	f
+EvalRandomExpr	eval.c	/^EvalRandomExpr(expr_t *pExpr, Expr_Val_t *pBuf, Expr_Val_t *pParams, int bIsParam)$/;"	f
+EvalRownCountExpr	eval.c	/^EvalRownCountExpr(expr_t *pExpr, Expr_Val_t *pBuf, Expr_Val_t *pParams)$/;"	f
+EvalTextExpr	eval.c	/^EvalTextExpr(expr_t *pExpr, Expr_Val_t *pBuf, Expr_Val_t *pParams, int bIsParam)$/;"	f
+FL_LOADED	dist.c	79;"	d	file:
+FN	error_msg.c	/^static char *FN;$/;"	v	file:
+FUNC_INFO_T	expr.c	/^typedef struct FUNC_INFO_T {$/;"	s	file:
+FindKeyword	keywords.c	/^int FindKeyword(char *szWord)$/;"	f
+FindToken	grammar.c	/^FindToken (char *word)$/;"	f
+FreeBuffer	StringBuffer.c	/^void FreeBuffer(StringBuffer_t *pBuf)$/;"	f
+GenerateQuery	query_handler.c	/^void GenerateQuery(FILE *pOutFile, FILE *pLogFile, int nQuery)$/;"	f
+GetBuffer	StringBuffer.c	/^char *GetBuffer(StringBuffer_t *pBuf)$/;"	f
+GetCCITT	checksum.c	/^unsigned short GetCCITT (unsigned short crc, unsigned short ch)$/;"	f
+GetErrorCounts	grammar_support.c	/^GetErrorCounts(int *nError, int *nWarning)$/;"	f
+GetParamName	r_params.c	/^GetParamName(int nParam)$/;"	f
+GetParamValue	r_params.c	/^GetParamValue(int nParam)$/;"	f
+GetRowcountByName	tdefs.c	/^GetRowcountByName(char *szName)$/;"	f
+GetTableNumber	tdefs.c	/^GetTableNumber(char *szName)$/;"	f
+InitBuffer	StringBuffer.c	/^StringBuffer_t *InitBuffer(int nSize, int nIncrement)$/;"	f
+InitKeywords	keywords.c	/^void InitKeywords()$/;"	f
+IntegrateDist	dist.c	/^int IntegrateDist(char *szDistName, int nPct, int nStartIndex, int nWeightSet)$/;"	f
+IsIntParam	r_params.c	/^IsIntParam(char *szParam)$/;"	f
+IsStrParam	r_params.c	/^IsStrParam(char *szParam)$/;"	f
+KeyWords	keywords.c	/^static keyword_t KeyWords[] =$/;"	v	file:
+KeywordText	keywords.c	/^char *KeywordText(int nKeyword)$/;"	f
+LN	error_msg.c	/^static int *LN;$/;"	v	file:
+LinearScale	scaling.c	/^LinearScale(int nTable, int nTargetGB)$/;"	f	file:
+LogScale	scaling.c	/^LogScale(int nTable, int nTargetGB)$/;"	f	file:
+MALLOC	dcgram.c	53;"	d	file:
+MALLOC	dcgram.c	56;"	d	file:
+MAX_FUNC	expr.c	67;"	d	file:
+MAX_LIMIT	pricing.c	50;"	d	file:
+MAX_LINE_LEN	r_params.c	71;"	d	file:
+MIN_DATE_INT	date.c	51;"	d	file:
+MakeFunctionCall	expr.c	/^MakeFunctionCall(int nKeyword, list_t *pArgList)$/;"	f
+MakeIntConstant	expr.c	/^MakeIntConstant(ds_key_t nValue)$/;"	f
+MakeListExpr	expr.c	/^MakeListExpr(int nModifier, expr_t *pExpr, int nArg)$/;"	f
+MakeReplacement	expr.c	/^MakeReplacement(char *szText, int nValue)$/;"	f
+MakeStringConstant	expr.c	/^MakeStringConstant(char *szText)$/;"	f
+MakeVariableReference	expr.c	/^MakeVariableReference(char *szText, int nSuffix)$/;"	f
+MatchDistWeight	dist.c	/^int MatchDistWeight(void *dest, char *szDist, int nWeight, int nWeightSet, int ValueSet)$/;"	f
+Modulus	genrand.c	/^static HUGE_TYPE Modulus = 2147483647;  \/* trick you use to get 64 bit int *\/$/;"	v	file:
+Mult	genrand.c	/^static long Mult = 16807;       \/* the multiplier *\/$/;"	v	file:
+Multiplier	genrand.c	/^static HUGE_TYPE Multiplier = 16807;    \/* or whatever nonstandard *\/$/;"	v	file:
+NthElement	genrand.c	/^NthElement (HUGE_TYPE N, int nStream)$/;"	f
+OPTION_START	r_params.c	73;"	d	file:
+OPTION_START	r_params.c	75;"	d	file:
+PARAM_MAX_LEN	r_params.c	49;"	d	file:
+PATH_SEP	misc.c	72;"	d	file:
+PATH_SEP	misc.c	74;"	d	file:
+ParseFile	grammar.c	/^ParseFile (char *szPath)$/;"	f
+PrintExpr	expr.c	/^PrintExpr(expr_t *pExpr)$/;"	f
+PrintTemplate	query_handler.c	/^void PrintTemplate(template_t *t)$/;"	f
+ProcessAdd	dcgram.c	/^ProcessAdd (char *stmt, token_t * tokens)$/;"	f
+ProcessComments	grammar.c	/^ProcessComments (char *line)$/;"	f
+ProcessDistribution	dcgram.c	/^ProcessDistribution (char *stmt, token_t * tokens)$/;"	f
+ProcessErrorCode	error_msg.c	/^ProcessErrorCode (int nErrorCode, char *szRoutineName, char *szParam,$/;"	f
+ProcessInclude	dcgram.c	/^ProcessInclude (char *stmt, token_t * tokens)$/;"	f
+ProcessInt	dcgram.c	/^ProcessInt (char *stmt, token_t * tokens)$/;"	f
+ProcessNames	dcgram.c	/^ProcessNames (char *stmt, token_t * tokens)$/;"	f
+ProcessOther	dcgram.c	/^ProcessOther (char *stmt, token_t * tokens)$/;"	f
+ProcessSet	dcgram.c	/^ProcessSet (char *stmt, token_t * tokens)$/;"	f
+ProcessStr	grammar.c	/^ProcessStr (char *stmt, token_t * tokens)$/;"	f
+ProcessTypes	dcgram.c	/^ProcessTypes (char *stmt, token_t * tokens)$/;"	f
+REALLOC	dcgram.c	54;"	d	file:
+REALLOC	dcgram.c	57;"	d	file:
+RNGReset	genrand.c	/^RNGReset (int tbl)$/;"	f
+ReportError	error_msg.c	/^ReportError (int nError, char *msg, int bExit)$/;"	f
+ReportErrorNoLine	error_msg.c	/^ReportErrorNoLine (int nError, char *msg, int bExit)$/;"	f
+ResetBuffer	StringBuffer.c	/^int ResetBuffer(StringBuffer_t *pBuf)$/;"	f
+SCALING_T	scaling.c	/^static struct SCALING_T {$/;"	s	file:
+SPACE_INCREMENT	text.c	61;"	d	file:
+SafeStrtok	grammar.c	/^SafeStrtok (char *string, char *delims)$/;"	f
+SetErrorGlobals	error_msg.c	/^SetErrorGlobals (char *szFileName, int *nLineNumber)$/;"	f
+SetScaleIndex	build_support.c	/^SetScaleIndex(char *szName, char *szValue)$/;"	f
+SetTokens	grammar.c	/^SetTokens (token_t * pToken)$/;"	f
+StaticScale	scaling.c	/^StaticScale(int nTable, int nTargetGB)$/;"	f	file:
+TemplateList	QgenMain.c	/^list_t *TemplateList;$/;"	v
+ValidateParams	expr.c	/^ValidateParams(int nFunc, expr_t *pArgs)$/;"	f
+WriteIndex	dcomp.c	/^WriteIndex(distindex_t *t)$/;"	f
+YY_BUF_SIZE	grammar_support.c	77;"	d	file:
+ZIP_MAP	s_zip_to_gmt.c	/^struct ZIP_MAP  {$/;"	s	file:
+_FILE_OFFSET_BITS	checksum.c	37;"	d	file:
+_LARGEFILE64_SOURCE	checksum.c	36;"	d	file:
+aPriceLimits	pricing.c	/^static ds_limits_t	aPriceLimits[MAX_LIMIT] =$/;"	v	file:
+a_rnd	misc.c	/^a_rnd (int min, int max, int column, char *dest)$/;"	f
+addList	list.c	/^addList(list_t *pList, void *pData)$/;"	f
+alpha_num	misc.c	/^static char alpha_num[65] =$/;"	v	file:
+arBKeys	scd.c	/^char arBKeys[MAX_TABLE][17];$/;"	v
+arDeleteFiles	print.c	/^static char *arDeleteFiles[3] = {"", "delete_", "inventory_delete_"};$/;"	v	file:
+arFuncArgs	expr.c	/^static int arFuncArgs[MAX_FUNC][MAX_ARGS + 1] =$/;"	v	file:
+arFuncInfo	expr.c	/^static func_info_t arFuncInfo[MAX_FUNC + 1] =$/;"	v	file:
+arGMTOffset	s_zip_to_gmt.c	/^} arGMTOffset[63] = $/;"	v	typeref:struct:ZIP_MAP
+arInventoryUpdateDates	scaling.c	/^static int arInventoryUpdateDates[6];$/;"	v	file:
+arRowcount	scaling.c	/^} arRowcount[MAX_TABLE + 1];$/;"	v	typeref:struct:SCALING_T	file:
+arScaleVolume	scaling.c	/^static int arScaleVolume[9] =$/;"	v	file:
+arUpdateDates	scaling.c	/^static int arUpdateDates[6];$/;"	v	file:
+arValueLengths	dcgram.c	/^int *arValueLengths = NULL;$/;"	v
+arValues	dcgram.c	/^char **arValues = NULL;$/;"	v
+arWeights	dcgram.c	/^int *arWeights = NULL;$/;"	v
+arithmetic_expr	qgen.y	/^arithmetic_expr:	expr '+' expr$/;"	l
+bitmap_to_dist	build_support.c	/^bitmap_to_dist(void *pDest, char *distname, ds_key_t *modulus, int vset, int stream)$/;"	f
+canCast	expr.c	/^canCast(int nFromDataType, int nToDataType)$/;"	f	file:
+changeSCD	scd.c	/^changeSCD(int nDataType, void *pNewData, void *pOldData, int *nFlags, int bFirst)$/;"	f
+checkSeeds	parallel.c	/^checkSeeds (tdef * pTdef)$/;"	f
+city_hash	address.c	/^city_hash(int nTable, char *name)$/;"	f
+clr_flg	r_params.c	/^clr_flg(char *flag)$/;"	f
+comma_expr_list	qgen.y	/^comma_expr_list:	expr$/;"	l
+compareSubstitution	substitution.c	/^compareSubstitution(const void *p1, const void *p2)$/;"	f
+cp_join	join.c	/^cp_join(int tbl, int col, ds_key_t jDate)$/;"	f	file:
+create_table	load.c	/^create_table(int nTable)$/;"	f
+current_table	print.c	/^static int current_table = -1;$/;"	v	file:
+dateScaling	scaling.c	/^dateScaling(int nTable, ds_key_t jDate)$/;"	f
+date_init	date.c	/^date_init(void)$/;"	f
+date_join	join.c	/^date_join(int from_tbl, int from_col, ds_key_t join_count, int nYear)$/;"	f	file:
+date_part	date.c	/^date_part(date_t *d, int part)$/;"	f
+date_t_op	date.c	/^date_t_op(date_t *dest, int op, date_t *d1, date_t *d2)$/;"	f
+day_number	date.c	/^day_number(date_t *d)$/;"	f
+decimal_t_op	decimal.c	/^decimal_t_op(decimal_t *dest, int op, decimal_t *d1, decimal_t *d2)$/;"	f
+dectoflt	decimal.c	/^dectoflt(double *dest, decimal_t *d)$/;"	f
+dectostr	decimal.c	/^dectostr(char *dest, decimal_t *d)$/;"	f
+defineSubstitution	query_handler.c	/^defineSubstitution(template_t *pQuery, char *szSubstitutionName, expr_t *pDefinition)$/;"	f
+define_statement	qgen.y	/^define_statement:	KW_DEFINE TOK_ID '=' expr ';'$/;"	l
+di_compare	dist.c	/^di_compare(const void *op1, const void *op2)$/;"	f
+dist_active	dist.c	/^dist_active(char *szName, int nWeightSet)$/;"	f
+dist_argument	qgen.y	/^dist_argument:		KW_SET KW_WEIGHTS '=' TOK_INT ';'$/;"	l
+dist_argument_list	qgen.y	/^dist_argument_list:	dist_argument$/;"	l
+dist_expr_list	qgen.y	/^dist_expr_list:		expr		$/;"	l
+dist_function_name	qgen.y	/^dist_function_name:	KW_DIST		{$$ = KW_DIST;}$/;"	l
+dist_member	qgen.y	/^dist_member:		KW_ADD '(' dist_value_list ':' dist_weight_list ')' ';'$/;"	l
+dist_members_list	qgen.y	/^dist_members_list:	dist_member$/;"	l
+dist_name_list	qgen.y	/^dist_name_list:		TOK_ID$/;"	l
+dist_op	dist.c	/^dist_op(void *dest, int op, char *d_name, int vset, int wset, int stream)$/;"	f
+dist_statement	qgen.y	/^dist_statement:		KW_DIST TOK_ID ';' dist_argument_list dist_members_list$/;"	l
+dist_to_bitmap	build_support.c	/^dist_to_bitmap(int *pDest, char *szDistName, int nValue, int nWeight, int nStream)$/;"	f
+dist_type	dist.c	/^dist_type(char *name, int nValueSet)$/;"	f
+dist_type	qgen.y	/^dist_type:			KW_INT$/;"	l
+dist_type_list	qgen.y	/^dist_type_list:$/;"	l
+dist_value	qgen.y	/^dist_value:			TOK_INT$/;"	l
+dist_value_list	qgen.y	/^dist_value_list:	dist_value$/;"	l
+dist_weight	dist.c	/^dist_weight(int *dest, char *d, int index, int wset)$/;"	f
+dist_weight_list	qgen.y	/^dist_weight_list:	TOK_INT$/;"	l
+distsize	dist.c	/^distsize(char *name)$/;"	f
+doomsday	date.c	/^static int doomsday[4] = {3, 2, 0, 5};$/;"	v	file:
+dttoj	date.c	/^dttoj(date_t *dt)$/;"	f
+dttostr	date.c	/^dttostr(date_t *d)$/;"	f
+dump_dist	dist.c	/^dump_dist(char *name)$/;"	f
+dump_seeds	genrand.c	/^dump_seeds (int tbl)$/;"	f
+embed_string	build_support.c	/^embed_string(char *szDest, char *szDist, int nValue, int nWeight, int nStream)$/;"	f
+env_config	misc.c	/^env_config (char *var, char *dflt)$/;"	f
+expr	qgen.y	/^expr:				TOK_LITERAL	$/;"	l
+file_num	misc.c	/^int file_num = -1;$/;"	v
+findDistValue	dist.c	/^findDistValue(char *szValue, char *szDistName, int ValueSet)$/;"	f
+findList	list.c	/^findList(list_t *pList, void *pData)$/;"	f
+findSubstitution	substitution.c	/^findSubstitution(template_t *t, char *name, int *nUse)$/;"	f
+findValue	query_handler.c	/^findValue(segment_t *pSegment)$/;"	f
+find_dist	dist.c	/^find_dist(char *name)$/;"	f
+find_table	driver.c	/^find_table(char *szParamName, char *tname)$/;"	f
+fnd_param	r_params.c	/^fnd_param(char *name)$/;"	f
+fpDeleteFile	print.c	/^static FILE *fpDeleteFile;$/;"	v	file:
+fpOutfile	print.c	/^static FILE *fpOutfile = NULL;$/;"	v	file:
+ftodec	decimal.c	/^ftodec(decimal_t *dest, double f)$/;"	f
+func_info_t	expr.c	/^} func_info_t;$/;"	t	typeref:struct:FUNC_INFO_T	file:
+function_call	qgen.y	/^function_call:		function_name '(' comma_expr_list ')'$/;"	l
+function_name	qgen.y	/^function_name:		KW_DATE		{$$ = KW_DATE;}$/;"	l
+g_OldValues	w_call_center.c	/^static struct CALL_CENTER_TBL g_OldValues;$/;"	v	typeref:struct:CALL_CENTER_TBL	file:
+g_OldValues	w_item.c	/^	g_OldValues;$/;"	v	typeref:struct:
+g_OldValues	w_store.c	/^static struct W_STORE_TBL g_OldValues;$/;"	v	typeref:struct:W_STORE_TBL	file:
+g_OldValues	w_web_page.c	/^static struct W_WEB_PAGE_TBL g_OldValues;$/;"	v	typeref:struct:W_WEB_PAGE_TBL	file:
+g_OldValues	w_web_site.c	/^static struct W_WEB_SITE_TBL g_OldValues;$/;"	v	typeref:struct:W_WEB_SITE_TBL	file:
+g_Template	QgenMain.c	/^	*g_Template;$/;"	v
+g_dbgen_version	dbgen_version.c	/^struct DBGEN_VERSION_TBL g_dbgen_version;$/;"	v	typeref:struct:DBGEN_VERSION_TBL
+g_nQueryNumber	QgenMain.c	/^int g_nQueryNumber, $/;"	v
+g_nStreamNumber	QgenMain.c	/^	g_nStreamNumber;$/;"	v
+g_s_brand	s_brand.c	/^struct S_BRAND_TBL g_s_brand;$/;"	v	typeref:struct:S_BRAND_TBL
+g_s_catalog	s_catalog.c	/^struct S_CATALOG_TBL g_s_catalog;$/;"	v	typeref:struct:S_CATALOG_TBL
+g_s_catalog_order	s_catalog_order.c	/^struct S_CATALOG_ORDER_TBL g_s_catalog_order;$/;"	v	typeref:struct:S_CATALOG_ORDER_TBL
+g_s_catalog_order_lineitem	s_catalog_order.c	/^struct S_CATALOG_ORDER_LINEITEM_TBL g_s_catalog_order_lineitem;$/;"	v	typeref:struct:S_CATALOG_ORDER_LINEITEM_TBL
+g_s_catalog_promotional_item	s_catalog_promotional_item.c	/^struct S_CATALOG_PROMOTIONAL_ITEM_TBL g_s_catalog_promotional_item;$/;"	v	typeref:struct:S_CATALOG_PROMOTIONAL_ITEM_TBL
+g_s_catalog_return	s_catalog_order.c	/^struct S_CATALOG_RETURNS_TBL	g_s_catalog_return;$/;"	v	typeref:struct:S_CATALOG_RETURNS_TBL
+g_s_catalog_returns	s_catalog_returns.c	/^struct S_CATALOG_RETURNS_TBL g_s_catalog_returns;$/;"	v	typeref:struct:S_CATALOG_RETURNS_TBL
+g_s_category	s_category.c	/^struct S_CATEGORY_TBL g_s_category;$/;"	v	typeref:struct:S_CATEGORY_TBL
+g_s_class	s_class.c	/^struct S_CLASS_TBL g_s_class;$/;"	v	typeref:struct:S_CLASS_TBL
+g_s_company	s_company.c	/^struct S_COMPANY_TBL g_s_company;$/;"	v	typeref:struct:S_COMPANY_TBL
+g_s_customer	s_customer.c	/^struct S_CUSTOMER_TBL g_s_customer;$/;"	v	typeref:struct:S_CUSTOMER_TBL
+g_s_division	s_division.c	/^struct S_DIVISION_TBL g_s_division;$/;"	v	typeref:struct:S_DIVISION_TBL
+g_s_inventory	s_inventory.c	/^struct S_INVENTORY_TBL g_s_inventory;$/;"	v	typeref:struct:S_INVENTORY_TBL
+g_s_manager	s_manager.c	/^struct S_MANAGER_TBL g_s_manager;$/;"	v	typeref:struct:S_MANAGER_TBL
+g_s_manufacturer	s_manufacturer.c	/^struct S_MANUFACTURER_TBL g_s_manufacturer;$/;"	v	typeref:struct:S_MANUFACTURER_TBL
+g_s_market	s_market.c	/^struct S_MARKET_TBL g_s_market;$/;"	v	typeref:struct:S_MARKET_TBL
+g_s_pline	s_pline.c	/^struct S_PURCHASE_LINEITEM_TBL g_s_pline;$/;"	v	typeref:struct:S_PURCHASE_LINEITEM_TBL
+g_s_product	s_product.c	/^struct S_PRODUCT_TBL g_s_product;$/;"	v	typeref:struct:S_PRODUCT_TBL
+g_s_purchase	s_purchase.c	/^struct S_PURCHASE_TBL g_s_purchase;$/;"	v	typeref:struct:S_PURCHASE_TBL
+g_s_purchase_lineitem	s_purchase.c	/^struct S_PURCHASE_LINEITEM_TBL g_s_purchase_lineitem;$/;"	v	typeref:struct:S_PURCHASE_LINEITEM_TBL
+g_s_reason	s_reason.c	/^struct S_REASON_TBL g_s_reason;$/;"	v	typeref:struct:S_REASON_TBL
+g_s_store_promotional_item	s_store_promotional_item.c	/^struct S_STORE_PROMOTIONAL_ITEM_TBL g_s_store_promotional_item;$/;"	v	typeref:struct:S_STORE_PROMOTIONAL_ITEM_TBL
+g_s_store_return	s_purchase.c	/^struct S_STORE_RETURNS_TBL g_s_store_return;$/;"	v	typeref:struct:S_STORE_RETURNS_TBL
+g_s_store_returns	s_store_returns.c	/^struct S_STORE_RETURNS_TBL g_s_store_returns;$/;"	v	typeref:struct:S_STORE_RETURNS_TBL
+g_s_subcategory	s_subcategory.c	/^struct S_SUBCATEGORY_TBL g_s_subcategory;$/;"	v	typeref:struct:S_SUBCATEGORY_TBL
+g_s_subclass	s_subclass.c	/^struct S_SUBCLASS_TBL g_s_subclass;$/;"	v	typeref:struct:S_SUBCLASS_TBL
+g_s_web_order	s_web_order.c	/^struct S_WEB_ORDER_TBL g_s_web_order;$/;"	v	typeref:struct:S_WEB_ORDER_TBL
+g_s_web_order_lineitem	s_web_order.c	/^struct S_WEB_ORDER_LINEITEM_TBL g_s_web_order_lineitem;$/;"	v	typeref:struct:S_WEB_ORDER_LINEITEM_TBL
+g_s_web_order_lineitem	s_web_order_lineitem.c	/^struct S_WEB_ORDER_LINEITEM_TBL g_s_web_order_lineitem;$/;"	v	typeref:struct:S_WEB_ORDER_LINEITEM_TBL
+g_s_web_promotional_item	s_web_promotinal_item.c	/^struct S_WEB_PROMOTIONAL_ITEM_TBL g_s_web_promotional_item;$/;"	v	typeref:struct:S_WEB_PROMOTIONAL_ITEM_TBL
+g_s_web_return	s_web_order.c	/^struct S_WEB_RETURNS_TBL g_s_web_return;$/;"	v	typeref:struct:S_WEB_RETURNS_TBL
+g_s_web_returns	s_web_returns.c	/^struct S_WEB_RETURNS_TBL g_s_web_returns;$/;"	v	typeref:struct:S_WEB_RETURNS_TBL
+g_s_zip	s_zip_to_gmt.c	/^struct S_ZIP_GMT_TBL g_s_zip;$/;"	v	typeref:struct:S_ZIP_GMT_TBL
+g_sbTemplateName	QgenMain.c	/^StringBuffer_t *g_sbTemplateName = NULL;$/;"	v
+g_szCommandLine	driver.c	/^char g_szCommandLine[201];$/;"	v
+g_w_call_center	w_call_center.c	/^struct CALL_CENTER_TBL g_w_call_center;$/;"	v	typeref:struct:CALL_CENTER_TBL
+g_w_catalog_page	s_catalog_page.c	/^struct CATALOG_PAGE_TBL g_w_catalog_page;$/;"	v	typeref:struct:CATALOG_PAGE_TBL
+g_w_catalog_page	w_catalog_page.c	/^struct CATALOG_PAGE_TBL g_w_catalog_page;$/;"	v	typeref:struct:CATALOG_PAGE_TBL
+g_w_catalog_returns	w_catalog_returns.c	/^struct W_CATALOG_RETURNS_TBL g_w_catalog_returns;$/;"	v	typeref:struct:W_CATALOG_RETURNS_TBL
+g_w_catalog_sales	w_catalog_sales.c	/^struct W_CATALOG_SALES_TBL g_w_catalog_sales;$/;"	v	typeref:struct:W_CATALOG_SALES_TBL
+g_w_customer	w_customer.c	/^struct W_CUSTOMER_TBL g_w_customer;$/;"	v	typeref:struct:W_CUSTOMER_TBL
+g_w_customer_address	w_customer_address.c	/^struct W_CUSTOMER_ADDRESS_TBL g_w_customer_address;$/;"	v	typeref:struct:W_CUSTOMER_ADDRESS_TBL
+g_w_customer_demographics	w_customer_demographics.c	/^struct W_CUSTOMER_DEMOGRAPHICS_TBL g_w_customer_demographics;$/;"	v	typeref:struct:W_CUSTOMER_DEMOGRAPHICS_TBL
+g_w_date	w_datetbl.c	/^struct W_DATE_TBL g_w_date;$/;"	v	typeref:struct:W_DATE_TBL
+g_w_household_demographics	w_household_demographics.c	/^struct W_HOUSEHOLD_DEMOGRAPHICS_TBL g_w_household_demographics;$/;"	v	typeref:struct:W_HOUSEHOLD_DEMOGRAPHICS_TBL
+g_w_income_band	w_income_band.c	/^struct W_INCOME_BAND_TBL g_w_income_band;$/;"	v	typeref:struct:W_INCOME_BAND_TBL
+g_w_inventory	w_inventory.c	/^struct W_INVENTORY_TBL g_w_inventory;$/;"	v	typeref:struct:W_INVENTORY_TBL
+g_w_item	w_item.c	/^struct W_ITEM_TBL g_w_item,$/;"	v	typeref:struct:W_ITEM_TBL
+g_w_promotion	w_promotion.c	/^struct W_PROMOTION_TBL g_w_promotion;$/;"	v	typeref:struct:W_PROMOTION_TBL
+g_w_reason	w_reason.c	/^struct W_REASON_TBL g_w_reason;$/;"	v	typeref:struct:W_REASON_TBL
+g_w_ship_mode	w_ship_mode.c	/^struct W_SHIP_MODE_TBL g_w_ship_mode;$/;"	v	typeref:struct:W_SHIP_MODE_TBL
+g_w_store	w_store.c	/^struct W_STORE_TBL g_w_store;$/;"	v	typeref:struct:W_STORE_TBL
+g_w_store_returns	w_store_returns.c	/^struct W_STORE_RETURNS_TBL g_w_store_returns;$/;"	v	typeref:struct:W_STORE_RETURNS_TBL
+g_w_store_sales	w_store_sales.c	/^struct W_STORE_SALES_TBL g_w_store_sales;$/;"	v	typeref:struct:W_STORE_SALES_TBL
+g_w_time	w_timetbl.c	/^struct W_TIME_TBL g_w_time;$/;"	v	typeref:struct:W_TIME_TBL
+g_w_warehouse	s_warehouse.c	/^struct W_WAREHOUSE_TBL g_w_warehouse;$/;"	v	typeref:struct:W_WAREHOUSE_TBL
+g_w_warehouse	w_warehouse.c	/^struct W_WAREHOUSE_TBL g_w_warehouse;$/;"	v	typeref:struct:W_WAREHOUSE_TBL
+g_w_web_page	w_web_page.c	/^struct W_WEB_PAGE_TBL g_w_web_page;$/;"	v	typeref:struct:W_WEB_PAGE_TBL
+g_w_web_returns	w_web_returns.c	/^struct W_WEB_RETURNS_TBL g_w_web_returns;$/;"	v	typeref:struct:W_WEB_RETURNS_TBL
+g_w_web_sales	w_web_sales.c	/^struct W_WEB_SALES_TBL g_w_web_sales;$/;"	v	typeref:struct:W_WEB_SALES_TBL
+g_w_web_site	s_web_site.c	/^struct W_WEB_SITE_TBL g_w_web_site;$/;"	v	typeref:struct:W_WEB_SITE_TBL
+g_w_web_site	w_web_site.c	/^struct W_WEB_SITE_TBL g_w_web_site;$/;"	v	typeref:struct:W_WEB_SITE_TBL
+gen_charset	genrand.c	/^gen_charset (char *dest, char *set, int min, int max, int stream)$/;"	f
+gen_tbl	driver.c	/^gen_tbl (int tabid, ds_key_t kFirstRow, ds_key_t kRowCount)$/;"	f
+gen_text	text.c	/^gen_text(char *dest, int min, int max, int stream)$/;"	f
+generateQueryStreams	QgenMain.c	/^generateQueryStreams(void)$/;"	f
+genrand_date	genrand.c	/^genrand_date (date_t * dest, int dist, date_t * min, date_t * max,$/;"	f
+genrand_decimal	genrand.c	/^genrand_decimal (decimal_t * dest, int dist, decimal_t * min, decimal_t * max,$/;"	f
+genrand_email	genrand.c	/^genrand_email (char *pEmail, char *pFirst, char *pLast, int nColumn)$/;"	f
+genrand_integer	genrand.c	/^genrand_integer (int *dest, int dist, int min, int max, int mean, int stream)$/;"	f
+genrand_ipaddr	genrand.c	/^genrand_ipaddr (char *pDest, int nColumn)$/;"	f
+genrand_key	genrand.c	/^genrand_key (ds_key_t * dest, int dist, ds_key_t min, ds_key_t max,$/;"	f
+genrand_url	genrand.c	/^genrand_url (char *pDest, int nColumn)$/;"	f
+getCatalogNumberFromPage	join.c	/^getCatalogNumberFromPage(ds_key_t kPageNumber)$/;"	f
+getDateWeightFromJulian	date.c	/^getDateWeightFromJulian(jDay, nDistribution)$/;"	f
+getFirstSK	scd.c	/^getFirstSK(ds_key_t kID)$/;"	f
+getHead	list.c	/^getHead(list_t *pList)$/;"	f
+getIDCount	scaling.c	/^getIDCount(int nTable)$/;"	f
+getItem	list.c	/^getItem(list_t *pList, int nIndex)$/;"	f
+getKeywordValue	keywords.c	/^getKeywordValue(int nIndex)$/;"	f
+getNext	list.c	/^getNext(list_t *pList)$/;"	f
+getSKFromID	scd.c	/^getSKFromID(ds_key_t kID, int nColumn)$/;"	f
+getScaleSlot	scaling.c	/^getScaleSlot(int nTargetGB)$/;"	f
+getSimpleTdefsByNumber	tdefs.c	/^getSimpleTdefsByNumber(nTable)$/;"	f
+getSkewedJulianDate	scaling.c	/^getSkewedJulianDate(int nWeight, int nColumn)$/;"	f
+getTableFromColumn	tdefs.c	/^getTableFromColumn(int nColumn)$/;"	f
+getTableNameByID	tdefs.c	/^getTableNameByID(int i)$/;"	f
+getTail	list.c	/^getTail(list_t *pList)$/;"	f
+getTdefFunctionsByNumber	tdef_functions.c	/^getTdefFunctionsByNumber(nTable)$/;"	f
+getTdefsByNumber	tdefs.c	/^getTdefsByNumber(int nTable)$/;"	f
+getUpdateBase	scaling.c	/^getUpdateBase(int nTable)$/;"	f
+getUpdateDate	scaling.c	/^getUpdateDate(int nTable, ds_key_t kRowcount)$/;"	f
+get_int	r_params.c	/^get_int(char *var)$/;"	f
+get_rowcount	scaling.c	/^get_rowcount(int table)$/;"	f
+get_str	r_params.c	/^get_str(char *var)$/;"	f
+henv	load.c	/^SQLHENV	henv;$/;"	v
+hierarchy_item	build_support.c	/^hierarchy_item(int h_level, ds_key_t *id, char **name, ds_key_t kIndex)$/;"	f
+include_file	grammar_support.c	/^include_file(char *fn, void *pC)$/;"	f
+include_statement	qgen.y	/^include_statement:	'#' KW_INCLUDE path$/;"	l
+initSparseKeys	sparse.c	/^initSparseKeys(int nTable)$/;"	f
+init_params	r_params.c	/^init_params(void)$/;"	f
+init_rand	genrand.c	/^init_rand (void)$/;"	f
+is_leap	date.c	/^is_leap(int year)$/;"	f
+is_set	r_params.c	/^is_set(char *flag)$/;"	f
+itodec	decimal.c	/^itodec(decimal_t *dest, int src)$/;"	f
+itodt	date.c	/^itodt(date_t *dest, int src)$/;"	f
+jDate	w_catalog_sales.c	/^static ds_key_t jDate;$/;"	v	file:
+jDate	w_store_sales.c	/^static ds_key_t jDate,$/;"	v	file:
+jDate	w_web_sales.c	/^static ds_key_t jDate;$/;"	v	file:
+jtodt	date.c	/^jtodt(date_t *dest, int src)$/;"	f
+kBaseRowcount	scaling.c	/^   ds_key_t kBaseRowcount;$/;"	m	struct:SCALING_T	file:
+kDayRowcount	scaling.c	/^   ds_key_t kDayRowcount[6];$/;"	m	struct:SCALING_T	file:
+kNewDateIndex	w_catalog_sales.c	/^static ds_key_t kNewDateIndex = 0;$/;"	v	file:
+kNewDateIndex	w_store_sales.c	/^   kNewDateIndex;$/;"	v	file:
+kNewDateIndex	w_web_sales.c	/^static ds_key_t kNewDateIndex = 0;$/;"	v	file:
+kNextInsertValue	scaling.c	/^   ds_key_t kNextInsertValue;$/;"	m	struct:SCALING_T	file:
+keyword_expr	qgen.y	/^keyword_expr:     KW_UNIFORM		{$$ = KW_UNIFORM;}$/;"	l
+keyword_value	qgen.y	/^keyword_value:				KW_QUERY		{$$ = KW_QUERY;}$/;"	l
+known	date.c	/^static int known[13] = { 0, 3, 0, 0, 4, 9, 6, 11, 8, 5, 10, 7, 12 };$/;"	v	file:
+ld_dbgen_version	dbgen_version.c	/^ld_dbgen_version(void *pSrc)$/;"	f
+ld_s_brand	s_brand.c	/^ld_s_brand(void *pSrc)$/;"	f
+ld_s_call_center	s_call_center.c	/^ld_s_call_center(void *r)$/;"	f
+ld_s_catalog	s_catalog.c	/^ld_s_catalog(void *pSrc)$/;"	f
+ld_s_catalog_order	s_catalog_order.c	/^ld_s_catalog_order(void *pSrc)$/;"	f
+ld_s_catalog_order_lineitem	s_catalog_order_lineitem.c	/^ld_s_catalog_order_lineitem(void *pSrc)$/;"	f
+ld_s_catalog_page	s_catalog_page.c	/^ld_s_catalog_page(void *pSrc)$/;"	f
+ld_s_catalog_promotional_item	s_catalog_promotional_item.c	/^ld_s_catalog_promotional_item(void *pSrc)$/;"	f
+ld_s_catalog_returns	s_catalog_returns.c	/^ld_s_catalog_returns(void *pSrc)$/;"	f
+ld_s_category	s_category.c	/^ld_s_category(void *pSrc)$/;"	f
+ld_s_class	s_class.c	/^ld_s_class(void *pSrc)$/;"	f
+ld_s_company	s_company.c	/^ld_s_company(void *pSrc)$/;"	f
+ld_s_customer	s_customer.c	/^ld_s_customer (void *pSrc)$/;"	f
+ld_s_customer_address	s_customer_address.c	/^ld_s_customer_address(void *row)$/;"	f
+ld_s_division	s_division.c	/^ld_s_division(void *pSrc)$/;"	f
+ld_s_inventory	s_inventory.c	/^ld_s_inventory(void *pSrc)$/;"	f
+ld_s_item	s_item.c	/^ld_s_item(void *pSrc)$/;"	f
+ld_s_manager	s_manager.c	/^ld_s_manager(void *pSrc)$/;"	f
+ld_s_manufacturer	s_manufacturer.c	/^ld_s_manufacturer(void *pSrc)$/;"	f
+ld_s_market	s_market.c	/^ld_s_market(void *pSrc)$/;"	f
+ld_s_pline	s_pline.c	/^ld_s_pline(void *pSrc)$/;"	f
+ld_s_product	s_product.c	/^ld_s_product(void *pSrc)$/;"	f
+ld_s_promotion	s_promotion.c	/^ld_s_promotion(void *pSrc)$/;"	f
+ld_s_purchase	s_purchase.c	/^ld_s_purchase(void *pSrc)$/;"	f
+ld_s_reason	s_reason.c	/^ld_s_reason(void *pSrc)$/;"	f
+ld_s_store	s_store.c	/^ld_s_store(void *pSrc)$/;"	f
+ld_s_store_promotional_item	s_store_promotional_item.c	/^ld_s_store_promotional_item(void *pSrc)$/;"	f
+ld_s_store_returns	s_store_returns.c	/^ld_s_store_returns(void *pSrc)$/;"	f
+ld_s_subcategory	s_subcategory.c	/^ld_s_subcategory(void *pSrc)$/;"	f
+ld_s_subclass	s_subclass.c	/^ld_s_subclass(void *pSrc)$/;"	f
+ld_s_warehouse	s_warehouse.c	/^ld_s_warehouse(void *pSrc)$/;"	f
+ld_s_web_order	s_web_order.c	/^ld_s_web_order(void *pSrc)$/;"	f
+ld_s_web_order_lineitem	s_web_order_lineitem.c	/^ld_s_web_order_lineitem(void *pSrc)$/;"	f
+ld_s_web_page	s_web_page.c	/^ld_s_web_page(void *pSrc)$/;"	f
+ld_s_web_promotional_item	s_web_promotinal_item.c	/^ld_s_web_promotional_item(void *pSrc)$/;"	f
+ld_s_web_return	s_web_returns.c	/^ld_s_web_return(void *pSrc)$/;"	f
+ld_s_web_site	s_web_site.c	/^ld_s_web_site(void *pSrc)$/;"	f
+ld_s_zip	s_zip_to_gmt.c	/^ld_s_zip(void *pSrc)$/;"	f
+ld_w_call_center	w_call_center.c	/^ld_w_call_center(void *r)$/;"	f
+ld_w_catalog_page	w_catalog_page.c	/^ld_w_catalog_page(void *r)$/;"	f
+ld_w_catalog_returns	w_catalog_returns.c	/^ld_w_catalog_returns(void *row)$/;"	f
+ld_w_catalog_sales	w_catalog_sales.c	/^ld_w_catalog_sales(void *row)$/;"	f
+ld_w_customer	w_customer.c	/^ld_w_customer(void *row)$/;"	f
+ld_w_customer_address	w_customer_address.c	/^ld_w_customer_address(void *row)$/;"	f
+ld_w_customer_demographics	w_customer_demographics.c	/^ld_w_customer_demographics(void *row)$/;"	f
+ld_w_date	w_datetbl.c	/^ld_w_date(void *pSrc)$/;"	f
+ld_w_household_demographics	w_household_demographics.c	/^ld_w_household_demographics(void *pSrc)$/;"	f
+ld_w_income_band	w_income_band.c	/^ld_w_income_band(void *pSrc)$/;"	f
+ld_w_inventory	w_inventory.c	/^ld_w_inventory(void *pSrc)$/;"	f
+ld_w_item	w_item.c	/^ld_w_item(void *pSrc)$/;"	f
+ld_w_promotion	w_promotion.c	/^ld_w_promotion(void *pSrc)$/;"	f
+ld_w_reason	w_reason.c	/^ld_w_reason(void *pSrc)$/;"	f
+ld_w_ship_mode	w_ship_mode.c	/^ld_w_ship_mode(void *pSrc)$/;"	f
+ld_w_store	w_store.c	/^ld_w_store(void *pSrc)$/;"	f
+ld_w_store_returns	w_store_returns.c	/^ld_w_store_returns(void *pSrc)$/;"	f
+ld_w_store_sales	w_store_sales.c	/^ld_w_store_sales(void *pSrc)$/;"	f
+ld_w_time	w_timetbl.c	/^ld_w_time(void *pSrc)$/;"	f
+ld_w_warehouse	w_warehouse.c	/^ld_w_warehouse(void *pSrc)$/;"	f
+ld_w_web_page	w_web_page.c	/^ld_w_web_page(void *pSrc)$/;"	f
+ld_w_web_returns	w_web_returns.c	/^ld_w_web_returns(void *pSrc)$/;"	f
+ld_w_web_sales	w_web_sales.c	/^ld_w_web_sales(void *pSrc)$/;"	f
+ld_w_web_site	w_web_site.c	/^ld_w_web_site(void *pSrc)$/;"	f
+load_close	load.c	/^load_close(void)$/;"	f
+load_dist	dist.c	/^load_dist(d_idx_t *di)$/;"	f	file:
+load_init	load.c	/^load_init(void)$/;"	f
+load_param	r_params.c	/^load_param(int nParam, char *szValue)$/;"	f
+load_params	r_params.c	/^load_params()$/;"	f
+ltoc	build_support.c	/^static void ltoc(char *szDest, unsigned long nVal)$/;"	f	file:
+m_days	date.c	/^static int m_days[2][13] =$/;"	v	file:
+main	QgenMain.c	/^main(int ac, char* av[])$/;"	f
+main	checksum.c	/^int main(int argc, char *argv[]) {$/;"	f
+main	date.c	/^main()$/;"	f
+main	dcomp.c	/^int main(int argc, char* argv[])$/;"	f
+main	decimal.c	/^main()$/;"	f
+main	dist.c	/^main()$/;"	f
+main	driver.c	/^main (int ac, char **av)$/;"	f
+main	genrand.c	/^main ()$/;"	f
+main	mkheader.c	/^main(int ac, char **av)$/;"	f
+main	r_params.c	/^main()$/;"	f
+main	text.c	/^main()$/;"	f
+makeArithmeticExpr	expr.c	/^makeArithmeticExpr(int nOp, expr_t *pArg1, expr_t *pArg2)$/;"	f
+makeExpr	expr.c	/^makeExpr(void)$/;"	f
+makeKeyPermutation	permute.c	/^makeKeyPermutation(ds_key_t *nNumberSet, ds_key_t nSize, int nStream)$/;"	f
+makeList	list.c	/^makeList(int nFlags, int (*SortFunc)(const void *d1, const void *d2))$/;"	f
+makePermutation	permute.c	/^makePermutation(int *nNumberSet, int nSize, int nStream)$/;"	f
+matchSCDSK	scd.c	/^matchSCDSK(ds_key_t kUnique, ds_key_t jDate, int nTable)$/;"	f
+mk_address	address.c	/^mk_address(ds_addr_t *pAddr, int nColumn)$/;"	f
+mk_bkey	build_support.c	/^mk_bkey(char *szDest, ds_key_t kPrimary, int nStream)$/;"	f
+mk_city	address.c	/^int mk_city(int nTable, char **dest)$/;"	f
+mk_companyname	build_support.c	/^int mk_companyname(char *dest, int nTable, int nCompany)$/;"	f
+mk_date	date.c	/^mk_date(void)$/;"	f
+mk_dbgen_version	dbgen_version.c	/^mk_dbgen_version(void *pDest, ds_key_t kIndex)$/;"	f
+mk_decimal	decimal.c	/^mk_decimal(int s, int p)$/;"	f
+mk_detail	s_catalog_order.c	/^mk_detail(void *pDest, int nLine, int bPrint)$/;"	f	file:
+mk_detail	s_purchase.c	/^mk_detail(int i, int bPrint)$/;"	f
+mk_detail	s_web_order.c	/^mk_detail(int i, int bPrint)$/;"	f	file:
+mk_detail	w_catalog_sales.c	/^mk_detail(void *row, int bPrint)$/;"	f	file:
+mk_detail	w_store_sales.c	/^mk_detail (void *row, int bPrint)$/;"	f	file:
+mk_detail	w_web_sales.c	/^mk_detail (void *row, int bPrint)$/;"	f	file:
+mk_join	join.c	/^mk_join(int from_col, int to_tbl, ds_key_t join_count)$/;"	f
+mk_master	s_catalog_order.c	/^mk_master(void *pDest, ds_key_t kIndex)$/;"	f	file:
+mk_master	s_purchase.c	/^mk_master(void *pDest, ds_key_t kIndex)$/;"	f
+mk_master	s_web_order.c	/^mk_master(void *pDest, ds_key_t kIndex)$/;"	f	file:
+mk_master	w_catalog_sales.c	/^mk_master (void *row, ds_key_t index)                         $/;"	f	file:
+mk_master	w_store_sales.c	/^mk_master (void *row, ds_key_t index)$/;"	f	file:
+mk_master	w_web_sales.c	/^mk_master (void *row, ds_key_t index)$/;"	f	file:
+mk_s_brand	s_brand.c	/^mk_s_brand(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_call_center	s_call_center.c	/^mk_s_call_center (void* row, ds_key_t index)$/;"	f
+mk_s_catalog	s_catalog.c	/^mk_s_catalog(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_catalog_order	s_catalog_order.c	/^mk_s_catalog_order(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_catalog_order_lineitem	s_catalog_order_lineitem.c	/^mk_s_catalog_order_lineitem(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_catalog_page	s_catalog_page.c	/^mk_s_catalog_page(void *pDest, ds_key_t kRow)$/;"	f
+mk_s_catalog_promotional_item	s_catalog_promotional_item.c	/^mk_s_catalog_promotional_item(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_catalog_returns	s_catalog_returns.c	/^mk_s_catalog_returns(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_category	s_category.c	/^mk_s_category(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_class	s_class.c	/^mk_s_class(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_company	s_company.c	/^mk_s_company(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_customer	s_customer.c	/^mk_s_customer (void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_division	s_division.c	/^mk_s_division(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_inventory	s_inventory.c	/^mk_s_inventory(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_item	s_item.c	/^mk_s_item (void* row, ds_key_t index)$/;"	f
+mk_s_manager	s_manager.c	/^mk_s_manager(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_manufacturer	s_manufacturer.c	/^mk_s_manufacturer(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_market	s_market.c	/^mk_s_market(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_pline	s_pline.c	/^mk_s_pline(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_product	s_product.c	/^mk_s_product(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_promotion	s_promotion.c	/^mk_s_promotion (void* row, ds_key_t index)$/;"	f
+mk_s_purchase	s_purchase.c	/^mk_s_purchase(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_reason	s_reason.c	/^mk_s_reason(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_store	s_store.c	/^mk_s_store (void* row, ds_key_t index)$/;"	f
+mk_s_store_promotional_item	s_store_promotional_item.c	/^mk_s_store_promotional_item(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_store_returns	s_store_returns.c	/^mk_s_store_returns(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_subcategory	s_subcategory.c	/^mk_s_subcategory(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_subclass	s_subclass.c	/^mk_s_subclass(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_warehouse	s_warehouse.c	/^mk_s_warehouse (void* row, ds_key_t index)$/;"	f
+mk_s_web_order	s_web_order.c	/^mk_s_web_order(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_web_order_lineitem	s_web_order_lineitem.c	/^mk_s_web_order_lineitem(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_web_page	s_web_page.c	/^mk_s_web_page (void* row, ds_key_t index)$/;"	f
+mk_s_web_promotional_item	s_web_promotinal_item.c	/^mk_s_web_promotional_item(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_web_return	s_web_returns.c	/^mk_s_web_return(void *pDest, ds_key_t kIndex)$/;"	f
+mk_s_web_site	s_web_site.c	/^mk_s_web_site (void* row, ds_key_t index)$/;"	f
+mk_s_zip	s_zip_to_gmt.c	/^mk_s_zip(void *pDest, ds_key_t kIndex)$/;"	f
+mk_sentence	text.c	/^mk_sentence(int stream)$/;"	f	file:
+mk_streetname	address.c	/^int mk_streetname(int nTable, char *dest)$/;"	f
+mk_streetnumber	address.c	/^int mk_streetnumber(int nTable, int *dest)$/;"	f
+mk_suitenumber	address.c	/^int	mk_suitenumber(int nTable, char *dest)$/;"	f
+mk_w_call_center	w_call_center.c	/^mk_w_call_center (void* row, ds_key_t index)$/;"	f
+mk_w_catalog_page	w_catalog_page.c	/^mk_w_catalog_page (void *row, ds_key_t index)$/;"	f
+mk_w_catalog_returns	w_catalog_returns.c	/^mk_w_catalog_returns (void * row, ds_key_t index)$/;"	f
+mk_w_catalog_sales	w_catalog_sales.c	/^mk_w_catalog_sales (void* row, ds_key_t index)$/;"	f
+mk_w_customer	w_customer.c	/^mk_w_customer (void * row, ds_key_t index)$/;"	f
+mk_w_customer_address	w_customer_address.c	/^mk_w_customer_address (void* row, ds_key_t index)$/;"	f
+mk_w_customer_demographics	w_customer_demographics.c	/^mk_w_customer_demographics (void* row, ds_key_t index)$/;"	f
+mk_w_date	w_datetbl.c	/^mk_w_date (void * row, ds_key_t index)$/;"	f
+mk_w_household_demographics	w_household_demographics.c	/^mk_w_household_demographics (void* row, ds_key_t index)$/;"	f
+mk_w_income_band	w_income_band.c	/^mk_w_income_band (void* row, ds_key_t index)$/;"	f
+mk_w_inventory	w_inventory.c	/^mk_w_inventory(void *pDest, ds_key_t index)$/;"	f
+mk_w_item	w_item.c	/^mk_w_item (void* row, ds_key_t index)$/;"	f
+mk_w_promotion	w_promotion.c	/^mk_w_promotion(void *pDest, ds_key_t index)$/;"	f
+mk_w_reason	w_reason.c	/^mk_w_reason (void* row, ds_key_t index)$/;"	f
+mk_w_ship_mode	w_ship_mode.c	/^mk_w_ship_mode(void *pDest, ds_key_t kIndex)$/;"	f
+mk_w_store	w_store.c	/^mk_w_store (void* row, ds_key_t index)$/;"	f
+mk_w_store_returns	w_store_returns.c	/^mk_w_store_returns (void * row, ds_key_t index)$/;"	f
+mk_w_store_sales	w_store_sales.c	/^mk_w_store_sales (void *row, ds_key_t index)$/;"	f
+mk_w_time	w_timetbl.c	/^mk_w_time(void* row, ds_key_t index)$/;"	f
+mk_w_warehouse	w_warehouse.c	/^mk_w_warehouse (void* row, ds_key_t index)$/;"	f
+mk_w_web_page	w_web_page.c	/^mk_w_web_page (void * row, ds_key_t index)$/;"	f
+mk_w_web_returns	w_web_returns.c	/^mk_w_web_returns (void* row, ds_key_t index)$/;"	f
+mk_w_web_sales	w_web_sales.c	/^mk_w_web_sales (void *row, ds_key_t index)$/;"	f
+mk_w_web_site	w_web_site.c	/^mk_w_web_site (void *row, ds_key_t index)$/;"	f
+mk_word	build_support.c	/^mk_word(char *dest, char *syl_set, ds_key_t src, int char_cnt, int col)$/;"	f
+mk_zipcode	address.c	/^int mk_zipcode(int nTable, char *dest, int nRegion, char *city)$/;"	f
+nAddFlags	expr.c	/^	int nAddFlags;$/;"	m	struct:FUNC_INFO_T	file:
+nDataType	expr.c	/^	int nDataType;$/;"	m	struct:FUNC_INFO_T	file:
+nErrcnt	grammar_support.c	/^static int nErrcnt = 0;$/;"	v	file:
+nItemCount	w_catalog_sales.c	/^static int nItemCount;$/;"	v	file:
+nItemCount	w_store_sales.c	/^   nItemCount,$/;"	v	file:
+nItemIndex	s_catalog_order.c	/^int nItemIndex;$/;"	v
+nItemIndex	s_purchase.c	/^int nItemIndex;$/;"	v
+nItemIndex	s_web_order.c	/^int nItemIndex = -1;$/;"	v
+nItemIndex	w_store_sales.c	/^	nItemIndex;$/;"	v	file:
+nItemIndex	w_web_sales.c	/^static int nItemIndex = 0;$/;"	v	file:
+nKeyword	expr.c	/^	int nKeyword;$/;"	m	struct:FUNC_INFO_T	file:
+nLineNumber	grammar.c	/^int nLineNumber = 0;$/;"	v
+nMax	s_zip_to_gmt.c	/^	int nMax;$/;"	m	struct:ZIP_MAP	file:
+nMaxValueWidth	dcgram.c	/^int nMaxValueWidth = 0;$/;"	v
+nMaxWeightWidth	dcgram.c	/^int nMaxWeightWidth = 0;$/;"	v
+nMemTotal	dcgram.c	/^int nMemTotal = 0;$/;"	v
+nMin	s_zip_to_gmt.c	/^	int nMin;$/;"	m	struct:ZIP_MAP	file:
+nOffset	s_zip_to_gmt.c	/^	int	nOffset;$/;"	m	struct:ZIP_MAP	file:
+nParams	expr.c	/^	int nParams;$/;"	m	struct:FUNC_INFO_T	file:
+nQ	genrand.c	/^static long nQ = 127773;        \/* the quotient MAXINT \/ Mult *\/$/;"	v	file:
+nR	genrand.c	/^static long nR = 2836;          \/* the remainder MAXINT % Mult *\/$/;"	v	file:
+nTicketItemBase	w_catalog_sales.c	/^static int nTicketItemBase = 1;$/;"	v	file:
+nUpdatePercentage	scaling.c	/^   int	nUpdatePercentage;$/;"	m	struct:SCALING_T	file:
+nWarncnt	grammar_support.c	/^static int nWarncnt = 0;$/;"	v	file:
+name	dist.c	/^struct {char *name;} tdefs[] = {NULL};$/;"	m	struct:__anon1	file:
+name	text.c	/^typedef struct {char *name;} tdef;$/;"	m	struct:__anon2	file:
+next_random	genrand.c	/^next_random (int stream)$/;"	f
+next_random_float	genrand.c	/^next_random_float (int stream)$/;"	f
+nullCheck	nulls.c	/^nullCheck(int nColumn)$/;"	f
+nullSet	nulls.c	/^nullSet(ds_key_t *pDest, int nStream)$/;"	f
+openDeleteFile	print.c	/^openDeleteFile(int bOpen)$/;"	f
+opt_substitution_suffix	qgen.y	/^opt_substitution_suffix:		\/* *\/		{$$ = 0;}$/;"	l
+options	dist.c	/^option_t options[] =$/;"	v
+options	r_params.c	/^option_t options[] =$/;"	v
+options	text.c	/^option_t options[] =$/;"	v
+pCurrentFile	dcomp.c	/^file_ref_t *pCurrentFile;$/;"	v
+pCurrentFile	driver.c	/^file_ref_t *pCurrentFile;$/;"	v
+pCurrentFile	grammar_support.c	/^file_ref_t *pCurrentFile = NULL;$/;"	v
+pCurrentIndexEntry	dcgram.c	/^d_idx_t *pCurrentIndexEntry;$/;"	v
+pCurrentQuery	QgenMain.c	/^template_t *pCurrentQuery,$/;"	v
+pDistIndex	dcomp.c	/^distindex_t *pDistIndex;$/;"	v
+pItemPermutation	w_catalog_sales.c	/^static int *pItemPermutation;$/;"	v	file:
+pItemPermutation	w_store_sales.c	/^static int *pItemPermutation,$/;"	v	file:
+pTokens	grammar.c	/^token_t *pTokens;$/;"	v
+param_init	r_params.c	/^static int param_init = 0;$/;"	v	file:
+params	dist.c	/^char params[2];$/;"	v
+params	r_params.c	/^char *params[9];$/;"	v
+params	text.c	/^char *params[2];$/;"	v
+parseQueries	QgenMain.c	/^parseQueries(void)$/;"	f
+parseTemplate	QgenMain.c	/^parseTemplate(char *szFileName, int nIndex)$/;"	f
+path	qgen.y	/^path:		TOK_LITERAL	{ $$ = $1; }$/;"	l
+pr_dbgen_version	dbgen_version.c	/^pr_dbgen_version(void *pSrc)$/;"	f
+pr_s_brand	s_brand.c	/^pr_s_brand(void *pSrc)$/;"	f
+pr_s_call_center	s_call_center.c	/^pr_s_call_center(void *row)$/;"	f
+pr_s_catalog	s_catalog.c	/^pr_s_catalog(void *pSrc)$/;"	f
+pr_s_catalog_order	s_catalog_order.c	/^pr_s_catalog_order(void *pSrc)$/;"	f
+pr_s_catalog_order_lineitem	s_catalog_order_lineitem.c	/^pr_s_catalog_order_lineitem(void *pSrc)$/;"	f
+pr_s_catalog_page	s_catalog_page.c	/^pr_s_catalog_page(void *pSrc)$/;"	f
+pr_s_catalog_promotional_item	s_catalog_promotional_item.c	/^pr_s_catalog_promotional_item(void *pSrc)$/;"	f
+pr_s_catalog_returns	s_catalog_returns.c	/^pr_s_catalog_returns(void *pSrc)$/;"	f
+pr_s_category	s_category.c	/^pr_s_category(void *pSrc)$/;"	f
+pr_s_class	s_class.c	/^pr_s_class(void *pSrc)$/;"	f
+pr_s_company	s_company.c	/^pr_s_company(void *pSrc)$/;"	f
+pr_s_customer	s_customer.c	/^pr_s_customer (void *pSrc)$/;"	f
+pr_s_customer_address	s_customer_address.c	/^pr_s_customer_address(void *row)$/;"	f
+pr_s_division	s_division.c	/^pr_s_division(void *pSrc)$/;"	f
+pr_s_inventory	s_inventory.c	/^pr_s_inventory(void *pSrc)$/;"	f
+pr_s_item	s_item.c	/^pr_s_item(void *pSrc)$/;"	f
+pr_s_manager	s_manager.c	/^pr_s_manager(void *pSrc)$/;"	f
+pr_s_manufacturer	s_manufacturer.c	/^pr_s_manufacturer(void *pSrc)$/;"	f
+pr_s_market	s_market.c	/^pr_s_market(void *pSrc)$/;"	f
+pr_s_pline	s_pline.c	/^pr_s_pline(void *pSrc)$/;"	f
+pr_s_product	s_product.c	/^pr_s_product(void *pSrc)$/;"	f
+pr_s_promotion	s_promotion.c	/^pr_s_promotion(void *pSrc)$/;"	f
+pr_s_purchase	s_purchase.c	/^pr_s_purchase(void *pSrc)$/;"	f
+pr_s_reason	s_reason.c	/^pr_s_reason(void *pSrc)$/;"	f
+pr_s_store	s_store.c	/^pr_s_store(void *pSrc)$/;"	f
+pr_s_store_promotional_item	s_store_promotional_item.c	/^pr_s_store_promotional_item(void *pSrc)$/;"	f
+pr_s_store_returns	s_store_returns.c	/^pr_s_store_returns(void *pSrc)$/;"	f
+pr_s_subcategory	s_subcategory.c	/^pr_s_subcategory(void *pSrc)$/;"	f
+pr_s_subclass	s_subclass.c	/^pr_s_subclass(void *pSrc)$/;"	f
+pr_s_warehouse	s_warehouse.c	/^pr_s_warehouse(void *pSrc)$/;"	f
+pr_s_web_order	s_web_order.c	/^pr_s_web_order(void *pSrc)$/;"	f
+pr_s_web_order_lineitem	s_web_order_lineitem.c	/^pr_s_web_order_lineitem(void *pSrc)$/;"	f
+pr_s_web_page	s_web_page.c	/^pr_s_web_page(void *pSrc)$/;"	f
+pr_s_web_promotional_item	s_web_promotinal_item.c	/^pr_s_web_promotional_item(void *pSrc)$/;"	f
+pr_s_web_return	s_web_returns.c	/^pr_s_web_return(void *pSrc)$/;"	f
+pr_s_web_site	s_web_site.c	/^pr_s_web_site(void *pSrc)$/;"	f
+pr_s_zip	s_zip_to_gmt.c	/^pr_s_zip(void *pSrc)$/;"	f
+pr_w_call_center	w_call_center.c	/^pr_w_call_center(void *row)$/;"	f
+pr_w_catalog_page	w_catalog_page.c	/^pr_w_catalog_page(void *row)$/;"	f
+pr_w_catalog_returns	w_catalog_returns.c	/^pr_w_catalog_returns(void *row)$/;"	f
+pr_w_catalog_sales	w_catalog_sales.c	/^pr_w_catalog_sales(void *row)$/;"	f
+pr_w_customer	w_customer.c	/^pr_w_customer(void *row)$/;"	f
+pr_w_customer_address	w_customer_address.c	/^pr_w_customer_address(void *row)$/;"	f
+pr_w_customer_demographics	w_customer_demographics.c	/^pr_w_customer_demographics(void *row)$/;"	f
+pr_w_date	w_datetbl.c	/^pr_w_date(void *row)$/;"	f
+pr_w_household_demographics	w_household_demographics.c	/^pr_w_household_demographics(void *row)$/;"	f
+pr_w_income_band	w_income_band.c	/^pr_w_income_band(void *row)$/;"	f
+pr_w_inventory	w_inventory.c	/^pr_w_inventory(void *row)$/;"	f
+pr_w_item	w_item.c	/^pr_w_item(void *row)$/;"	f
+pr_w_promotion	w_promotion.c	/^pr_w_promotion(void *row)$/;"	f
+pr_w_reason	w_reason.c	/^pr_w_reason(void *row)$/;"	f
+pr_w_ship_mode	w_ship_mode.c	/^pr_w_ship_mode(void *pSrc)$/;"	f
+pr_w_store	w_store.c	/^pr_w_store(void *row)$/;"	f
+pr_w_store_returns	w_store_returns.c	/^pr_w_store_returns(void *row)$/;"	f
+pr_w_store_sales	w_store_sales.c	/^pr_w_store_sales(void *row)$/;"	f
+pr_w_time	w_timetbl.c	/^pr_w_time(void *row)$/;"	f
+pr_w_warehouse	w_warehouse.c	/^pr_w_warehouse(void *row)$/;"	f
+pr_w_web_page	w_web_page.c	/^pr_w_web_page(void *row)$/;"	f
+pr_w_web_returns	w_web_returns.c	/^pr_w_web_returns(void *row)$/;"	f
+pr_w_web_sales	w_web_sales.c	/^pr_w_web_sales(void *row)$/;"	f
+pr_w_web_site	w_web_site.c	/^pr_w_web_site(void *row)$/;"	f
+printReleaseInfo	release.c	/^printReleaseInfo (char *param_name, char *msg)$/;"	f
+printValidation	validate.c	/^printValidation(int nTable, ds_key_t kRow)$/;"	f
+print_boolean	print.c	/^print_boolean (int nColumn, int val, int sep)$/;"	f
+print_char	print.c	/^print_char (int nColumn, char val, int sep)$/;"	f
+print_close	print.c	/^print_close(int tbl)$/;"	f
+print_date	print.c	/^print_date (int nColumn, ds_key_t val, int sep)$/;"	f
+print_decimal	print.c	/^print_decimal (int nColumn, decimal_t * val, int sep)$/;"	f
+print_delete	print.c	/^print_delete (int * val)$/;"	f
+print_end	print.c	/^print_end (int tbl)$/;"	f
+print_id	print.c	/^print_id (int nColumn, ds_key_t val, int sep)$/;"	f
+print_integer	print.c	/^print_integer (int nColumn, int val, int sep)$/;"	f
+print_jdate	print.c	/^print_jdate (FILE *pFile, ds_key_t kValue)$/;"	f
+print_key	print.c	/^print_key (int nColumn, ds_key_t val, int sep)$/;"	f
+print_options	r_params.c	/^print_options(struct OPTION_T *o, int bShowOptional)$/;"	f	file:
+print_params	r_params.c	/^print_params(void)$/;"	f
+print_prep	print.c	/^print_prep (int table, int update)$/;"	f
+print_separator	print.c	/^print_separator (int sep)$/;"	f
+print_start	print.c	/^print_start (int tbl)$/;"	f
+print_string	print.c	/^print_string (char *szMessage, ds_key_t val)$/;"	f
+print_time	print.c	/^print_time (int nColumn, ds_key_t val, int sep)$/;"	f
+print_validation	print.c	/^print_validation(ds_key_t kRowNumber)$/;"	f
+print_varchar	print.c	/^print_varchar (int nColumn, char *val, int sep)$/;"	f
+process_options	r_params.c	/^process_options (int count, char **vector)$/;"	f
+qtr_start	date.c	/^static char *qtr_start[5] = {NULL, "01-01", "04-01", "07-01", "10-01"};$/;"	v	file:
+query_component_list	qgen.y	/^query_component_list:	substitution$/;"	l
+query_statement	qgen.y	/^query_statement:		query_component_list ';'$/;"	l
+randomSparseKey	sparse.c	/^randomSparseKey(int nTable, int nColumn)$/;"	f
+random_to_bitmap	build_support.c	/^random_to_bitmap(int *pDest, int nDist, int nMin, int nMax, int nMean, int nStream)$/;"	f
+read_file	r_params.c	/^read_file(char *param_name, char *optarg)$/;"	f
+removeItem	list.c	/^removeItem(list_t *pList, int bHead)$/;"	f
+replacement	qgen.y	/^replacement:		'{' TOK_LITERAL ',' TOK_INT '}'$/;"	l
+replacement_list	qgen.y	/^replacement_list:	replacement	$/;"	l
+resetCountCount	address.c	/^resetCountCount(void)$/;"	f
+resetSeeds	genrand.c	/^resetSeeds(int nTable)$/;"	f
+row_skip	parallel.c	/^row_skip (int tbl, ds_key_t count)$/;"	f
+row_stop	parallel.c	/^row_stop (int tbl)$/;"	f
+s_nCityCount	address.c	/^static int s_nCityCount = 0;$/;"	v	file:
+s_nCountyCount	address.c	/^static int s_nCountyCount = 0;$/;"	v	file:
+s_tdef_funcs	tdef_functions.c	/^table_func_t s_tdef_funcs[] = { $/;"	v
+save_file	r_params.c	/^save_file(char *path)$/;"	f
+sc_w_inventory	w_inventory.c	/^sc_w_inventory(int nScale)$/;"	f
+scd_join	scd.c	/^scd_join(int tbl, int col, ds_key_t jDate)$/;"	f
+setSCDKeys	scd.c	/^setSCDKeys(int nColumnID, ds_key_t kIndex, char *szBKey, ds_key_t *pkBeginDateKey, ds_key_t *pkEndDateKey)$/;"	f
+setSeed	genrand.c	/^setSeed(int nStream, int nValue)$/;"	f
+setUpdateDateRange	build_support.c	/^setUpdateDateRange(int nTable, date_t *pMinDate, date_t *pMaxDate)$/;"	f
+setUpdateDates	scaling.c	/^setUpdateDates(void)$/;"	f
+setUpdateScaling	scaling.c	/^setUpdateScaling(int nTable)$/;"	f
+set_dow	date.c	/^set_dow(date_t *d)$/;"	f
+set_files	driver.c	/^set_files (int i)$/;"	f
+set_flg	r_params.c	/^set_flg(char *flag)$/;"	f
+set_int	r_params.c	/^set_int(char *var, char *val)$/;"	f
+set_locale	build_support.c	/^int set_locale(int nRegion, decimal_t *longitude, decimal_t *latitude)$/;"	f
+set_option	r_params.c	/^set_option(char *name, char *param)$/;"	f
+set_precision	decimal.c	/^set_precision(decimal_t *dest, int scale, int precision)$/;"	f
+set_pricing	pricing.c	/^void set_pricing(int nTabId, ds_pricing_t *pPricing)$/;"	f
+set_str	r_params.c	/^set_str(char *var, char *val)$/;"	f
+skipDays	driver.c	/^skipDays(int nTable, ds_key_t *pRemainder)$/;"	f
+skip_random	genrand.c	/^skip_random (int nStream, ds_key_t N)$/;"	f
+split_work	parallel.c	/^split_work (int tnum, ds_key_t * pkFirstRow, ds_key_t * pkRowCount)$/;"	f
+statement	qgen.y	/^statement:	include_statement	{$$ = KW_INCLUDE; }$/;"	l
+statement_list	qgen.y	/^statement_list:	statement$/;"	l
+strdup	porting.c	/^char *strdup(const char *szSrc)$/;"	f
+strtodate	date.c	/^strtodate(char *str)$/;"	f
+strtodec	decimal.c	/^strtodec(decimal_t *dest, char *s)$/;"	f
+strtodt	date.c	/^strtodt(date_t *dest, char *s)$/;"	f
+strtotime	date.c	/^strtotime(char *str)$/;"	f
+substitution	qgen.y	/^substitution:		'[' TOK_ID opt_substitution_suffix ']'$/;"	l
+szXlate	build_support.c	/^static char szXlate[16] = "ABCDEFGHIJKLMNOP";$/;"	v	file:
+tdef	text.c	/^typedef struct {char *name;} tdef;$/;"	t	typeref:struct:__anon2	file:
+tdefs	dist.c	/^struct {char *name;} tdefs[] = {NULL};$/;"	v	typeref:struct:__anon1
+time_join	join.c	/^time_join(int to_tbl, int to_col, ds_key_t join_count)$/;"	f	file:
+usage	r_params.c	/^usage (char *param_name, char *msg)$/;"	f
+used_space	text.c	/^static int used_space = 0; \/* current length of the sentence being built *\/$/;"	v	file:
+validateGeneric	validate.c	/^validateGeneric(int nTable, ds_key_t kRow, int *Permute)$/;"	f
+validateSCD	validate.c	/^validateSCD(int nTable, ds_key_t kRow, int *Permutation)$/;"	f
+validate_options	driver.c	/^validate_options(void)$/;"	f
+vld_s_catalog_order	s_catalog_order.c	/^vld_s_catalog_order(int nTable, ds_key_t kRow, int* bPermutation)$/;"	f
+vld_s_catalog_page	s_catalog_page.c	/^vld_s_catalog_page(int nTable, ds_key_t kRow, int *Permutation)$/;"	f
+vld_s_customer_address	s_customer_address.c	/^vld_s_customer_address(int nTable, ds_key_t kRow, int *Permutation)$/;"	f
+vld_s_item	s_item.c	/^vld_s_item(int nTable, ds_key_t kRow, int *Permutation)$/;"	f
+vld_s_promotion	s_promotion.c	/^vld_s_promotion(int nTable, ds_key_t kRow, int *Permutation)$/;"	f
+vld_s_purchase	s_purchase.c	/^vld_s_purchase(int nTable, ds_key_t kRow, int* bPermutation)$/;"	f
+vld_s_web_order	s_web_order.c	/^vld_s_web_order(int nTable, ds_key_t kRow, int* bPermutation)$/;"	f
+vld_s_web_order_lineitem	s_web_order_lineitem.c	/^vld_s_web_order_lineitem(int nTable, ds_key_t kRow, int *Permutation)$/;"	f
+vld_s_web_page	s_web_page.c	/^vld_s_web_page(int nTable, ds_key_t kRow, int *Permutation)$/;"	f
+vld_s_zip	s_zip_to_gmt.c	/^vld_s_zip(int nTable, ds_key_t kRow, int *Permutation)$/;"	f
+vld_w_catalog_sales	w_catalog_sales.c	/^vld_w_catalog_sales(int nTable, ds_key_t kRow, int *Permutation)$/;"	f
+vld_w_date	w_datetbl.c	/^vld_w_date(int nTable, ds_key_t kRow, int *Permutation)$/;"	f
+vld_w_store_sales	w_store_sales.c	/^vld_w_store_sales(int nTable, ds_key_t kRow, int *Permutation)$/;"	f
+vld_web_sales	w_web_sales.c	/^vld_web_sales(int nTable, ds_key_t kRow, int *Permutation)$/;"	f
+w_tdef_funcs	QgenMain.c	/^table_func_t w_tdef_funcs[MAX_TABLE];$/;"	v
+w_tdef_funcs	tdef_functions.c	/^table_func_t w_tdef_funcs[] = { $/;"	v
+web_join	join.c	/^web_join(int col, ds_key_t join_key)$/;"	f	file:
+weekday_names	date.c	/^char *weekday_names[8] = {NULL, "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};$/;"	v
+workload_spec	qgen.y	/^workload_spec:		statement_list	$/;"	l
+yydebug	QgenMain.c	/^int yydebug;$/;"	v
+yyerror	grammar_support.c	/^yyerror(char *msg, ...)$/;"	f
+yywarn	grammar_support.c	/^yywarn(char *str)$/;"	f

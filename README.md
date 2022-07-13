@@ -1,16 +1,10 @@
-Pipeline Status: ![CommitStatus](https://github.com/pivotal/TPC-DS/actions/workflows/main.yml/badge.svg)
----
+# Decision Support Benchmark for HashData database.
 
-# Decision Support Benchmark for Greenplum database.
-
-This is the decision support (DS) benchmark derived from [TPC-DS](http://tpc.org/tpcds/).
-This repo contains automation of running the DS benchmark against an existing Greenplum cluster.
+This tool is based on the benchmark tool [pivotal TPC-DS](https://github.com/pivotal/TPC-DS).
+This repo contains automation of running the DS benchmark on an existing Hashdata cluster.
 
 ## Context
-### Supported Greenplum Versions
 
-- [VMware Tanzu Greenplum](https://network.tanzu.vmware.com/products/vmware-tanzu-greenplum/) `4.3.x`, `5.x`, `6.x`
-- [Open Source Greenplum Databases](https://network.tanzu.vmware.com/products/greenplum-database/) `5.x`, `6.x`
 
 ### Supported TPC-DS Versions
 
@@ -21,22 +15,16 @@ TPC has published the following TPC-DS standards over time:
 | 2.1.0 | 2015/11/12 | http://www.tpc.org/tpc_documents_current_versions/pdf/tpc-ds_v2.1.0.pdf |
 | 1.3.1 (earliest) | 2015/02/19 | http://www.tpc.org/tpc_documents_current_versions/pdf/tpc-ds_v1.3.1.pdf |
 
-These are the combined versions of TPC-DS and Greenplum:
-| DS Benchmark Version | TPC-DS Benchmark Version | Greenplum Version |
-|-|-|-|
-| 3.0.0 | 2.1.0 | 4.3.x, 5.x, 6.x |
-| 2.2.x | 2.1.0 | 4.3.x, 5.x |
-| 2.x | 2.1.0 | 4.3.x |
 
 ## Setup
 ### Prerequisites
 
-1. A running Greenplum Database with `gpadmin` access
+1. A running HashData Database with `gpadmin` access
 2. `gpadmin` database is created
 3. `root` access on the master node `mdw` for installing dependencies
 4. `ssh` connections between `mdw` and the segment nodes `sdw1..n`
 
-All the following examples are using standard host name convention of Greenplum using `mdw` for master node, and `sdw1..n` for the segment nodes.
+All the following examples are using standard host name convention of HashData using `mdw` for master node, and `sdw1..n` for the segment nodes.
 
 ### TPC-DS Tools Dependencies
 
@@ -47,23 +35,22 @@ ssh root@mdw
 yum -y install gcc make
 ```
 
-Note:  If you are using Photon OS, then you need:
-
-```bash
-yum -y install build-essential
-```
-
 The original source code is from http://tpc.org/tpc_documents_current_versions/current_specifications5.asp.
 
 ### Download and Install
 
-Visit the repo at https://github.com/pivotal/TPC-DS/releases and download the tarball to the `mdw` node.
+Visit the repo at https://github.com/RyanWei/TPC-DS-HashData/releases/and download the tarball to the `mdw` node. You can always use the latest version.
 
 ```bash
 ssh gpadmin@mdw
-curl -LO https://github.com/pivotal/TPC-DS/archive/refs/tags/v3.0.0.tar.gz
-tar xzf v3.0.0.tar.gz
-mv TPC-DS-3.0.0 TPC-DS
+curl -LO https://github.com/RyanWei/TPC-DS-HashData/archive/refs/tags/v1.1.tar.gz
+tar xzf v1.1.tar.gz
+mv TPC-DS-HashData-1.1 TPC-DS
+```
+Put the folder under /home/gpadmin/ and change owner to gpadmin.
+
+```
+chown -R gpadmin.gpadmin TPC-DS
 ```
 
 ## Usage
@@ -76,13 +63,13 @@ cd ~/TPC-DS
 ./tpcds.sh
 ```
 
-By default, it will run a scale 1 (1G) and with 2 concurrent users, from data generation to score computation.
+By default, it will run a scale 1 (1G) and with 1 concurrent users, from data generation to score computation.
 
 ### Configuration Options
 
 By changing the `tpcds_variables.sh`, we can control how this benchmark will run.
 
-This is the default example at [tpcds_variables.sh](https://github.com/pivotal/TPC-DS/blob/main/tpcds_variables.sh)
+This is the default example at [tpcds_variables.sh](https://github.com/RyanWei/TPC-DS-HashData/blob/main/tpcds_variables.sh)
 
 ```shell
 # environment options
@@ -90,7 +77,7 @@ ADMIN_USER="gpadmin"
 
 # benchmark options
 GEN_DATA_SCALE="1"
-MULTI_USER_COUNT="2"
+MULTI_USER_COUNT="1"
 
 # step options
 RUN_COMPILE_TPCDS="true"
@@ -240,11 +227,17 @@ Table storage is defined in `functions.sh` and is configured for optimal perform
 
 ### Execution
 
-Example of running the benchmark as `root` as a background process:
+Running the benchmark as a background process:
 
 ```bash
-nohup ./tpcds.sh > tpcds.log 2>&1 < tpcds.log &
+sh run.sh
 ```
+
+### Play with different options
+- Change different storage options in `functions.sh` to try with different compress options and whether use AO/CO storage.
+- Replace some of the tables' DDL with the `*.sql.partition` files in folder `03_ddl` to use partition for some of the non-dimension tables. No partition is used by default.
+- Steps `RUN_COMPILE_TPCDS` and `RUN_GEN_DATA` only need to be executed once. 
+
 
 ## Benchmark Minor Modifications
 
@@ -361,16 +354,3 @@ This was done on queries: 2, 14, and 23.
 For the larger tests (e.g. 15TB), a few of the TPC-DS queries can output a very large number of rows which are just discarded.
 
 This was done on queries: 64, 34, and 71.
-
-# Development
-
-## Prerequisites
-
-- `shellcheck`: https://github.com/koalaman/shellcheck
-- `shfmt`: https://github.com/mvdan/sh
-
-## Linting
-
-```
-make lint
-```

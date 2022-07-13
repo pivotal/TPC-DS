@@ -1,0 +1,2143 @@
+############################################################################
+Sourcing tpcds_variables.sh
+############################################################################
+
+############################################################################
+Ensure gpadmin is executing this script.
+############################################################################
+
+############################################################################
+ADMIN_USER: gpadmin
+MULTI_USER_COUNT: 2
+############################################################################
+
+############################################################################
+TPC-DS Script for Pivotal Greenplum Database.
+############################################################################
+
+############################################################################
+GEN_DATA_SCALE: 1
+EXPLAIN_ANALYZE: false
+RANDOM_DISTRIBUTION: false
+MULTI_USER_COUNT: 2
+RUN_COMPILE_TPCDS: true
+RUN_GEN_DATA: true
+GEN_NEW_DATA: true
+RUN_INIT: true
+RUN_DDL: true
+DROP_EXISTING_TABLES: true
+RUN_LOAD: true
+RUN_SQL: true
+SINGLE_USER_ITERATIONS: 1
+RUN_SINGLE_USER_REPORTS: true
+RUN_MULTI_USER: true
+RUN_MULTI_USER_REPORTS: true
+BENCH_ROLE: dsbench
+GPFDIST_LOCATION: p
+############################################################################
+
+Run /home/gpadmin/TPC-DS/00_compile_tpcds//rollout.sh
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o mkheader.o mkheader.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall  -o mkheader mkheader.o -lm
+./mkheader column_list.txt
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_brand.o s_brand.c
+s_brand.c: In function ‘ld_s_brand’:
+s_brand.c:142:22: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_BRAND_TBL *r;
+                      ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_customer_address.o s_customer_address.c
+s_customer_address.c: In function ‘ld_s_customer_address’:
+s_customer_address.c:115:33: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_CUSTOMER_ADDRESS_TBL *r;
+                                 ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_call_center.o s_call_center.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_catalog.o s_catalog.c
+s_catalog.c: In function ‘ld_s_catalog’:
+s_catalog.c:147:24: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_CATALOG_TBL *r;
+                        ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_catalog_order.o s_catalog_order.c
+s_catalog_order.c: In function ‘ld_s_catalog_order’:
+s_catalog_order.c:200:30: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_CATALOG_ORDER_TBL *r;
+                              ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_catalog_order_lineitem.o s_catalog_order_lineitem.c
+s_catalog_order_lineitem.c: In function ‘ld_s_catalog_order_lineitem’:
+s_catalog_order_lineitem.c:188:39: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_CATALOG_ORDER_LINEITEM_TBL *r;
+                                       ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_catalog_page.o s_catalog_page.c
+s_catalog_page.c: In function ‘ld_s_catalog_page’:
+s_catalog_page.c:117:27: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct CATALOG_PAGE_TBL *r;
+                           ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_catalog_promotional_item.o s_catalog_promotional_item.c
+s_catalog_promotional_item.c: In function ‘ld_s_catalog_promotional_item’:
+s_catalog_promotional_item.c:137:41: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_CATALOG_PROMOTIONAL_ITEM_TBL *r;
+                                         ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_catalog_returns.o s_catalog_returns.c
+s_catalog_returns.c: In function ‘ld_s_catalog_returns’:
+s_catalog_returns.c:174:32: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_CATALOG_RETURNS_TBL *r;
+                                ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_category.o s_category.c
+s_category.c: In function ‘ld_s_category’:
+s_category.c:137:25: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_CATEGORY_TBL *r;
+                         ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_class.o s_class.c
+s_class.c: In function ‘ld_s_class’:
+s_class.c:140:22: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_CLASS_TBL *r;
+                      ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_company.o s_company.c
+s_company.c: In function ‘ld_s_company’:
+s_company.c:136:24: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_COMPANY_TBL *r;
+                        ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_customer.o s_customer.c
+s_customer.c: In function ‘ld_s_customer’:
+s_customer.c:272:26: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+   struct S_CUSTOMER_TBL *r;
+                          ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_division.o s_division.c
+s_division.c: In function ‘ld_s_division’:
+s_division.c:138:25: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_DIVISION_TBL *r;
+                         ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_inventory.o s_inventory.c
+s_inventory.c: In function ‘ld_s_inventory’:
+s_inventory.c:158:26: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_INVENTORY_TBL *r;
+                          ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_item.o s_item.c
+s_item.c: In function ‘ld_s_item’:
+s_item.c:148:21: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_ITEM_TBL *r;
+                     ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_manager.o s_manager.c
+s_manager.c: In function ‘ld_s_manager’:
+s_manager.c:140:24: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_MANAGER_TBL *r;
+                        ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_manufacturer.o s_manufacturer.c
+s_manufacturer.c: In function ‘ld_s_manufacturer’:
+s_manufacturer.c:136:29: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_MANUFACTURER_TBL *r;
+                             ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_market.o s_market.c
+s_market.c: In function ‘ld_s_market’:
+s_market.c:141:23: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_MARKET_TBL *r;
+                       ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_pline.o s_pline.c
+s_pline.c: In function ‘ld_s_pline’:
+s_pline.c:177:34: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_PURCHASE_LINEITEM_TBL *r;
+                                  ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_product.o s_product.c
+s_product.c: In function ‘ld_s_product’:
+s_product.c:141:24: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_PRODUCT_TBL *r;
+                        ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_promotion.o s_promotion.c
+s_promotion.c: In function ‘ld_s_promotion’:
+s_promotion.c:157:26: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_PROMOTION_TBL *r;
+                          ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_purchase.o s_purchase.c
+s_purchase.c: In function ‘ld_s_purchase’:
+s_purchase.c:194:25: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_PURCHASE_TBL *r;
+                         ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_reason.o s_reason.c
+s_reason.c: In function ‘ld_s_reason’:
+s_reason.c:137:23: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_REASON_TBL *r;
+                       ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_store.o s_store.c
+s_store.c: In function ‘ld_s_store’:
+s_store.c:146:22: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_STORE_TBL *r;
+                      ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_store_promotional_item.o s_store_promotional_item.c
+s_store_promotional_item.c: In function ‘ld_s_store_promotional_item’:
+s_store_promotional_item.c:138:39: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_STORE_PROMOTIONAL_ITEM_TBL *r;
+                                       ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_store_returns.o s_store_returns.c
+s_store_returns.c: In function ‘ld_s_store_returns’:
+s_store_returns.c:167:30: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_STORE_RETURNS_TBL *r;
+                              ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_subcategory.o s_subcategory.c
+s_subcategory.c: In function ‘ld_s_subcategory’:
+s_subcategory.c:141:28: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_SUBCATEGORY_TBL *r;
+                            ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_subclass.o s_subclass.c
+s_subclass.c: In function ‘ld_s_subclass’:
+s_subclass.c:141:25: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_SUBCLASS_TBL *r;
+                         ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_warehouse.o s_warehouse.c
+s_warehouse.c: In function ‘ld_s_warehouse’:
+s_warehouse.c:136:26: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_WAREHOUSE_TBL *r;
+                          ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_web_order.o s_web_order.c
+s_web_order.c: In function ‘ld_s_web_order’:
+s_web_order.c:206:26: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_WEB_ORDER_TBL *r;
+                          ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_web_order_lineitem.o s_web_order_lineitem.c
+s_web_order_lineitem.c: In function ‘ld_s_web_order_lineitem’:
+s_web_order_lineitem.c:185:35: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_WEB_ORDER_LINEITEM_TBL *r;
+                                   ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_web_page.o s_web_page.c
+s_web_page.c: In function ‘ld_s_web_page’:
+s_web_page.c:146:25: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_WEB_PAGE_TBL *r;
+                         ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_web_promotinal_item.o s_web_promotinal_item.c
+s_web_promotinal_item.c: In function ‘ld_s_web_promotional_item’:
+s_web_promotinal_item.c:140:37: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_WEB_PROMOTIONAL_ITEM_TBL *r;
+                                     ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_web_returns.o s_web_returns.c
+s_web_returns.c: In function ‘ld_s_web_return’:
+s_web_returns.c:179:28: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_WEB_RETURNS_TBL *r;
+                            ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_web_site.o s_web_site.c
+s_web_site.c: In function ‘ld_s_web_site’:
+s_web_site.c:142:25: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_WEB_SITE_TBL *r;
+                         ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o s_zip_to_gmt.o s_zip_to_gmt.c
+s_zip_to_gmt.c: In function ‘mk_s_zip’:
+s_zip_to_gmt.c:152:2: warning: format ‘%lld’ expects argument of type ‘long long int’, but argument 3 has type ‘ds_key_t’ [-Wformat=]
+  sprintf(r->szZip, "%05lld", kIndex);
+  ^
+s_zip_to_gmt.c: In function ‘ld_s_zip’:
+s_zip_to_gmt.c:207:24: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct S_ZIP_GMT_TBL *r;
+                        ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_call_center.o w_call_center.c
+w_call_center.c: In function ‘mk_w_call_center’:
+w_call_center.c:88:3: warning: variable ‘nDaysPerRevision’ set but not used [-Wunused-but-set-variable]
+   nDaysPerRevision;
+   ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_catalog_page.o w_catalog_page.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_catalog_returns.o w_catalog_returns.c
+w_catalog_returns.c: In function ‘ld_w_catalog_returns’:
+w_catalog_returns.c:242:32: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_CATALOG_RETURNS_TBL *r;
+                                ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_catalog_sales.o w_catalog_sales.c
+w_catalog_sales.c: In function ‘mk_detail’:
+w_catalog_sales.c:167:18: warning: variable ‘jDate’ set but not used [-Wunused-but-set-variable]
+  static ds_key_t jDate;
+                  ^
+w_catalog_sales.c: In function ‘ld_w_catalog_sales’:
+w_catalog_sales.c:358:30: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_CATALOG_SALES_TBL *r;
+                              ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_customer_address.o w_customer_address.c
+w_customer_address.c: In function ‘ld_w_customer_address’:
+w_customer_address.c:148:33: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_CUSTOMER_ADDRESS_TBL *r;
+                                 ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_customer.o w_customer.c
+w_customer.c: In function ‘mk_w_customer’:
+w_customer.c:72:13: warning: variable ‘nBaseDate’ set but not used [-Wunused-but-set-variable]
+  static int nBaseDate;
+             ^
+w_customer.c: In function ‘ld_w_customer’:
+w_customer.c:208:25: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_CUSTOMER_TBL *r;
+                         ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_customer_demographics.o w_customer_demographics.c
+w_customer_demographics.c: In function ‘ld_w_customer_demographics’:
+w_customer_demographics.c:147:38: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_CUSTOMER_DEMOGRAPHICS_TBL *r;
+                                      ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_datetbl.o w_datetbl.c
+w_datetbl.c: In function ‘ld_w_date’:
+w_datetbl.c:226:21: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_DATE_TBL *r;
+                     ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_household_demographics.o w_household_demographics.c
+w_household_demographics.c: In function ‘ld_w_household_demographics’:
+w_household_demographics.c:144:39: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_HOUSEHOLD_DEMOGRAPHICS_TBL *r;
+                                       ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_income_band.o w_income_band.c
+w_income_band.c: In function ‘ld_w_income_band’:
+w_income_band.c:130:28: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_INCOME_BAND_TBL *r;
+                            ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_inventory.o w_inventory.c
+w_inventory.c: In function ‘ld_w_inventory’:
+w_inventory.c:169:26: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_INVENTORY_TBL *r;
+                          ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_item.o w_item.c
+w_item.c: In function ‘ld_w_item’:
+w_item.c:294:21: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_ITEM_TBL *r;
+                     ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_promotion.o w_promotion.c
+w_promotion.c: In function ‘mk_w_promotion’:
+w_promotion.c:76:11: warning: variable ‘nTemp’ set but not used [-Wunused-but-set-variable]
+  ds_key_t nTemp;
+           ^
+w_promotion.c: In function ‘ld_w_promotion’:
+w_promotion.c:206:26: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_PROMOTION_TBL *r;
+                          ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_reason.o w_reason.c
+w_reason.c: In function ‘ld_w_reason’:
+w_reason.c:132:23: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_REASON_TBL *r;
+                       ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_ship_mode.o w_ship_mode.c
+w_ship_mode.c: In function ‘ld_w_ship_mode’:
+w_ship_mode.c:150:26: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_SHIP_MODE_TBL *r;
+                          ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_store.o w_store.c
+w_store.c: In function ‘ld_w_store’:
+w_store.c:301:22: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_STORE_TBL *r;
+                      ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_store_returns.o w_store_returns.c
+w_store_returns.c: In function ‘ld_w_store_returns’:
+w_store_returns.c:196:30: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_STORE_RETURNS_TBL *r;
+                              ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_store_sales.o w_store_sales.c
+w_store_sales.c: In function ‘mk_master’:
+w_store_sales.c:75:3: warning: variable ‘nMaxItemCount’ set but not used [-Wunused-but-set-variable]
+   nMaxItemCount;
+   ^
+w_store_sales.c: In function ‘ld_w_store_sales’:
+w_store_sales.c:226:28: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_STORE_SALES_TBL *r;
+                            ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_timetbl.o w_timetbl.c
+w_timetbl.c: In function ‘ld_w_time’:
+w_timetbl.c:147:21: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_TIME_TBL *r;
+                     ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_warehouse.o w_warehouse.c
+w_warehouse.c: In function ‘ld_w_warehouse’:
+w_warehouse.c:157:26: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_WAREHOUSE_TBL *r;
+                          ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_web_page.o w_web_page.c
+w_web_page.c: In function ‘mk_w_web_page’:
+w_web_page.c:86:3: warning: variable ‘nRevisions’ set but not used [-Wunused-but-set-variable]
+   nRevisions;
+   ^
+w_web_page.c: In function ‘ld_w_web_page’:
+w_web_page.c:241:25: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_WEB_PAGE_TBL *r;
+                         ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_web_returns.o w_web_returns.c
+w_web_returns.c: In function ‘ld_w_web_returns’:
+w_web_returns.c:217:28: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_WEB_RETURNS_TBL *r;
+                            ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_web_sales.o w_web_sales.c
+w_web_sales.c: In function ‘ld_w_web_sales’:
+w_web_sales.c:315:26: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_WEB_SALES_TBL *r;
+                          ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o w_web_site.o w_web_site.c
+w_web_site.c: In function ‘mk_w_web_site’:
+w_web_site.c:82:17: warning: variable ‘dToday’ set but not used [-Wunused-but-set-variable]
+  static date_t *dToday;
+                 ^
+w_web_site.c: In function ‘ld_w_web_site’:
+w_web_site.c:266:25: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct W_WEB_SITE_TBL *r;
+                         ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o dbgen_version.o dbgen_version.c
+dbgen_version.c: In function ‘ld_dbgen_version’:
+dbgen_version.c:147:28: warning: variable ‘r’ set but not used [-Wunused-but-set-variable]
+  struct DBGEN_VERSION_TBL *r;
+                            ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o address.o address.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o build_support.o build_support.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o date.o date.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o decimal.o decimal.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o dist.o dist.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o dcgram.o dcgram.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o dcomp.o dcomp.c
+dcomp.c: In function ‘main’:
+dcomp.c:257:6: warning: variable ‘nArgs’ set but not used [-Wunused-but-set-variable]
+  int nArgs,
+      ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o grammar.o grammar.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o error_msg.o error_msg.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o StringBuffer.o StringBuffer.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o r_params.o r_params.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall  -o distcomp dcgram.o dcomp.o grammar.o error_msg.o StringBuffer.o r_params.o  -lm
+./distcomp -i tpcds.dst -o tpcds.idx
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o driver.o driver.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o genrand.o genrand.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o join.o join.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o list.o list.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o load.o load.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o misc.o misc.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o nulls.o nulls.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o parallel.o parallel.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o permute.o permute.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o pricing.o pricing.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o print.o print.c
+print.c: In function ‘print_key’:
+print.c:347:4: warning: format ‘%lld’ expects argument of type ‘long long int’, but argument 3 has type ‘ds_key_t’ [-Wformat=]
+    if (fprintf (fpOutfile, HUGE_FORMAT, val) < 0)
+    ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o tdef_functions.o tdef_functions.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o tdefs.o tdefs.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o text.o text.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o scd.o scd.c
+scd.c: In function ‘scd_join’:
+scd.c:167:3: warning: variable ‘jH1DataDate’ set but not used [-Wunused-but-set-variable]
+   jH1DataDate,
+   ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o scaling.o scaling.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o release.o release.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o sparse.o sparse.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o validate.o validate.c
+validate.c: In function ‘validateGeneric’:
+validate.c:67:10: warning: variable ‘pChild’ set but not used [-Wunused-but-set-variable]
+    tdef *pChild;
+          ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall  -o dsdgen s_brand.o s_customer_address.o s_call_center.o s_catalog.o s_catalog_order.o s_catalog_order_lineitem.o s_catalog_page.o s_catalog_promotional_item.o s_catalog_returns.o s_category.o s_class.o s_company.o s_customer.o s_division.o s_inventory.o s_item.o s_manager.o s_manufacturer.o s_market.o s_pline.o s_product.o s_promotion.o s_purchase.o s_reason.o s_store.o s_store_promotional_item.o s_store_returns.o s_subcategory.o s_subclass.o s_warehouse.o s_web_order.o s_web_order_lineitem.o s_web_page.o s_web_promotinal_item.o s_web_returns.o s_web_site.o s_zip_to_gmt.o w_call_center.o w_catalog_page.o w_catalog_returns.o w_catalog_sales.o w_customer_address.o w_customer.o w_customer_demographics.o w_datetbl.o w_household_demographics.o w_income_band.o w_inventory.o w_item.o w_promotion.o w_reason.o w_ship_mode.o w_store.o w_store_returns.o w_store_sales.o w_timetbl.o w_warehouse.o w_web_page.o w_web_returns.o w_web_sales.o w_web_site.o dbgen_version.o address.o build_support.o date.o decimal.o dist.o driver.o error_msg.o genrand.o join.o list.o load.o misc.o nulls.o parallel.o permute.o pricing.o print.o r_params.o StringBuffer.o tdef_functions.o tdefs.o text.o scd.o scaling.o release.o sparse.o validate.o -lm
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o expr.o expr.c
+expr.c: In function ‘PrintExpr’:
+expr.c:442:5: warning: format ‘%lld’ expects argument of type ‘long long int’, but argument 2 has type ‘ds_key_t’ [-Wformat=]
+     printf(HUGE_FORMAT, pExpr->Value.nValue);
+     ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o eval.o eval.c
+eval.c: In function ‘EvalArithmetic’:
+eval.c:93:5: warning: format ‘%lld’ expects argument of type ‘long long int’, but argument 3 has type ‘ds_key_t’ [-Wformat=]
+     sprintf(szInteger, HUGE_FORMAT, pParams[0].nValue);
+     ^
+eval.c:100:5: warning: format ‘%lld’ expects argument of type ‘long long int’, but argument 3 has type ‘ds_key_t’ [-Wformat=]
+     sprintf(szInteger, HUGE_FORMAT, pParams[1].nValue);
+     ^
+eval.c: In function ‘EvalRownCountExpr’:
+eval.c:343:7: warning: format ‘%lld’ expects argument of type ‘long long int’, but argument 3 has type ‘ds_key_t’ [-Wformat=]
+       sprintf(szBuf, HUGE_FORMAT, get_rowcount(i));
+       ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o grammar_support.o grammar_support.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o keywords.o keywords.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o QgenMain.o QgenMain.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o query_handler.o query_handler.c
+query_handler.c: In function ‘GenerateQuery’:
+query_handler.c:281:5: warning: format ‘%lld’ expects argument of type ‘long long int’, but argument 3 has type ‘ds_key_t’ [-Wformat=]
+     fprintf(pLogFile, HUGE_FORMAT, pSub->arValues[i].nValue);
+     ^
+query_handler.c:303:5: warning: format ‘%lld’ expects argument of type ‘long long int’, but argument 3 has type ‘ds_key_t’ [-Wformat=]
+     fprintf(pOutFile, HUGE_FORMAT, pValue->nValue);
+     ^
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o substitution.o substitution.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o tokenizer.o tokenizer.c
+<stdout>:1351:17: warning: ‘yyunput’ defined but not used [-Wunused-function]
+<stdout>:1392:16: warning: ‘input’ defined but not used [-Wunused-function]
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o y.tab.o y.tab.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall  -o dsqgen address.o date.o decimal.o dist.o error_msg.o expr.o eval.o genrand.o grammar_support.o keywords.o list.o nulls.o permute.o print.o QgenMain.o query_handler.o r_params.o scaling.o StringBuffer.o substitution.o tdefs.o text.o tokenizer.o w_inventory.o y.tab.o release.o scd.o build_support.o parallel.o  -lm
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall   -c -o checksum.o checksum.c
+gcc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DYYDEBUG  -DLINUX -g -Wall  -o checksum checksum.o -lm
+copy tpcds binaries to segment hosts
+Finished compile_tpcds
+Run /home/gpadmin/TPC-DS/01_gen_data//rollout.sh
+kill any orphaned dsdgen processes on segment hosts
+copy generate_data.sh to segment hosts
+parallel:  16
+ssh -n -f computing-f8d06d00-segment-cc55c18c "bash -c \'cd ~/; ./generate_data.sh 1 1  16 /data0/database//40000/dsbenchmark > generate_data.1.log 2>&1 < generate_data.1.log &\'"
+ssh -n -f computing-f8d06d00-segment-d80e1160 "bash -c \'cd ~/; ./generate_data.sh 1 2  16 /data0/database//40000/dsbenchmark > generate_data.2.log 2>&1 < generate_data.2.log &\'"
+ssh -n -f computing-f8d06d00-segment-f6500372 "bash -c \'cd ~/; ./generate_data.sh 1 3  16 /data0/database//40000/dsbenchmark > generate_data.3.log 2>&1 < generate_data.3.log &\'"
+ssh -n -f computing-f8d06d00-segment-f9df37ce "bash -c \'cd ~/; ./generate_data.sh 1 4  16 /data0/database//40000/dsbenchmark > generate_data.4.log 2>&1 < generate_data.4.log &\'"
+ssh -n -f computing-f8d06d00-segment-8964a688 "bash -c \'cd ~/; ./generate_data.sh 1 5  16 /data0/database//40000/dsbenchmark > generate_data.5.log 2>&1 < generate_data.5.log &\'"
+ssh -n -f computing-f8d06d00-segment-5ec28e9d "bash -c \'cd ~/; ./generate_data.sh 1 6  16 /data0/database//40000/dsbenchmark > generate_data.6.log 2>&1 < generate_data.6.log &\'"
+ssh -n -f computing-f8d06d00-segment-240c7f29 "bash -c \'cd ~/; ./generate_data.sh 1 7  16 /data0/database//40000/dsbenchmark > generate_data.7.log 2>&1 < generate_data.7.log &\'"
+ssh -n -f computing-f8d06d00-segment-c69ed9c6 "bash -c \'cd ~/; ./generate_data.sh 1 8  16 /data0/database//40000/dsbenchmark > generate_data.8.log 2>&1 < generate_data.8.log &\'"
+ssh -n -f computing-f8d06d00-segment-57664e5e "bash -c \'cd ~/; ./generate_data.sh 1 9  16 /data0/database//40000/dsbenchmark > generate_data.9.log 2>&1 < generate_data.9.log &\'"
+ssh -n -f computing-f8d06d00-segment-fcc5e6a6 "bash -c \'cd ~/; ./generate_data.sh 1 10  16 /data0/database//40000/dsbenchmark > generate_data.10.log 2>&1 < generate_data.10.log &\'"
+ssh -n -f computing-f8d06d00-segment-a9fe5924 "bash -c \'cd ~/; ./generate_data.sh 1 11  16 /data0/database//40000/dsbenchmark > generate_data.11.log 2>&1 < generate_data.11.log &\'"
+ssh -n -f computing-f8d06d00-segment-772128c5 "bash -c \'cd ~/; ./generate_data.sh 1 12  16 /data0/database//40000/dsbenchmark > generate_data.12.log 2>&1 < generate_data.12.log &\'"
+ssh -n -f computing-f8d06d00-segment-5609b4dd "bash -c \'cd ~/; ./generate_data.sh 1 13  16 /data0/database//40000/dsbenchmark > generate_data.13.log 2>&1 < generate_data.13.log &\'"
+ssh -n -f computing-f8d06d00-segment-3e867bcf "bash -c \'cd ~/; ./generate_data.sh 1 14  16 /data0/database//40000/dsbenchmark > generate_data.14.log 2>&1 < generate_data.14.log &\'"
+ssh -n -f computing-f8d06d00-segment-99c66e8b "bash -c \'cd ~/; ./generate_data.sh 1 15  16 /data0/database//40000/dsbenchmark > generate_data.15.log 2>&1 < generate_data.15.log &\'"
+ssh -n -f computing-f8d06d00-segment-3b09486e "bash -c \'cd ~/; ./generate_data.sh 1 16  16 /data0/database//40000/dsbenchmark > generate_data.16.log 2>&1 < generate_data.16.log &\'"
+
+Now generating data.  This may take a while.
+Generating data duration: 780 minute(s)81 minute(s)
+Done generating data
+
+Generate queries based on scale
+/home/gpadmin/TPC-DS/01_gen_data/dsqgen -input /home/gpadmin/TPC-DS/01_gen_data/query_templates/templates.lst -directory /home/gpadmin/TPC-DS/01_gen_data/query_templates -dialect pivotal -scale 1 -verbose y -output /home/gpadmin/TPC-DS/01_gen_data
+qgen2 Query Generator (Version 2.0.0)
+Copyright Transaction Processing Performance Council (TPC) 2001 - 2015
+Warning: This scale factor is valid for QUALIFICATION ONLY
+ Creating: /home/gpadmin/TPC-DS/05_sql/101.dsbench.01.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/101.dsbench.01.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/102.dsbench.02.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/102.dsbench.02.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/103.dsbench.03.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/103.dsbench.03.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/104.dsbench.04.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/104.dsbench.04.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/105.dsbench.05.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/105.dsbench.05.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/106.dsbench.06.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/106.dsbench.06.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/107.dsbench.07.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/107.dsbench.07.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/108.dsbench.08.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/108.dsbench.08.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/109.dsbench.09.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/109.dsbench.09.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/110.dsbench.10.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/110.dsbench.10.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/111.dsbench.11.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/111.dsbench.11.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/112.dsbench.12.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/112.dsbench.12.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/113.dsbench.13.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/113.dsbench.13.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/114.dsbench.14.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/114.dsbench.14.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/115.dsbench.15.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/115.dsbench.15.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/116.dsbench.16.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/116.dsbench.16.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/117.dsbench.17.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/117.dsbench.17.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/118.dsbench.18.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/118.dsbench.18.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/119.dsbench.19.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/119.dsbench.19.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/120.dsbench.20.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/120.dsbench.20.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/121.dsbench.21.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/121.dsbench.21.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/122.dsbench.22.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/122.dsbench.22.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/123.dsbench.23.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/123.dsbench.23.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/124.dsbench.24.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/124.dsbench.24.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/125.dsbench.25.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/125.dsbench.25.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/126.dsbench.26.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/126.dsbench.26.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/127.dsbench.27.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/127.dsbench.27.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/128.dsbench.28.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/128.dsbench.28.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/129.dsbench.29.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/129.dsbench.29.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/130.dsbench.30.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/130.dsbench.30.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/131.dsbench.31.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/131.dsbench.31.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/132.dsbench.32.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/132.dsbench.32.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/133.dsbench.33.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/133.dsbench.33.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/134.dsbench.34.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/134.dsbench.34.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/135.dsbench.35.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/135.dsbench.35.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/136.dsbench.36.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/136.dsbench.36.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/137.dsbench.37.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/137.dsbench.37.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/138.dsbench.38.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/138.dsbench.38.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/139.dsbench.39.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/139.dsbench.39.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/140.dsbench.40.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/140.dsbench.40.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/141.dsbench.41.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/141.dsbench.41.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/142.dsbench.42.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/142.dsbench.42.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/143.dsbench.43.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/143.dsbench.43.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/144.dsbench.44.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/144.dsbench.44.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/145.dsbench.45.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/145.dsbench.45.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/146.dsbench.46.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/146.dsbench.46.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/147.dsbench.47.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/147.dsbench.47.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/148.dsbench.48.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/148.dsbench.48.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/149.dsbench.49.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/149.dsbench.49.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/150.dsbench.50.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/150.dsbench.50.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/151.dsbench.51.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/151.dsbench.51.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/152.dsbench.52.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/152.dsbench.52.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/153.dsbench.53.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/153.dsbench.53.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/154.dsbench.54.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/154.dsbench.54.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/155.dsbench.55.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/155.dsbench.55.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/156.dsbench.56.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/156.dsbench.56.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/157.dsbench.57.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/157.dsbench.57.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/158.dsbench.58.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/158.dsbench.58.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/159.dsbench.59.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/159.dsbench.59.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/160.dsbench.60.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/160.dsbench.60.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/161.dsbench.61.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/161.dsbench.61.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/162.dsbench.62.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/162.dsbench.62.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/163.dsbench.63.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/163.dsbench.63.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/164.dsbench.64.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/164.dsbench.64.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/165.dsbench.65.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/165.dsbench.65.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/166.dsbench.66.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/166.dsbench.66.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/167.dsbench.67.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/167.dsbench.67.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/168.dsbench.68.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/168.dsbench.68.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/169.dsbench.69.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/169.dsbench.69.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/170.dsbench.70.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/170.dsbench.70.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/171.dsbench.71.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/171.dsbench.71.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/172.dsbench.72.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/172.dsbench.72.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/173.dsbench.73.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/173.dsbench.73.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/174.dsbench.74.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/174.dsbench.74.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/175.dsbench.75.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/175.dsbench.75.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/176.dsbench.76.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/176.dsbench.76.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/177.dsbench.77.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/177.dsbench.77.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/178.dsbench.78.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/178.dsbench.78.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/179.dsbench.79.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/179.dsbench.79.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/180.dsbench.80.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/180.dsbench.80.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/181.dsbench.81.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/181.dsbench.81.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/182.dsbench.82.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/182.dsbench.82.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/183.dsbench.83.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/183.dsbench.83.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/184.dsbench.84.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/184.dsbench.84.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/185.dsbench.85.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/185.dsbench.85.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/186.dsbench.86.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/186.dsbench.86.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/187.dsbench.87.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/187.dsbench.87.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/188.dsbench.88.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/188.dsbench.88.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/189.dsbench.89.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/189.dsbench.89.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/190.dsbench.90.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/190.dsbench.90.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/191.dsbench.91.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/191.dsbench.91.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/192.dsbench.92.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/192.dsbench.92.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/193.dsbench.93.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/193.dsbench.93.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/194.dsbench.94.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/194.dsbench.94.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/195.dsbench.95.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/195.dsbench.95.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/196.dsbench.96.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/196.dsbench.96.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/197.dsbench.97.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/197.dsbench.97.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/198.dsbench.98.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/198.dsbench.98.sql
+Creating: /home/gpadmin/TPC-DS/05_sql/199.dsbench.99.sql
+Completed: /home/gpadmin/TPC-DS/05_sql/199.dsbench.99.sql
+
+queries 114, 123, 124, and 139 have 2 queries in each file.  Need to add :EXPLAIN_ANALYZE to second query in these files
+
+Modifying: /home/gpadmin/TPC-DS/05_sql/114.dsbench.14.sql
+Modified: /home/gpadmin/TPC-DS/05_sql/114.dsbench.14.sql
+Modifying: /home/gpadmin/TPC-DS/05_sql/123.dsbench.23.sql
+Modified: /home/gpadmin/TPC-DS/05_sql/123.dsbench.23.sql
+Modifying: /home/gpadmin/TPC-DS/05_sql/124.dsbench.24.sql
+Modified: /home/gpadmin/TPC-DS/05_sql/124.dsbench.24.sql
+Modifying: /home/gpadmin/TPC-DS/05_sql/139.dsbench.39.sql
+Modified: /home/gpadmin/TPC-DS/05_sql/139.dsbench.39.sql
+COMPLETE: dsqgen scale 1
+Finished gen_data
+Run /home/gpadmin/TPC-DS/02_init//rollout.sh
+set up .bashrc on segment hosts
+check optimizer
+check analyze_root_partition
+check gp_autostats_mode
+check default_statistics_target
+copy config files
+Finished init
+Run /home/gpadmin/TPC-DS/03_ddl//rollout.sh
+[2022-07-13 13:30:06] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/000.gpdb.tpcds.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY ()"
+DROP SCHEMA IF EXISTS tpcds CASCADE;
+psql:/home/gpadmin/TPC-DS/03_ddl/000.gpdb.tpcds.sql:1: NOTICE:  drop cascades to 24 other objects
+DETAIL:  drop cascades to append only columnar table call_center
+drop cascades to append only columnar table catalog_page
+drop cascades to append only columnar table catalog_returns
+drop cascades to append only columnar table catalog_sales
+drop cascades to append only columnar table customer
+drop cascades to append only columnar table customer_address
+drop cascades to append only columnar table customer_demographics
+drop cascades to append only columnar table date_dim
+drop cascades to append only columnar table household_demographics
+drop cascades to append only columnar table income_band
+drop cascades to append only columnar table inventory
+drop cascades to append only columnar table item
+drop cascades to append only columnar table promotion
+drop cascades to append only columnar table reason
+drop cascades to append only columnar table ship_mode
+drop cascades to append only columnar table store
+drop cascades to append only columnar table store_returns
+drop cascades to append only columnar table store_sales
+drop cascades to append only columnar table time_dim
+drop cascades to append only columnar table warehouse
+drop cascades to append only columnar table web_page
+drop cascades to append only columnar table web_returns
+drop cascades to append only columnar table web_sales
+drop cascades to append only columnar table web_site
+DROP SCHEMA IF EXISTS ext_tpcds CASCADE;
+psql:/home/gpadmin/TPC-DS/03_ddl/000.gpdb.tpcds.sql:2: NOTICE:  drop cascades to 24 other objects
+DETAIL:  drop cascades to external table ext_tpcds.call_center
+drop cascades to external table ext_tpcds.catalog_page
+drop cascades to external table ext_tpcds.catalog_returns
+drop cascades to external table ext_tpcds.catalog_sales
+drop cascades to external table ext_tpcds.customer
+drop cascades to external table ext_tpcds.customer_address
+drop cascades to external table ext_tpcds.customer_demographics
+drop cascades to external table ext_tpcds.date_dim
+drop cascades to external table ext_tpcds.household_demographics
+drop cascades to external table ext_tpcds.income_band
+drop cascades to external table ext_tpcds.inventory
+drop cascades to external table ext_tpcds.item
+drop cascades to external table ext_tpcds.promotion
+drop cascades to external table ext_tpcds.reason
+drop cascades to external table ext_tpcds.ship_mode
+drop cascades to external table ext_tpcds.store
+drop cascades to external table ext_tpcds.store_returns
+drop cascades to external table ext_tpcds.store_sales
+drop cascades to external table ext_tpcds.time_dim
+drop cascades to external table ext_tpcds.warehouse
+drop cascades to external table ext_tpcds.web_page
+drop cascades to external table ext_tpcds.web_returns
+drop cascades to external table ext_tpcds.web_sales
+drop cascades to external table ext_tpcds.web_site
+CREATE SCHEMA tpcds;
+CREATE SCHEMA ext_tpcds;
+[2022-07-13 13:38:50] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/001.gpdb.call_center.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (cc_call_center_sk)"
+CREATE TABLE tpcds.call_center (
+    cc_call_center_sk integer,
+    cc_call_center_id character varying(16),
+    cc_rec_start_date date,
+    cc_rec_end_date date,
+    cc_closed_date_sk integer,
+    cc_open_date_sk integer,
+    cc_name character varying(50),
+    cc_class character varying(50),
+    cc_employees integer,
+    cc_sq_ft integer,
+    cc_hours character varying(20),
+    cc_manager character varying(40),
+    cc_mkt_id integer,
+    cc_mkt_class character varying(50),
+    cc_mkt_desc character varying(100),
+    cc_market_manager character varying(40),
+    cc_division text,
+    cc_division_name character varying(50),
+    cc_company text,
+    cc_company_name character varying(50),
+    cc_street_number character varying(10),
+    cc_street_name character varying(60),
+    cc_street_type character varying(15),
+    cc_suite_number character varying(10),
+    cc_city character varying(60),
+    cc_county character varying(30),
+    cc_state text,
+    cc_zip character varying(10),
+    cc_country character varying(20),
+    cc_gmt_offset numeric(5,2),
+    cc_tax_percentage numeric(5,2)
+)
+WITH (:SMALL_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:38:51] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/002.gpdb.catalog_page.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (cp_catalog_page_sk)"
+CREATE TABLE tpcds.catalog_page (
+    cp_catalog_page_sk integer NOT NULL,
+    cp_catalog_page_id character varying(16) NOT NULL,
+    cp_start_date_sk integer,
+    cp_end_date_sk integer,
+    cp_department character varying(50),
+    cp_catalog_number integer,
+    cp_catalog_page_number integer,
+    cp_description character varying(100),
+    cp_type character varying(100)
+)
+WITH (:SMALL_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:38:51] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/003.gpdb.catalog_returns.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (cr_item_sk,cr_order_number)"
+CREATE TABLE tpcds.catalog_returns (
+    cr_returned_date_sk integer,
+    cr_returned_time_sk integer,
+    cr_item_sk integer NOT NULL,
+    cr_refunded_customer_sk integer,
+    cr_refunded_cdemo_sk integer,
+    cr_refunded_hdemo_sk integer,
+    cr_refunded_addr_sk integer,
+    cr_returning_customer_sk integer,
+    cr_returning_cdemo_sk integer,
+    cr_returning_hdemo_sk integer,
+    cr_returning_addr_sk integer,
+    cr_call_center_sk integer,
+    cr_catalog_page_sk integer,
+    cr_ship_mode_sk integer,
+    cr_warehouse_sk integer,
+    cr_reason_sk integer,
+    cr_order_number bigint NOT NULL,
+    cr_return_quantity integer,
+    cr_return_amount numeric(7,2),
+    cr_return_tax numeric(7,2),
+    cr_return_amt_inc_tax numeric(7,2),
+    cr_fee numeric(7,2),
+    cr_return_ship_cost numeric(7,2),
+    cr_refunded_cash numeric(7,2),
+    cr_reversed_charge numeric(7,2),
+    cr_store_credit numeric(7,2),
+    cr_net_loss numeric(7,2)
+)
+WITH (:MEDIUM_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:38:52] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/004.gpdb.catalog_sales.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (cs_item_sk,cs_order_number)"
+CREATE TABLE tpcds.catalog_sales (
+    cs_sold_date_sk integer,
+    cs_sold_time_sk integer,
+    cs_ship_date_sk integer,
+    cs_bill_customer_sk integer,
+    cs_bill_cdemo_sk integer,
+    cs_bill_hdemo_sk integer,
+    cs_bill_addr_sk integer,
+    cs_ship_customer_sk integer,
+    cs_ship_cdemo_sk integer,
+    cs_ship_hdemo_sk integer,
+    cs_ship_addr_sk integer,
+    cs_call_center_sk integer,
+    cs_catalog_page_sk integer,
+    cs_ship_mode_sk integer,
+    cs_warehouse_sk integer,
+    cs_item_sk integer NOT NULL,
+    cs_promo_sk integer,
+    cs_order_number bigint NOT NULL,
+    cs_quantity integer,
+    cs_wholesale_cost numeric(7,2),
+    cs_list_price numeric(7,2),
+    cs_sales_price numeric(7,2),
+    cs_ext_discount_amt numeric(7,2),
+    cs_ext_sales_price numeric(7,2),
+    cs_ext_wholesale_cost numeric(7,2),
+    cs_ext_list_price numeric(7,2),
+    cs_ext_tax numeric(7,2),
+    cs_coupon_amt numeric(7,2),
+    cs_ext_ship_cost numeric(7,2),
+    cs_net_paid numeric(7,2),
+    cs_net_paid_inc_tax numeric(7,2),
+    cs_net_paid_inc_ship numeric(7,2),
+    cs_net_paid_inc_ship_tax numeric(7,2),
+    cs_net_profit numeric(7,2)
+)
+WITH (:LARGE_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:38:53] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/005.gpdb.customer.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (c_customer_sk)"
+CREATE TABLE tpcds.customer (
+    c_customer_sk integer NOT NULL,
+    c_customer_id character varying(16) NOT NULL,
+    c_current_cdemo_sk integer,
+    c_current_hdemo_sk integer,
+    c_current_addr_sk integer,
+    c_first_shipto_date_sk integer,
+    c_first_sales_date_sk integer,
+    c_salutation character varying(10),
+    c_first_name character varying(20),
+    c_last_name character varying(30),
+    c_preferred_cust_flag character(1),
+    c_birth_day integer,
+    c_birth_month integer,
+    c_birth_year integer,
+    c_birth_country character varying(20),
+    c_login character varying(13),
+    c_email_address character varying(50),
+    c_last_review_date integer
+)
+WITH (:SMALL_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:38:53] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/006.gpdb.customer_address.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (ca_address_sk)"
+CREATE TABLE tpcds.customer_address (
+    ca_address_sk integer NOT NULL,
+    ca_address_id character varying(16) NOT NULL,
+    ca_street_number character varying(10),
+    ca_street_name character varying(60),
+    ca_street_type character varying(15),
+    ca_suite_number character varying(10),
+    ca_city character varying(60),
+    ca_county character varying(30),
+    ca_state character varying(2),
+    ca_zip character varying(10),
+    ca_country character varying(20),
+    ca_gmt_offset numeric(5,2),
+    ca_location_type character varying(20)
+)
+WITH (:SMALL_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:38:54] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/007.gpdb.customer_demographics.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (cd_demo_sk)"
+CREATE TABLE tpcds.customer_demographics (
+    cd_demo_sk integer NOT NULL,
+    cd_gender character(1),
+    cd_marital_status character(1),
+    cd_education_status character varying(20),
+    cd_purchase_estimate integer,
+    cd_credit_rating character varying(10),
+    cd_dep_count integer,
+    cd_dep_employed_count integer,
+    cd_dep_college_count integer
+)
+WITH (:SMALL_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:38:54] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/008.gpdb.date_dim.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (d_date_sk)"
+CREATE TABLE tpcds.date_dim (
+    d_date_sk integer NOT NULL,
+    d_date_id character varying(16) NOT NULL,
+    d_date date,
+    d_month_seq integer,
+    d_week_seq integer,
+    d_quarter_seq integer,
+    d_year integer,
+    d_dow integer,
+    d_moy integer,
+    d_dom integer,
+    d_qoy integer,
+    d_fy_year integer,
+    d_fy_quarter_seq integer,
+    d_fy_week_seq integer,
+    d_day_name character varying(9),
+    d_quarter_name character varying(6),
+    d_holiday character(1),
+    d_weekend character(1),
+    d_following_holiday character(1),
+    d_first_dom integer,
+    d_last_dom integer,
+    d_same_day_ly integer,
+    d_same_day_lq integer,
+    d_current_day character(1),
+    d_current_week character(1),
+    d_current_month character(1),
+    d_current_quarter character(1),
+    d_current_year character(1)
+)
+WITH (:SMALL_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:38:55] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/010.gpdb.household_demographics.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (hd_demo_sk)"
+CREATE TABLE tpcds.household_demographics (
+    hd_demo_sk integer NOT NULL,
+    hd_income_band_sk integer,
+    hd_buy_potential character varying(15),
+    hd_dep_count integer,
+    hd_vehicle_count integer
+)
+WITH (:SMALL_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:38:55] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/011.gpdb.income_band.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (ib_income_band_sk)"
+CREATE TABLE tpcds.income_band (
+    ib_income_band_sk integer NOT NULL,
+    ib_lower_bound integer,
+    ib_upper_bound integer
+)
+WITH (:SMALL_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:38:56] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/012.gpdb.inventory.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (inv_date_sk,inv_item_sk,inv_warehouse_sk)"
+CREATE TABLE tpcds.inventory (
+    inv_date_sk integer NOT NULL,
+    inv_item_sk integer NOT NULL,
+    inv_warehouse_sk integer NOT NULL,
+    inv_quantity_on_hand integer
+)
+WITH (:LARGE_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:38:56] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/013.gpdb.item.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (i_item_sk)"
+CREATE TABLE tpcds.item (
+    i_item_sk integer NOT NULL,
+    i_item_id character varying(16) NOT NULL,
+    i_rec_start_date date,
+    i_rec_end_date date,
+    i_item_desc character varying(200),
+    i_current_price numeric(7,2),
+    i_wholesale_cost numeric(7,2),
+    i_brand_id integer,
+    i_brand character varying(50),
+    i_class_id integer,
+    i_class character varying(50),
+    i_category_id integer,
+    i_category character varying(50),
+    i_manufact_id integer,
+    i_manufact character varying(50),
+    i_size character varying(20),
+    i_formulation character varying(20),
+    i_color character varying(20),
+    i_units character varying(10),
+    i_container character varying(10),
+    i_manager_id integer,
+    i_product_name character varying(50)
+)
+WITH (:SMALL_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:38:57] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/014.gpdb.promotion.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (p_promo_sk)"
+CREATE TABLE tpcds.promotion (
+    p_promo_sk integer NOT NULL,
+    p_promo_id character varying(16) NOT NULL,
+    p_start_date_sk integer,
+    p_end_date_sk integer,
+    p_item_sk integer,
+    p_cost numeric(15,2),
+    p_response_target integer,
+    p_promo_name character varying(50),
+    p_channel_dmail character(1),
+    p_channel_email character(1),
+    p_channel_catalog character(1),
+    p_channel_tv character(1),
+    p_channel_radio character(1),
+    p_channel_press character(1),
+    p_channel_event character(1),
+    p_channel_demo character(1),
+    p_channel_details character varying(100),
+    p_purpose character varying(15),
+    p_discount_active character(1)
+)
+WITH (:SMALL_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:38:57] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/015.gpdb.reason.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (r_reason_sk)"
+CREATE TABLE tpcds.reason (
+    r_reason_sk integer NOT NULL,
+    r_reason_id character varying(16) NOT NULL,
+    r_reason_desc character varying(100)
+)
+WITH (:SMALL_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:38:57] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/016.gpdb.ship_mode.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (sm_ship_mode_sk)"
+CREATE TABLE tpcds.ship_mode (
+    sm_ship_mode_sk integer NOT NULL,
+    sm_ship_mode_id character varying(16) NOT NULL,
+    sm_type character varying(30),
+    sm_code character varying(10),
+    sm_carrier character varying(20),
+    sm_contract character varying(20)
+)
+WITH (:SMALL_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:38:58] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/017.gpdb.store.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (s_store_sk)"
+CREATE TABLE tpcds.store (
+    s_store_sk integer NOT NULL,
+    s_store_id character varying(16) NOT NULL,
+    s_rec_start_date date,
+    s_rec_end_date date,
+    s_closed_date_sk integer,
+    s_store_name character varying(50),
+    s_number_employees integer,
+    s_floor_space integer,
+    s_hours character varying(20),
+    s_manager character varying(40),
+    s_market_id integer,
+    s_geography_class character varying(100),
+    s_market_desc character varying(100),
+    s_market_manager character varying(40),
+    s_division_id integer,
+    s_division_name character varying(50),
+    s_company_id integer,
+    s_company_name character varying(50),
+    s_street_number character varying(10),
+    s_street_name character varying(60),
+    s_street_type character varying(15),
+    s_suite_number character varying(10),
+    s_city character varying(60),
+    s_county character varying(30),
+    s_state character varying(2),
+    s_zip character varying(10),
+    s_country character varying(20),
+    s_gmt_offset numeric(5,2),
+    s_tax_precentage numeric(5,2)
+)
+WITH (:SMALL_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:38:58] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/018.gpdb.store_returns.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (sr_item_sk,sr_ticket_number)"
+CREATE TABLE tpcds.store_returns (
+    sr_returned_date_sk integer,
+    sr_return_time_sk integer,
+    sr_item_sk integer NOT NULL,
+    sr_customer_sk integer,
+    sr_cdemo_sk integer,
+    sr_hdemo_sk integer,
+    sr_addr_sk integer,
+    sr_store_sk integer,
+    sr_reason_sk integer,
+    sr_ticket_number bigint NOT NULL,
+    sr_return_quantity integer,
+    sr_return_amt numeric(7,2),
+    sr_return_tax numeric(7,2),
+    sr_return_amt_inc_tax numeric(7,2),
+    sr_fee numeric(7,2),
+    sr_return_ship_cost numeric(7,2),
+    sr_refunded_cash numeric(7,2),
+    sr_reversed_charge numeric(7,2),
+    sr_store_credit numeric(7,2),
+    sr_net_loss numeric(7,2)
+)
+WITH (:MEDIUM_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:38:59] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/019.gpdb.store_sales.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (ss_item_sk,ss_ticket_number)"
+CREATE TABLE tpcds.store_sales (
+    ss_sold_date_sk integer,
+    ss_sold_time_sk integer,
+    ss_item_sk int NOT NULL,
+    ss_customer_sk integer,
+    ss_cdemo_sk integer,
+    ss_hdemo_sk integer,
+    ss_addr_sk integer,
+    ss_store_sk integer,
+    ss_promo_sk integer,
+    ss_ticket_number bigint NOT NULL,
+    ss_quantity integer,
+    ss_wholesale_cost numeric(7,2),
+    ss_list_price numeric(7,2),
+    ss_sales_price numeric(7,2),
+    ss_ext_discount_amt numeric(7,2),
+    ss_ext_sales_price numeric(7,2),
+    ss_ext_wholesale_cost numeric(7,2),
+    ss_ext_list_price numeric(7,2),
+    ss_ext_tax numeric(7,2),
+    ss_coupon_amt numeric(7,2),
+    ss_net_paid numeric(7,2),
+    ss_net_paid_inc_tax numeric(7,2),
+    ss_net_profit numeric(7,2)
+)
+WITH (:LARGE_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:38:59] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/020.gpdb.time_dim.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (t_time_sk)"
+CREATE TABLE tpcds.time_dim (
+    t_time_sk integer NOT NULL,
+    t_time_id character varying(16) NOT NULL,
+    t_time integer,
+    t_hour integer,
+    t_minute integer,
+    t_second integer,
+    t_am_pm character(2),
+    t_shift character(20),
+    t_sub_shift character(20),
+    t_meal_time character(20)
+)
+WITH (:SMALL_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:39:00] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/021.gpdb.warehouse.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (w_warehouse_sk)"
+CREATE TABLE tpcds.warehouse (
+    w_warehouse_sk integer NOT NULL,
+    w_warehouse_id character varying(16) NOT NULL,
+    w_warehouse_name character varying(20),
+    w_warehouse_sq_ft integer,
+    w_street_number character varying(10),
+    w_street_name character varying(60),
+    w_street_type character varying(15),
+    w_suite_number character varying(10),
+    w_city character varying(60),
+    w_county character varying(30),
+    w_state character varying(2),
+    w_zip character varying(10),
+    w_country character varying(20),
+    w_gmt_offset numeric(5,2)
+)
+WITH (:SMALL_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:39:00] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/022.gpdb.web_page.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (wp_web_page_sk)"
+CREATE TABLE tpcds.web_page (
+    wp_web_page_sk integer NOT NULL,
+    wp_web_page_id character varying(16) NOT NULL,
+    wp_rec_start_date date,
+    wp_rec_end_date date,
+    wp_creation_date_sk integer,
+    wp_access_date_sk integer,
+    wp_autogen_flag character(1),
+    wp_customer_sk integer,
+    wp_url character varying(100),
+    wp_type character varying(50),
+    wp_char_count integer,
+    wp_link_count integer,
+    wp_image_count integer,
+    wp_max_ad_count integer
+)
+WITH (:SMALL_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:39:01] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/023.gpdb.web_returns.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (wr_order_number,wr_item_sk)"
+CREATE TABLE tpcds.web_returns (
+    wr_returned_date_sk integer,
+    wr_returned_time_sk integer,
+    wr_item_sk integer NOT NULL,
+    wr_refunded_customer_sk integer,
+    wr_refunded_cdemo_sk integer,
+    wr_refunded_hdemo_sk integer,
+    wr_refunded_addr_sk integer,
+    wr_returning_customer_sk integer,
+    wr_returning_cdemo_sk integer,
+    wr_returning_hdemo_sk integer,
+    wr_returning_addr_sk integer,
+    wr_web_page_sk integer,
+    wr_reason_sk integer,
+    wr_order_number integer NOT NULL,
+    wr_return_quantity integer,
+    wr_return_amt numeric(7,2),
+    wr_return_tax numeric(7,2),
+    wr_return_amt_inc_tax numeric(7,2),
+    wr_fee numeric(7,2),
+    wr_return_ship_cost numeric(7,2),
+    wr_refunded_cash numeric(7,2),
+    wr_reversed_charge numeric(7,2),
+    wr_account_credit numeric(7,2),
+    wr_net_loss numeric(7,2)
+)
+WITH (:SMALL_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:39:01] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/024.gpdb.web_sales.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (ws_item_sk,ws_order_number)"
+CREATE TABLE tpcds.web_sales (
+    ws_sold_date_sk integer,
+    ws_sold_time_sk integer,
+    ws_ship_date_sk integer,
+    ws_item_sk integer NOT NULL,
+    ws_bill_customer_sk integer,
+    ws_bill_cdemo_sk integer,
+    ws_bill_hdemo_sk integer,
+    ws_bill_addr_sk integer,
+    ws_ship_customer_sk integer,
+    ws_ship_cdemo_sk integer,
+    ws_ship_hdemo_sk integer,
+    ws_ship_addr_sk integer,
+    ws_web_page_sk integer,
+    ws_web_site_sk integer,
+    ws_ship_mode_sk integer,
+    ws_warehouse_sk integer,
+    ws_promo_sk integer,
+    ws_order_number integer NOT NULL,
+    ws_quantity integer,
+    ws_wholesale_cost numeric(7,2),
+    ws_list_price numeric(7,2),
+    ws_sales_price numeric(7,2),
+    ws_ext_discount_amt numeric(7,2),
+    ws_ext_sales_price numeric(7,2),
+    ws_ext_wholesale_cost numeric(7,2),
+    ws_ext_list_price numeric(7,2),
+    ws_ext_tax numeric(7,2),
+    ws_coupon_amt numeric(7,2),
+    ws_ext_ship_cost numeric(7,2),
+    ws_net_paid numeric(7,2),
+    ws_net_paid_inc_tax numeric(7,2),
+    ws_net_paid_inc_ship numeric(7,2),
+    ws_net_paid_inc_ship_tax numeric(7,2),
+    ws_net_profit numeric(7,2)
+)
+WITH (:LARGE_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:39:02] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/025.gpdb.web_site.sql -v SMALL_STORAGE="appendonly=true, orientation=column" -v MEDIUM_STORAGE="appendonly=true, orientation=column" -v LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4" -v DISTRIBUTED_BY="DISTRIBUTED BY (web_site_sk)"
+CREATE TABLE tpcds.web_site (
+    web_site_sk integer NOT NULL,
+    web_site_id character varying(16) NOT NULL,
+    web_rec_start_date date,
+    web_rec_end_date date,
+    web_name character varying(50),
+    web_open_date_sk integer,
+    web_close_date_sk integer,
+    web_class character varying(50),
+    web_manager character varying(40),
+    web_mkt_id integer,
+    web_mkt_class character varying(50),
+    web_mkt_desc character varying(100),
+    web_market_manager character varying(40),
+    web_company_id integer,
+    web_company_name character varying(50),
+    web_street_number character varying(10),
+    web_street_name character varying(60),
+    web_street_type character varying(15),
+    web_suite_number character varying(10),
+    web_city character varying(60),
+    web_county character varying(30),
+    web_state character varying(2),
+    web_zip character varying(10),
+    web_country character varying(20),
+    web_gmt_offset numeric(5,2),
+    web_tax_percentage numeric(5,2)
+)
+WITH (:SMALL_STORAGE)
+:DISTRIBUTED_BY;
+[2022-07-13 13:39:03] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/026.ext_tpcds.call_center.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/call_center_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/call_center_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/call_center_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/call_center_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/call_center_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/call_center_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/call_center_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/call_center_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/call_center_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/call_center_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/call_center_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/call_center_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/call_center_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/call_center_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/call_center_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/call_center_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.call_center (like tpcds.call_center)
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:03] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/027.ext_tpcds.catalog_page.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/catalog_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/catalog_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/catalog_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/catalog_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/catalog_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/catalog_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/catalog_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/catalog_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/catalog_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/catalog_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/catalog_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/catalog_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/catalog_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/catalog_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/catalog_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/catalog_page_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.catalog_page (like tpcds.catalog_page)
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:04] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/028.ext_tpcds.catalog_returns.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/catalog_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/catalog_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/catalog_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/catalog_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/catalog_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/catalog_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/catalog_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/catalog_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/catalog_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/catalog_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/catalog_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/catalog_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/catalog_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/catalog_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/catalog_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/catalog_returns_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.catalog_returns (like tpcds.catalog_returns)
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:04] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/029.ext_tpcds.catalog_sales.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/catalog_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/catalog_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/catalog_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/catalog_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/catalog_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/catalog_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/catalog_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/catalog_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/catalog_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/catalog_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/catalog_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/catalog_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/catalog_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/catalog_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/catalog_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/catalog_sales_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.catalog_sales (like tpcds.catalog_sales)
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:04] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/030.ext_tpcds.customer.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/customer_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/customer_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/customer_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/customer_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/customer_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/customer_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/customer_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/customer_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/customer_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/customer_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/customer_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/customer_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/customer_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/customer_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/customer_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/customer_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.customer (like tpcds.customer)
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\') ENCODING 'LATIN1';
+[2022-07-13 13:39:05] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/031.ext_tpcds.customer_address.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/customer_address_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/customer_address_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/customer_address_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/customer_address_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/customer_address_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/customer_address_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/customer_address_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/customer_address_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/customer_address_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/customer_address_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/customer_address_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/customer_address_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/customer_address_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/customer_address_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/customer_address_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/customer_address_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.customer_address (like tpcds.customer_address)  
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:05] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/032.ext_tpcds.customer_demographics.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/customer_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/customer_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/customer_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/customer_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/customer_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/customer_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/customer_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/customer_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/customer_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/customer_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/customer_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/customer_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/customer_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/customer_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/customer_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/customer_demographics_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.customer_demographics (like tpcds.customer_demographics)  
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:05] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/033.ext_tpcds.date_dim.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/date_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/date_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/date_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/date_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/date_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/date_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/date_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/date_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/date_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/date_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/date_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/date_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/date_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/date_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/date_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/date_dim_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.date_dim (like tpcds.date_dim)
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:05] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/035.ext_tpcds.household_demographics.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/household_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/household_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/household_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/household_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/household_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/household_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/household_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/household_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/household_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/household_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/household_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/household_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/household_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/household_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/household_demographics_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/household_demographics_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.household_demographics (like tpcds.household_demographics)
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:06] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/036.ext_tpcds.income_band.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/income_band_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/income_band_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/income_band_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/income_band_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/income_band_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/income_band_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/income_band_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/income_band_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/income_band_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/income_band_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/income_band_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/income_band_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/income_band_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/income_band_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/income_band_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/income_band_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.income_band (like tpcds.income_band)
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:06] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/037.ext_tpcds.inventory.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/inventory_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/inventory_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/inventory_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/inventory_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/inventory_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/inventory_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/inventory_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/inventory_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/inventory_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/inventory_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/inventory_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/inventory_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/inventory_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/inventory_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/inventory_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/inventory_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.inventory (like tpcds.inventory)
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:06] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/038.ext_tpcds.item.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/item_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/item_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/item_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/item_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/item_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/item_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/item_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/item_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/item_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/item_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/item_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/item_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/item_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/item_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/item_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/item_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.item (like tpcds.item)
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:07] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/039.ext_tpcds.promotion.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/promotion_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/promotion_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/promotion_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/promotion_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/promotion_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/promotion_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/promotion_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/promotion_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/promotion_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/promotion_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/promotion_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/promotion_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/promotion_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/promotion_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/promotion_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/promotion_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.promotion (like tpcds.promotion)
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:07] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/040.ext_tpcds.reason.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/reason_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/reason_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/reason_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/reason_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/reason_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/reason_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/reason_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/reason_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/reason_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/reason_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/reason_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/reason_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/reason_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/reason_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/reason_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/reason_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.reason (like tpcds.reason)
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:07] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/041.ext_tpcds.ship_mode.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/ship_mode_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/ship_mode_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/ship_mode_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/ship_mode_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/ship_mode_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/ship_mode_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/ship_mode_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/ship_mode_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/ship_mode_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/ship_mode_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/ship_mode_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/ship_mode_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/ship_mode_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/ship_mode_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/ship_mode_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/ship_mode_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.ship_mode (like tpcds.ship_mode) 
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:07] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/042.ext_tpcds.store.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/store_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/store_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/store_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/store_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/store_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/store_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/store_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/store_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/store_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/store_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/store_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/store_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/store_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/store_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/store_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/store_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.store (like tpcds.store) 
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:08] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/043.ext_tpcds.store_returns.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/store_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/store_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/store_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/store_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/store_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/store_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/store_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/store_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/store_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/store_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/store_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/store_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/store_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/store_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/store_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/store_returns_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.store_returns (like tpcds.store_returns)
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:08] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/044.ext_tpcds.store_sales.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/store_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/store_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/store_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/store_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/store_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/store_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/store_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/store_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/store_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/store_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/store_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/store_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/store_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/store_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/store_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/store_sales_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.store_sales
+(
+    ss_sold_date_sk integer,
+    ss_sold_time_sk integer,
+    ss_item_sk int,
+    ss_customer_sk integer,
+    ss_cdemo_sk integer,
+    ss_hdemo_sk integer,
+    ss_addr_sk integer,
+    ss_store_sk integer,
+    ss_promo_sk integer,
+    ss_ticket_number bigint,
+    ss_quantity integer,
+    ss_wholesale_cost numeric(7,2),
+    ss_list_price numeric(7,2),
+    ss_sales_price numeric(7,2),
+    ss_ext_discount_amt numeric(7,2),
+    ss_ext_sales_price numeric(7,2),
+    ss_ext_wholesale_cost numeric(7,2),
+    ss_ext_list_price numeric(7,2),
+    ss_ext_tax numeric(7,2),
+    ss_coupon_amt numeric(7,2),
+    ss_net_paid numeric(7,2),
+    ss_net_paid_inc_tax numeric(7,2),
+    ss_net_profit numeric(7,2)
+)
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:08] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/045.ext_tpcds.time_dim.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/time_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/time_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/time_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/time_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/time_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/time_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/time_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/time_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/time_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/time_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/time_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/time_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/time_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/time_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/time_dim_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/time_dim_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.time_dim (like tpcds.time_dim) 
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:09] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/046.ext_tpcds.warehouse.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/warehouse_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/warehouse_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/warehouse_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/warehouse_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/warehouse_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/warehouse_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/warehouse_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/warehouse_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/warehouse_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/warehouse_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/warehouse_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/warehouse_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/warehouse_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/warehouse_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/warehouse_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/warehouse_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.warehouse (like tpcds.warehouse)
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:09] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/047.ext_tpcds.web_page.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/web_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/web_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/web_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/web_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/web_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/web_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/web_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/web_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/web_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/web_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/web_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/web_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/web_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/web_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/web_page_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/web_page_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.web_page (like tpcds.web_page) 
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:09] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/048.ext_tpcds.web_returns.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/web_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/web_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/web_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/web_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/web_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/web_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/web_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/web_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/web_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/web_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/web_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/web_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/web_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/web_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/web_returns_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/web_returns_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.web_returns (like tpcds.web_returns) 
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:10] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/049.ext_tpcds.web_sales.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/web_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/web_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/web_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/web_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/web_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/web_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/web_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/web_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/web_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/web_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/web_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/web_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/web_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/web_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/web_sales_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/web_sales_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.web_sales (like tpcds.web_sales)
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:10] psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f /home/gpadmin/TPC-DS/03_ddl/050.ext_tpcds.web_site.sql -v LOCATION="'gpfdist://computing-f8d06d00-segment-240c7f29:5001/web_site_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3b09486e:5001/web_site_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-3e867bcf:5001/web_site_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5609b4dd:5001/web_site_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-57664e5e:5001/web_site_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-5ec28e9d:5001/web_site_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-772128c5:5001/web_site_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-8964a688:5001/web_site_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-99c66e8b:5001/web_site_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-a9fe5924:5001/web_site_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-c69ed9c6:5001/web_site_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-cc55c18c:5001/web_site_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-d80e1160:5001/web_site_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f6500372:5001/web_site_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-f9df37ce:5001/web_site_[0-9]*_[0-9]*.dat', 'gpfdist://computing-f8d06d00-segment-fcc5e6a6:5001/web_site_[0-9]*_[0-9]*.dat'"
+CREATE EXTERNAL TABLE ext_tpcds.web_site (like tpcds.web_site)
+LOCATION (:LOCATION)
+FORMAT 'TEXT' (DELIMITER '|' NULL AS '' ESCAPE AS E'\\');
+[2022-07-13 13:39:10] Drop role dsbench
+[2022-07-13 13:39:10] Creating role dsbench
+NOTICE:  resource queue required -- using default resource queue "pg_default"
+[2022-07-13 13:39:10] Grant schema privileges to role dsbench
+[2022-07-13 13:39:10] Grant table privileges to role dsbench
+[2022-07-13 13:39:11] Set search_path for database gpadmin
+Finished ddl
+Run /home/gpadmin/TPC-DS/04_load//rollout.sh
+copy the start and stop scripts to the segment hosts in the cluster
+scp start_gpfdist.sh stop_gpfdist.sh computing-f8d06d00-segment-a9fe5924:
+scp start_gpfdist.sh stop_gpfdist.sh computing-f8d06d00-segment-772128c5:
+scp start_gpfdist.sh stop_gpfdist.sh computing-f8d06d00-segment-fcc5e6a6:
+scp start_gpfdist.sh stop_gpfdist.sh computing-f8d06d00-segment-d80e1160:
+scp start_gpfdist.sh stop_gpfdist.sh computing-f8d06d00-segment-3b09486e:
+scp start_gpfdist.sh stop_gpfdist.sh computing-f8d06d00-segment-5ec28e9d:
+scp start_gpfdist.sh stop_gpfdist.sh computing-f8d06d00-segment-c69ed9c6:
+scp start_gpfdist.sh stop_gpfdist.sh computing-f8d06d00-segment-8964a688:
+scp start_gpfdist.sh stop_gpfdist.sh computing-f8d06d00-segment-5609b4dd:
+scp start_gpfdist.sh stop_gpfdist.sh computing-f8d06d00-segment-99c66e8b:
+scp start_gpfdist.sh stop_gpfdist.sh computing-f8d06d00-segment-57664e5e:
+scp start_gpfdist.sh stop_gpfdist.sh computing-f8d06d00-segment-240c7f29:
+scp start_gpfdist.sh stop_gpfdist.sh computing-f8d06d00-segment-f9df37ce:
+scp start_gpfdist.sh stop_gpfdist.sh computing-f8d06d00-segment-cc55c18c:
+scp start_gpfdist.sh stop_gpfdist.sh computing-f8d06d00-segment-3e867bcf:
+scp start_gpfdist.sh stop_gpfdist.sh computing-f8d06d00-segment-f6500372:
+stop gpfdist on all ports
+killing 13065
+killing 9621
+killing 20616
+killing 17707
+killing 20108
+killing 20708
+killing 20675
+killing 20674
+killing 20552
+killing 20812
+killing 10304
+killing 20612
+killing 17949
+killing 18497
+killing 20137
+killing 17306
+executing on computing-f8d06d00-segment-240c7f29 ./start_gpfdist.sh 5001 /data0/database//40000/dsbenchmark
+Started gpfdist on port 5001
+executing on computing-f8d06d00-segment-3b09486e ./start_gpfdist.sh 5001 /data0/database//40000/dsbenchmark
+Started gpfdist on port 5001
+executing on computing-f8d06d00-segment-3e867bcf ./start_gpfdist.sh 5001 /data0/database//40000/dsbenchmark
+Started gpfdist on port 5001
+executing on computing-f8d06d00-segment-5609b4dd ./start_gpfdist.sh 5001 /data0/database//40000/dsbenchmark
+Started gpfdist on port 5001
+executing on computing-f8d06d00-segment-57664e5e ./start_gpfdist.sh 5001 /data0/database//40000/dsbenchmark
+Started gpfdist on port 5001
+executing on computing-f8d06d00-segment-5ec28e9d ./start_gpfdist.sh 5001 /data0/database//40000/dsbenchmark
+Started gpfdist on port 5001
+executing on computing-f8d06d00-segment-772128c5 ./start_gpfdist.sh 5001 /data0/database//40000/dsbenchmark
+Started gpfdist on port 5001
+executing on computing-f8d06d00-segment-8964a688 ./start_gpfdist.sh 5001 /data0/database//40000/dsbenchmark
+Started gpfdist on port 5001
+executing on computing-f8d06d00-segment-99c66e8b ./start_gpfdist.sh 5001 /data0/database//40000/dsbenchmark
+Started gpfdist on port 5001
+executing on computing-f8d06d00-segment-a9fe5924 ./start_gpfdist.sh 5001 /data0/database//40000/dsbenchmark
+Started gpfdist on port 5001
+executing on computing-f8d06d00-segment-c69ed9c6 ./start_gpfdist.sh 5001 /data0/database//40000/dsbenchmark
+Started gpfdist on port 5001
+executing on computing-f8d06d00-segment-cc55c18c ./start_gpfdist.sh 5001 /data0/database//40000/dsbenchmark
+Started gpfdist on port 5001
+executing on computing-f8d06d00-segment-d80e1160 ./start_gpfdist.sh 5001 /data0/database//40000/dsbenchmark
+Started gpfdist on port 5001
+executing on computing-f8d06d00-segment-f6500372 ./start_gpfdist.sh 5001 /data0/database//40000/dsbenchmark
+Started gpfdist on port 5001
+executing on computing-f8d06d00-segment-f9df37ce ./start_gpfdist.sh 5001 /data0/database//40000/dsbenchmark
+Started gpfdist on port 5001
+executing on computing-f8d06d00-segment-fcc5e6a6 ./start_gpfdist.sh 5001 /data0/database//40000/dsbenchmark
+Started gpfdist on port 5001
+[2022-07-13 13:39:33] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/001.gpdb.time_dim.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:39:36] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/002.gpdb.ship_mode.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:39:38] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/003.gpdb.reason.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:39:39] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/004.gpdb.income_band.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:39:40] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/005.gpdb.item.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:39:45] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/006.gpdb.date_dim.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:39:51] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/007.gpdb.customer_demographics.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:39:54] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/008.gpdb.customer_address.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:39:57] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/009.gpdb.warehouse.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:40:00] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/010.gpdb.promotion.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:40:04] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/011.gpdb.household_demographics.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:40:05] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/012.gpdb.customer.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:40:09] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/013.gpdb.web_page.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:40:12] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/014.gpdb.web_site.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:40:17] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/015.gpdb.catalog_page.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:40:19] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/016.gpdb.call_center.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:40:24] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/017.gpdb.store.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:40:30] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/018.gpdb.inventory.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:40:33] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/019.gpdb.web_sales.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:40:44] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/020.gpdb.web_returns.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:40:49] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/021.gpdb.catalog_sales.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:41:06] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/022.gpdb.catalog_returns.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:41:12] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/023.gpdb.store_sales.sql | grep INSERT | awk -F ' ' '{print $3}'
+[2022-07-13 13:41:31] psql -v ON_ERROR_STOP=1 -f /home/gpadmin/TPC-DS/04_load/024.gpdb.store_returns.sql | grep INSERT | awk -F ' ' '{print $3}'
+stop gpfdist on all ports
+killing 16344
+killing 12824
+killing 24266
+killing 20936
+killing 23330
+killing 24178
+killing 24167
+killing 23939
+killing 23889
+killing 24020
+killing 13357
+killing 23664
+killing 21288
+killing 21900
+killing 23404
+killing 20659
+20220713:13:41:38:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-Starting analyzedb with args: -d gpadmin -s tpcds --full -a
+20220713:13:41:38:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-Getting and verifying input tables...
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-Checking for tables with stale stats...
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:----------------------------------------------------
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-Tables or partitions to be analyzed
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:----------------------------------------------------
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.web_site
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.web_sales
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.web_returns
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.web_page
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.warehouse
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.time_dim
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.store_sales
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.store_returns
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.store
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.ship_mode
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.reason
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.promotion
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.item
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.inventory
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.income_band
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.household_demographics
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.date_dim
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.customer_demographics
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.customer_address
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.customer
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.catalog_sales
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.catalog_returns
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.catalog_page
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-tpcds.call_center
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:----------------------------------------------------
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-Starting analyze with 5 workers...
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker0] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.web_site
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker1] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.web_sales
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker2] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.web_returns
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker3] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.web_page
+20220713:13:41:39:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker4] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.warehouse
+20220713:13:41:40:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker4] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.warehouse. Elapsed time: 0 seconds.
+20220713:13:41:40:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker4] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.time_dim
+20220713:13:41:40:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker3] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.web_page. Elapsed time: 0 seconds.
+20220713:13:41:40:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker3] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.store_sales
+20220713:13:41:40:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker0] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.web_site. Elapsed time: 0 seconds.
+20220713:13:41:40:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker0] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.store_returns
+20220713:13:41:41:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker2] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.web_returns. Elapsed time: 1 seconds.
+20220713:13:41:41:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker2] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.store
+20220713:13:41:42:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker0] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.store_returns. Elapsed time: 1 seconds.
+20220713:13:41:42:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker0] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.ship_mode
+20220713:13:41:42:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-progress status: completed 5 out of 24 tables or partitions
+20220713:13:41:42:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker1] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.web_sales. Elapsed time: 3 seconds.
+20220713:13:41:42:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker1] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.reason
+20220713:13:41:42:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker2] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.store. Elapsed time: 1 seconds.
+20220713:13:41:42:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker2] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.promotion
+20220713:13:41:42:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker3] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.store_sales. Elapsed time: 2 seconds.
+20220713:13:41:42:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker3] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.item
+20220713:13:41:43:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker0] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.ship_mode. Elapsed time: 0 seconds.
+20220713:13:41:43:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker0] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.inventory
+20220713:13:41:43:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker1] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.reason. Elapsed time: 0 seconds.
+20220713:13:41:43:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker4] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.time_dim. Elapsed time: 2 seconds.
+20220713:13:41:43:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker1] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.income_band
+20220713:13:41:43:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker4] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.household_demographics
+20220713:13:41:43:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker2] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.promotion. Elapsed time: 0 seconds.
+20220713:13:41:43:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker2] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.date_dim
+20220713:13:41:44:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker1] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.income_band. Elapsed time: 0 seconds.
+20220713:13:41:44:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker1] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.customer_demographics
+20220713:13:41:44:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker4] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.household_demographics. Elapsed time: 0 seconds.
+20220713:13:41:44:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker4] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.customer_address
+20220713:13:41:44:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker0] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.inventory. Elapsed time: 1 seconds.
+20220713:13:41:44:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker0] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.customer
+20220713:13:41:44:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-progress status: completed 15 out of 24 tables or partitions
+20220713:13:41:47:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker3] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.item. Elapsed time: 4 seconds.
+20220713:13:41:47:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker3] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.catalog_sales
+20220713:13:41:47:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker1] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.customer_demographics. Elapsed time: 3 seconds.
+20220713:13:41:47:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker1] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.catalog_returns
+20220713:13:41:48:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker2] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.date_dim. Elapsed time: 4 seconds.
+20220713:13:41:48:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker2] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.catalog_page
+20220713:13:41:48:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker0] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.customer. Elapsed time: 3 seconds.
+20220713:13:41:48:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker0] started  set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.call_center
+20220713:13:41:50:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker3] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.catalog_sales. Elapsed time: 2 seconds.
+20220713:13:41:50:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker0] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.call_center. Elapsed time: 1 seconds.
+20220713:13:41:50:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker4] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.customer_address. Elapsed time: 5 seconds.
+20220713:13:41:50:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker2] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.catalog_page. Elapsed time: 1 seconds.
+20220713:13:41:50:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-[worker1] finished set optimizer_analyze_enable_merge_of_leaf_stats=off; analyze tpcds.catalog_returns. Elapsed time: 2 seconds.
+20220713:13:41:50:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-Total elapsed time: 10 seconds. Analyzed 24 out of 24 table(s) or partition(s) successfully.
+20220713:13:41:50:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-Directory /data0/database//gpseg-1//db_analyze/gpadmin exists
+20220713:13:41:50:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-about to request exclusive lock on '/data0/database//gpseg-1//db_analyze/gpadmin/write_lock_semaphore' for analyzedb, to be able to write results...
+20220713:13:41:50:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-acquired analyzedb output lock, proceeding...
+20220713:13:41:50:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-Created /data0/database//gpseg-1//db_analyze/gpadmin/20220713134150
+20220713:13:41:50:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-Writing ao state file /data0/database//gpseg-1//db_analyze/gpadmin/20220713134150/analyze_20220713134150_ao_state_file
+20220713:13:41:50:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-Writing last operation file /data0/database//gpseg-1//db_analyze/gpadmin/20220713134150/analyze_20220713134150_last_operation
+20220713:13:41:50:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-Writing column state file /data0/database//gpseg-1//db_analyze/gpadmin/20220713134150/analyze_20220713134150_col_state_file
+20220713:13:41:50:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-Writing report file /data0/database//gpseg-1//db_analyze/gpadmin/20220713134150/analyze_20220713134150_report
+20220713:13:41:50:023039 analyzedb:computing-f8d06d00-master-5882cc9a:gpadmin-[INFO]:-Done.
+Finished load
+Run /home/gpadmin/TPC-DS/05_sql//rollout.sh
+[2022-07-13 13:41:50] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/101.dsbench.01.sql | wc -l
+[2022-07-13 13:41:51] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/102.dsbench.02.sql | wc -l
+[2022-07-13 13:41:52] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/103.dsbench.03.sql | wc -l
+[2022-07-13 13:41:53] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/104.dsbench.04.sql | wc -l
+[2022-07-13 13:41:57] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/105.dsbench.05.sql | wc -l
+[2022-07-13 13:42:00] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/106.dsbench.06.sql | wc -l
+[2022-07-13 13:42:02] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/107.dsbench.07.sql | wc -l
+[2022-07-13 13:42:03] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/108.dsbench.08.sql | wc -l
+[2022-07-13 13:42:04] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/109.dsbench.09.sql | wc -l
+[2022-07-13 13:42:07] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/110.dsbench.10.sql | wc -l
+[2022-07-13 13:42:09] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/111.dsbench.11.sql | wc -l
+[2022-07-13 13:42:11] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/112.dsbench.12.sql | wc -l
+[2022-07-13 13:42:12] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/113.dsbench.13.sql | wc -l
+[2022-07-13 13:42:14] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/114.dsbench.14.sql | wc -l
+[2022-07-13 13:42:30] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/115.dsbench.15.sql | wc -l
+[2022-07-13 13:42:31] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/116.dsbench.16.sql | wc -l
+[2022-07-13 13:42:33] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/117.dsbench.17.sql | wc -l
+[2022-07-13 13:42:36] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/118.dsbench.18.sql | wc -l
+[2022-07-13 13:42:38] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/119.dsbench.19.sql | wc -l
+[2022-07-13 13:42:39] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/120.dsbench.20.sql | wc -l
+[2022-07-13 13:42:40] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/121.dsbench.21.sql | wc -l
+[2022-07-13 13:42:41] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/122.dsbench.22.sql | wc -l
+[2022-07-13 13:42:43] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/123.dsbench.23.sql | wc -l
+[2022-07-13 13:42:53] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/124.dsbench.24.sql | wc -l
+[2022-07-13 13:42:55] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/125.dsbench.25.sql | wc -l
+[2022-07-13 13:42:58] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/126.dsbench.26.sql | wc -l
+[2022-07-13 13:42:59] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/127.dsbench.27.sql | wc -l
+[2022-07-13 13:43:00] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/128.dsbench.28.sql | wc -l
+[2022-07-13 13:43:02] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/129.dsbench.29.sql | wc -l
+[2022-07-13 13:43:04] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/130.dsbench.30.sql | wc -l
+[2022-07-13 13:43:05] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/131.dsbench.31.sql | wc -l
+[2022-07-13 13:43:09] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/132.dsbench.32.sql | wc -l
+[2022-07-13 13:43:10] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/133.dsbench.33.sql | wc -l
+[2022-07-13 13:43:13] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/134.dsbench.34.sql | wc -l
+[2022-07-13 13:43:14] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/135.dsbench.35.sql | wc -l
+[2022-07-13 13:43:16] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/136.dsbench.36.sql | wc -l
+[2022-07-13 13:43:17] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/137.dsbench.37.sql | wc -l
+[2022-07-13 13:43:18] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/138.dsbench.38.sql | wc -l
+[2022-07-13 13:43:20] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/139.dsbench.39.sql | wc -l
+[2022-07-13 13:43:23] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/140.dsbench.40.sql | wc -l
+[2022-07-13 13:43:24] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/141.dsbench.41.sql | wc -l
+[2022-07-13 13:43:24] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/142.dsbench.42.sql | wc -l
+[2022-07-13 13:43:25] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/143.dsbench.43.sql | wc -l
+[2022-07-13 13:43:26] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/144.dsbench.44.sql | wc -l
+[2022-07-13 13:43:27] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/145.dsbench.45.sql | wc -l
+[2022-07-13 13:43:28] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/146.dsbench.46.sql | wc -l
+[2022-07-13 13:43:30] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/147.dsbench.47.sql | wc -l
+[2022-07-13 13:43:32] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/148.dsbench.48.sql | wc -l
+[2022-07-13 13:43:34] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/149.dsbench.49.sql | wc -l
+[2022-07-13 13:43:36] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/150.dsbench.50.sql | wc -l
+[2022-07-13 13:43:37] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/151.dsbench.51.sql | wc -l
+[2022-07-13 13:43:38] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/152.dsbench.52.sql | wc -l
+[2022-07-13 13:43:39] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/153.dsbench.53.sql | wc -l
+[2022-07-13 13:43:40] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/154.dsbench.54.sql | wc -l
+[2022-07-13 13:43:43] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/155.dsbench.55.sql | wc -l
+[2022-07-13 13:43:43] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/156.dsbench.56.sql | wc -l
+[2022-07-13 13:43:47] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/157.dsbench.57.sql | wc -l
+[2022-07-13 13:43:49] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/158.dsbench.58.sql | wc -l
+[2022-07-13 13:43:52] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/159.dsbench.59.sql | wc -l
+[2022-07-13 13:43:54] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/160.dsbench.60.sql | wc -l
+[2022-07-13 13:43:58] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/161.dsbench.61.sql | wc -l
+[2022-07-13 13:44:01] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/162.dsbench.62.sql | wc -l
+[2022-07-13 13:44:02] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/163.dsbench.63.sql | wc -l
+[2022-07-13 13:44:03] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/164.dsbench.64.sql | wc -l
+[2022-07-13 13:44:07] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/165.dsbench.65.sql | wc -l
+[2022-07-13 13:44:09] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/166.dsbench.66.sql | wc -l
+[2022-07-13 13:44:11] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/167.dsbench.67.sql | wc -l
+[2022-07-13 13:44:15] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/168.dsbench.68.sql | wc -l
+[2022-07-13 13:44:16] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/169.dsbench.69.sql | wc -l
+[2022-07-13 13:44:19] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/170.dsbench.70.sql | wc -l
+[2022-07-13 13:44:21] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/171.dsbench.71.sql | wc -l
+[2022-07-13 13:44:22] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/172.dsbench.72.sql | wc -l
+[2022-07-13 13:44:30] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/173.dsbench.73.sql | wc -l
+[2022-07-13 13:44:31] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/174.dsbench.74.sql | wc -l
+[2022-07-13 13:44:33] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/175.dsbench.75.sql | wc -l
+[2022-07-13 13:44:36] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/176.dsbench.76.sql | wc -l
+[2022-07-13 13:44:37] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/177.dsbench.77.sql | wc -l
+[2022-07-13 13:44:41] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/178.dsbench.78.sql | wc -l
+[2022-07-13 13:44:43] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/179.dsbench.79.sql | wc -l
+[2022-07-13 13:44:44] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/180.dsbench.80.sql | wc -l
+[2022-07-13 13:44:49] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/181.dsbench.81.sql | wc -l
+[2022-07-13 13:44:51] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/182.dsbench.82.sql | wc -l
+[2022-07-13 13:44:52] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/183.dsbench.83.sql | wc -l
+[2022-07-13 13:44:55] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/184.dsbench.84.sql | wc -l
+[2022-07-13 13:44:56] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/185.dsbench.85.sql | wc -l
+[2022-07-13 13:44:59] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/186.dsbench.86.sql | wc -l
+[2022-07-13 13:45:00] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/187.dsbench.87.sql | wc -l
+[2022-07-13 13:45:02] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/188.dsbench.88.sql | wc -l
+[2022-07-13 13:45:08] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/189.dsbench.89.sql | wc -l
+[2022-07-13 13:45:09] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/190.dsbench.90.sql | wc -l
+[2022-07-13 13:45:10] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/191.dsbench.91.sql | wc -l
+[2022-07-13 13:45:12] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/192.dsbench.92.sql | wc -l
+[2022-07-13 13:45:12] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/193.dsbench.93.sql | wc -l
+[2022-07-13 13:45:13] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/194.dsbench.94.sql | wc -l
+[2022-07-13 13:45:15] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/195.dsbench.95.sql | wc -l
+[2022-07-13 13:45:20] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/196.dsbench.96.sql | wc -l
+[2022-07-13 13:45:21] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/197.dsbench.97.sql | wc -l
+[2022-07-13 13:45:22] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/198.dsbench.98.sql | wc -l
+[2022-07-13 13:45:23] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f /home/gpadmin/TPC-DS/05_sql/199.dsbench.99.sql | wc -l
+Finished sql
+Run /home/gpadmin/TPC-DS/06_single_user_reports//rollout.sh
+[2022-07-13 13:45:24] psql -v ON_ERROR_STOP=1 -a -f /home/gpadmin/TPC-DS/06_single_user_reports/00.gpdb.tpcds_reports.sql
+DROP SCHEMA IF EXISTS tpcds_reports CASCADE;
+psql:/home/gpadmin/TPC-DS/06_single_user_reports/00.gpdb.tpcds_reports.sql:1: NOTICE:  schema "tpcds_reports" does not exist, skipping
+DROP SCHEMA
+CREATE SCHEMA tpcds_reports;
+CREATE SCHEMA
+
+[2022-07-13 13:45:24] psql -v ON_ERROR_STOP=1 -a -f /home/gpadmin/TPC-DS/06_single_user_reports/01.gpdb.gen_data.sql
+CREATE TABLE tpcds_reports.gen_data
+(id int, description varchar, tuples bigint, duration time, start_epoch_seconds bigint, end_epoch_seconds bigint)
+DISTRIBUTED BY (id);
+CREATE TABLE
+
+[2022-07-13 13:45:24] psql -v ON_ERROR_STOP=1 -a -f /home/gpadmin/TPC-DS/06_single_user_reports/02.gpdb.init.sql
+CREATE TABLE tpcds_reports.init
+(id int, description varchar, tuples bigint, duration time, start_epoch_seconds bigint, end_epoch_seconds bigint)
+DISTRIBUTED BY (id);
+CREATE TABLE
+
+[2022-07-13 13:45:25] psql -v ON_ERROR_STOP=1 -a -f /home/gpadmin/TPC-DS/06_single_user_reports/03.gpdb.ddl.sql
+CREATE TABLE tpcds_reports.ddl
+(id int, description varchar, tuples bigint, duration time, start_epoch_seconds bigint, end_epoch_seconds bigint)
+DISTRIBUTED BY (id);
+CREATE TABLE
+
+[2022-07-13 13:45:25] psql -v ON_ERROR_STOP=1 -a -f /home/gpadmin/TPC-DS/06_single_user_reports/04.gpdb.load.sql
+CREATE TABLE tpcds_reports.load
+(id int, description varchar, tuples bigint, duration time, start_epoch_seconds bigint, end_epoch_seconds bigint)
+DISTRIBUTED BY (id);
+CREATE TABLE
+
+[2022-07-13 13:45:25] psql -v ON_ERROR_STOP=1 -a -f /home/gpadmin/TPC-DS/06_single_user_reports/05.gpdb.sql.sql
+CREATE TABLE tpcds_reports.sql
+(id int, description varchar, tuples bigint, duration time, start_epoch_seconds bigint, end_epoch_seconds bigint)
+DISTRIBUTED BY (id);
+CREATE TABLE
+
+[2022-07-13 13:45:26] psql -v ON_ERROR_STOP=1 -a -f /home/gpadmin/TPC-DS/06_single_user_reports/06.gpdb.compile_tpcds.sql
+CREATE TABLE tpcds_reports.compile_tpcds
+(id int, description varchar, tuples bigint, duration time, start_epoch_seconds bigint, end_spoch_seconds bigint)
+DISTRIBUTED BY (id);
+CREATE TABLE
+
+[2022-07-13 13:45:26] psql -v ON_ERROR_STOP=1 -a -f /home/gpadmin/TPC-DS/06_single_user_reports/07.copy.gen_data.sql -v LOGFILE="'/home/gpadmin/TPC-DS/log/rollout_gen_data.log'"
+COPY tpcds_reports.gen_data FROM :LOGFILE WITH DELIMITER '|';
+COPY 1
+
+[2022-07-13 13:45:27] psql -v ON_ERROR_STOP=1 -a -f /home/gpadmin/TPC-DS/06_single_user_reports/08.copy.init.sql -v LOGFILE="'/home/gpadmin/TPC-DS/log/rollout_init.log'"
+COPY tpcds_reports.init FROM :LOGFILE WITH DELIMITER '|';
+COPY 1
+
+[2022-07-13 13:45:27] psql -v ON_ERROR_STOP=1 -a -f /home/gpadmin/TPC-DS/06_single_user_reports/09.copy.ddl.sql -v LOGFILE="'/home/gpadmin/TPC-DS/log/rollout_ddl.log'"
+COPY tpcds_reports.ddl FROM :LOGFILE WITH DELIMITER '|';
+COPY 50
+
+[2022-07-13 13:45:28] psql -v ON_ERROR_STOP=1 -a -f /home/gpadmin/TPC-DS/06_single_user_reports/10.copy.load.sql -v LOGFILE="'/home/gpadmin/TPC-DS/log/rollout_load.log'"
+COPY tpcds_reports.load FROM :LOGFILE WITH DELIMITER '|';
+COPY 25
+
+[2022-07-13 13:45:29] psql -v ON_ERROR_STOP=1 -a -f /home/gpadmin/TPC-DS/06_single_user_reports/11.copy.sql.sql -v LOGFILE="'/home/gpadmin/TPC-DS/log/rollout_sql.log'"
+COPY tpcds_reports.sql FROM :LOGFILE WITH DELIMITER '|';
+COPY 99
+
+[2022-07-13 13:45:29] psql -v ON_ERROR_STOP=1 -a -f /home/gpadmin/TPC-DS/06_single_user_reports/12.copy.compile_tpcds.sql -v LOGFILE="'/home/gpadmin/TPC-DS/log/rollout_compile_tpcds.log'"
+COPY tpcds_reports.compile_tpcds FROM :LOGFILE WITH DELIMITER '|';
+COPY 1
+
+analyze tpcds_reports.gen_data;
+ANALYZE
+analyze tpcds_reports.init;
+ANALYZE
+analyze tpcds_reports.ddl;
+ANALYZE
+analyze tpcds_reports.load;
+ANALYZE
+analyze tpcds_reports.sql;
+ANALYZE
+analyze tpcds_reports.compile_tpcds;
+ANALYZE
+********************************************************************************
+Generate Data
+********************************************************************************
+time	value
+Seconds	137
+Minutes	2.28333333333333
+Hours	0.0380555555555556
+(3 rows)
+
+********************************************************************************
+Data Loads
+********************************************************************************
+table_name	tuples	seconds
+call_center	6	5
+catalog_page	11718	2
+catalog_returns	144067	6
+catalog_sales	1441548	17
+customer	100000	4
+customer_address	50000	3
+customer_demographics	1920800	3
+date_dim	73049	6
+household_demographics	7200	2
+income_band	20	1
+inventory	11745000	3
+item	18000	5
+promotion	300	3
+reason	35	1
+ship_mode	20	2
+store	12	6
+store_returns	287514	6
+store_sales	2880404	19
+time_dim	86400	3
+warehouse	5	3
+web_page	60	3
+web_returns	71763	5
+web_sales	719384	11
+web_site	30	5
+(24 rows)
+
+********************************************************************************
+Analyze
+********************************************************************************
+schema_name	seconds
+tpcds	12
+(1 row)
+
+
+********************************************************************************
+Queries
+********************************************************************************
+id	tuples	duration
+01	100	1
+02	2513	1
+03	1	1
+04	4	4
+05	100	3
+06	45	2
+07	100	1
+08	0	1
+09	1	3
+10	8	2
+11	88	2
+12	100	1
+13	1	2
+14	200	16
+15	100	1
+16	1	2
+17	0	3
+18	100	2
+19	100	1
+20	100	1
+21	100	1
+22	100	2
+23	1	10
+24	0	2
+25	0	3
+26	100	1
+27	100	1
+28	1	2
+29	1	2
+30	97	1
+31	51	4
+32	1	1
+33	100	3
+34	100	1
+35	100	2
+36	100	1
+37	0	1
+38	1	2
+39	257	3
+40	100	1
+41	0	0
+42	10	1
+43	6	1
+44	0	1
+45	16	1
+46	100	2
+47	100	2
+48	1	2
+49	31	2
+50	6	1
+51	100	1
+52	100	1
+53	100	1
+54	0	3
+55	100	0
+56	100	4
+57	100	2
+58	0	3
+59	100	2
+60	100	4
+61	1	3
+62	100	1
+63	100	1
+64	7	4
+65	100	2
+66	5	2
+67	100	4
+68	100	1
+69	100	3
+70	3	2
+71	100	1
+72	100	8
+73	2	1
+74	89	2
+75	100	3
+76	100	1
+77	44	4
+78	100	2
+79	100	1
+80	100	5
+81	100	2
+82	5	1
+83	12	3
+84	23	1
+85	0	3
+86	100	1
+87	1	2
+88	1	6
+89	100	1
+90	1	1
+91	5	1
+92	1	0
+93	100	1
+94	1	2
+95	1	5
+96	1	1
+97	1	1
+98	2600	1
+99	90	1
+(99 rows)
+
+Finished single_user_reports
+Run /home/gpadmin/TPC-DS/07_multi_user//rollout.sh
+sql_dir: /home/gpadmin/TPC-DS/07_multi_user
+checking for directory /home/gpadmin/TPC-DS/07_multi_user/1
+mkdir /home/gpadmin/TPC-DS/07_multi_user/1
+rm -f /home/gpadmin/TPC-DS/07_multi_user/1/*.sql
+checking for directory /home/gpadmin/TPC-DS/07_multi_user/2
+mkdir /home/gpadmin/TPC-DS/07_multi_user/2
+rm -f /home/gpadmin/TPC-DS/07_multi_user/2/*.sql
+cd /home/gpadmin/TPC-DS/07_multi_user
+[2022-07-13 13:45:33] /home/gpadmin/TPC-DS/07_multi_user/dsqgen -streams 2 -input /home/gpadmin/TPC-DS/07_multi_user/query_templates/templates.lst -directory /home/gpadmin/TPC-DS/07_multi_user/query_templates -dialect pivotal -scale 1 -verbose y -output /home/gpadmin/TPC-DS/07_multi_user
+qgen2 Query Generator (Version 2.0.0)
+Copyright Transaction Processing Performance Council (TPC) 2001 - 2015
+Warning: This scale factor is valid for QUALIFICATION ONLY
+ stream_number: 1
+mv /home/gpadmin/TPC-DS/07_multi_user/query_0.sql /home/gpadmin/TPC-DS/07_multi_user/1/
+stream_number: 2
+mv /home/gpadmin/TPC-DS/07_multi_user/query_1.sql /home/gpadmin/TPC-DS/07_multi_user/2/
+[2022-07-13 13:45:33] /home/gpadmin/TPC-DS/07_multi_user/test.sh 1
+[2022-07-13 13:45:33] /home/gpadmin/TPC-DS/07_multi_user/test.sh 2
+Now executing queries. This may take a while.
+Multi-user query duration: 780 minute(s)81 minute(s)82 minute(s)83 minute(s)84 minute(s)85 minute(s)86 minute(s)87 minute(s)88 minute(s)89 minute(s)810 minute(s)811 minute(s)812 minute(s)813 minute(s)
+done.
+
+Run /home/gpadmin/TPC-DS/08_multi_user_reports//rollout.sh
+[2022-07-13 14:00:33] psql -v ON_ERROR_STOP=1 -a -f /home/gpadmin/TPC-DS/08_multi_user_reports/00.gpdb.tpcds_testing.sql
+DROP SCHEMA IF EXISTS tpcds_testing CASCADE;
+psql:/home/gpadmin/TPC-DS/08_multi_user_reports/00.gpdb.tpcds_testing.sql:1: NOTICE:  schema "tpcds_testing" does not exist, skipping
+DROP SCHEMA
+CREATE SCHEMA tpcds_testing;
+CREATE SCHEMA
+
+[2022-07-13 14:00:33] psql -v ON_ERROR_STOP=1 -a -f /home/gpadmin/TPC-DS/08_multi_user_reports/01.gpdb.sql.sql
+CREATE TABLE tpcds_testing.sql
+(id int, description varchar, tuples bigint, duration time, start_epoch_seconds bigint, end_epoch_seconds bigint)
+DISTRIBUTED BY (id);
+CREATE TABLE
+
+[2022-07-13 14:00:34] psql -v ON_ERROR_STOP=1 -a -f /home/gpadmin/TPC-DS/08_multi_user_reports/02.copy.sql.sql -v LOGFILE="'/home/gpadmin/TPC-DS/log/rollout_testing_1.log'"
+COPY tpcds_testing.sql FROM :LOGFILE WITH DELIMITER '|';
+COPY 99
+[2022-07-13 14:00:35] psql -v ON_ERROR_STOP=1 -a -f /home/gpadmin/TPC-DS/08_multi_user_reports/02.copy.sql.sql -v LOGFILE="'/home/gpadmin/TPC-DS/log/rollout_testing_2.log'"
+COPY tpcds_testing.sql FROM :LOGFILE WITH DELIMITER '|';
+COPY 99
+analyze tpcds_testing.sql;
+ANALYZE
+query_id	session_1	session_2	session_3	session_4	session_5	session_6	session_7	session_8	session_9	session_10
+01	1	1	0	0	0	0	0	0	0	0
+02	1	1	0	0	0	0	0	0	0	0
+03	1	0	0	0	0	0	0	0	0	0
+04	5	39	0	0	0	0	0	0	0	0
+05	3	3	0	0	0	0	0	0	0	0
+06	3	2	0	0	0	0	0	0	0	0
+07	1	1	0	0	0	0	0	0	0	0
+08	2	1	0	0	0	0	0	0	0	0
+09	3	4	0	0	0	0	0	0	0	0
+10	2	3	0	0	0	0	0	0	0	0
+11	3	3	0	0	0	0	0	0	0	0
+12	0	1	0	0	0	0	0	0	0	0
+13	2	1	0	0	0	0	0	0	0	0
+14	181	98	0	0	0	0	0	0	0	0
+15	6	1	0	0	0	0	0	0	0	0
+16	2	2	0	0	0	0	0	0	0	0
+17	3	2	0	0	0	0	0	0	0	0
+18	64	3	0	0	0	0	0	0	0	0
+19	2	2	0	0	0	0	0	0	0	0
+20	1	1	0	0	0	0	0	0	0	0
+21	2	1	0	0	0	0	0	0	0	0
+22	2	2	0	0	0	0	0	0	0	0
+23	9	229	0	0	0	0	0	0	0	0
+24	161	4	0	0	0	0	0	0	0	0
+25	2	3	0	0	0	0	0	0	0	0
+26	1	1	0	0	0	0	0	0	0	0
+27	2	1	0	0	0	0	0	0	0	0
+28	2	1	0	0	0	0	0	0	0	0
+29	2	2	0	0	0	0	0	0	0	0
+30	1	2	0	0	0	0	0	0	0	0
+31	4	4	0	0	0	0	0	0	0	0
+32	0	0	0	0	0	0	0	0	0	0
+33	4	4	0	0	0	0	0	0	0	0
+34	1	1	0	0	0	0	0	0	0	0
+35	2	2	0	0	0	0	0	0	0	0
+36	1	2	0	0	0	0	0	0	0	0
+37	1	1	0	0	0	0	0	0	0	0
+38	2	2	0	0	0	0	0	0	0	0
+39	31	3	0	0	0	0	0	0	0	0
+40	1	1	0	0	0	0	0	0	0	0
+41	0	1	0	0	0	0	0	0	0	0
+42	1	1	0	0	0	0	0	0	0	0
+43	0	1	0	0	0	0	0	0	0	0
+44	17	1	0	0	0	0	0	0	0	0
+45	1	1	0	0	0	0	0	0	0	0
+46	2	2	0	0	0	0	0	0	0	0
+47	1	2	0	0	0	0	0	0	0	0
+48	2	2	0	0	0	0	0	0	0	0
+49	3	3	0	0	0	0	0	0	0	0
+50	1	1	0	0	0	0	0	0	0	0
+51	1	1	0	0	0	0	0	0	0	0
+52	63	1	0	0	0	0	0	0	0	0
+53	1	1	0	0	0	0	0	0	0	0
+54	3	3	0	0	0	0	0	0	0	0
+55	1	7	0	0	0	0	0	0	0	0
+56	4	5	0	0	0	0	0	0	0	0
+57	2	2	0	0	0	0	0	0	0	0
+58	3	4	0	0	0	0	0	0	0	0
+59	3	2	0	0	0	0	0	0	0	0
+60	89	66	0	0	0	0	0	0	0	0
+61	3	3	0	0	0	0	0	0	0	0
+62	1	1	0	0	0	0	0	0	0	0
+63	1	1	0	0	0	0	0	0	0	0
+64	5	5	0	0	0	0	0	0	0	0
+65	1	2	0	0	0	0	0	0	0	0
+66	3	30	0	0	0	0	0	0	0	0
+67	4	3	0	0	0	0	0	0	0	0
+68	2	1	0	0	0	0	0	0	0	0
+69	3	2	0	0	0	0	0	0	0	0
+70	2	159	0	0	0	0	0	0	0	0
+71	2	2	0	0	0	0	0	0	0	0
+72	9	9	0	0	0	0	0	0	0	0
+73	1	1	0	0	0	0	0	0	0	0
+74	2	3	0	0	0	0	0	0	0	0
+75	4	3	0	0	0	0	0	0	0	0
+76	1	2	0	0	0	0	0	0	0	0
+77	4	4	0	0	0	0	0	0	0	0
+78	3	3	0	0	0	0	0	0	0	0
+79	2	1	0	0	0	0	0	0	0	0
+80	5	4	0	0	0	0	0	0	0	0
+81	1	2	0	0	0	0	0	0	0	0
+82	2	2	0	0	0	0	0	0	0	0
+83	3	4	0	0	0	0	0	0	0	0
+84	1	1	0	0	0	0	0	0	0	0
+85	3	4	0	0	0	0	0	0	0	0
+86	1	1	0	0	0	0	0	0	0	0
+87	2	1	0	0	0	0	0	0	0	0
+88	7	6	0	0	0	0	0	0	0	0
+89	33	1	0	0	0	0	0	0	0	0
+90	1	1	0	0	0	0	0	0	0	0
+91	1	2	0	0	0	0	0	0	0	0
+92	0	17	0	0	0	0	0	0	0	0
+93	2	1	0	0	0	0	0	0	0	0
+94	2	2	0	0	0	0	0	0	0	0
+95	6	5	0	0	0	0	0	0	0	0
+96	1	1	0	0	0	0	0	0	0	0
+97	1	1	0	0	0	0	0	0	0	0
+98	1	1	0	0	0	0	0	0	0	0
+99	0	1	0	0	0	0	0	0	0	0
+(99 rows)
+
+Finished multi_user_reports
+Run /home/gpadmin/TPC-DS/09_score//rollout.sh
+Number of Streams (Sq)	2
+Scale Factor (SF)	1
+Load			124
+Analyze			12
+1 User Queries		213
+Concurrent Queries	1676
+Throughput Test Elapsed Time	841
+
+TPC-DS v1.3.1 (QphDS@SF = floor(SF * Q / sum(TPT, TTT, TLD)))
+Q (3 * Sq * 99)		594
+TPT (seconds)		426
+TTT (seconds)		3352
+TLD (seconds)		2
+Score			0
+
+TPC-DS v2.2.0 (QphDS@SF = floor(SF * Q / geomean(TPT, TTT, TLD)))
+Q (Sq * 99)		198
+TPT (hours)		0.118
+TTT (hours)		0.467
+TLD (hours)		0.001
+Score			5884
+Finished score

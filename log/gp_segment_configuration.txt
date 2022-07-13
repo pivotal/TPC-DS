@@ -1,0 +1,17 @@
+1|-1|p|p|s|u|5432|computing-f8d06d00-master-5882cc9a|computing-f8d06d00-master-5882cc9a|/data0/database//gpseg-1
+2|0|p|p|s|u|40000|computing-f8d06d00-segment-cc55c18c|computing-f8d06d00-segment-cc55c18c|/data0/database//40000
+3|1|p|p|s|u|40000|computing-f8d06d00-segment-d80e1160|computing-f8d06d00-segment-d80e1160|/data0/database//40000
+4|2|p|p|s|u|40000|computing-f8d06d00-segment-f6500372|computing-f8d06d00-segment-f6500372|/data0/database//40000
+5|3|p|p|s|u|40000|computing-f8d06d00-segment-f9df37ce|computing-f8d06d00-segment-f9df37ce|/data0/database//40000
+6|4|p|p|s|u|40000|computing-f8d06d00-segment-8964a688|computing-f8d06d00-segment-8964a688|/data0/database//40000
+7|5|p|p|s|u|40000|computing-f8d06d00-segment-5ec28e9d|computing-f8d06d00-segment-5ec28e9d|/data0/database//40000
+8|6|p|p|s|u|40000|computing-f8d06d00-segment-240c7f29|computing-f8d06d00-segment-240c7f29|/data0/database//40000
+9|7|p|p|s|u|40000|computing-f8d06d00-segment-c69ed9c6|computing-f8d06d00-segment-c69ed9c6|/data0/database//40000
+10|8|p|p|s|u|40000|computing-f8d06d00-segment-57664e5e|computing-f8d06d00-segment-57664e5e|/data0/database//40000
+11|9|p|p|s|u|40000|computing-f8d06d00-segment-fcc5e6a6|computing-f8d06d00-segment-fcc5e6a6|/data0/database//40000
+12|10|p|p|s|u|40000|computing-f8d06d00-segment-a9fe5924|computing-f8d06d00-segment-a9fe5924|/data0/database//40000
+13|11|p|p|s|u|40000|computing-f8d06d00-segment-772128c5|computing-f8d06d00-segment-772128c5|/data0/database//40000
+14|12|p|p|s|u|40000|computing-f8d06d00-segment-5609b4dd|computing-f8d06d00-segment-5609b4dd|/data0/database//40000
+15|13|p|p|s|u|40000|computing-f8d06d00-segment-3e867bcf|computing-f8d06d00-segment-3e867bcf|/data0/database//40000
+16|14|p|p|s|u|40000|computing-f8d06d00-segment-99c66e8b|computing-f8d06d00-segment-99c66e8b|/data0/database//40000
+17|15|p|p|s|u|40000|computing-f8d06d00-segment-3b09486e|computing-f8d06d00-segment-3b09486e|/data0/database//40000

@@ -1,0 +1,404 @@
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/112.dsbench.01.sql
+sed -n 479,503p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/112.dsbench.01.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/112.dsbench.01.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/184.dsbench.02.sql
+sed -n 4018,4077p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/184.dsbench.02.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/184.dsbench.02.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/145.dsbench.03.sql
+sed -n 2031,2051p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/145.dsbench.03.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/145.dsbench.03.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/193.dsbench.04.sql
+sed -n 4392,4507p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/193.dsbench.04.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/193.dsbench.04.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/198.dsbench.05.sql
+sed -n 4696,4823p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/198.dsbench.05.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/198.dsbench.05.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/158.dsbench.06.sql
+sed -n 2622,2647p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/158.dsbench.06.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/158.dsbench.06.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/102.dsbench.07.sql
+sed -n 17,37p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/102.dsbench.07.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/102.dsbench.07.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/163.dsbench.08.sql
+sed -n 2803,2910p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/163.dsbench.08.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/163.dsbench.08.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/149.dsbench.09.sql
+sed -n 2282,2332p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/149.dsbench.09.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/149.dsbench.09.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/126.dsbench.10.sql
+sed -n 1048,1106p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/126.dsbench.10.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/126.dsbench.10.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/151.dsbench.11.sql
+sed -n 2385,2465p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/151.dsbench.11.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/151.dsbench.11.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/164.dsbench.12.sql
+sed -n 2911,2944p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/164.dsbench.12.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/164.dsbench.12.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/191.dsbench.13.sql
+sed -n 4241,4292p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/191.dsbench.13.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/191.dsbench.13.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/169.dsbench.14.sql
+sed -n 3193,3390p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/169.dsbench.14.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/169.dsbench.14.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/157.dsbench.15.sql
+sed -n 2602,2621p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/157.dsbench.15.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/157.dsbench.15.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/125.dsbench.16.sql
+sed -n 1017,1047p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/125.dsbench.16.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/125.dsbench.16.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/141.dsbench.17.sql
+sed -n 1873,1917p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/141.dsbench.17.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/141.dsbench.17.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/190.dsbench.18.sql
+sed -n 4207,4240p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/190.dsbench.18.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/190.dsbench.18.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/108.dsbench.19.sql
+sed -n 321,345p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/108.dsbench.19.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/108.dsbench.19.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/165.dsbench.20.sql
+sed -n 2945,2974p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/165.dsbench.20.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/165.dsbench.20.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/114.dsbench.21.sql
+sed -n 535,564p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/114.dsbench.21.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/114.dsbench.21.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/155.dsbench.22.sql
+sed -n 2554,2573p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/155.dsbench.22.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/155.dsbench.22.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/168.dsbench.23.sql
+sed -n 3086,3192p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/168.dsbench.23.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/168.dsbench.23.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/192.dsbench.24.sql
+sed -n 4293,4391p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/192.dsbench.24.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/192.dsbench.24.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/109.dsbench.25.sql
+sed -n 346,393p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/109.dsbench.25.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/109.dsbench.25.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/185.dsbench.26.sql
+sed -n 4078,4098p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/185.dsbench.26.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/185.dsbench.26.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/116.dsbench.27.sql
+sed -n 584,606p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/116.dsbench.27.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/116.dsbench.27.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/136.dsbench.28.sql
+sed -n 1522,1574p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/136.dsbench.28.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/136.dsbench.28.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/153.dsbench.29.sql
+sed -n 2484,2530p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/153.dsbench.29.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/153.dsbench.29.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/175.dsbench.30.sql
+sed -n 3608,3638p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/175.dsbench.30.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/175.dsbench.30.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/150.dsbench.31.sql
+sed -n 2333,2384p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/150.dsbench.31.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/150.dsbench.31.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/107.dsbench.32.sql
+sed -n 293,320p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/107.dsbench.32.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/107.dsbench.32.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/122.dsbench.33.sql
+sed -n 872,946p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/122.dsbench.33.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/122.dsbench.33.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/173.dsbench.34.sql
+sed -n 3509,3540p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/173.dsbench.34.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/173.dsbench.34.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/147.dsbench.35.sql
+sed -n 2097,2154p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/147.dsbench.35.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/147.dsbench.35.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/121.dsbench.36.sql
+sed -n 841,871p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/121.dsbench.36.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/121.dsbench.36.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/131.dsbench.37.sql
+sed -n 1305,1321p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/131.dsbench.37.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/131.dsbench.37.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/154.dsbench.38.sql
+sed -n 2531,2553p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/154.dsbench.38.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/154.dsbench.38.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/105.dsbench.39.sql
+sed -n 143,196p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/105.dsbench.39.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/105.dsbench.39.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/186.dsbench.40.sql
+sed -n 4099,4126p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/186.dsbench.40.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/186.dsbench.40.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/162.dsbench.41.sql
+sed -n 2751,2802p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/162.dsbench.41.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/162.dsbench.41.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/161.dsbench.42.sql
+sed -n 2729,2750p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/161.dsbench.42.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/161.dsbench.42.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/115.dsbench.43.sql
+sed -n 565,583p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/115.dsbench.43.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/115.dsbench.43.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/104.dsbench.44.sql
+sed -n 108,142p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/104.dsbench.44.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/104.dsbench.44.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/118.dsbench.45.sql
+sed -n 636,655p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/118.dsbench.45.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/118.dsbench.45.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/123.dsbench.46.sql
+sed -n 947,981p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/123.dsbench.46.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/123.dsbench.46.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/142.dsbench.47.sql
+sed -n 1918,1968p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/142.dsbench.47.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/142.dsbench.47.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/174.dsbench.48.sql
+sed -n 3541,3607p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/174.dsbench.48.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/174.dsbench.48.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/148.dsbench.49.sql
+sed -n 2155,2281p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/148.dsbench.49.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/148.dsbench.49.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/160.dsbench.50.sql
+sed -n 2670,2728p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/160.dsbench.50.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/160.dsbench.50.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/146.dsbench.51.sql
+sed -n 2052,2096p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/146.dsbench.51.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/146.dsbench.51.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/159.dsbench.52.sql
+sed -n 2648,2669p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/159.dsbench.52.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/159.dsbench.52.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/188.dsbench.53.sql
+sed -n 4156,4183p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/188.dsbench.53.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/188.dsbench.53.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/181.dsbench.54.sql
+sed -n 3880,3935p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/181.dsbench.54.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/181.dsbench.54.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/182.dsbench.55.sql
+sed -n 3936,3949p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/182.dsbench.55.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/182.dsbench.55.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/183.dsbench.56.sql
+sed -n 3950,4017p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/183.dsbench.56.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/183.dsbench.56.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/170.dsbench.57.sql
+sed -n 3391,3438p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/170.dsbench.57.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/170.dsbench.57.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/119.dsbench.58.sql
+sed -n 656,720p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/119.dsbench.58.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/119.dsbench.58.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/130.dsbench.59.sql
+sed -n 1261,1304p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/130.dsbench.59.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/130.dsbench.59.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/129.dsbench.60.sql
+sed -n 1183,1260p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/129.dsbench.60.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/129.dsbench.60.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/197.dsbench.61.sql
+sed -n 4652,4695p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/197.dsbench.61.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/197.dsbench.61.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/124.dsbench.62.sql
+sed -n 982,1016p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/124.dsbench.62.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/124.dsbench.62.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/127.dsbench.63.sql
+sed -n 1107,1135p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/127.dsbench.63.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/127.dsbench.63.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/120.dsbench.64.sql
+sed -n 721,840p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/120.dsbench.64.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/120.dsbench.64.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/171.dsbench.65.sql
+sed -n 3439,3467p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/171.dsbench.65.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/171.dsbench.65.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/139.dsbench.66.sql
+sed -n 1631,1850p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/139.dsbench.66.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/139.dsbench.66.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/135.dsbench.67.sql
+sed -n 1478,1521p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/135.dsbench.67.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/135.dsbench.67.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/195.dsbench.68.sql
+sed -n 4543,4584p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/195.dsbench.68.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/195.dsbench.68.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/128.dsbench.69.sql
+sed -n 1136,1182p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/128.dsbench.69.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/128.dsbench.69.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/134.dsbench.70.sql
+sed -n 1439,1477p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/134.dsbench.70.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/134.dsbench.70.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/172.dsbench.71.sql
+sed -n 3468,3508p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/172.dsbench.71.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/172.dsbench.71.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/187.dsbench.72.sql
+sed -n 4127,4155p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/187.dsbench.72.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/187.dsbench.72.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/179.dsbench.73.sql
+sed -n 3831,3858p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/179.dsbench.73.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/179.dsbench.73.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/176.dsbench.74.sql
+sed -n 3639,3699p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/176.dsbench.74.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/176.dsbench.74.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/103.dsbench.75.sql
+sed -n 38,107p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/103.dsbench.75.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/103.dsbench.75.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/199.dsbench.76.sql
+sed -n 4824,4847p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/199.dsbench.76.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/199.dsbench.76.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/178.dsbench.77.sql
+sed -n 3723,3830p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/178.dsbench.77.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/178.dsbench.77.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/110.dsbench.78.sql
+sed -n 394,451p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/110.dsbench.78.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/110.dsbench.78.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/189.dsbench.79.sql
+sed -n 4184,4206p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/189.dsbench.79.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/189.dsbench.79.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/106.dsbench.80.sql
+sed -n 197,292p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/106.dsbench.80.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/106.dsbench.80.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/137.dsbench.81.sql
+sed -n 1575,1605p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/137.dsbench.81.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/137.dsbench.81.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/167.dsbench.82.sql
+sed -n 3069,3085p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/167.dsbench.82.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/167.dsbench.82.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/196.dsbench.83.sql
+sed -n 4585,4651p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/196.dsbench.83.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/196.dsbench.83.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/180.dsbench.84.sql
+sed -n 3859,3879p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/180.dsbench.84.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/180.dsbench.84.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/133.dsbench.85.sql
+sed -n 1355,1438p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/133.dsbench.85.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/133.dsbench.85.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/111.dsbench.86.sql
+sed -n 452,478p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/111.dsbench.86.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/111.dsbench.86.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/177.dsbench.87.sql
+sed -n 3700,3722p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/177.dsbench.87.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/177.dsbench.87.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/166.dsbench.88.sql
+sed -n 2975,3068p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/166.dsbench.88.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/166.dsbench.88.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/156.dsbench.89.sql
+sed -n 2574,2601p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/156.dsbench.89.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/156.dsbench.89.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/140.dsbench.90.sql
+sed -n 1851,1872p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/140.dsbench.90.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/140.dsbench.90.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/113.dsbench.91.sql
+sed -n 504,534p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/113.dsbench.91.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/113.dsbench.91.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/144.dsbench.92.sql
+sed -n 2001,2030p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/144.dsbench.92.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/144.dsbench.92.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/152.dsbench.93.sql
+sed -n 2466,2483p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/152.dsbench.93.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/152.dsbench.93.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/117.dsbench.94.sql
+sed -n 607,635p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/117.dsbench.94.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/117.dsbench.94.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/143.dsbench.95.sql
+sed -n 1969,2000p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/143.dsbench.95.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/143.dsbench.95.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/101.dsbench.96.sql
+sed -n 1,16p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/101.dsbench.96.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/101.dsbench.96.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/138.dsbench.97.sql
+sed -n 1606,1630p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/138.dsbench.97.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/138.dsbench.97.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/132.dsbench.98.sql
+sed -n 1322,1354p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/132.dsbench.98.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/132.dsbench.98.sql
+print "set role dsbench;\n:EXPLAIN_ANALYZE\n" > /home/gpadmin/TPC-DS/07_multi_user/1/194.dsbench.99.sql
+sed -n 4508,4542p /home/gpadmin/TPC-DS/07_multi_user/1/query_0.sql >> /home/gpadmin/TPC-DS/07_multi_user/1/194.dsbench.99.sql
+Completed: /home/gpadmin/TPC-DS/07_multi_user/1/194.dsbench.99.sql
+rm -f /home/gpadmin/TPC-DS/07_multi_user/1/query_*.sql
+
+queries 14, 23, 24, and 39 have 2 queries in each file.  Need to add :EXPLAIN_ANALYZE to second query in these files
+
+myfilename: /home/gpadmin/TPC-DS/07_multi_user/1/*.dsbench.14.sql
+myfilename: /home/gpadmin/TPC-DS/07_multi_user/1/*.dsbench.23.sql
+myfilename: /home/gpadmin/TPC-DS/07_multi_user/1/*.dsbench.24.sql
+myfilename: /home/gpadmin/TPC-DS/07_multi_user/1/*.dsbench.39.sql
+[2022-07-13 13:45:34] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/101.dsbench.96.sql | wc -l
+[2022-07-13 13:45:35] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/102.dsbench.07.sql | wc -l
+[2022-07-13 13:45:36] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/103.dsbench.75.sql | wc -l
+[2022-07-13 13:45:40] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/104.dsbench.44.sql | wc -l
+[2022-07-13 13:45:57] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/105.dsbench.39.sql | wc -l
+[2022-07-13 13:46:28] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/106.dsbench.80.sql | wc -l
+[2022-07-13 13:46:33] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/107.dsbench.32.sql | wc -l
+[2022-07-13 13:46:33] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/108.dsbench.19.sql | wc -l
+[2022-07-13 13:46:35] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/109.dsbench.25.sql | wc -l
+[2022-07-13 13:46:37] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/110.dsbench.78.sql | wc -l
+[2022-07-13 13:46:40] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/111.dsbench.86.sql | wc -l
+[2022-07-13 13:46:41] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/112.dsbench.01.sql | wc -l
+[2022-07-13 13:46:42] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/113.dsbench.91.sql | wc -l
+[2022-07-13 13:46:43] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/114.dsbench.21.sql | wc -l
+[2022-07-13 13:46:45] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/115.dsbench.43.sql | wc -l
+[2022-07-13 13:46:45] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/116.dsbench.27.sql | wc -l
+[2022-07-13 13:46:47] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/117.dsbench.94.sql | wc -l
+[2022-07-13 13:46:49] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/118.dsbench.45.sql | wc -l
+[2022-07-13 13:46:50] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/119.dsbench.58.sql | wc -l
+[2022-07-13 13:46:53] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/120.dsbench.64.sql | wc -l
+[2022-07-13 13:46:58] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/121.dsbench.36.sql | wc -l
+[2022-07-13 13:46:59] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/122.dsbench.33.sql | wc -l
+[2022-07-13 13:47:03] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/123.dsbench.46.sql | wc -l
+[2022-07-13 13:47:05] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/124.dsbench.62.sql | wc -l
+[2022-07-13 13:47:06] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/125.dsbench.16.sql | wc -l
+[2022-07-13 13:47:08] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/126.dsbench.10.sql | wc -l
+[2022-07-13 13:47:10] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/127.dsbench.63.sql | wc -l
+[2022-07-13 13:47:11] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/128.dsbench.69.sql | wc -l
+[2022-07-13 13:47:14] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/129.dsbench.60.sql | wc -l
+[2022-07-13 13:48:43] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/130.dsbench.59.sql | wc -l
+[2022-07-13 13:48:46] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/131.dsbench.37.sql | wc -l
+[2022-07-13 13:48:47] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/132.dsbench.98.sql | wc -l
+[2022-07-13 13:48:48] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/133.dsbench.85.sql | wc -l
+[2022-07-13 13:48:51] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/134.dsbench.70.sql | wc -l
+[2022-07-13 13:48:53] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/135.dsbench.67.sql | wc -l
+[2022-07-13 13:48:57] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/136.dsbench.28.sql | wc -l
+[2022-07-13 13:48:59] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/137.dsbench.81.sql | wc -l
+[2022-07-13 13:49:00] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/138.dsbench.97.sql | wc -l
+[2022-07-13 13:49:01] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/139.dsbench.66.sql | wc -l
+[2022-07-13 13:49:04] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/140.dsbench.90.sql | wc -l
+[2022-07-13 13:49:05] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/141.dsbench.17.sql | wc -l
+[2022-07-13 13:49:08] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/142.dsbench.47.sql | wc -l
+[2022-07-13 13:49:09] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/143.dsbench.95.sql | wc -l
+[2022-07-13 13:49:15] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/144.dsbench.92.sql | wc -l
+[2022-07-13 13:49:15] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/145.dsbench.03.sql | wc -l
+[2022-07-13 13:49:16] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/146.dsbench.51.sql | wc -l
+[2022-07-13 13:49:17] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/147.dsbench.35.sql | wc -l
+[2022-07-13 13:49:19] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/148.dsbench.49.sql | wc -l
+[2022-07-13 13:49:22] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/149.dsbench.09.sql | wc -l
+[2022-07-13 13:49:25] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/150.dsbench.31.sql | wc -l
+[2022-07-13 13:49:29] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/151.dsbench.11.sql | wc -l
+[2022-07-13 13:49:32] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/152.dsbench.93.sql | wc -l
+[2022-07-13 13:49:34] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/153.dsbench.29.sql | wc -l
+[2022-07-13 13:49:36] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/154.dsbench.38.sql | wc -l
+[2022-07-13 13:49:38] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/155.dsbench.22.sql | wc -l
+[2022-07-13 13:49:40] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/156.dsbench.89.sql | wc -l
+[2022-07-13 13:50:13] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/157.dsbench.15.sql | wc -l
+[2022-07-13 13:50:19] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/158.dsbench.06.sql | wc -l
+[2022-07-13 13:50:22] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/159.dsbench.52.sql | wc -l
+[2022-07-13 13:51:25] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/160.dsbench.50.sql | wc -l
+[2022-07-13 13:51:26] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/161.dsbench.42.sql | wc -l
+[2022-07-13 13:51:27] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/162.dsbench.41.sql | wc -l
+[2022-07-13 13:51:27] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/163.dsbench.08.sql | wc -l
+[2022-07-13 13:51:29] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/164.dsbench.12.sql | wc -l
+[2022-07-13 13:51:29] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/165.dsbench.20.sql | wc -l
+[2022-07-13 13:51:30] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/166.dsbench.88.sql | wc -l
+[2022-07-13 13:51:37] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/167.dsbench.82.sql | wc -l
+[2022-07-13 13:51:39] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/168.dsbench.23.sql | wc -l
+[2022-07-13 13:51:48] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/169.dsbench.14.sql | wc -l
+[2022-07-13 13:54:49] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/170.dsbench.57.sql | wc -l
+[2022-07-13 13:54:51] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/171.dsbench.65.sql | wc -l
+[2022-07-13 13:54:52] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/172.dsbench.71.sql | wc -l
+[2022-07-13 13:54:54] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/173.dsbench.34.sql | wc -l
+[2022-07-13 13:54:55] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/174.dsbench.48.sql | wc -l
+[2022-07-13 13:54:57] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/175.dsbench.30.sql | wc -l
+[2022-07-13 13:54:58] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/176.dsbench.74.sql | wc -l
+[2022-07-13 13:55:00] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/177.dsbench.87.sql | wc -l
+[2022-07-13 13:55:02] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/178.dsbench.77.sql | wc -l
+[2022-07-13 13:55:06] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/179.dsbench.73.sql | wc -l
+[2022-07-13 13:55:07] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/180.dsbench.84.sql | wc -l
+[2022-07-13 13:55:08] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/181.dsbench.54.sql | wc -l
+[2022-07-13 13:55:11] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/182.dsbench.55.sql | wc -l
+[2022-07-13 13:55:12] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/183.dsbench.56.sql | wc -l
+[2022-07-13 13:55:16] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/184.dsbench.02.sql | wc -l
+[2022-07-13 13:55:17] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/185.dsbench.26.sql | wc -l
+[2022-07-13 13:55:18] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/186.dsbench.40.sql | wc -l
+[2022-07-13 13:55:19] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/187.dsbench.72.sql | wc -l
+[2022-07-13 13:55:28] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/188.dsbench.53.sql | wc -l
+[2022-07-13 13:55:29] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/189.dsbench.79.sql | wc -l
+[2022-07-13 13:55:31] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/190.dsbench.18.sql | wc -l
+[2022-07-13 13:56:35] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/191.dsbench.13.sql | wc -l
+[2022-07-13 13:56:37] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/192.dsbench.24.sql | wc -l
+[2022-07-13 13:59:18] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/193.dsbench.04.sql | wc -l
+[2022-07-13 13:59:23] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/194.dsbench.99.sql | wc -l
+[2022-07-13 13:59:23] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/195.dsbench.68.sql | wc -l
+[2022-07-13 13:59:25] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/196.dsbench.83.sql | wc -l
+[2022-07-13 13:59:28] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/197.dsbench.61.sql | wc -l
+[2022-07-13 13:59:31] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/198.dsbench.05.sql | wc -l
+[2022-07-13 13:59:34] psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE= -f /home/gpadmin/TPC-DS/07_multi_user/1/199.dsbench.76.sql | wc -l

@@ -1,0 +1,5 @@
+if [ -f /etc/bashrc ]; then
+  . /etc/bashrc
+fi
+source /usr/local/greenplum-db/greenplum_path.sh
+export LD_PRELOAD=/lib64/libz.so.1 ps
