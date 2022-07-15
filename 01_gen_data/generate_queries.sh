@@ -38,10 +38,10 @@ for p in $(seq 1 99); do
 	echo "Creating: ${TPC_DS_DIR}/05_sql/${filename}"
 	printf "set role ${BENCH_ROLE};\nset search_path=${SCHEMA_NAME},public;\n" > ${TPC_DS_DIR}/05_sql/${filename}
 
-	for o in $(cat ${PWD}/optimizer.txt); do
+	for o in $(${TPC_DS_DIR}/01_gen_data/optimizer.txt); do
         q2=$(echo ${o} | awk -F '|' '{print $1}')
         if [ "${p}" == "${q2}" ]; then
-          optimizer=$(echo ${z} | awk -F '|' '{print $2}')
+          optimizer=$(echo ${o} | awk -F '|' '{print $2}')
         fi
     done
 	printf "set optimizer=${optimizer};\n" >> ${TPC_DS_DIR}/05_sql/${filename}
@@ -62,7 +62,7 @@ arr=("114.${BENCH_ROLE}.14.sql" "123.${BENCH_ROLE}.23.sql" "124.${BENCH_ROLE}.24
 for z in "${arr[@]}"; do
 	myfilename=${TPC_DS_DIR}/05_sql/${z}
 	echo "Modifying: ${myfilename}"
-	pos=$(grep -n ";" ${myfilename} | awk -F ':' ' { if (NR > 1) print $1 }' | head -1)
+	pos=$(grep -n ";" ${myfilename} | awk -F ':' ' { if (NR > 4) print $1 }' | head -1)
 	pos=$((pos + 1))
 	sed -i ''${pos}'i\'$'\n'':EXPLAIN_ANALYZE'$'\n' ${myfilename}
 	echo "Modified: ${myfilename}"

@@ -44,7 +44,7 @@ function generate_queries()
     for o in $(cat ${TPC_DS_DIR}/01_gen_data/optimizer.txt); do
         q2=$(echo ${o} | awk -F '|' '{print $1}')
         if [ "${p}" == "${q2}" ]; then
-          optimizer=$(echo ${z} | awk -F '|' '{print $2}')
+          optimizer=$(echo ${o} | awk -F '|' '{print $2}')
         fi
     done
 	  printf "set optimizer=${optimizer};\n" >> ${sql_dir}/${filename}
@@ -67,7 +67,7 @@ function generate_queries()
   for z in "${arr[@]}"; do
     myfilename=${sql_dir}/${z}
     echo "myfilename: ${myfilename}"
-    pos=$(grep -n ";" ${myfilename} | awk -F ':' '{ if (NR > 1) print $1}' | head -1)
+    pos=$(grep -n ";" ${myfilename} | awk -F ':' '{ if (NR > 4) print $1}' | head -1)
     pos=$((pos + 1))
     sed -i ${pos}i":EXPLAIN_ANALYZE" ${myfilename}
   done
