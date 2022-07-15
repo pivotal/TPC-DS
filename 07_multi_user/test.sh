@@ -38,8 +38,19 @@ function generate_queries()
 
     #add explain analyze
     echo "print \"set role ${BENCH_ROLE};\\n:EXPLAIN_ANALYZE\\n\" > ${sql_dir}/${filename}"
-    printf "set role ${BENCH_ROLE};\nset search_path=${SCHEMA_NAME},public;\nset optimizer=${ORCA_OPTIMIZER};\nset statement_mem=\"${STATEMENT_MEM_MULTI_USER}\";\n:EXPLAIN_ANALYZE\n" > ${sql_dir}/${filename}
 
+    printf "set role ${BENCH_ROLE};\nset search_path=${SCHEMA_NAME},public;\n" > ${sql_dir}/${filename}
+    
+    for z in $(cat ${TPC_DS_DIR}/01_gen_data/optimizer.txt); do
+        q2=$(echo ${z} | awk -F '|' '{print $1}')
+        if [ "${p}" == "${q2}" ]; then
+          optimizer=$(echo ${z} | awk -F '|' '{print $2}')
+        fi
+    done
+	  printf "set optimizer=${optimizer};\n" >> ${sql_dir}/${filename}
+	  printf "set statement_mem=\"${STATEMENT_MEM}\";\n" >> ${sql_dir}/${filename}
+	  printf ":EXPLAIN_ANALYZE\n" >> ${sql_dir}/${filename}
+    
     echo "sed -n ${start_position},${end_position}p ${sql_dir}/${tpcds_query_name} >> ${sql_dir}/${filename}"
     sed -n ${start_position},${end_position}p ${sql_dir}/${tpcds_query_name} >> ${sql_dir}/${filename}
     query_id=$((query_id + 1))
