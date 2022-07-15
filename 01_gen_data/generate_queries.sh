@@ -36,7 +36,18 @@ for p in $(seq 1 99); do
 	done
 
 	echo "Creating: ${TPC_DS_DIR}/05_sql/${filename}"
-	printf "set role ${BENCH_ROLE};\nset search_path=${SCHEMA_NAME},public;\nset optimizer=${ORCA_OPTIMIZER};\nset statement_mem=\"${STATEMENT_MEM}\";\n:EXPLAIN_ANALYZE\n" > ${TPC_DS_DIR}/05_sql/${filename}
+	printf "set role ${BENCH_ROLE};\nset search_path=${SCHEMA_NAME},public;\n" > ${TPC_DS_DIR}/05_sql/${filename}
+
+	for z in $(cat ${PWD}/optimizer.txt); do
+        q2=$(echo ${z} | awk -F '|' '{print $1}')
+        if [ "${p}" == "${q2}" ]; then
+          optimizer=$(echo ${z} | awk -F '|' '{print $2}')
+        fi
+    done
+	printf "set optimizer=${optimizer};\n" >> ${TPC_DS_DIR}/05_sql/${filename}
+	printf "set statement_mem=\"${STATEMENT_MEM}\";\n" >> ${TPC_DS_DIR}/05_sql/${filename}
+	printf ":EXPLAIN_ANALYZE\n" >> ${TPC_DS_DIR}/05_sql/${filename}
+	
 	sed -n ${start_position},${end_position}p ${PWD}/query_0.sql >> ${TPC_DS_DIR}/05_sql/${filename}
 	query_id=$((query_id + 1))
 	file_id=$((file_id + 1))
