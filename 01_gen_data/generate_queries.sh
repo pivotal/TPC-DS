@@ -38,8 +38,8 @@ for p in $(seq 1 99); do
 	echo "Creating: ${TPC_DS_DIR}/05_sql/${filename}"
 	printf "set role ${BENCH_ROLE};\nset search_path=${SCHEMA_NAME},public;\n" > ${TPC_DS_DIR}/05_sql/${filename}
 
-	for z in $(cat ${PWD}/optimizer.txt); do
-        q2=$(echo ${z} | awk -F '|' '{print $1}')
+	for o in $(cat ${PWD}/optimizer.txt); do
+        q2=$(echo ${o} | awk -F '|' '{print $1}')
         if [ "${p}" == "${q2}" ]; then
           optimizer=$(echo ${z} | awk -F '|' '{print $2}')
         fi

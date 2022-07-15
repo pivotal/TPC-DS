@@ -41,8 +41,8 @@ function generate_queries()
 
     printf "set role ${BENCH_ROLE};\nset search_path=${SCHEMA_NAME},public;\n" > ${sql_dir}/${filename}
     
-    for z in $(cat ${TPC_DS_DIR}/01_gen_data/optimizer.txt); do
-        q2=$(echo ${z} | awk -F '|' '{print $1}')
+    for o in $(cat ${TPC_DS_DIR}/01_gen_data/optimizer.txt); do
+        q2=$(echo ${o} | awk -F '|' '{print $1}')
         if [ "${p}" == "${q2}" ]; then
           optimizer=$(echo ${z} | awk -F '|' '{print $2}')
         fi
