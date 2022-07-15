@@ -48,7 +48,7 @@ function generate_queries()
         fi
     done
 	  printf "set optimizer=${optimizer};\n" >> ${sql_dir}/${filename}
-	  printf "set statement_mem=\"${STATEMENT_MEM}\";\n" >> ${sql_dir}/${filename}
+	  printf "set statement_mem=\"${STATEMENT_MEM_MULTI_USER}\";\n" >> ${sql_dir}/${filename}
 	  printf ":EXPLAIN_ANALYZE\n" >> ${sql_dir}/${filename}
     
     echo "sed -n ${start_position},${end_position}p ${sql_dir}/${tpcds_query_name} >> ${sql_dir}/${filename}"
