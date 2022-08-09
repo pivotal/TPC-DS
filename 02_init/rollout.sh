@@ -18,28 +18,28 @@ function set_segment_bashrc()
   echo "  . /etc/bashrc" >> ${PWD}/segment_bashrc
   echo "fi" >> ${PWD}/segment_bashrc
   echo "source /usr/local/greenplum-db/greenplum_path.sh" >> ${PWD}/segment_bashrc
-  echo "export LD_PRELOAD=/lib64/libz.so.1 ps" >> ${PWD}/segment_bashrc
+  echo "export LD_PRELOAD=${LD_PREOAD}" >> ${PWD}/segment_bashrc
   chmod 755 ${PWD}/segment_bashrc
 
   echo "set up .bashrc on segment hosts"
   for ext_host in $(cat ${TPC_DS_DIR}/segment_hosts.txt); do
     # don't overwrite the master.  Only needed on single node installs
     shortname=$(echo ${ext_host} | awk -F '.' '{print $1}')
-    if [ "$MASTER_HOST" != "$shortname" ]; then
-      bashrc_exists=$(ssh ${ext_host} "ls ~/.bashrc" 2> /dev/null | wc -l)
-      if [ "${bashrc_exists}" -eq "0" ]; then
-        echo "copy new .bashrc to ${ext_host}:${ADMIN_HOME}"
-        scp ${PWD}/segment_bashrc ${ext_host}:${ADMIN_HOME}/.bashrc
+    if [ "${MASTER_HOST}" != "${shortname}" ]; then
+      bashrc_exists=$(ssh ${ext_host} "find ~ -name .bashrc | grep -c .")
+      if [ ${bashrc_exists} -eq 0 ]; then
+        echo "copy new .bashrc to ${ext_host}:~${ADMIN_USER}"
+        scp ${PWD}/segment_bashrc ${ext_host}:~${ADMIN_USER}/.bashrc
       else
-        count=$(ssh ${ext_host} "grep greenplum_path ~/.bashrc" 2> /dev/null | wc -l)
-        if [ "$count" -eq "0" ]; then
+        count=$(ssh ${ext_host} "grep -c greenplum_path ~/.bashrc")
+        if [ ${count} -eq 0 ]; then
           echo "Adding greenplum_path to ${ext_host} .bashrc"
           ssh ${ext_host} "echo \"source ${GREENPLUM_PATH}\" >> ~/.bashrc"
         fi
-        count=$(ssh ${ext_host} "grep LD_PRELOAD ~/.bashrc" 2> /dev/null | wc -l)
-        if [ "$count" -eq "0" ]; then
+        count=$(ssh ${ext_host} "grep -c LD_PRELOAD ~/.bashrc")
+        if [ ${count} -eq 0 ]; then
           echo "Adding LD_PRELOAD to ${ext_host} .bashrc"
-          ssh ${ext_host} "echo \"export LD_PRELOAD=/lib64/libz.so.1 ps\" >> ~/.bashrc"
+          ssh ${ext_host} "echo \"export LD_PRELOAD=${LD_PRELOAD}\" >> ~/.bashrc"
         fi
       fi
     fi

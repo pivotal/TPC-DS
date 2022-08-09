@@ -243,7 +243,7 @@ Table storage is defined in `functions.sh` and is configured for optimal perform
 Example of running the benchmark as `root` as a background process:
 
 ```bash
-nohup ./tpcds.sh > tpcds.log 2>&1 < tpcds.log &
+nohup ./tpcds.sh &> tpcds.log &
 ```
 
 ## Benchmark Minor Modifications
