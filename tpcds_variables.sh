@@ -4,9 +4,9 @@ export ADMIN_USER="gpadmin"
 export BENCH_ROLE="dsbench"
 
 # to connect directly to GP
-export PORT_USER="-p 5432"
+export PSQL_OPTIONS="-p 5432"
 # to connect through pgbouncer
-#export PORT_USER="-p 6543 -U dsbench"
+#export PSQL_OPTIONS="-p 6543 -U dsbench"
 
 # benchmark options
 export GEN_DATA_SCALE="1"

@@ -18,7 +18,7 @@ function set_segment_bashrc()
   echo "  . /etc/bashrc" >> ${PWD}/segment_bashrc
   echo "fi" >> ${PWD}/segment_bashrc
   echo "source /usr/local/greenplum-db/greenplum_path.sh" >> ${PWD}/segment_bashrc
-  echo "export LD_PRELOAD=${LD_PREOAD}" >> ${PWD}/segment_bashrc
+  echo "export LD_PRELOAD=${LD_PRELOAD}" >> ${PWD}/segment_bashrc
   chmod 755 ${PWD}/segment_bashrc
 
   echo "set up .bashrc on segment hosts"
@@ -31,12 +31,12 @@ function set_segment_bashrc()
         echo "copy new .bashrc to ${ext_host}:~${ADMIN_USER}"
         scp ${PWD}/segment_bashrc ${ext_host}:~${ADMIN_USER}/.bashrc
       else
-        count=$(ssh ${ext_host} "grep -c greenplum_path ~/.bashrc")
+        count=$(ssh ${ext_host} "grep -c greenplum_path ~/.bashrc || true")
         if [ ${count} -eq 0 ]; then
           echo "Adding greenplum_path to ${ext_host} .bashrc"
           ssh ${ext_host} "echo \"source ${GREENPLUM_PATH}\" >> ~/.bashrc"
         fi
-        count=$(ssh ${ext_host} "grep -c LD_PRELOAD ~/.bashrc")
+        count=$(ssh ${ext_host} "grep -c LD_PRELOAD ~/.bashrc || true")
         if [ ${count} -eq 0 ]; then
           echo "Adding LD_PRELOAD to ${ext_host} .bashrc"
           ssh ${ext_host} "echo \"export LD_PRELOAD=${LD_PRELOAD}\" >> ~/.bashrc"

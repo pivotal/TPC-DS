@@ -11,13 +11,13 @@ fi
 
 function get_running_jobs_count()
 {
-  job_count=$(ps -fu "${ADMIN_USER}" | grep -c "TPC-DS/07_multi_user/test.sh")
+  job_count=$(ps -fu "${ADMIN_USER}" | grep -c "TPC-DS/07_multi_user/test.sh || true")
   echo "${job_count}"
 }
 
 function get_file_count()
 {
-  file_count=$(find ${TPC_DS_DIR}/log -maxdepth 1 -name 'end_testing*' | grep -c .)
+  file_count=$(find ${TPC_DS_DIR}/log -maxdepth 1 -name 'end_testing*' | grep -c . || true)
   echo "${file_count}"
 }
 
