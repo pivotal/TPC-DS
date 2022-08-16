@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
 # This script needs to be run as root!
+if [ "${EUID}" -ne 0 ]; then
+	echo "ERROR: ${0} must be run as root"
+	exit
+fi
 
 get_ram() {
 	case $1 in
@@ -190,7 +194,7 @@ validate_guc_settings() {
 		mem_factor=117
 	fi
 	gp_vmem=$(( (((SWAP_IN_MB + RAM_IN_MB) - (7680 + (5 / 100) * RAM_IN_MB)) / (mem_factor / 100)) ))
-	max_acting_primary_segments=$(su - gpadmin -c "psql -d postgres -t -c \"with hostnames as ( select distinct hostname from gp_segment_configuration where content <> -1 order by hostname limit 1), content_ids as (select content from gp_segment_configuration where hostname in ( select hostname from hostnames ) and preferred_role = 'p'), counts as (select count(content) as mirrors_per_host, hostname from gp_segment_configuration where content in (select content from content_ids) and hostname not in ( select hostname from hostnames ) and preferred_role = 'm' group by hostname) select count(content) + max(mirrors_per_host) as max_acting_primary_segments from content_ids, counts\"" | awk '{ printf $1 }')
+	max_acting_primary_segments=$(su - gpadmin -c "psql -d postgres -t -c \"with hostnames as ( select distinct hostname from gp_segment_configuration where content <> -1 order by hostname limit 1), content_ids as ( select content from gp_segment_configuration where hostname in ( select hostname from hostnames ) and preferred_role = 'p' and content <> -1), counts as ( select count(content) as mirrors_per_host, hostname from gp_segment_configuration where content in (select content from content_ids) and preferred_role = 'm' group by hostname) select count(content) + max(mirrors_per_host) as max_acting_primary_segments from content_ids, counts\"" | awk '{ printf $1 }')
 	gp_vmem_protect_limit=$(( gp_vmem / max_acting_primary_segments ))
 
 	cmd_val_contains "su - gpadmin -c 'gpconfig -s gp_interconnect_queue_depth'" "Master  value: 16"
