@@ -11,7 +11,7 @@ fi
 
 function get_running_jobs_count()
 {
-  job_count=$(ps -fu "${ADMIN_USER}" | grep -c "TPC-DS/07_multi_user/test.sh || true")
+  job_count=$(ps -fu "${ADMIN_USER}" | grep -c "TPC-DS/07_multi_user/test.sh" || true)
   echo "${job_count}"
 }
 
