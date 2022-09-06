@@ -84,7 +84,7 @@ for i in ${sql_dir}/*.sql; do
     myfilename=$(basename ${i})
     mylogfile="${TPC_DS_DIR}/log/${session_id}.${myfilename}.multi.explain_analyze.log"
     log_time "psql ${PSQL_OPTIONS} -d gpadmin -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE=\"EXPLAIN ANALYZE\" -f ${i}"
-    psql -p ${PSQL_OPTIONS} -d gpadmin -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="EXPLAIN ANALYZE" -f ${i} > ${mylogfile}
+    psql ${PSQL_OPTIONS} -d gpadmin -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="EXPLAIN ANALYZE" -f ${i} > ${mylogfile}
     tuples="0"
   fi
 
