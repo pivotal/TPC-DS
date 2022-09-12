@@ -10,6 +10,10 @@ dependencies:
 	sudo yum -y install epel-release
 	sudo yum install ShellCheck
 
+.PHONY: shfmt
+shfmt:
+	find . -name "*.sh" -not -path './00_compile_tpcds/t*' | xargs shfmt -d -i 2
+
 .PHONY: lint
 lint:
 	find . -name "*.sh" -not -path './00_compile_tpcds/t*' | grep -v 'tpcds_variables.sh' | xargs shellcheck -S warning
