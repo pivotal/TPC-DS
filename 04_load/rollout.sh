@@ -9,8 +9,7 @@ init_log ${step}
 get_version
 filter="gpdb"
 
-function copy_script()
-{
+function copy_script() {
   echo "copy the start and stop scripts to the segment hosts in the cluster"
   for i in $(cat ${TPC_DS_DIR}/segment_hosts.txt); do
     echo "scp start_gpfdist.sh stop_gpfdist.sh ${i}:"
@@ -18,16 +17,14 @@ function copy_script()
   done
 }
 
-function stop_gpfdist()
-{
+function stop_gpfdist() {
   echo "stop gpfdist on all ports"
   for i in $(cat ${TPC_DS_DIR}/segment_hosts.txt); do
     ssh -n -f $i "bash -c 'cd ~/; ./stop_gpfdist.sh'"
   done
 }
 
-function start_gpfdist()
-{
+function start_gpfdist() {
   stop_gpfdist
   sleep 1
   get_gpfdist_port
@@ -60,7 +57,10 @@ for i in ${PWD}/*.${filter}.*.sql; do
   table_name=$(echo ${i} | awk -F '.' '{print $3}')
 
   log_time "psql -v ON_ERROR_STOP=1 -f ${i} | grep INSERT | awk -F ' ' '{print \$3}'"
-  tuples=$(psql -v ON_ERROR_STOP=1 -f ${i} | grep INSERT | awk -F ' ' '{print $3}'; exit ${PIPESTATUS[0]})
+  tuples=$(
+    psql -v ON_ERROR_STOP=1 -f ${i} | grep INSERT | awk -F ' ' '{print $3}'
+    exit ${PIPESTATUS[0]}
+  )
 
   print_log ${tuples}
 done
@@ -82,7 +82,6 @@ fi
 if [ "${PGPORT}" == "" ]; then
   export PGPORT=5432
 fi
-
 
 schema_name="tpcds"
 table_name="tpcds"

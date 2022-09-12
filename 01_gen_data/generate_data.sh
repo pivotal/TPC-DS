@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 # runs on segment host; we don't inherit the functions
-PWD=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+PWD=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 GEN_DATA_SCALE=${1}
 CHILD=${2}

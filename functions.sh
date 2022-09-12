@@ -12,7 +12,8 @@ fi
 ####  Unexported functions  ####################################################
 ################################################################################
 function check_variable() {
-  local var_name="${1}"; shift
+  local var_name="${1}"
+  shift
 
   if [ ! -n "${!var_name}" ]; then
     echo "${var_name} is not defined in ${VARS_FILE}. Exiting."
@@ -27,7 +28,7 @@ function check_variables() {
   echo "############################################################################"
   echo ""
   # shellcheck source=tpcds_variables.sh
-  source ./${VARS_FILE} 2> /dev/null
+  source ./${VARS_FILE} 2>/dev/null
   if [ $? -ne 0 ]; then
     echo "./${VARS_FILE} does not exist. Please ensure that this file exists before running TPC-DS. Exiting."
     exit 1
@@ -95,13 +96,13 @@ function source_bashrc() {
   fi
   count=$(egrep -c "source .*/greenplum_path.sh|\. .*/greenplum_path.sh" ${startup_file})
   if [ ${count} -eq 0 ]; then
-      echo "${HOME}/.bashrc does not contain greenplum_path.sh"
-      echo "Please update your ${startup_file} for ${ADMIN_USER} and try again."
-      exit 1
+    echo "${HOME}/.bashrc does not contain greenplum_path.sh"
+    echo "Please update your ${startup_file} for ${ADMIN_USER} and try again."
+    exit 1
   elif [ ${count} -gt 1 ]; then
-      echo "${HOME}/.bashrc contains multiple greenplum_path.sh entries"
-      echo "Please update your ${startup_file} for ${ADMIN_USER} and try again."
-      exit 1
+    echo "${HOME}/.bashrc contains multiple greenplum_path.sh entries"
+    echo "Please update your ${startup_file} for ${ADMIN_USER} and try again."
+    exit 1
   else
     get_version
   fi
@@ -138,7 +139,7 @@ export -f get_gpfdist_port
 
 function get_version() {
   #need to call source_bashrc first
-  VERSION=$(psql -v ON_ERROR_STOP=1 -t -A -c "SELECT CASE WHEN POSITION ('Greenplum Database 4.3' IN version) > 0 THEN 'gpdb_4_3' WHEN POSITION ('Greenplum Database 5' IN version) > 0 THEN 'gpdb_5' WHEN POSITION ('Greenplum Database 6' IN version) > 0 THEN 'gpdb_6' ELSE 'postgresql' END FROM version();") 
+  VERSION=$(psql -v ON_ERROR_STOP=1 -t -A -c "SELECT CASE WHEN POSITION ('Greenplum Database 4.3' IN version) > 0 THEN 'gpdb_4_3' WHEN POSITION ('Greenplum Database 5' IN version) > 0 THEN 'gpdb_5' WHEN POSITION ('Greenplum Database 6' IN version) > 0 THEN 'gpdb_6' ELSE 'postgresql' END FROM version();")
   if [[ ${VERSION} =~ "gpdb" ]]; then
     quicklz_test=$(psql -v ON_ERROR_STOP=1 -t -A -c "SELECT COUNT(1) FROM pg_compression WHERE compname = 'quicklz'")
     if [ "${quicklz_test}" -eq "1" ]; then
@@ -180,7 +181,7 @@ declare table_name
 function print_log() {
   #duration
   T_END="$(date +%s)"
-  T_DURATION="$((T_END-T_START))"
+  T_DURATION="$((T_END - T_START))"
   S_DURATION=${T_DURATION}
 
   #this is done for steps that don't have id values
@@ -196,7 +197,7 @@ function print_log() {
   fi
 
   # calling function adds schema_name and table_name
-  printf "%s|%s.%s|%s|%02d:%02d:%02d|%d|%d\n" ${id} ${schema_name} ${table_name} ${tuples} "$((S_DURATION/3600%24))" "$((S_DURATION/60%60))" "$((S_DURATION%60))" "${T_START}" "${T_END}" >> ${TPC_DS_DIR}/log/${logfile}
+  printf "%s|%s.%s|%s|%02d:%02d:%02d|%d|%d\n" ${id} ${schema_name} ${table_name} ${tuples} "$((S_DURATION / 3600 % 24))" "$((S_DURATION / 60 % 60))" "$((S_DURATION % 60))" "${T_START}" "${T_END}" >>${TPC_DS_DIR}/log/${logfile}
 }
 export -f print_log
 
@@ -206,8 +207,7 @@ function end_step() {
 }
 export -f end_step
 
-function log_time()
-{
+function log_time() {
   printf "[%s] %s\n" "$(date '+%Y-%m-%d %H:%M:%S')" "$1"
 }
 export -f log_time

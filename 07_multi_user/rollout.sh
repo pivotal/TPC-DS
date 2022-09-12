@@ -9,14 +9,12 @@ if [ "${MULTI_USER_COUNT}" -eq "0" ]; then
   exit 0
 fi
 
-function get_running_jobs_count()
-{
+function get_running_jobs_count() {
   job_count=$(ps -fu "${ADMIN_USER}" | grep -c "TPC-DS/07_multi_user/test.sh" || true)
   echo "${job_count}"
 }
 
-function get_file_count()
-{
+function get_file_count() {
   file_count=$(find ${TPC_DS_DIR}/log -maxdepth 1 -name 'end_testing*' | grep -c . || true)
   echo "${file_count}"
 }
@@ -26,8 +24,7 @@ rm -f ${TPC_DS_DIR}/log/testing*.log
 rm -f ${TPC_DS_DIR}/log/rollout_testing_*.log
 rm -f ${TPC_DS_DIR}/log/*multi.explain_analyze.log
 
-function generate_templates()
-{
+function generate_templates() {
   rm -f ${PWD}/query_*.sql
 
   #create each user's directory
@@ -69,7 +66,7 @@ fi
 for session_id in $(seq 1 ${MULTI_USER_COUNT}); do
   session_log=${TPC_DS_DIR}/log/testing_session_${session_id}.log
   log_time "${PWD}/test.sh ${session_id}"
-  ${PWD}/test.sh ${session_id} &> ${session_log} &
+  ${PWD}/test.sh ${session_id} &>${session_log} &
 done
 
 echo "Now executing queries. This may take a while."

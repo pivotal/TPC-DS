@@ -8,7 +8,7 @@ PWD=$(get_pwd ${BASH_SOURCE[0]})
 max_id=$(ls ${PWD}/*.sql | tail -1)
 max_id=$(basename ${max_id} | awk -F '.' '{print $1}')
 
-analyzedb --help &> /dev/null
+analyzedb --help &>/dev/null
 return_status="$?"
 
 if [ "$return_status" -eq "0" ]; then

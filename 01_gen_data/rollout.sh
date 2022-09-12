@@ -15,11 +15,11 @@ function get_count_generate_data() {
   while read -r i; do
     next_count=$(ssh -o ConnectTimeout=0 -n -f ${i} "bash -c 'ps -ef | grep generate_data.sh | grep -v grep | wc -l'" 2>&1 || true)
     check="^[0-9]+$"
-    if ! [[ ${next_count} =~ ${check} ]] ; then
+    if ! [[ ${next_count} =~ ${check} ]]; then
       next_count="1"
     fi
     count=$((count + next_count))
-  done < ${TPC_DS_DIR}/segment_hosts.txt
+  done <${TPC_DS_DIR}/segment_hosts.txt
 }
 
 function kill_orphaned_data_gen() {
@@ -84,7 +84,7 @@ if [ "${GEN_NEW_DATA}" == "true" ]; then
     tput rc
     echo -ne "${minutes} minute(s)"
     sleep 60
-    minutes=$(( minutes + 1 ))
+    minutes=$((minutes + 1))
     get_count_generate_data
   done
 
