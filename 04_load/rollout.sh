@@ -14,16 +14,18 @@ function copy_script()
   echo "copy the start and stop scripts to the segment hosts in the cluster"
   for i in $(cat ${TPC_DS_DIR}/segment_hosts.txt); do
     echo "scp start_gpfdist.sh stop_gpfdist.sh ${i}:"
-    scp ${PWD}/start_gpfdist.sh ${PWD}/stop_gpfdist.sh ${i}:
+    scp ${PWD}/start_gpfdist.sh ${PWD}/stop_gpfdist.sh ${i}: &
   done
+  wait
 }
 
 function stop_gpfdist()
 {
   echo "stop gpfdist on all ports"
   for i in $(cat ${TPC_DS_DIR}/segment_hosts.txt); do
-    ssh -n -f $i "bash -c 'cd ~/; ./stop_gpfdist.sh'"
+    ssh -n -f $i "bash -c 'cd ~/; ./stop_gpfdist.sh'" &
   done
+  wait
 }
 
 function start_gpfdist()
@@ -43,9 +45,9 @@ function start_gpfdist()
     GEN_DATA_PATH="${GEN_DATA_PATH}/dsbenchmark"
     PORT=$((GPFDIST_PORT + CHILD))
     echo "executing on ${EXT_HOST} ./start_gpfdist.sh $PORT ${GEN_DATA_PATH}"
-    ssh -n -f ${EXT_HOST} "bash -c 'cd ~${ADMIN_USER}; ./start_gpfdist.sh $PORT ${GEN_DATA_PATH}'"
-    sleep 1
+    ssh -n -f ${EXT_HOST} "bash -c 'cd ~${ADMIN_USER}; ./start_gpfdist.sh $PORT ${GEN_DATA_PATH}'" &
   done
+  wait
 }
 
 copy_script

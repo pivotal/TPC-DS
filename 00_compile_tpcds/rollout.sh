@@ -30,8 +30,9 @@ function copy_tpc()
   #copy the compiled dsdgen program to the segment nodes
   echo "copy tpcds binaries to segment hosts"
   for i in $(cat ${TPC_DS_DIR}/segment_hosts.txt); do
-    scp tools/dsdgen tools/tpcds.idx ${i}:
+    scp tools/dsdgen tools/tpcds.idx ${i}: &
   done
+  wait
 }
 
 function copy_queries()
