@@ -362,6 +362,12 @@ For the larger tests (e.g. 15TB), a few of the TPC-DS queries can output a very 
 
 This was done on queries: 64, 34, and 71.
 
+### 6. Changed `integer` to `bigint` to handle larger scale.
+
+For larger tests (50TB and up), data load will fail due to out of range numbers.
+
+This is done on loading of `web_sales`, and `web_returns`.
+
 # Development
 
 ## Prerequisites

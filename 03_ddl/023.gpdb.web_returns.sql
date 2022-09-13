@@ -12,7 +12,7 @@ CREATE TABLE tpcds.web_returns (
     wr_returning_addr_sk integer,
     wr_web_page_sk integer,
     wr_reason_sk integer,
-    wr_order_number integer NOT NULL,
+    wr_order_number bigint NOT NULL,
     wr_return_quantity integer,
     wr_return_amt numeric(7,2),
     wr_return_tax numeric(7,2),
