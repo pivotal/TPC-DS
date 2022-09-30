@@ -120,6 +120,11 @@ function get_gpfdist_port() {
   primary_base=$(echo "${all_ports}" | awk -F '|' '{print $1}' | head -c1)
   mirror_base=$(echo "${all_ports}" | awk -F '|' '{print $2}' | head -c1)
 
+  if [ -n "$GPFDIST_PORT" ]; then
+    export GPFDIST_PORT
+    return
+  fi
+
   for i in $(seq 4 9); do
     if [ "${primary_base}" -ne "${i}" ] && [ "$mirror_base" -ne "${i}" ]; then
       GPFDIST_PORT="${i}000"
