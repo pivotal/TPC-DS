@@ -28,7 +28,7 @@ function check_variables() {
   echo "############################################################################"
   echo ""
   # shellcheck source=tpcds_variables.sh
-  source ./${VARS_FILE} 2>/dev/null
+  source ./${VARS_FILE} 2> /dev/null
   if [ $? -ne 0 ]; then
     echo "./${VARS_FILE} does not exist. Please ensure that this file exists before running TPC-DS. Exiting."
     exit 1
@@ -197,7 +197,7 @@ function print_log() {
   fi
 
   # calling function adds schema_name and table_name
-  printf "%s|%s.%s|%s|%02d:%02d:%02d|%d|%d\n" ${id} ${schema_name} ${table_name} ${tuples} "$((S_DURATION / 3600 % 24))" "$((S_DURATION / 60 % 60))" "$((S_DURATION % 60))" "${T_START}" "${T_END}" >>${TPC_DS_DIR}/log/${logfile}
+  printf "%s|%s.%s|%s|%02d:%02d:%02d|%d|%d\n" ${id} ${schema_name} ${table_name} ${tuples} "$((S_DURATION / 3600 % 24))" "$((S_DURATION / 60 % 60))" "$((S_DURATION % 60))" "${T_START}" "${T_END}" >> ${TPC_DS_DIR}/log/${logfile}
 }
 export -f print_log
 

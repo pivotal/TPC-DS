@@ -64,7 +64,7 @@ cmd_val_contains() {
 
   # eval is needed when there are single quotes and double quotes in the command string.
   value=$(eval "${cmd}")
-  if ! echo "${value}" | grep "${expected_value}" &>/dev/null; then
+  if ! echo "${value}" | grep "${expected_value}" &> /dev/null; then
     echo "ERROR: '${expected_value}' not found in output of command '${cmd}'."
     echo "Got:"
     echo "${value}"
@@ -78,7 +78,7 @@ check_package_exist() {
 
   package_name=${1}
   shift
-  if ! rpm -qa | grep "${package_name}" &>/dev/null; then
+  if ! rpm -qa | grep "${package_name}" &> /dev/null; then
     echo "ERROR: ${package_name} is not found in 'rpm -qa'"
     _ERROR_FOUND=1
   fi
@@ -167,7 +167,7 @@ validate_guc_settings() {
 
   echo
   echo "Verifying GUC settings for Greenplum"
-  if ! (su - gpadmin -c "gpstate") &>/dev/null; then
+  if ! (su - gpadmin -c "gpstate") &> /dev/null; then
     echo "ERROR: Greenplum is not running."
     _ERROR_FOUND=1
   fi

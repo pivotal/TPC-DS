@@ -19,7 +19,7 @@ function get_count_generate_data() {
       next_count="1"
     fi
     count=$((count + next_count))
-  done <${TPC_DS_DIR}/segment_hosts.txt
+  done < ${TPC_DS_DIR}/segment_hosts.txt
 }
 
 function kill_orphaned_data_gen() {

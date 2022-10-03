@@ -4,7 +4,7 @@
 ## Parameter ${1} is the tpcds log file from the run
 ## You will need to fill in columns A-K in the GPV TPC-DS.xlsx spreadsheet
 ## Paste the output from the command into column 'L', and use the spreadsheet's feature to split the text into columns with the ';' separator
-tail -22 ${1} >/tmp/$$.txt
+tail -22 ${1} > /tmp/$$.txt
 
 load=$(grep "^Load" /tmp/$$.txt | sed -e 's/^.*[[:blank:]]//')
 loadhrs="=INDIRECT(ADDRESS(ROW(),COLUMN()-1))/(60*60)"

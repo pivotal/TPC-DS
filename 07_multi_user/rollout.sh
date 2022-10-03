@@ -66,7 +66,7 @@ fi
 for session_id in $(seq 1 ${MULTI_USER_COUNT}); do
   session_log=${TPC_DS_DIR}/log/testing_session_${session_id}.log
   log_time "${PWD}/test.sh ${session_id}"
-  ${PWD}/test.sh ${session_id} &>${session_log} &
+  ${PWD}/test.sh ${session_id} &> ${session_log} &
 done
 
 echo "Now executing queries. This may take a while."

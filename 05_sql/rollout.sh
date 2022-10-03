@@ -26,7 +26,7 @@ for i in ${PWD}/*.${BENCH_ROLE}.*.sql; do
       myfilename=$(basename ${i})
       mylogfile=${TPC_DS_DIR}/log/${myfilename}.single.explain_analyze.log
       log_time "psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE=\"EXPLAIN ANALYZE\" -f ${i} > ${mylogfile}"
-      psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="EXPLAIN ANALYZE" -f ${i} >${mylogfile}
+      psql -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="EXPLAIN ANALYZE" -f ${i} > ${mylogfile}
       tuples="0"
     fi
     print_log ${tuples}
