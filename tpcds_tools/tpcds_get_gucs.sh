@@ -1,4 +1,3 @@
-# Gather GUC settings
 gpconfig -s gp_interconnect_queue_depth
 gpconfig -s gp_interconnect_snd_queue_depth
 
@@ -23,6 +22,10 @@ gpconfig -s memory_spill_ratio
 gpconfig -s max_statement_mem
 gpconfig -s statement_mem
 
+gpconfig -s gp_dispatch_keepalives_idle
+gpconfig -s gp_dispatch_keepalives_interval
+gpconfig -s gp_dispatch_keepalives_count
+
 gpconfig -s runaway_detector_activation_percent
 gpconfig -s optimizer_enable_associativity
 
@@ -32,4 +35,4 @@ gpconfig -s gp_resqueue_priority
 gpconfig -s gp_resqueue_priority_cpucores_per_segment
 gpconfig -s gp_resqueue_priority_sweeper_interval
 
-psql -c "SELECT * FROM gp_toolkit.gp_resgroup_config" template1;
+psql -c "SELECT * FROM gp_toolkit.gp_resgroup_config order by groupid" template1;
