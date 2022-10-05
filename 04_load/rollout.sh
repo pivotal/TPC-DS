@@ -50,6 +50,9 @@ function start_gpfdist() {
 copy_script
 start_gpfdist
 
+# need to wait for all the gpfdist processes to start
+sleep 5
+
 for i in ${PWD}/*.${filter}.*.sql; do
   start_log
 
