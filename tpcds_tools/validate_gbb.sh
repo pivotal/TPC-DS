@@ -194,40 +194,40 @@ validate_guc_settings() {
   statement_mem_with_unit=$([ $((statement_mem % 1024)) == 0 ] && echo "$((statement_mem / 1024))GB" || echo "${statement_mem}MB")
   max_statement_mem_with_unit=$([ $((max_statement_mem % 1024)) == 0 ] && echo "$((max_statement_mem / 1024))GB" || echo "${max_statement_mem}MB")
 
-	mem_factor=170
-	if [ ${RAM_IN_GB} -gt 256 ]; then
-		mem_factor=117
-	fi
-	gp_vmem=$(( (((SWAP_IN_MB + RAM_IN_MB) - (7680 + (5 / 100) * RAM_IN_MB)) / (mem_factor / 100)) ))
-	max_acting_primary_segments=$(su - gpadmin -c "psql -d postgres -t -c \
-		\"with hostnames as ( \
-			select distinct hostname \
-			from gp_segment_configuration \
-			where content <> -1 order by hostname \
-			limit 1), \
-		content_ids as ( \
-			select content \
-			from gp_segment_configuration \
-			where hostname in ( \
-					select hostname \
-					from hostnames ) \
-				and preferred_role = 'p' \
-				and content <> -1), \
-		counts as ( \
-			select count(content) as mirrors_per_host, hostname \
-			from gp_segment_configuration \
-			where content in ( \
-					select content \
-					from content_ids) \
-				and preferred_role = 'm' \
-			group by hostname) \
-		select t.count + coalesce(s.max, 0) \
-		from ( \
-			select count(content) \
-			from content_ids) t, ( \
-			select max(mirrors_per_host) \
-			from counts) s\"" | awk '{ printf $1 }')
-	gp_vmem_protect_limit=$(( gp_vmem / max_acting_primary_segments ))
+  mem_factor=170
+  if [ ${RAM_IN_GB} -gt 256 ]; then
+    mem_factor=117
+  fi
+  gp_vmem=$(((((SWAP_IN_MB + RAM_IN_MB) - (7680 + (5 / 100) * RAM_IN_MB)) / (mem_factor / 100))))
+  max_acting_primary_segments=$(su - gpadmin -c "psql -d postgres -t -c \
+    \"with hostnames as ( \
+      select distinct hostname \
+      from gp_segment_configuration \
+      where content <> -1 order by hostname \
+      limit 1), \
+    content_ids as ( \
+      select content \
+      from gp_segment_configuration \
+      where hostname in ( \
+        select hostname \
+        from hostnames ) \
+      and preferred_role = 'p' \
+      and content <> -1), \
+    counts as ( \
+      select count(content) as mirrors_per_host, hostname \
+      from gp_segment_configuration \
+      where content in ( \
+        select content \
+        from content_ids) \
+      and preferred_role = 'm' \
+      group by hostname) \
+    select t.count + coalesce(s.max, 0) \
+    from ( \
+      select count(content) \
+      from content_ids) t, ( \
+      select max(mirrors_per_host) \
+      from counts) s\"" | awk '{ printf $1 }')
+  gp_vmem_protect_limit=$((gp_vmem / max_acting_primary_segments))
 
   cmd_val_contains "su - gpadmin -c 'gpconfig -s gp_interconnect_queue_depth'" "Master  value: 16"
   cmd_val_contains "su - gpadmin -c 'gpconfig -s gp_interconnect_queue_depth'" "Segment value: 16"

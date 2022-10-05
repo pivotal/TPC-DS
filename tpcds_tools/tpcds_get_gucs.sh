@@ -37,4 +37,4 @@ gpconfig -s gp_resqueue_priority
 gpconfig -s gp_resqueue_priority_cpucores_per_segment
 gpconfig -s gp_resqueue_priority_sweeper_interval
 
-psql -c "SELECT * FROM gp_toolkit.gp_resgroup_config order by groupid" template1;
+psql -c "SELECT * FROM gp_toolkit.gp_resgroup_config order by groupid" template1
