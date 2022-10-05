@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 gpconfig -s gp_interconnect_queue_depth
 gpconfig -s gp_interconnect_snd_queue_depth
 

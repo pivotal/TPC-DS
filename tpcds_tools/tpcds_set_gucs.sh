@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 gpconfig -c gp_resource_manager -v group
 
 gpconfig -c gp_resource_group_memory_limit -v 0.9
