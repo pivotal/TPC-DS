@@ -246,6 +246,23 @@ Example of running the benchmark as `root` as a background process:
 nohup ./tpcds.sh &> tpcds.log &
 ```
 
+## Minumum Required Query Streams
+
+According to https://www.tpc.org/tpcds/presentations/the_making_of_tpcds.pdf,
+but not in the TPC-DS specification,
+figure 12 indicates the following minimum query streams by the scale factor.
+
+| Scale Factor | Minimum Number of Streams |
+|-|-|
+| 100 | 3 |
+| 300 | 5 |
+| 1,000 | 7 |
+| 3,000 | 9 |
+| 10,000 | 11 |
+| 30,000 | 13 |
+| 100,000 | 15 |
+
+
 ## Benchmark Minor Modifications
 
 ### 1. Change to SQL queries that subtracted or added days were modified slightly:
