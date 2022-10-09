@@ -31,8 +31,8 @@ These are the combined versions of TPC-DS and Greenplum:
 ## Setup
 ### Prerequisites
 
-1. A running Greenplum Database with `gpadmin` access
-2. `gpadmin` database is created
+1. A running Greenplum Database with `${ADMIN_USER}` access(default `gpadmin`)
+2. `${PGDATABASE}` database(default `gpadmin`) is created
 3. `root` access on the master node `mdw` for installing dependencies
 4. `ssh` connections between `mdw` and the segment nodes `sdw1..n`
 
@@ -67,21 +67,23 @@ The original source code is from http://tpc.org/tpc_documents_current_versions/c
 Visit the repo at https://github.com/pivotal/TPC-DS/releases and download the tarball to the `mdw` node.
 
 ```bash
-ssh gpadmin@mdw
-curl -LO https://github.com/pivotal/TPC-DS/archive/refs/tags/v3.7.0.tar.gz
-tar xzf v3.7.0.tar.gz
-mv TPC-DS-3.7.0 TPC-DS
+ssh ${ADMIN_USER}@mdw
+curl -LO https://github.com/pivotal/TPC-DS/archive/refs/tags/v3.3.0.tar.gz
+tar xzf v3.3.0.tar.gz
+mv TPC-DS-3.3.0 TPC-DS
 ```
+**NOTE:** default `ADMIN_USER` is assumed to be `gpadmin`
 
 ## Usage
 
-To run the benchmark, login as `gpadmin` on `mdw`:
+To run the benchmark, login as `${ADMIN_USER}` on `mdw`:
 
 ```
-ssh gpadmin@mdw
+ssh ${ADMIN_USER}@mdw
 cd ~/TPC-DS
 ./tpcds.sh
 ```
+**NOTE:** default `ADMIN_USER` is assumed to be `gpadmin`
 
 By default, it will run a scale 1 (1G) and with 2 concurrent users, from data generation to score computation.
 
@@ -218,7 +220,7 @@ There are multiple steps running the benchmark and controlled by these variables
 - `RUN_SQL`: default `true`.
   It will run the power test of the benchmark.
 - `RUN_SINGLE_USER_REPORTS`: default `true`.
-  It will upload the results to the Greenplum database `gpadmin` under schema `tpcds_reports`.
+  It will upload the results to the Greenplum database `${PGDATABASE}` under schema `tpcds_reports`.
   These tables are required later on in the `RUN_SCORE` step.
   Recommend to keep it `true` if above step of `RUN_SQL` is `true`.
 - `RUN_MULTI_USER`: default `true`.
@@ -227,7 +229,7 @@ There are multiple steps running the benchmark and controlled by these variables
   `dsqgen` will sample the database to find proper filters.
   For very large database and a lot of streams, this process can take a long time (hours) to just generate the queries.
 - `RUN_MULTI_USER_REPORTS`: default `true`.
-  It will upload the results to the Greenplum database `gpadmin` under schema `tpcds_reports`.
+  It will upload the results to the Greenplum database `${PGDATABASE}` under schema `tpcds_reports`.
   Recommend to keep it `true` if above step of `RUN_MULTI_USER` is `true`.
 - `RUN_SCORE`: default `true`.
   It will query the results from `tpcds_reports` and compute the `QphDS` based on supported benchmark standard.
