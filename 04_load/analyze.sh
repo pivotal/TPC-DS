@@ -14,7 +14,7 @@ return_status="$?"
 if [ "$return_status" -eq "0" ]; then
   dbname="${PGDATABASE}"
   if [ "${dbname}" == "" ]; then
-    dbname="$ADMIN_USER"
+    dbname="${ADMIN_USER}"
   fi
 
   if [ "${PGPORT}" == "" ]; then

@@ -167,7 +167,7 @@ validate_guc_settings() {
 
   echo
   echo "Verifying GUC settings for Greenplum"
-  if ! (su - gpadmin -c "gpstate") &>/dev/null; then
+  if ! (su - ${ADMIN_USER} -c "gpstate") &>/dev/null; then
     echo "ERROR: Greenplum is not running."
     _ERROR_FOUND=1
   fi
@@ -178,13 +178,13 @@ validate_guc_settings() {
 
   vm_overcommit_ratio=$(sysctl -n vm.overcommit_ratio)
 
-  gp_resource_group_memory_limit_x100=$(su - gpadmin -c 'gpconfig -s gp_resource_group_memory_limit' | grep "^Master" | awk '{ printf $3 * 100 }')
+  gp_resource_group_memory_limit_x100=$(su - ${ADMIN_USER} -c 'gpconfig -s gp_resource_group_memory_limit' | grep "^Master" | awk '{ printf $3 * 100 }')
 
-  num_active_primary_segments=$(su - gpadmin -c "psql -d postgres -t -c \"select count(1) from gp_segment_configuration where content <> -1 and preferred_role = 'p'\"" | awk '{ printf $1 }')
+  num_active_primary_segments=$(su - ${ADMIN_USER} -c "psql -d postgres -t -c \"select count(1) from gp_segment_configuration where content <> -1 and preferred_role = 'p'\"" | awk '{ printf $1 }')
 
   rg_perseg_mem=$((((RAM_IN_MB * vm_overcommit_ratio / 100) + SWAP_IN_MB) * gp_resource_group_memory_limit_x100 / 100 / num_active_primary_segments))
 
-  max_expected_concurrent_queries=$(su - gpadmin -c "psql -d postgres -t -c \"SELECT concurrency FROM gp_toolkit.gp_resgroup_config where groupname = 'default_group'\"")
+  max_expected_concurrent_queries=$(su - ${ADMIN_USER} -c "psql -d postgres -t -c \"SELECT concurrency FROM gp_toolkit.gp_resgroup_config where groupname = 'default_group'\"")
 
   statement_mem=$((rg_perseg_mem / max_expected_concurrent_queries))
   max_statement_mem=$((RAM_IN_MB / max_expected_concurrent_queries))
@@ -199,29 +199,29 @@ validate_guc_settings() {
     mem_factor=117
   fi
   gp_vmem=$(((((SWAP_IN_MB + RAM_IN_MB) - (7680 + (5 / 100) * RAM_IN_MB)) / (mem_factor / 100))))
-  max_acting_primary_segments=$(su - gpadmin -c "psql -d postgres -t -c \"with hostnames as ( select distinct hostname from gp_segment_configuration where content <> -1 order by hostname limit 1), content_ids as ( select content from gp_segment_configuration where hostname in ( select hostname from hostnames ) and preferred_role = 'p' and content <> -1), counts as ( select count(content) as mirrors_per_host, hostname from gp_segment_configuration where content in (select content from content_ids) and preferred_role = 'm' group by hostname) select count(content) + max(mirrors_per_host) as max_acting_primary_segments from content_ids, counts\"" | awk '{ printf $1 }')
+  max_acting_primary_segments=$(su - ${ADMIN_USER} -c "psql -d postgres -t -c \"with hostnames as ( select distinct hostname from gp_segment_configuration where content <> -1 order by hostname limit 1), content_ids as ( select content from gp_segment_configuration where hostname in ( select hostname from hostnames ) and preferred_role = 'p' and content <> -1), counts as ( select count(content) as mirrors_per_host, hostname from gp_segment_configuration where content in (select content from content_ids) and preferred_role = 'm' group by hostname) select count(content) + max(mirrors_per_host) as max_acting_primary_segments from content_ids, counts\"" | awk '{ printf $1 }')
   gp_vmem_protect_limit=$((gp_vmem / max_acting_primary_segments))
 
-  cmd_val_contains "su - gpadmin -c 'gpconfig -s gp_interconnect_queue_depth'" "Master  value: 16"
-  cmd_val_contains "su - gpadmin -c 'gpconfig -s gp_interconnect_queue_depth'" "Segment value: 16"
+  cmd_val_contains "su - ${ADMIN_USER} -c 'gpconfig -s gp_interconnect_queue_depth'" "Master  value: 16"
+  cmd_val_contains "su - ${ADMIN_USER} -c 'gpconfig -s gp_interconnect_queue_depth'" "Segment value: 16"
 
-  cmd_val_contains "su - gpadmin -c 'gpconfig -s gp_interconnect_snd_queue_depth'" "Master  value: 16"
-  cmd_val_contains "su - gpadmin -c 'gpconfig -s gp_interconnect_snd_queue_depth'" "Segment value: 16"
+  cmd_val_contains "su - ${ADMIN_USER} -c 'gpconfig -s gp_interconnect_snd_queue_depth'" "Master  value: 16"
+  cmd_val_contains "su - ${ADMIN_USER} -c 'gpconfig -s gp_interconnect_snd_queue_depth'" "Segment value: 16"
 
-  cmd_val_contains "su - gpadmin -c 'gpconfig -s gp_resource_group_memory_limit'" "Master  value: 0.85"
-  cmd_val_contains "su - gpadmin -c 'gpconfig -s gp_resource_group_memory_limit'" "Segment value: 0.85"
+  cmd_val_contains "su - ${ADMIN_USER} -c 'gpconfig -s gp_resource_group_memory_limit'" "Master  value: 0.85"
+  cmd_val_contains "su - ${ADMIN_USER} -c 'gpconfig -s gp_resource_group_memory_limit'" "Segment value: 0.85"
 
-  cmd_val_contains "su - gpadmin -c 'gpconfig -s statement_mem'" "Master  value: ${statement_mem_with_unit}"
-  cmd_val_contains "su - gpadmin -c 'gpconfig -s statement_mem'" "Segment value: ${statement_mem_with_unit}"
+  cmd_val_contains "su - ${ADMIN_USER} -c 'gpconfig -s statement_mem'" "Master  value: ${statement_mem_with_unit}"
+  cmd_val_contains "su - ${ADMIN_USER} -c 'gpconfig -s statement_mem'" "Segment value: ${statement_mem_with_unit}"
 
-  cmd_val_contains "su - gpadmin -c 'gpconfig -s max_statement_mem'" "Master  value: ${max_statement_mem_with_unit}"
-  cmd_val_contains "su - gpadmin -c 'gpconfig -s max_statement_mem'" "Segment value: ${max_statement_mem_with_unit}"
+  cmd_val_contains "su - ${ADMIN_USER} -c 'gpconfig -s max_statement_mem'" "Master  value: ${max_statement_mem_with_unit}"
+  cmd_val_contains "su - ${ADMIN_USER} -c 'gpconfig -s max_statement_mem'" "Segment value: ${max_statement_mem_with_unit}"
 
-  cmd_val_contains "su - gpadmin -c 'gpconfig -s gp_vmem_protect_limit'" "Master  value: ${gp_vmem_protect_limit}"
-  cmd_val_contains "su - gpadmin -c 'gpconfig -s gp_vmem_protect_limit'" "Segment value: ${gp_vmem_protect_limit}"
+  cmd_val_contains "su - ${ADMIN_USER} -c 'gpconfig -s gp_vmem_protect_limit'" "Master  value: ${gp_vmem_protect_limit}"
+  cmd_val_contains "su - ${ADMIN_USER} -c 'gpconfig -s gp_vmem_protect_limit'" "Segment value: ${gp_vmem_protect_limit}"
 
-  cmd_val_contains "su - gpadmin -c 'gpconfig -s gp_workfile_compression'" "Master  value: off"
-  cmd_val_contains "su - gpadmin -c 'gpconfig -s gp_workfile_compression'" "Segment value: off"
+  cmd_val_contains "su - ${ADMIN_USER} -c 'gpconfig -s gp_workfile_compression'" "Master  value: off"
+  cmd_val_contains "su - ${ADMIN_USER} -c 'gpconfig -s gp_workfile_compression'" "Segment value: off"
 
 }
 

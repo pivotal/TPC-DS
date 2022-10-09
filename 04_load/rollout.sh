@@ -76,7 +76,7 @@ stop_gpfdist
 max_id=$(ls ${PWD}/*.sql | tail -1)
 i=$(basename ${max_id} | awk -F '.' '{print $1}' | sed 's/^0*//')
 
-dbname="$PGDATABASE"
+dbname="${PGDATABASE}"
 if [ "${dbname}" == "" ]; then
   dbname="${ADMIN_USER}"
 fi

@@ -15,7 +15,7 @@ export TPC_DS_DIR
 
 # Check that pertinent variables are set in the variable file.
 check_variables
-# Make sure this is being run as gpadmin
+# Make sure this is being run as ${ADMIN_USER}
 check_admin_user
 # Output admin user and multi-user count to standard out
 print_header
