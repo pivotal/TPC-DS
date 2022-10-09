@@ -77,11 +77,11 @@ DropRole="DROP ROLE IF EXISTS ${BENCH_ROLE}"
 CreateRole="CREATE ROLE ${BENCH_ROLE}"
 GrantSchemaPrivileges="GRANT ALL PRIVILEGES ON SCHEMA tpcds TO ${BENCH_ROLE}"
 GrantTablePrivileges="GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA tpcds TO ${BENCH_ROLE}"
-SetSearchPath="ALTER database ${ADMIN_USER} SET search_path=tpcds, \"\${ADMIN_USER}\", public"
+SetSearchPath="ALTER database ${ADMIN_USER} SET search_path=tpcds, \"\${user}\", public"
 
 start_log
 
-if [ "${BENCH_ROLE}" != "gpadmin" ]; then
+if [ "${BENCH_ROLE}" != "${ADMIN_USER}" ]; then
   log_time "Drop role ${BENCH_ROLE}"
   psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${DropRole}"
   log_time "Creating role ${BENCH_ROLE}"

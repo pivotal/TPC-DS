@@ -80,7 +80,7 @@ print_log "${id}" "${schema_name}" "${table_name}" 0
 
 stop_gpfdist
 
-dbname="$PGDATABASE"
+dbname="${PGDATABASE}"
 if [ "${dbname}" == "" ]; then
   dbname="${ADMIN_USER}"
 fi
