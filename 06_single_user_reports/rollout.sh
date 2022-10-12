@@ -10,18 +10,18 @@ init_log ${step}
 filter="gpdb"
 
 for i in ${PWD}/*.${filter}.*.sql; do
-	log_time "psql -v ON_ERROR_STOP=1 -a -f ${i}"
-	psql -v ON_ERROR_STOP=1 -a -f ${i}
-	echo ""
+  log_time "psql -v ON_ERROR_STOP=1 -a -f ${i}"
+  psql -v ON_ERROR_STOP=1 -a -f ${i}
+  echo ""
 done
 
 for i in ${PWD}/*.copy.*.sql; do
-	logstep=$(echo ${i} | awk -F 'copy.' '{print $2}' | awk -F '.' '{print $1}')
-	logfile="${TPC_DS_DIR}/log/rollout_${logstep}.log"
-	logfile="'${logfile}'"
-	log_time "psql -v ON_ERROR_STOP=1 -a -f ${i} -v LOGFILE=\"${logfile}\""
-	psql -v ON_ERROR_STOP=1 -a -f ${i} -v LOGFILE="${logfile}"
-	echo ""
+  logstep=$(echo ${i} | awk -F 'copy.' '{print $2}' | awk -F '.' '{print $1}')
+  logfile="${TPC_DS_DIR}/log/rollout_${logstep}.log"
+  logfile="'${logfile}'"
+  log_time "psql -v ON_ERROR_STOP=1 -a -f ${i} -v LOGFILE=\"${logfile}\""
+  psql -v ON_ERROR_STOP=1 -a -f ${i} -v LOGFILE="${logfile}"
+  echo ""
 done
 
 psql -v ON_ERROR_STOP=1 -q -t -A -c "select 'analyze ' || n.nspname || '.' || c.relname || ';' from pg_class c join pg_namespace n on n.oid = c.relnamespace and n.nspname = 'tpcds_reports'" | psql -v ON_ERROR_STOP=1 -t -A -e
