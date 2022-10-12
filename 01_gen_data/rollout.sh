@@ -15,7 +15,7 @@ function get_count_generate_data() {
   while read -r i; do
     next_count=$(ssh -o ConnectTimeout=0 -n -f ${i} "bash -c 'ps -ef | grep generate_data.sh | grep -v grep | wc -l'" 2>&1 || true)
     check="^[0-9]+$"
-    if ! [[ ${next_count} =~ ${check} ]] ; then
+    if ! [[ ${next_count} =~ ${check} ]]; then
       next_count="1"
     fi
     count=$((count + next_count))
@@ -26,15 +26,17 @@ function kill_orphaned_data_gen() {
   echo "kill any orphaned dsdgen processes on segment hosts"
   # always return true even if no processes were killed
   for i in $(cat ${TPC_DS_DIR}/segment_hosts.txt); do
-    ssh ${i} "pkill dsdgen" || true
+    ssh ${i} "pkill dsdgen" || true &
   done
+  wait
 }
 
 function copy_generate_data() {
   echo "copy generate_data.sh to segment hosts"
   for i in $(cat ${TPC_DS_DIR}/segment_hosts.txt); do
-    scp ${PWD}/generate_data.sh ${i}:
+    scp ${PWD}/generate_data.sh ${i}: &
   done
+  wait
 }
 
 function gen_data() {
@@ -55,10 +57,11 @@ function gen_data() {
     EXT_HOST=$(echo ${i} | awk -F '|' '{print $2}')
     GEN_DATA_PATH=$(echo ${i} | awk -F '|' '{print $3}')
     GEN_DATA_PATH="${GEN_DATA_PATH}/dsbenchmark"
-    echo "ssh -n -f ${EXT_HOST} \"bash -c \'cd ~/; ./generate_data.sh ${GEN_DATA_SCALE} ${CHILD} ${PARALLEL} ${GEN_DATA_PATH} > generate_data.${CHILD}.log 2>&1 < generate_data.${CHILD}.log &\'\""
+    echo "ssh -n -f ${EXT_HOST} \"bash -c \'cd ~/; ./generate_data.sh ${GEN_DATA_SCALE} ${CHILD} ${PARALLEL} ${GEN_DATA_PATH} &> generate_data.${CHILD}.log &\'\""
 
-    ssh -n -f ${EXT_HOST} "bash -c 'cd ~/; ./generate_data.sh ${GEN_DATA_SCALE} ${CHILD} ${PARALLEL} ${GEN_DATA_PATH} > generate_data.${CHILD}.log 2>&1 < generate_data.${CHILD}.log &'"
+    ssh -n -f ${EXT_HOST} "bash -c 'cd ~/; ./generate_data.sh ${GEN_DATA_SCALE} ${CHILD} ${PARALLEL} ${GEN_DATA_PATH} &> generate_data.${CHILD}.log &'" &
   done
+  wait
 }
 
 step="gen_data"
@@ -84,7 +87,7 @@ if [ "${GEN_NEW_DATA}" == "true" ]; then
     tput rc
     echo -ne "${minutes} minute(s)"
     sleep 60
-    minutes=$(( minutes + 1 ))
+    minutes=$((minutes + 1))
     get_count_generate_data
   done
 
