@@ -16,7 +16,7 @@ CREATE TABLE tpcds.web_sales (
     ws_ship_mode_sk integer,
     ws_warehouse_sk integer,
     ws_promo_sk integer,
-    ws_order_number integer NOT NULL,
+    ws_order_number bigint NOT NULL,
     ws_quantity integer,
     ws_wholesale_cost numeric(7,2),
     ws_list_price numeric(7,2),

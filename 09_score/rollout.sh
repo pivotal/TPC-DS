@@ -16,13 +16,13 @@ S_Q=${MULTI_USER_COUNT}
 SF=${GEN_DATA_SCALE}
 
 # Calculate operands for v1.3.1 of the TPC-DS score
-Q_1_3_1=$(( 3 * S_Q * 99 ))
-TPT_1_3_1=$(( QUERIES_TIME * S_Q ))
-TTT_1_3_1=$(( 2 * CONCURRENT_QUERY_TIME ))
-TLD_1_3_1=$(( S_Q * LOAD_TIME / 100 ))
+Q_1_3_1=$((3 * S_Q * 99))
+TPT_1_3_1=$((QUERIES_TIME * S_Q))
+TTT_1_3_1=$((2 * CONCURRENT_QUERY_TIME))
+TLD_1_3_1=$((S_Q * LOAD_TIME / 100))
 
 # Calculate operands for v2.2.0 of the TPC-DS score
-Q_2_2_0=$(( S_Q * 99 ))
+Q_2_2_0=$((S_Q * 99))
 TPT_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select cast(${QUERIES_TIME} as decimal) * cast(${S_Q} as decimal) / cast(3600.0 as decimal)")
 TTT_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select cast(2 as decimal) * cast(${THROUGHPUT_ELAPSED_TIME} as decimal) / cast(3600.0 as decimal)")
 TLD_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select cast(0.01 as decimal) * cast(${S_Q} as decimal) * cast(${LOAD_TIME} as decimal) / cast(3600.0 as decimal)")

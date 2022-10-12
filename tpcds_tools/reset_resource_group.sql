@@ -1,0 +1,11 @@
+alter resource group default_group set CONCURRENCY 20;
+alter resource group default_group set CPU_RATE_LIMIT 30;
+alter resource group default_group set MEMORY_LIMIT 0;
+alter resource group default_group set MEMORY_SHARED_QUOTA 80;
+alter resource group default_group set MEMORY_SPILL_RATIO 0;
+alter resource group admin_group set CONCURRENCY 10;
+alter resource group admin_group set CPU_RATE_LIMIT 10;
+alter resource group admin_group set MEMORY_LIMIT 10;
+alter resource group admin_group set MEMORY_SHARED_QUOTA 80;
+alter resource group admin_group set MEMORY_SPILL_RATIO 0;
+SELECT * FROM gp_toolkit.gp_resgroup_config;
