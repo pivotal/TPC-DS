@@ -9,25 +9,24 @@ init_log ${step}
 get_version
 filter="gpdb"
 
-function copy_script()
-{
+function copy_script() {
   echo "copy the start and stop scripts to the segment hosts in the cluster"
   for i in $(cat ${TPC_DS_DIR}/segment_hosts.txt); do
     echo "scp start_gpfdist.sh stop_gpfdist.sh ${i}:"
-    scp ${PWD}/start_gpfdist.sh ${PWD}/stop_gpfdist.sh ${i}:
+    scp ${PWD}/start_gpfdist.sh ${PWD}/stop_gpfdist.sh ${i}: &
   done
+  wait
 }
 
-function stop_gpfdist()
-{
+function stop_gpfdist() {
   echo "stop gpfdist on all ports"
   for i in $(cat ${TPC_DS_DIR}/segment_hosts.txt); do
-    ssh -n -f $i "bash -c 'cd ~/; ./stop_gpfdist.sh'"
+    ssh -n -f $i "bash -c 'cd ~/; ./stop_gpfdist.sh'" &
   done
+  wait
 }
 
-function start_gpfdist()
-{
+function start_gpfdist() {
   stop_gpfdist
   sleep 1
   get_gpfdist_port
@@ -43,13 +42,16 @@ function start_gpfdist()
     GEN_DATA_PATH="${GEN_DATA_PATH}/dsbenchmark"
     PORT=$((GPFDIST_PORT + CHILD))
     echo "executing on ${EXT_HOST} ./start_gpfdist.sh $PORT ${GEN_DATA_PATH}"
-    ssh -n -f ${EXT_HOST} "bash -c 'cd ~${ADMIN_USER}; ./start_gpfdist.sh $PORT ${GEN_DATA_PATH}'"
-    sleep 1
+    ssh -n -f ${EXT_HOST} "bash -c 'cd ~${ADMIN_USER}; ./start_gpfdist.sh $PORT ${GEN_DATA_PATH}'" &
   done
+  wait
 }
 
 copy_script
 start_gpfdist
+
+# need to wait for all the gpfdist processes to start
+sleep 5
 
 for i in ${PWD}/*.${filter}.*.sql; do
   start_log
@@ -60,10 +62,18 @@ for i in ${PWD}/*.${filter}.*.sql; do
   table_name=$(echo ${i} | awk -F '.' '{print $3}')
 
   log_time "psql -v ON_ERROR_STOP=1 -f ${i} | grep INSERT | awk -F ' ' '{print \$3}'"
-  tuples=$(psql -v ON_ERROR_STOP=1 -f ${i} | grep INSERT | awk -F ' ' '{print $3}'; exit ${PIPESTATUS[0]})
+  tuples=$(
+    psql -v ON_ERROR_STOP=1 -f ${i} | grep INSERT | awk -F ' ' '{print $3}'
+    exit ${PIPESTATUS[0]}
+  )
 
   print_log ${tuples}
 done
+
+log_time "finished loading tables"
+tuples=0
+print_log ${tuples}
+
 stop_gpfdist
 
 max_id=$(ls ${PWD}/*.sql | tail -1)
@@ -77,7 +87,6 @@ fi
 if [ "${PGPORT}" == "" ]; then
   export PGPORT=5432
 fi
-
 
 schema_name="tpcds"
 table_name="tpcds"

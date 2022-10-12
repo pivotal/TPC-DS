@@ -6,8 +6,7 @@ PWD=$(get_pwd ${BASH_SOURCE[0]})
 ################################################################################
 ####  Local functions  #########################################################
 ################################################################################
-function create_directories()
-{
+function create_directories() {
   if [ ! -d ${TPC_DS_DIR}/log ]; then
     echo "Creating log directory"
     mkdir ${TPC_DS_DIR}/log
