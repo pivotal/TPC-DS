@@ -87,10 +87,12 @@ start_log
 analyzedb -d ${dbname} -s tpcds --full -a
 
 #make sure root stats are gathered
-if [ "${VERSION}" == "gpdb_6" ] || [ "${VERSION}" == "gpdb_7" ] || [ "${VERSION}" == "gpdb_8" ]; then
-  SQL_QUERY="select n.nspname, c.relname from pg_class c join pg_namespace n on c.relnamespace = n.oid left outer join (select starelid from pg_statistic group by starelid) s on c.oid = s.starelid join (select tablename from pg_partitions group by tablename) p on p.tablename = c.relname where n.nspname = 'tpcds' and s.starelid is null order by 1, 2"
+if [ "${VERSION}" == "gpdb_7" ] || [ "${VERSION}" == "gpdb_8" ]; then
+  SQL_QUERY="select n.nspname, c.relname from pg_class c join pg_namespace n on c.relnamespace = n.oid left outer join (select starelid from pg_statistic group by starelid) s on c.oid = s.starelid join pg_partitioned_table p on p.partrelid = c.oid where n.nspname = 'tpch' and s.starelid is null order by 1, 2"
+elif [ "${VERSION}" == "gpdb_6" ]; then
+  SQL_QUERY="select n.nspname, c.relname from pg_class c join pg_namespace n on c.relnamespace = n.oid left outer join (select starelid from pg_statistic group by starelid) s on c.oid = s.starelid join (select tablename from pg_partitions group by tablename) p on p.tablename = c.relname where n.nspname = 'tpch' and s.starelid is null order by 1, 2"
 else
-  SQL_QUERY="select n.nspname, c.relname from pg_class c join pg_namespace n on c.relnamespace = n.oid join pg_partitions p on p.schemaname = n.nspname and p.tablename = c.relname where n.nspname = 'tpcds' and p.partitionrank is null and c.reltuples = 0 order by 1, 2"
+  SQL_QUERY="select n.nspname, c.relname from pg_class c join pg_namespace n on c.relnamespace = n.oid join pg_partitions p on p.schemaname = n.nspname and p.tablename = c.relname where n.nspname = 'tpch' and p.partitionrank is null and c.reltuples = 0 order by 1, 2"
 fi
 for t in $(psql -v ON_ERROR_STOP=1 -q -t -A -c "${SQL_QUERY}"); do
   schema_name=$(echo ${t} | awk -F '|' '{print $1}')
