@@ -11,7 +11,8 @@ export schema_name
 table_name="compile"
 export table_name
 
-function make_tpc() {
+function make_tpc()
+{
   #compile the tools
   cd ${PWD}/tools
   rm -f ./*.o
@@ -19,7 +20,8 @@ function make_tpc() {
   cd ..
 }
 
-function copy_tpc() {
+function copy_tpc()
+{
   cp ${PWD}/tools/dsqgen ../*_gen_data/
   cp ${PWD}/tools/dsqgen ../*_multi_user/
   cp ${PWD}/tools/tpcds.idx ../*_gen_data/
@@ -28,12 +30,12 @@ function copy_tpc() {
   #copy the compiled dsdgen program to the segment nodes
   echo "copy tpcds binaries to segment hosts"
   for i in $(cat ${TPC_DS_DIR}/segment_hosts.txt); do
-    scp tools/dsdgen tools/tpcds.idx ${i}: &
+    scp tools/dsdgen tools/tpcds.idx ${i}:
   done
-  wait
 }
 
-function copy_queries() {
+function copy_queries()
+{
   rm -rf ${TPC_DS_DIR}/*_gen_data/query_templates
   rm -rf ${TPC_DS_DIR}/*_multi_user/query_templates
   cp -R query_templates ${TPC_DS_DIR}/*_gen_data/

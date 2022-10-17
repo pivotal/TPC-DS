@@ -8,10 +8,10 @@ query_id=1
 file_id=101
 
 if [ "${GEN_DATA_SCALE}" == "" ] || [ "${BENCH_ROLE}" == "" ]; then
-  echo "Usage: generate_queries.sh scale rolename"
-  echo "Example: ./generate_queries.sh 100 dsbench"
-  echo "This creates queries for 100GB of data."
-  exit 1
+	echo "Usage: generate_queries.sh scale rolename"
+	echo "Example: ./generate_queries.sh 100 dsbench"
+	echo "This creates queries for 100GB of data."
+	exit 1
 fi
 
 rm -f ${PWD}/query_0.sql
@@ -22,18 +22,18 @@ ${PWD}/dsqgen -input ${PWD}/query_templates/templates.lst -directory ${PWD}/quer
 rm -f ${TPC_DS_DIR}/05_sql/*.${BENCH_ROLE}.*.sql*
 
 for p in $(seq 1 99); do
-  q=$(printf %02d ${query_id})
-  filename=${file_id}.${BENCH_ROLE}.${q}.sql
-  template_filename=query${p}.tpl
-  start_position=""
-  end_position=""
-  for pos in $(grep -n ${template_filename} ${PWD}/query_0.sql | awk -F ':' '{print $1}'); do
-    if [ "${start_position}" == "" ]; then
-      start_position=${pos}
-    else
-      end_position=${pos}
-    fi
-  done
+	q=$(printf %02d ${query_id})
+	filename=${file_id}.${BENCH_ROLE}.${q}.sql
+	template_filename=query${p}.tpl
+	start_position=""
+	end_position=""
+	for pos in $(grep -n ${template_filename} ${PWD}/query_0.sql | awk -F ':' '{print $1}'); do
+		if [ "${start_position}" == "" ]; then
+			start_position=${pos}
+		else
+			end_position=${pos}
+		fi
+	done
 
 	echo "Creating: ${TPC_DS_DIR}/05_sql/${filename}"
 	printf "set role ${BENCH_ROLE};\nset search_path=${SCHEMA_NAME},public;\n" > ${TPC_DS_DIR}/05_sql/${filename}
