@@ -3,6 +3,7 @@
 export ADMIN_USER="gpadmin"
 export BENCH_ROLE="dsbench"
 export SCHEMA_NAME="tpcds"
+export GREENPLUM_PATH=$GPHOME/greenplum_path.sh
  
 
 # to connect directly to GP
