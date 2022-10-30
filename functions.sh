@@ -129,7 +129,7 @@ function get_gpfdist_port() {
 
   for i in $(seq 2 6); do
     if [ "${primary_base}" -ne "${i}" ] && [ "$mirror_base" -ne "${i}" ]; then
-      GPFDIST_PORT="${i}4000"
+      GPFDIST_PORT="${i}4660"
       export GPFDIST_PORT
       break
     fi
