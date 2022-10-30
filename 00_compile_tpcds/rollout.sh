@@ -15,7 +15,7 @@ function make_tpc() {
   #compile the tools
   cd ${PWD}/tools
   rm -f ./*.o
-  make
+  ADDITIONAL_CFLAGS_OPTION="-g -Wno-unused-function -Wno-unused-but-set-variable -Wno-format" make
   cd ..
 }
 
