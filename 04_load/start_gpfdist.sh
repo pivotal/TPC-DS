@@ -21,11 +21,11 @@ if [ "${pid}" -ne "0" ]; then
     echo "Started gpfdist on port ${GPFDIST_PORT}"
   else
     echo "Unable to start gpfdist on port ${GPFDIST_PORT}"
-    echo "Plese check logfile gpfdist.${GPFDIST_PORT}.log on segment host ${seghost}."
+    echo "Plese check logfile gpfdist.${GPFDIST_PORT}.log on segment host ${seghost}"
     exit 1
   fi
 else
   echo "Unable to start background process for gpfdist on port ${GPFDIST_PORT}"
-  echo "Plese check logfile gpfdist.${GPFDIST_PORT}.log on segment host ${seghost}."
+  echo "Plese check logfile gpfdist.${GPFDIST_PORT}.log on segment host ${seghost}"
   exit 1
 fi
