@@ -48,8 +48,6 @@
 #include "validate.h"
 #include "parallel.h"
 
-struct CATALOG_PAGE_TBL g_w_catalog_page;
-
 int
 mk_s_catalog_page(void *pDest, ds_key_t kRow)
 {

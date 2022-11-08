@@ -56,4 +56,8 @@ struct S_WEB_ORDER_LINEITEM_TBL {
 int mk_s_web_order_lineitem(void *pDest, ds_key_t kIndex);
 int pr_s_web_order_lineitem(void *pSrc);
 int ld_s_web_order_lineitem(void *pSrc);
+
+extern struct S_WEB_ORDER_LINEITEM_TBL g_s_web_order_lineitem;
+extern int nItemIndex;
+
 #endif

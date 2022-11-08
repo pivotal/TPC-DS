@@ -48,8 +48,6 @@
 #include "parallel.h"
 
 struct S_WEB_RETURNS_TBL g_s_web_returns;
-extern struct S_WEB_ORDER_TBL g_s_web_order;
-extern struct S_WEB_ORDER_LINEITEM_TBL g_s_web_order_lineitem;
 
 
 /*

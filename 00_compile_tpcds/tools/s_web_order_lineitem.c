@@ -52,8 +52,6 @@
 #include "scd.h"
 
 struct S_WEB_ORDER_LINEITEM_TBL g_s_web_order_lineitem;
-extern struct S_WEB_ORDER_TBL g_s_web_order;
-extern int nItemIndex;
 
 /*
 * Routine: 

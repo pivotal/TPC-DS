@@ -51,9 +51,7 @@
 #include "parallel.h"
 
 struct S_WEB_ORDER_TBL g_s_web_order;
-struct S_WEB_ORDER_LINEITEM_TBL g_s_web_order_lineitem;
 struct S_WEB_RETURNS_TBL g_s_web_return;
-int nItemIndex = -1;
 
 	/* now build/print the lineitems for this order */
 	/* for each lineitem, randomly determine if it is to be returned */
