@@ -52,7 +52,6 @@
 struct S_PURCHASE_TBL g_s_purchase;
 struct S_PURCHASE_LINEITEM_TBL g_s_purchase_lineitem;
 struct S_STORE_RETURNS_TBL g_s_store_return;
-int nItemIndex;
 
 /*
 * Routine: 

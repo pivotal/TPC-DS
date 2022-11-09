@@ -53,4 +53,7 @@ int mk_s_web_order(void *pDest, ds_key_t kIndex);
 int pr_s_web_order(void *pSrc);
 int ld_s_web_order(void *pSrc);
 int vld_s_web_order(int nTable, ds_key_t kRow, int *pPermute);
+
+extern struct S_WEB_ORDER_TBL g_s_web_order;
+
 #endif

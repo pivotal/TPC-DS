@@ -48,8 +48,6 @@
 #include "permute.h"
 #include "scd.h"
 
-struct W_WEB_SITE_TBL g_w_web_site;
-
 
 /*
 * Routine: 

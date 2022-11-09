@@ -53,5 +53,8 @@ struct CATALOG_PAGE_TBL {
 int mk_w_catalog_page(void *row, ds_key_t index);
 int pr_w_catalog_page(void *r);
 int ld_w_catalog_page(void *r);
+
+extern struct CATALOG_PAGE_TBL g_w_catalog_page;
+
 #endif
 

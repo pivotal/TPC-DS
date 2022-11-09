@@ -39,4 +39,7 @@
 int mk_s_warehouse(void *pRow, ds_key_t kIndex);
 int pr_s_warehouse(void *pSrc);
 int ld_s_warehouse(void *pSrc);
+
+extern struct W_WAREHOUSE_TBL g_w_warehouse;
+
 #endif

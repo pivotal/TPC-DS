@@ -68,5 +68,8 @@ struct W_WEB_SITE_TBL {
 int mk_w_web_site(void *pDest, ds_key_t kIndex);
 int pr_w_web_site(void *pSrc);
 int ld_w_web_site(void *pSrc);
+
+extern struct W_WEB_SITE_TBL g_w_web_site;
+
 #endif
 
