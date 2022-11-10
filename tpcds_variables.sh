@@ -1,3 +1,11 @@
+# shellcheck source=functions.sh
+FUNCTIONS_FILE="functions.sh"
+source ./${FUNCTIONS_FILE}
+source_bashrc
+
+TPC_DS_DIR=$(get_pwd ${BASH_SOURCE[0]})
+export TPC_DS_DIR
+
 # shellcheck disable=SC2148
 # environment options
 export ADMIN_USER="gpadmin"
