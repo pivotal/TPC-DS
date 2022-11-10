@@ -10,7 +10,7 @@ if [ "${MULTI_USER_COUNT}" -eq "0" ]; then
 fi
 
 function get_running_jobs_count() {
-  job_count=$(pgrep -cf "07_multi_user/test.sh" || true)
+  job_count=$(pgrep -cf "${TPC_DS_DIR}/07_multi_user/test.sh" || true)
   echo "${job_count}"
 }
 
