@@ -53,9 +53,9 @@ function check_binary() {
   chmod +x dsdgen
   fi
 
-  ./dsqgen --help
+  ./dsqgen -help
   if [ $? == 0 ]; then 
-    ./dsdgen --help
+    ./dsdgen -help
     if [ $? == 0 ]; then
       compile_flag="false" 
     fi
