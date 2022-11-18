@@ -46,12 +46,10 @@ function check_binary() {
   set +e
   
   cd ${PWD}/tools/
-  if [ "${CHIP_TYPE}" == "arm" ]; then
-  cp -f dsqgen.arm dsqgen
-  cp -f dsdgen.arm dsdgen
+  cp -f dsqgen.${CHIP_TYPE} dsqgen
+  cp -f dsdgen.${CHIP_TYPE} dsdgen
   chmod +x dsqgen
   chmod +x dsdgen
-  fi
 
   ./dsqgen -help
   if [ $? == 0 ]; then 
