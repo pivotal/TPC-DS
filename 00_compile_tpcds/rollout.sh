@@ -47,15 +47,15 @@ function check_binary() {
   
   cd ${TPC_DS_DIR}/00_compile_tpcds/tools
   if [ "${CHIP_TYPE}" == "arm" ]; then
-  mv dsqgen.arm dsqgen
-  mv dsdgen.arm dsdgen
-  chmod +x dsqgen
-  chmod +x dsdgen
+  mv ${TPC_DS_DIR}/00_compile_tpcds/tools/dsqgen.arm ${TPC_DS_DIR}/00_compile_tpcds/tools/dsqgen
+  mv ${TPC_DS_DIR}/00_compile_tpcds/tools/dsdgen.arm ${TPC_DS_DIR}/00_compile_tpcds/tools/dsdgen
+  chmod +x ${TPC_DS_DIR}/00_compile_tpcds/tools/dsqgen
+  chmod +x ${TPC_DS_DIR}/00_compile_tpcds/tools/dsdgen
   fi
 
-  dsqgen_flag = `./dsqgen --help`
+  ./dsqgen --help
   if [ $? == 0 ]; then 
-    dsdgen_flag = `./dsdgen --help`
+    ./dsdgen --help
     if [$? == 0 ]; then
       compile_flag="false" 
     fi
