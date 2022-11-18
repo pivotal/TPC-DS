@@ -65,7 +65,7 @@ function check_binary() {
 }
 
 check_binary
-ehco ${compile_flag}
+echo ${compile_flag}
 if [ "${compile_flag}" == "true" ]; then
   make_tpc
 fi
