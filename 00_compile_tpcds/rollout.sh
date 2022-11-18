@@ -45,12 +45,12 @@ function copy_queries() {
 function check_binary() {
   set +e
   
-  cd ${TPC_DS_DIR}/00_compile_tpcds/tools
+  cd ${PWD}/tools/
   if [ "${CHIP_TYPE}" == "arm" ]; then
-  mv ${TPC_DS_DIR}/00_compile_tpcds/tools/dsqgen.arm ${TPC_DS_DIR}/00_compile_tpcds/tools/dsqgen
-  mv ${TPC_DS_DIR}/00_compile_tpcds/tools/dsdgen.arm ${TPC_DS_DIR}/00_compile_tpcds/tools/dsdgen
-  chmod +x ${TPC_DS_DIR}/00_compile_tpcds/tools/dsqgen
-  chmod +x ${TPC_DS_DIR}/00_compile_tpcds/tools/dsdgen
+  cp -f dsqgen.arm dsqgen
+  cp -f dsdgen.arm dsdgen
+  chmod +x dsqgen
+  chmod +x dsdgen
   fi
 
   ./dsqgen --help
