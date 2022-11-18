@@ -74,6 +74,10 @@ This is the default example at [tpcds_variables.sh](https://github.com/RyanWei/T
 ```shell
 # environment options
 ADMIN_USER="gpadmin"
+BENCH_ROLE="dsbench"
+SCHEMA_NAME="tpcds"
+GREENPLUM_PATH=$GPHOME/greenplum_path.sh
+CHIP_TYPE="x86"
 
 # benchmark options
 GEN_DATA_SCALE="1"
@@ -109,6 +113,8 @@ ADMIN_USER="gpadmin"
 These are the setup related variables:
 - `ADMIN_USER`: default `gpadmin`.
   It is the default database administrator account, as well as the user accessible to all `mdw` and `sdw1..n` machines.
+
+- `CHIP_TYPE`: default `x86` can be set to `arm` if your are running on arm based machine, including Mac M1. If included binaries works, compiling will be skipped. 
 
   Note: The benchmark related files for each segment node are located in the segment's `${PGDATA}/dsbenchmark` directory.
   If there isn't enough space in this directory in each segment, you can create a symbolic link to a drive location that does have enough space.
