@@ -6,10 +6,12 @@ PWD=$(get_pwd ${BASH_SOURCE[0]})
 step="compile_tpcds"
 init_log ${step}
 start_log
-schema_name="tpcds"
+schema_name="${SCHEMA_NAME}"
 export schema_name
 table_name="compile"
 export table_name
+
+compile_flag="true"
 
 function make_tpc() {
   #compile the tools
@@ -40,7 +42,32 @@ function copy_queries() {
   cp -R query_templates ${TPC_DS_DIR}/*_multi_user/
 }
 
-make_tpc
+function check_binary() {
+  set +e
+  
+  cd ${PWD}/tools
+  if [ "${CHIP_TYPE}" == "arm" ]; then
+  mv dsqgen.arm dsqgen
+  mv dsdgen.arm dsdgen
+  chmod +x dsqgen
+  chmod +x dsdgen
+  fi
+
+  dsqgen_flag = `./dsqgen --help`
+  if [ $? == 0 ]; then 
+    dsdgen_flag = `./dsdgen --help`
+    if [$? ==0 ]; then
+      compile_flag="false" 
+    if
+  if
+  cd ..
+  set -e
+}
+
+check_binary
+if [ "${compile_flag}" == "true"]; then
+  make_tpc
+if
 create_hosts_file
 copy_tpc
 copy_queries
