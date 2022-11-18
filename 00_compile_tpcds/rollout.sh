@@ -45,7 +45,7 @@ function copy_queries() {
 function check_binary() {
   set +e
   
-  cd ${PWD}/tools
+  cd ${TPC_DS_DIR}/00_compile_tpcds/tools
   if [ "${CHIP_TYPE}" == "arm" ]; then
   mv dsqgen.arm dsqgen
   mv dsdgen.arm dsdgen
