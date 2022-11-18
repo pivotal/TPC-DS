@@ -65,7 +65,8 @@ function check_binary() {
 }
 
 check_binary
-if [ "${compile_flag}" == "true"]; then
+ehco ${compile_flag}
+if [ "${compile_flag}" == "true" ]; then
   make_tpc
 fi
 create_hosts_file
