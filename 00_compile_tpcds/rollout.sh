@@ -56,7 +56,7 @@ function check_binary() {
   ./dsqgen --help
   if [ $? == 0 ]; then 
     ./dsdgen --help
-    if [$? == 0 ]; then
+    if [ $? == 0 ]; then
       compile_flag="false" 
     fi
   fi
