@@ -65,9 +65,11 @@ function check_binary() {
 }
 
 check_binary
-echo ${compile_flag}
+
 if [ "${compile_flag}" == "true" ]; then
   make_tpc
+else
+  echo "Binary works, no compiling needed."
 fi
 create_hosts_file
 copy_tpc
