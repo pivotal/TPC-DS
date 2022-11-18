@@ -58,8 +58,8 @@ function check_binary() {
     dsdgen_flag = `./dsdgen --help`
     if [$? == 0 ]; then
       compile_flag="false" 
-    if
-  if
+    fi
+  fi
   cd ..
   set -e
 }
@@ -67,7 +67,7 @@ function check_binary() {
 check_binary
 if [ "${compile_flag}" == "true"]; then
   make_tpc
-if
+fi
 create_hosts_file
 copy_tpc
 copy_queries
