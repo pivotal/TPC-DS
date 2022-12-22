@@ -17,4 +17,4 @@ gpconfig -c gp_interconnect_snd_queue_depth -v 16
 # gpconfig -c gp_dispatch_keepalives_interval -v 20
 # gpconfig -c gp_dispatch_keepalives_count -v 44
 
-psql -f set_resource_group.sql template1
+psql ${PSQL_OPTIONS} -f set_resource_group.sql template1

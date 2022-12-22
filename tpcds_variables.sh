@@ -5,6 +5,9 @@ export BENCH_ROLE="dsbench"
 
 # to connect directly to GP
 export PSQL_OPTIONS="-p 5432"
+# some of the tools like analyzedb donot have port option in arguments
+# they use default PostgreSQL environment variables
+export PGPORT=5432
 # to connect through pgbouncer
 #export PSQL_OPTIONS="-p 6543 -U dsbench"
 

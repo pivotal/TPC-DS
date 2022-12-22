@@ -180,11 +180,11 @@ validate_guc_settings() {
 
   gp_resource_group_memory_limit_x100=$(su - gpadmin -c 'gpconfig -s gp_resource_group_memory_limit' | grep "^Master" | awk '{ printf $3 * 100 }')
 
-  num_active_primary_segments=$(su - gpadmin -c "psql -d postgres -t -c \"select count(1) from gp_segment_configuration where content <> -1 and preferred_role = 'p'\"" | awk '{ printf $1 }')
+  num_active_primary_segments=$(su - gpadmin -c "psql ${PSQL_OPTIONS} -d postgres -t -c \"select count(1) from gp_segment_configuration where content <> -1 and preferred_role = 'p'\"" | awk '{ printf $1 }')
 
   rg_perseg_mem=$((((RAM_IN_MB * vm_overcommit_ratio / 100) + SWAP_IN_MB) * gp_resource_group_memory_limit_x100 / 100 / num_active_primary_segments))
 
-  max_expected_concurrent_queries=$(su - gpadmin -c "psql -d postgres -t -c \"SELECT concurrency FROM gp_toolkit.gp_resgroup_config where groupname = 'default_group'\"")
+  max_expected_concurrent_queries=$(su - gpadmin -c "psql ${PSQL_OPTIONS} -d postgres -t -c \"SELECT concurrency FROM gp_toolkit.gp_resgroup_config where groupname = 'default_group'\"")
 
   statement_mem=$((rg_perseg_mem / max_expected_concurrent_queries))
   max_statement_mem=$((RAM_IN_MB / max_expected_concurrent_queries))
@@ -199,7 +199,7 @@ validate_guc_settings() {
     mem_factor=117
   fi
   gp_vmem=$(((((SWAP_IN_MB + RAM_IN_MB) - (7680 + (5 / 100) * RAM_IN_MB)) / (mem_factor / 100))))
-  max_acting_primary_segments=$(su - gpadmin -c "psql -d postgres -t -c \
+  max_acting_primary_segments=$(su - gpadmin -c "psql ${PSQL_OPTIONS} -d postgres -t -c \
     \"with hostnames as ( \
       select distinct hostname \
       from gp_segment_configuration \

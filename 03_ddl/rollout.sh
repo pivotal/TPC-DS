@@ -32,8 +32,8 @@ if [ "${DROP_EXISTING_TABLES}" == "true" ]; then
       DISTRIBUTED_BY="DISTRIBUTED BY (${distribution})"
     fi
 
-    log_time "psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f ${i} -v SMALL_STORAGE=\"${SMALL_STORAGE}\" -v MEDIUM_STORAGE=\"${MEDIUM_STORAGE}\" -v LARGE_STORAGE=\"${LARGE_STORAGE}\" -v DISTRIBUTED_BY=\"${DISTRIBUTED_BY}\""
-    psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f ${i} -v SMALL_STORAGE="${SMALL_STORAGE}" -v MEDIUM_STORAGE="${MEDIUM_STORAGE}" -v LARGE_STORAGE="${LARGE_STORAGE}" -v DISTRIBUTED_BY="${DISTRIBUTED_BY}"
+    log_time "psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=1 -q -a -P pager=off -f ${i} -v SMALL_STORAGE=\"${SMALL_STORAGE}\" -v MEDIUM_STORAGE=\"${MEDIUM_STORAGE}\" -v LARGE_STORAGE=\"${LARGE_STORAGE}\" -v DISTRIBUTED_BY=\"${DISTRIBUTED_BY}\""
+    psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=1 -q -a -P pager=off -f ${i} -v SMALL_STORAGE="${SMALL_STORAGE}" -v MEDIUM_STORAGE="${MEDIUM_STORAGE}" -v LARGE_STORAGE="${LARGE_STORAGE}" -v DISTRIBUTED_BY="${DISTRIBUTED_BY}"
 
     print_log
   done
@@ -55,7 +55,7 @@ if [ "${DROP_EXISTING_TABLES}" == "true" ]; then
     else
       SQL_QUERY="select rank() over (partition by g.hostname order by p.fselocation), g.hostname from gp_segment_configuration g join pg_filespace_entry p on g.dbid = p.fsedbid join pg_tablespace t on t.spcfsoid = p.fsefsoid where g.content >= 0 and g.role = '${GPFDIST_LOCATION}' and t.spcname = 'pg_default' order by g.hostname"
     fi
-    for x in $(psql -v ON_ERROR_STOP=1 -q -A -t -c "${SQL_QUERY}"); do
+    for x in $(psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=1 -q -A -t -c "${SQL_QUERY}"); do
       CHILD=$(echo ${x} | awk -F '|' '{print $1}')
       EXT_HOST=$(echo ${x} | awk -F '|' '{print $2}')
       PORT=$((GPFDIST_PORT + CHILD))
@@ -71,8 +71,8 @@ if [ "${DROP_EXISTING_TABLES}" == "true" ]; then
     done
     LOCATION+="'"
 
-    log_time "psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f ${i} -v LOCATION=\"${LOCATION}\""
-    psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f ${i} -v LOCATION="${LOCATION}"
+    log_time "psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=1 -q -a -P pager=off -f ${i} -v LOCATION=\"${LOCATION}\""
+    psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=1 -q -a -P pager=off -f ${i} -v LOCATION="${LOCATION}"
 
     print_log
   done
@@ -88,17 +88,17 @@ start_log
 
 if [ "${BENCH_ROLE}" != "gpadmin" ]; then
   log_time "Drop role ${BENCH_ROLE}"
-  psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${DropRole}"
+  psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=0 -q -P pager=off -c "${DropRole}"
   log_time "Creating role ${BENCH_ROLE}"
-  psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${CreateRole}"
+  psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=0 -q -P pager=off -c "${CreateRole}"
   log_time "Grant schema privileges to role ${BENCH_ROLE}"
-  psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${GrantSchemaPrivileges}"
+  psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=0 -q -P pager=off -c "${GrantSchemaPrivileges}"
   log_time "Grant table privileges to role ${BENCH_ROLE}"
-  psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${GrantTablePrivileges}"
+  psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=0 -q -P pager=off -c "${GrantTablePrivileges}"
 fi
 
 log_time "Set search_path for database gpadmin"
-psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${SetSearchPath}"
+psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=0 -q -P pager=off -c "${SetSearchPath}"
 
 print_log
 
