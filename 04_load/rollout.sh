@@ -30,7 +30,8 @@ function start_gpfdist() {
   stop_gpfdist
   sleep 1
   get_gpfdist_port
-  if [ "${VERSION}" == "gpdb_6" ]; then
+
+  if [ "${VERSION}" == "gpdb_6" ] || [ "${VERSION}" == "gpdb_7" ]; then
     SQL_QUERY="select rank() over(partition by g.hostname order by g.datadir), g.hostname, g.datadir from gp_segment_configuration g where g.content >= 0 and g.role = '${GPFDIST_LOCATION}' order by g.hostname"
   else
     SQL_QUERY="select rank() over (partition by g.hostname order by p.fselocation), g.hostname, p.fselocation as path from gp_segment_configuration g join pg_filespace_entry p on g.dbid = p.fsedbid join pg_tablespace t on t.spcfsoid = p.fsefsoid where g.content >= 0 and g.role = '${GPFDIST_LOCATION}' and t.spcname = 'pg_default' order by g.hostname"
@@ -96,7 +97,7 @@ start_log
 analyzedb -d ${dbname} -s tpcds --full -a
 
 #make sure root stats are gathered
-if [ "${VERSION}" == "gpdb_6" ]; then
+if [ "${VERSION}" == "gpdb_6" ] || [ "${VERSION}" == "gpdb_7" ]; then
   SQL_QUERY="select n.nspname, c.relname from pg_class c join pg_namespace n on c.relnamespace = n.oid left outer join (select starelid from pg_statistic group by starelid) s on c.oid = s.starelid join (select tablename from pg_partitions group by tablename) p on p.tablename = c.relname where n.nspname = 'tpcds' and s.starelid is null order by 1, 2"
 else
   SQL_QUERY="select n.nspname, c.relname from pg_class c join pg_namespace n on c.relnamespace = n.oid join pg_partitions p on p.schemaname = n.nspname and p.tablename = c.relname where n.nspname = 'tpcds' and p.partitionrank is null and c.reltuples = 0 order by 1, 2"
