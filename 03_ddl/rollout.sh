@@ -9,7 +9,7 @@ get_version
 
 filter="gpdb"
 
-if [ "${DROP_EXISTING_TABLES}" == "true" ]; then
+if [ "${RUN_LOAD}" == "true" ]; then
   #Create tables
   for i in ${PWD}/*.${filter}.*.sql; do
     start_log

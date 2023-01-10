@@ -32,12 +32,7 @@ export GEN_NEW_DATA="true"
 export RUN_INIT="true"
 
 # step 03_ddl
-# To run another TPC-DS with a different BENCH_ROLE using existing tables and data
-# change BENCH_ROLE and set RUN_DDL to true and DROP_EXISTING_TABLES to false
-# DROP_EXISTING_TABLES only takes affect when RUN_DDL is true, and the default setting
-# should true under normal circumstances
 export RUN_DDL="true"
-export DROP_EXISTING_TABLES="true"
 
 # step 04_load
 export RUN_LOAD="true"
