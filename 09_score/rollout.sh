@@ -31,6 +31,7 @@ TLD_2_2_0=$(psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=1 -q -t -A -c "select cast(0.0
 SCORE_1_3_1=$(psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=1 -q -t -A -c "select floor(cast(${Q_1_3_1} as decimal) * cast(${SF} as decimal) / (cast(${TPT_1_3_1} as decimal) + cast(${TTT_1_3_1} as decimal) + cast(${TLD_1_3_1} as decimal)))")
 SCORE_2_2_0=$(psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=1 -q -t -A -c "select floor(cast(${Q_2_2_0} as decimal) * cast(${SF} as decimal) / exp((ln(cast(${TPT_2_2_0} as decimal)) + ln(cast(${TTT_2_2_0} as decimal)) + ln(cast(${TLD_2_2_0} as decimal))) / cast(3.0 as decimal)))")
 
+printf "Linux Kernel Version: %s\n" "$(uname -a)"
 printf "Number of Streams (Sq)\t%d\n" "${S_Q}"
 printf "Scale Factor (SF)\t%d\n" "${SF}"
 printf "Load (seconds)\t\t\t%d\n" "${LOAD_TIME}"
