@@ -12,7 +12,7 @@ dependencies:
 
 .PHONY: shfmt
 shfmt:
-	find . -name "*.sh" -not -path './00_compile_tpcds/t*' | xargs shfmt -d -i 2 -sr
+	find . -name "*.sh" -not -path './00_compile_tpcds/t*' | xargs shfmt -d -i 2 -sr -w
 
 .PHONY: lint
 lint:
