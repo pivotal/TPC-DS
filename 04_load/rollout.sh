@@ -36,7 +36,7 @@ function start_gpfdist() {
   else
     SQL_QUERY="select rank() over (partition by g.hostname order by p.fselocation), g.hostname, p.fselocation as path from gp_segment_configuration g join pg_filespace_entry p on g.dbid = p.fsedbid join pg_tablespace t on t.spcfsoid = p.fsefsoid where g.content >= 0 and g.role = '${GPFDIST_LOCATION}' and t.spcname = 'pg_default' order by g.hostname"
   fi
-  for i in $(psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=1 -q -A -t -c "${SQL_QUERY}"); do
+  for i in $(psql -v ON_ERROR_STOP=1 -q -A -t -c "${SQL_QUERY}"); do
     CHILD=$(echo ${i} | awk -F '|' '{print $1}')
     EXT_HOST=$(echo ${i} | awk -F '|' '{print $2}')
     GEN_DATA_PATH=$(echo ${i} | awk -F '|' '{print $3}')
@@ -67,9 +67,9 @@ for i in ${PWD}/*.${filter}.*.sql; do
   schema_name=$(echo ${i} | awk -F '.' '{print $2}')
   table_name=$(echo ${i} | awk -F '.' '{print $3}')
 
-  log_time "psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=1 -f ${i} | grep INSERT | awk -F ' ' '{print \$3}'"
+  log_time "psql -v ON_ERROR_STOP=1 -f ${i} | grep INSERT | awk -F ' ' '{print \$3}'"
   tuples=$(
-    psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=1 -f ${i} | grep INSERT | awk -F ' ' '{print $3}'
+    psql -v ON_ERROR_STOP=1 -f ${i} | grep INSERT | awk -F ' ' '{print $3}'
     exit ${PIPESTATUS[0]}
   )
 
@@ -107,13 +107,13 @@ if [ "${VERSION}" == "gpdb_6" ] || [ "${VERSION}" == "gpdb_7" ]; then
 else
   SQL_QUERY="select n.nspname, c.relname from pg_class c join pg_namespace n on c.relnamespace = n.oid join pg_partitions p on p.schemaname = n.nspname and p.tablename = c.relname where n.nspname = 'tpcds' and p.partitionrank is null and c.reltuples = 0 order by 1, 2"
 fi
-for t in $(psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=1 -q -t -A -c "${SQL_QUERY}"); do
+for t in $(psql -v ON_ERROR_STOP=1 -q -t -A -c "${SQL_QUERY}"); do
   schema_name=$(echo ${t} | awk -F '|' '{print $1}')
   table_name=$(echo ${t} | awk -F '|' '{print $2}')
   echo "Missing root stats for ${schema_name}.${table_name}"
   SQL_QUERY="ANALYZE ROOTPARTITION ${schema_name}.${table_name}"
-  log_time "psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=1 -q -t -A -c \"${SQL_QUERY}\""
-  psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=1 -q -t -A -c "${SQL_QUERY}"
+  log_time "psql -v ON_ERROR_STOP=1 -q -t -A -c \"${SQL_QUERY}\""
+  psql -v ON_ERROR_STOP=1 -q -t -A -c "${SQL_QUERY}"
 done
 
 tuples="0"

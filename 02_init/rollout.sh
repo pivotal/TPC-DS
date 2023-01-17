@@ -50,7 +50,7 @@ function check_gucs() {
 
   if [ "${VERSION}" == "gpdb_5" ]; then
     counter=$(
-      psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=1 -q -t -A -c "show optimizer_join_arity_for_associativity_commutativity" | grep -i "18" | wc -l
+      psql -v ON_ERROR_STOP=1 -q -t -A -c "show optimizer_join_arity_for_associativity_commutativity" | grep -i "18" | wc -l
       exit ${PIPESTATUS[0]}
     )
     if [ "${counter}" -eq "0" ]; then
@@ -62,7 +62,7 @@ function check_gucs() {
 
   echo "check optimizer"
   counter=$(
-    psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=1 -q -t -A -c "show optimizer" | grep -i "on" | wc -l
+    psql -v ON_ERROR_STOP=1 -q -t -A -c "show optimizer" | grep -i "on" | wc -l
     exit ${PIPESTATUS[0]}
   )
   if [ "${counter}" -eq "0" ]; then
@@ -73,7 +73,7 @@ function check_gucs() {
 
   echo "check analyze_root_partition"
   counter=$(
-    psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=1 -q -t -A -c "show optimizer_analyze_root_partition" | grep -i "on" | wc -l
+    psql -v ON_ERROR_STOP=1 -q -t -A -c "show optimizer_analyze_root_partition" | grep -i "on" | wc -l
     exit ${PIPESTATUS[0]}
   )
   if [ "${counter}" -eq "0" ]; then
@@ -84,7 +84,7 @@ function check_gucs() {
 
   echo "check gp_autostats_mode"
   counter=$(
-    psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=1 -q -t -A -c "show gp_autostats_mode" | grep -i "none" | wc -l
+    psql -v ON_ERROR_STOP=1 -q -t -A -c "show gp_autostats_mode" | grep -i "none" | wc -l
     exit ${PIPESTATUS[0]}
   )
   if [ "${counter}" -eq "0" ]; then
@@ -95,7 +95,7 @@ function check_gucs() {
 
   echo "check default_statistics_target"
   counter=$(
-    psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=1 -q -t -A -c "show default_statistics_target" | grep "100" | wc -l
+    psql -v ON_ERROR_STOP=1 -q -t -A -c "show default_statistics_target" | grep "100" | wc -l
     exit ${PIPESTATUS[0]}
   )
   if [ "${counter}" -eq "0" ]; then
@@ -117,7 +117,7 @@ function copy_config() {
     cp ${MASTER_DATA_DIRECTORY}/postgresql.conf ${TPC_DS_DIR}/log/
   fi
   #gp_segment_configuration
-  psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=1 -q -A -t -c "SELECT * FROM gp_segment_configuration" -o "${TPC_DS_DIR}"/log/gp_segment_configuration.txt
+  psql -v ON_ERROR_STOP=1 -q -A -t -c "SELECT * FROM gp_segment_configuration" -o ${TPC_DS_DIR}/log/gp_segment_configuration.txt
 }
 
 get_version
