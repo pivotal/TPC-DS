@@ -76,17 +76,17 @@ for i in ${sql_dir}/*.sql; do
   export table_name
 
   if [ "${EXPLAIN_ANALYZE}" == "false" ]; then
-    log_time "psql ${PSQL_OPTIONS} -d gpadmin -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f ${i} | wc -l"
+    log_time "psql -d gpadmin -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f ${i} | wc -l"
     tuples=$(
-      psql ${PSQL_OPTIONS} -d gpadmin -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f ${i} | wc -l
+      psql -d gpadmin -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="" -f ${i} | wc -l
       exit ${PIPESTATUS[0]}
     )
     tuples=$((tuples - 1))
   else
     myfilename=$(basename ${i})
     mylogfile="${TPC_DS_DIR}/log/${session_id}.${myfilename}.multi.explain_analyze.log"
-    log_time "psql ${PSQL_OPTIONS} -d gpadmin -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE=\"EXPLAIN ANALYZE\" -f ${i}"
-    psql ${PSQL_OPTIONS} -d gpadmin -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="EXPLAIN ANALYZE" -f ${i} > ${mylogfile}
+    log_time "psql -d gpadmin -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE=\"EXPLAIN ANALYZE\" -f ${i}"
+    psql -d gpadmin -v ON_ERROR_STOP=1 -A -q -t -P pager=off -v EXPLAIN_ANALYZE="EXPLAIN ANALYZE" -f ${i} > ${mylogfile}
     tuples="0"
   fi
 

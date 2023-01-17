@@ -4,9 +4,11 @@ export ADMIN_USER="gpadmin"
 export BENCH_ROLE="dsbench"
 
 # to connect directly to GP
-export PSQL_OPTIONS="-p 5432"
+export PGPORT="5432"
 # to connect through pgbouncer
-#export PSQL_OPTIONS="-p 6543 -U dsbench"
+# export PGPORT="6543"
+# Add additional PostgreSQL refer:
+# https://www.postgresql.org/docs/current/libpq-envars.html
 
 # benchmark options
 export GEN_DATA_SCALE="1"

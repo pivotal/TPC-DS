@@ -56,7 +56,7 @@ sleep 5
 
 # truncate table
 echo "truncating all tables ..."
-psql ${PSQL_OPTIONS} -v ON_ERROR_STOP=1 -f "${PWD}/000.truncate.tables.sql"
+psql -v ON_ERROR_STOP=1 -f "${PWD}/000.truncate.tables.sql"
 echo "finished truncate ..."
 
 for i in ${PWD}/*.${filter}.*.sql; do
