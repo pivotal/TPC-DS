@@ -128,6 +128,17 @@ These are the setup related variables:
 
 In most cases, we just leave them to the default.
 
+#### PSQL Environment Options
+
+```shell
+export PGPORT="6543"
+# Add additional PostgreSQL refer:
+# https://www.postgresql.org/docs/current/libpq-envars.html
+```
+
+TPC-DS uses `psql` command, which interally uses `libpq`, to connect to the database.
+`libpq` provides environment variables that can override the default connection parameter values, which will be used by PQconnectdb, PQsetdbLogin and PQsetdb if no value is directly specified by the calling code.
+
 #### Benchmark Options
 
 ```shell
