@@ -28,3 +28,5 @@ super-linter:
 		-e FILTER_REGEX_EXCLUDE=$(EXCLUDED_DIRECTORY) \
 		-v ${PWD}:/tmp/lint \
 		gcr.io/gp-virtual/super-linter:slim-$(SUPER_LINTER_VERSION)
+.PHONY: test
+test: shfmt lint super-linter
