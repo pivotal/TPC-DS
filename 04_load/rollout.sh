@@ -102,7 +102,9 @@ start_log
 analyzedb -d ${dbname} -s tpcds --full -a
 
 #make sure root stats are gathered
-if [ "${VERSION}" == "gpdb_6" ] || [ "${VERSION}" == "gpdb_7" ]; then
+if [ "${VERSION}" == "gpdb_7" ]; then
+  SQL_QUERY="select distinct n.nspname, c.relname from pg_partitioned_table pt left join pg_class c on pt.partrelid = c.oid left join pg_namespace n on c.relnamespace = n.oid where c.relkind = 'r' and n.nspname = 'tpcds';"
+elif [ "${VERSION}" == "gpdb_6" ]; then
   SQL_QUERY="select n.nspname, c.relname from pg_class c join pg_namespace n on c.relnamespace = n.oid left outer join (select starelid from pg_statistic group by starelid) s on c.oid = s.starelid join (select tablename from pg_partitions group by tablename) p on p.tablename = c.relname where n.nspname = 'tpcds' and s.starelid is not null order by 1, 2"
 else
   SQL_QUERY="select n.nspname, c.relname from pg_class c join pg_namespace n on c.relnamespace = n.oid join pg_partitions p on p.schemaname = n.nspname and p.tablename = c.relname where n.nspname = 'tpcds' and p.partitionrank is null and c.reltuples = 0 order by 1, 2"
