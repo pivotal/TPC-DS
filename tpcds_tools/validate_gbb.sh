@@ -9,7 +9,7 @@ fi
 get_ram() {
   case $1 in
   b | k | m | g)
-    printf "%d" "$(free -${1} | grep "^Mem:" | awk '{ print $2 }')"
+    printf "%d" "$(free -"${1}" | grep "^Mem:" | awk '{ print $2 }')"
     ;;
   *)
     printf "-1"
@@ -20,7 +20,7 @@ get_ram() {
 get_swap() {
   case ${1} in
   b | k | m | g)
-    printf "%d" "$(free -${1} | grep "^Swap:" | awk '{ print $2 }')"
+    printf "%d" "$(free -"${1}" | grep "^Swap:" | awk '{ print $2 }')"
     ;;
   *)
     printf "-1"
@@ -195,7 +195,7 @@ validate_guc_settings() {
   max_statement_mem_with_unit=$([ $((max_statement_mem % 1024)) == 0 ] && echo "$((max_statement_mem / 1024))GB" || echo "${max_statement_mem}MB")
 
   mem_factor=170
-  if [ ${RAM_IN_GB} -gt 256 ]; then
+  if [ "${RAM_IN_GB}" -gt 256 ]; then
     mem_factor=117
   fi
   gp_vmem=$(((((SWAP_IN_MB + RAM_IN_MB) - (7680 + (5 / 100) * RAM_IN_MB)) / (mem_factor / 100))))

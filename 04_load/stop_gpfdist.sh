@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-for i in $(ps -ef | grep gpfdist | grep -v grep | grep -v stop_gpfdist | awk -F ' ' '{print $2}'); do
+for i in $(pgrep gpfdist); do
   echo "killing ${i}"
-  kill ${i}
+  kill "${i}"
 done

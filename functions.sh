@@ -15,7 +15,7 @@ function check_variable() {
   local var_name="${1}"
   shift
 
-  if [ ! -n "${!var_name}" ]; then
+  if [ -z "${!var_name}" ]; then
     echo "${var_name} is not defined in ${VARS_FILE}. Exiting."
     exit 1
   fi
@@ -28,8 +28,7 @@ function check_variables() {
   echo "############################################################################"
   echo ""
   # shellcheck source=tpcds_variables.sh
-  source ./${VARS_FILE} 2> /dev/null
-  if [ $? -ne 0 ]; then
+  if ! source "./${VARS_FILE}" 2> /dev/null; then
     echo "./${VARS_FILE} does not exist. Please ensure that this file exists before running TPC-DS. Exiting."
     exit 1
   fi
@@ -87,19 +86,19 @@ function print_header() {
 # we need to declare this outside, otherwise, the declare will wipe out the
 # value within a function
 declare startup_file
-startup_file=${HOME}/.bashrc
+startup_file="${HOME}/.bashrc"
 function source_bashrc() {
-  if [ -f ${startup_file} ]; then
+  if [ -f "${startup_file}" ]; then
     # don't fail if an error is happening in the admin's profile
     # shellcheck disable=SC1090
-    source ${startup_file} || true
+    source "${startup_file}" || true
   fi
-  count=$(egrep -c "source .*/greenplum_path.sh|\. .*/greenplum_path.sh" ${startup_file})
-  if [ ${count} -eq 0 ]; then
+  count=$(grep -E -c "source .*/greenplum_path.sh|\. .*/greenplum_path.sh" "${startup_file}")
+  if [ "${count}" -eq 0 ]; then
     echo "${HOME}/.bashrc does not contain greenplum_path.sh"
     echo "Please update your ${startup_file} for ${ADMIN_USER} and try again."
     exit 1
-  elif [ ${count} -gt 1 ]; then
+  elif [ "${count}" -gt 1 ]; then
     echo "${HOME}/.bashrc contains multiple greenplum_path.sh entries"
     echo "Please update your ${startup_file} for ${ADMIN_USER} and try again."
     exit 1
@@ -113,19 +112,20 @@ function source_bashrc() {
 ################################################################################
 function get_pwd() {
   # Handle relative vs absolute path
-  [ ${1:0:1} == '/' ] && x=${1} || x=$PWD/${1}
+  [ "${1:0:1}" == '/' ] && x="${1}" || x="${PWD}/${1}"
   # Change to dirname of x
-  cd ${x%/*}
+  cd "${x%/*}"
   # Combine new pwd with basename of x
+	# shellcheck disable=SC2005
   echo "$(dirname "$(pwd -P)/${x##*/}")"
-  cd ${OLDPWD}
+  cd "${OLDPWD}"
 }
 export -f get_pwd
 
 function get_gpfdist_port() {
   all_ports=$(psql -t -A -c "select min(case when role = 'p' then port else 999999 end), min(case when role = 'm' then port else 999999 end) from gp_segment_configuration where content >= 0")
-  primary_base=$(echo ${all_ports} | awk -F '|' '{print $1}' | head -c1)
-  mirror_base=$(echo $all_ports | awk -F '|' '{print $2}' | head -c1)
+  primary_base=$(echo "${all_ports}" | awk -F '|' '{print $1}' | head -c1)
+  mirror_base=$(echo "${all_ports}" | awk -F '|' '{print $2}' | head -c1)
 
   for i in $(seq 4 9); do
     if [ "${primary_base}" -ne "${i}" ] && [ "$mirror_base" -ne "${i}" ]; then
@@ -164,8 +164,8 @@ function get_version() {
 export -f get_version
 
 function init_log() {
-  logfile=rollout_${1}.log
-  rm -f ${TPC_DS_DIR}/log/${logfile}
+  logfile="rollout_${1}.log"
+  rm -f "${TPC_DS_DIR}/log/${logfile}"
 }
 export -f init_log
 
@@ -188,7 +188,7 @@ function print_log() {
   if [ "${id}" == "" ]; then
     id="1"
   else
-    id=$(basename ${i} | awk -F '.' '{print $1}')
+    id=$(basename "${i}" | awk -F '.' '{print $1}')
   fi
 
   tuples=${1}
@@ -197,13 +197,13 @@ function print_log() {
   fi
 
   # calling function adds schema_name and table_name
-  printf "%s|%s.%s|%s|%02d:%02d:%02d|%d|%d\n" ${id} ${schema_name} ${table_name} ${tuples} "$((S_DURATION / 3600 % 24))" "$((S_DURATION / 60 % 60))" "$((S_DURATION % 60))" "${T_START}" "${T_END}" >> ${TPC_DS_DIR}/log/${logfile}
+  printf "%s|%s.%s|%s|%02d:%02d:%02d|%d|%d\n" "${id}" "${schema_name}" "${table_name}" "${tuples}" "$((S_DURATION / 3600 % 24))" "$((S_DURATION / 60 % 60))" "$((S_DURATION % 60))" "${T_START}" "${T_END}" >> "${TPC_DS_DIR}/log/${logfile}"
 }
 export -f print_log
 
 function end_step() {
   local logfile=end_${1}.log
-  touch ${TPC_DS_DIR}/log/${logfile}
+  touch "${TPC_DS_DIR}/log/${logfile}"
 }
 export -f end_step
 
@@ -217,6 +217,6 @@ function create_hosts_file() {
   # get_version
 
   SQL_QUERY="SELECT DISTINCT hostname FROM gp_segment_configuration WHERE role = '${GPFDIST_LOCATION}' AND content >= 0"
-  psql -v ON_ERROR_STOP=1 -t -A -c "${SQL_QUERY}" -o ${TPC_DS_DIR}/segment_hosts.txt
+  psql -v ON_ERROR_STOP=1 -t -A -c "${SQL_QUERY}" -o "${TPC_DS_DIR}"/segment_hosts.txt
 }
 export -f create_hosts_file

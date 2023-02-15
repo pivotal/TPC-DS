@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-PWD=$(get_pwd ${BASH_SOURCE[0]})
+PWD=$(get_pwd "${BASH_SOURCE[0]}")
 
 step="score"
 init_log ${step}
@@ -34,11 +34,11 @@ SCORE_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select floor(cast(${Q_2_2_0} 
 printf -- '-%.0s' {1..80}
 printf "\n"
 printf "Linux Kernel Version: %s\n" "$(uname -a)"
-printf "Greenplum Version: %s\n" "$(${GPHOME}/bin/postgres --gp-version)"
+printf "Greenplum Version: %s\n" "$("${GPHOME}"/bin/postgres --gp-version)"
 
 printf -- '-%.0s' {1..80}
 printf "\n"
-printf "Postgres Configuration:\n %s\n" "$(${GPHOME}/bin/pg_config)"
+printf "Postgres Configuration:\n %s\n" "$("${GPHOME}"/bin/pg_config)"
 
 printf -- '-%.0s' {1..80}
 printf "\n"

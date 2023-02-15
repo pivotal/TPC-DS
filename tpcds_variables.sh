@@ -60,6 +60,8 @@ export RANDOM_DISTRIBUTION="false"
 # Set gpfdist location where gpfdist will run p (primary) or m (mirror)
 export GPFDIST_LOCATION="p"
 
-export OSVERSION=$(uname)
-export MASTER_HOST=$(hostname -s)
+OSVERSION=$(uname)
+MASTER_HOST=$(hostname -s)
+export OSVERSION
+export MASTER_HOST
 export LD_PRELOAD=/lib64/libz.so.1 ps

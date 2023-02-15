@@ -1,38 +1,38 @@
 #!/bin/bash
 set -e
 
-PWD=$(get_pwd ${BASH_SOURCE[0]})
+PWD=$(get_pwd "${BASH_SOURCE[0]}")
 
 step="ddl"
-init_log ${step}
+init_log "${step}"
 get_version
 
 filter="gpdb"
 
 #Create tables
-for i in ${PWD}/*.${filter}.*.sql; do
+for i in "${PWD}"/*."${filter}".*.sql; do
   start_log
-  id=$(echo ${i} | awk -F '.' '{print $1}')
+  id=$(echo "${i}" | awk -F '.' '{print $1}')
   export id
-  schema_name=$(echo ${i} | awk -F '.' '{print $2}')
+  schema_name=$(echo "${i}" | awk -F '.' '{print $2}')
   export schema_name
-  table_name=$(echo ${i} | awk -F '.' '{print $3}')
+  table_name=$(echo "${i}" | awk -F '.' '{print $3}')
   export table_name
 
   if [ "${RANDOM_DISTRIBUTION}" == "true" ]; then
     DISTRIBUTED_BY="DISTRIBUTED RANDOMLY"
   else
-    for z in $(cat ${PWD}/distribution.txt); do
-      table_name2=$(echo ${z} | awk -F '|' '{print $2}')
+    while IFS= read -r z; do
+      table_name2=$(echo "${z}" | awk -F '|' '{print $2}')
       if [ "${table_name2}" == "${table_name}" ]; then
-        distribution=$(echo ${z} | awk -F '|' '{print $3}')
+        distribution=$(echo "${z}" | awk -F '|' '{print $3}')
       fi
-    done
+    done < "${PWD}"/distribution.txt
     DISTRIBUTED_BY="DISTRIBUTED BY (${distribution})"
   fi
 
   log_time "psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f ${i} -v SMALL_STORAGE=\"${SMALL_STORAGE}\" -v MEDIUM_STORAGE=\"${MEDIUM_STORAGE}\" -v LARGE_STORAGE=\"${LARGE_STORAGE}\" -v DISTRIBUTED_BY=\"${DISTRIBUTED_BY}\""
-  psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f ${i} -v SMALL_STORAGE="${SMALL_STORAGE}" -v MEDIUM_STORAGE="${MEDIUM_STORAGE}" -v LARGE_STORAGE="${LARGE_STORAGE}" -v DISTRIBUTED_BY="${DISTRIBUTED_BY}"
+  psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f "${i}" -v SMALL_STORAGE="${SMALL_STORAGE}" -v MEDIUM_STORAGE="${MEDIUM_STORAGE}" -v LARGE_STORAGE="${LARGE_STORAGE}" -v DISTRIBUTED_BY="${DISTRIBUTED_BY}"
 
   print_log
 done
@@ -40,12 +40,12 @@ done
 #external tables are the same for all gpdb
 get_gpfdist_port
 
-for i in ${PWD}/*.ext_tpcds.*.sql; do
+for i in "${PWD}"/*.ext_tpcds.*.sql; do
   start_log
 
-  id=$(echo ${i} | awk -F '.' '{print $1}')
-  schema_name=$(echo ${i} | awk -F '.' '{print $2}')
-  table_name=$(echo ${i} | awk -F '.' '{print $3}')
+  id=$(echo "${i}" | awk -F '.' '{print $1}')
+  schema_name=$(echo "${i}" | awk -F '.' '{print $2}')
+  table_name=$(echo "${i}" | awk -F '.' '{print $3}')
 
   counter=0
 
@@ -55,8 +55,8 @@ for i in ${PWD}/*.ext_tpcds.*.sql; do
     SQL_QUERY="select rank() over (partition by g.hostname order by p.fselocation), g.hostname from gp_segment_configuration g join pg_filespace_entry p on g.dbid = p.fsedbid join pg_tablespace t on t.spcfsoid = p.fsefsoid where g.content >= 0 and g.role = '${GPFDIST_LOCATION}' and t.spcname = 'pg_default' order by g.hostname"
   fi
   for x in $(psql -v ON_ERROR_STOP=1 -q -A -t -c "${SQL_QUERY}"); do
-    CHILD=$(echo ${x} | awk -F '|' '{print $1}')
-    EXT_HOST=$(echo ${x} | awk -F '|' '{print $2}')
+    CHILD=$(echo "${x}" | awk -F '|' '{print $1}')
+    EXT_HOST=$(echo "${x}" | awk -F '|' '{print $2}')
     PORT=$((GPFDIST_PORT + CHILD))
 
     if [ "${counter}" -eq "0" ]; then
@@ -71,7 +71,7 @@ for i in ${PWD}/*.ext_tpcds.*.sql; do
   LOCATION+="'"
 
   log_time "psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f ${i} -v LOCATION=\"${LOCATION}\""
-  psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f ${i} -v LOCATION="${LOCATION}"
+  psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f "${i}" -v LOCATION="${LOCATION}"
 
   print_log
 done
