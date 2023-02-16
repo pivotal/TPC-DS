@@ -93,7 +93,7 @@ function source_bashrc() {
     # shellcheck disable=SC1090
     source "${startup_file}" || true
   fi
-  count=$(grep -E -c "source .*/greenplum_path.sh|\. .*/greenplum_path.sh" "${startup_file}")
+  count=$(grep -E -c "source .*/greenplum_path.sh|\. .*/greenplum_path.sh" "${startup_file}" || true)
   if [ "${count}" -eq 0 ]; then
     echo "${HOME}/.bashrc does not contain greenplum_path.sh"
     echo "Please update your ${startup_file} for ${ADMIN_USER} and try again."
