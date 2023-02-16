@@ -27,6 +27,7 @@ super-linter:
 		-e LOG_LEVEL=ERROR \
 		-e FILTER_REGEX_EXCLUDE=$(EXCLUDED_DIRECTORY) \
 		-v ${PWD}:/tmp/lint \
-		gcr.io/gp-virtual/super-linter:slim-$(SUPER_LINTER_VERSION)
+		github/super-linter:slim-$(SUPER_LINTER_VERSION)
+
 .PHONY: test
 test: shfmt lint super-linter
