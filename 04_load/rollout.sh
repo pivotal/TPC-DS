@@ -62,10 +62,9 @@ echo "finished truncate ..."
 for i in "${PWD}"/*."${filter}".*.sql; do
   start_log
 
-  id=$(echo "${i}" | awk -F '.' '{print $1}')
-  export id
-  schema_name=$(echo "${i}" | awk -F '.' '{print $2}')
-  table_name=$(echo "${i}" | awk -F '.' '{print $3}')
+  id=$(basename "${i}" | awk -F '.' '{print $1}')
+  schema_name=$(basename "${i}" | awk -F '.' '{print $2}')
+  table_name=$(basename "${i}" | awk -F '.' '{print $3}')
 
   log_time "psql -v ON_ERROR_STOP=1 -f ${i} | grep INSERT | awk -F ' ' '{print \$3}'"
   tuples=$(
@@ -73,17 +72,13 @@ for i in "${PWD}"/*."${filter}".*.sql; do
     exit "${PIPESTATUS[0]}"
   )
 
-  print_log "${tuples}"
+  print_log "${id}" "${schema_name}" "${table_name}" "${tuples}"
 done
 
 log_time "finished loading tables"
-tuples=0
-print_log "${tuples}"
+print_log "${id}" "${schema_name}" "${table_name}" 0
 
 stop_gpfdist
-
-max_id=$(find "${PWD}" -name "*.sql" | sort | tail -1)
-i=$(basename "${max_id}" | awk -F '.' '{print $1}' | sed 's/^0*//')
 
 dbname="$PGDATABASE"
 if [ "${dbname}" == "" ]; then
@@ -99,7 +94,7 @@ table_name="tpcds"
 
 start_log
 #Analyze schema using analyzedb
-analyzedb -d "${dbname}" -s tpcds --full -a
+analyzedb -d "${dbname}" -s "${schema_name}" --full -a
 
 #make sure root stats are gathered
 if [ "${VERSION}" == "gpdb_7" ]; then
@@ -118,7 +113,8 @@ for t in $(psql -v ON_ERROR_STOP=1 -q -t -A -c "${SQL_QUERY}"); do
   psql -v ON_ERROR_STOP=1 -q -t -A -c "${SQL_QUERY}"
 done
 
-tuples="0"
-print_log "${tuples}"
+max_id=$(find "${PWD}" -name "*.sql" | sort | tail -1)
+id=$(basename "${max_id}" | awk -F '.' '{print $1}' | sed 's/^0*//')
+print_log "${id}" "${schema_name}" "${table_name}" 0
 
 echo "Finished ${step}"

@@ -68,10 +68,6 @@ function gen_data() {
 step="gen_data"
 init_log "${step}"
 start_log
-schema_name="tpcds"
-export schema_name
-table_name="gen_data"
-export table_name
 
 if [ "${GEN_NEW_DATA}" == "true" ]; then
   kill_orphaned_data_gen
@@ -101,6 +97,6 @@ echo "Generate queries based on scale"
 cd "${PWD}"
 "${PWD}"/generate_queries.sh
 
-print_log
+print_log "1" "tpcds" "gen_data" "0"
 
 echo "Finished ${step}"

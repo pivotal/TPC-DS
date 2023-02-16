@@ -26,8 +26,7 @@ if [ "$return_status" -eq "0" ]; then
   schema_name="tpcds"
   table_name="tpcds"
   analyzedb -d "${dbname}" -s tpcds --full -a
-  tuples="0"
-  print_log "${tuples}"
+  print_log "${id}" "${schema_name}" "${table_name}" "0"
 else
   #get stats on all non-partitioned tables and all partitions
   for i in $(psql -A -t -v ON_ERROR_STOP=ON -c "SELECT lpad(row_number() over() + $max_id, 3, '0') || '.' || n.nspname || '.' || c.relname FROM pg_class c JOIN pg_namespace n on c.relnamespace = n.oid WHERE n.nspname = 'tpcds' AND c.relname NOT IN (SELECT DISTINCT tablename FROM pg_partitions p WHERE schemaname = 'tpcds') AND c.reltuples::bigint = 0"); do
@@ -39,8 +38,7 @@ else
 
     log_time "psql -a -v ON_ERROR_STOP=ON -c \"ANALYZE ${schema_name}.${table_name}\""
     psql -a -v ON_ERROR_STOP=ON -c "ANALYZE ${schema_name}.${table_name}"
-    tuples="0"
-    print_log "${tuples}"
+    print_log "${id}" "${schema_name}" "${table_name}" "0"
   done
 
   #analyze root partitions of partitioned tables
@@ -54,7 +52,6 @@ else
 
     log_time "psql -a -v ON_ERROR_STOP=ON -c \"ANALYZE ROOTPARTITION ${schema_name}.${table_name}\""
     psql -a -v ON_ERROR_STOP=ON -c "ANALYZE ROOTPARTITION ${schema_name}.${table_name}"
-    tuples="0"
-    print_log "${tuples}"
+    print_log "${id}" "${schema_name}" "${table_name}" "0"
   done
 fi

@@ -7,9 +7,7 @@ step="init"
 init_log "${step}"
 start_log
 schema_name="tpcds"
-export schema_name
 table_name="init"
-export table_name
 
 function set_segment_bashrc() {
   #this is only needed if the segment nodes don't have the bashrc file created
@@ -129,6 +127,6 @@ set_segment_bashrc
 check_gucs
 copy_config
 
-print_log
+print_log "1" "${schema_name}" "${table_name}" "0"
 
 echo "Finished ${step}"

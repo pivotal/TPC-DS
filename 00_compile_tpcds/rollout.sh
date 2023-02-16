@@ -7,9 +7,7 @@ step="compile_tpcds"
 init_log "${step}"
 start_log
 schema_name="tpcds"
-export schema_name
 table_name="compile"
-export table_name
 
 function make_tpc() {
   #compile the tools
@@ -44,6 +42,6 @@ make_tpc
 create_hosts_file
 copy_tpc
 copy_queries
-print_log
+print_log "1" "${schema_name}" "${table_name}" "0"
 
 echo "Finished ${step}"

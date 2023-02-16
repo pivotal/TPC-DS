@@ -116,7 +116,7 @@ function get_pwd() {
   # Change to dirname of x
   cd "${x%/*}"
   # Combine new pwd with basename of x
-	# shellcheck disable=SC2005
+  # shellcheck disable=SC2005
   echo "$(dirname "$(pwd -P)/${x##*/}")"
   cd "${OLDPWD}"
 }
@@ -183,17 +183,19 @@ function print_log() {
   T_END="$(date +%s)"
   T_DURATION="$((T_END - T_START))"
   S_DURATION=${T_DURATION}
+  local id="${1}"
+  shift
+  local schema_name="${1}"
+  shift
+  local table_name="${1}"
+  shift
+  local tuples="${1}"
+  shift
 
   #this is done for steps that don't have id values
   if [ "${id}" == "" ]; then
-    id="1"
-  else
-    id=$(basename "${i}" | awk -F '.' '{print $1}')
-  fi
-
-  tuples=${1}
-  if [ "${tuples}" == "" ]; then
-    tuples="0"
+    echo "ERROR: no id found when printing log"
+    exit 1
   fi
 
   # calling function adds schema_name and table_name
