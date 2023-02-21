@@ -179,6 +179,7 @@ export -f start_log
 declare schema_name
 declare table_name
 function print_log() {
+  set -ue
   #duration
   T_END="$(date +%s)"
   T_DURATION="$((T_END - T_START))"
@@ -191,6 +192,7 @@ function print_log() {
   shift
   local tuples="${1}"
   shift
+  set +ue
 
   #this is done for steps that don't have id values
   if [ "${id}" == "" ]; then

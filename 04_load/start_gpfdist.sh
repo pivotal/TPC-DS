@@ -10,7 +10,7 @@ pid=$!
 
 if [ "${pid}" -ne "0" ]; then
   sleep 0.4
-  count=$(pgrep gpfdist | grep -c "${pid}")
+  count=$(pgrep gpfdist | grep -c "${pid}" || true)
   if [ "${count}" -eq "1" ]; then
     echo "Started gpfdist on port ${GPFDIST_PORT}"
   else

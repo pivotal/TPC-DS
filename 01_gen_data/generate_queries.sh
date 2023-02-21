@@ -33,7 +33,7 @@ for p in $(seq 1 99); do
     else
       end_position=${pos}
     fi
-  done < <(grep -n "${template_filename}" < "${PWD}"/query_0.sql | awk -F ':' '{print $1}')
+  done < <(grep -n "${template_filename}" "${PWD}"/query_0.sql | awk -F ':' '{print $1}')
 
   echo "Creating: ${TPC_DS_DIR}/05_sql/${filename}"
   printf "set role %s;\n:EXPLAIN_ANALYZE\n" "${BENCH_ROLE}" > "${TPC_DS_DIR}"/05_sql/"${filename}"

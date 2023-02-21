@@ -113,7 +113,7 @@ for t in $(psql -v ON_ERROR_STOP=1 -q -t -A -c "${SQL_QUERY}"); do
   psql -v ON_ERROR_STOP=1 -q -t -A -c "${SQL_QUERY}"
 done
 
-max_id=$(find "${PWD}" -name "*.sql" | sort | tail -1)
+max_id=$(find "${PWD}" -name "*.sql" -prune | sort | tail -1)
 id=$(basename "${max_id}" | awk -F '.' '{print $1}' | sed 's/^0*//')
 print_log "${id}" "${schema_name}" "${table_name}" 0
 

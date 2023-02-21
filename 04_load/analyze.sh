@@ -5,7 +5,7 @@
 
 PWD=$(get_pwd "${BASH_SOURCE[0]}")
 
-max_id=$(find "${PWD}" -name "*.sql" | sort -n | tail -1)
+max_id=$(find "${PWD}" -name "*.sql" -prune | sort -n | tail -1)
 max_id=$(basename "${max_id}" | awk -F '.' '{print $1}')
 
 analyzedb --help &> /dev/null
