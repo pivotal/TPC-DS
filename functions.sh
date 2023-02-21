@@ -111,14 +111,7 @@ function source_bashrc() {
 ####  Exported functions  ######################################################
 ################################################################################
 function get_pwd() {
-  # Handle relative vs absolute path
-  [ "${1:0:1}" == '/' ] && x="${1}" || x="${PWD}/${1}"
-  # Change to dirname of x
-  cd "${x%/*}"
-  # Combine new pwd with basename of x
-  # shellcheck disable=SC2005
-  echo "$(dirname "$(pwd -P)/${x##*/}")"
-  cd "${OLDPWD}"
+  dirname "$(readlink -e "${1}")"
 }
 export -f get_pwd
 
