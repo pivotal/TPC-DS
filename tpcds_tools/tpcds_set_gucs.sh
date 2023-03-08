@@ -12,6 +12,8 @@ gpconfig -c optimizer_enable_associativity -v on
 gpconfig -c gp_interconnect_queue_depth -v 16
 gpconfig -c gp_interconnect_snd_queue_depth -v 16
 
+gpconfig -c statement_mem -v 10GB
+
 # the following for mirrorless configuration only
 # gpconfig -c gp_dispatch_keepalives_idle -v 20
 # gpconfig -c gp_dispatch_keepalives_interval -v 20
