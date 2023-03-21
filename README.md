@@ -9,7 +9,7 @@ This repo contains automation of running the DS benchmark against an existing Gr
 ## Context
 ### Supported Greenplum Versions
 
-- [VMware Tanzu Greenplum](https://network.tanzu.vmware.com/products/vmware-tanzu-greenplum/) `4.3.x`, `5.x`, `6.x`
+- [VMware Greenplum](https://network.tanzu.vmware.com/products/vmware-tanzu-greenplum/) `4.3.x`, `5.x`, `6.x`
 - [Open Source Greenplum Databases](https://network.tanzu.vmware.com/products/greenplum-database/) `5.x`, `6.x`
 
 ### Supported TPC-DS Versions
