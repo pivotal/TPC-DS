@@ -2,6 +2,7 @@
 set -e
 
 PWD=$(get_pwd "${BASH_SOURCE[0]}")
+LOG_DIR=${PWD}/../log
 
 step="score"
 init_log ${step}
@@ -30,6 +31,26 @@ TLD_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select cast(0.01 as decimal) * 
 # Calculate scores using aggregation functions in psql
 SCORE_1_3_1=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select floor(cast(${Q_1_3_1} as decimal) * cast(${SF} as decimal) / (cast(${TPT_1_3_1} as decimal) + cast(${TTT_1_3_1} as decimal) + cast(${TLD_1_3_1} as decimal)))")
 SCORE_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select floor(cast(${Q_2_2_0} as decimal) * cast(${SF} as decimal) / exp((ln(cast(${TPT_2_2_0} as decimal)) + ln(cast(${TTT_2_2_0} as decimal)) + ln(cast(${TLD_2_2_0} as decimal))) / cast(3.0 as decimal)))")
+
+cat > ${LOG_DIR}/09_score.env << EOF
+LOAD_TIME=${LOAD_TIME}
+ANALYZE_TIME=${ANALYZE_TIME}
+QUERIES_TIME=${QUERIES_TIME}
+CONCURRENT_QUERY_TIME=${CONCURRENT_QUERY_TIME}
+THROUGHPUT_ELAPSED_TIME=${THROUGHPUT_ELAPSED_TIME}
+S_Q=${S_Q}
+SF=${SF}
+Q_1_3_1=${Q_1_3_1}
+TPT_1_3_1=${TPT_1_3_1}
+TTT_1_3_1=${TTT_1_3_1}
+TLD_1_3_1=${TLD_1_3_1}
+Q_2_2_0=${Q_2_2_0}
+TPT_2_2_0=$(printf "%.4f" "${TPT_2_2_0}")
+TTT_2_2_0=$(printf "%.4f" "${TTT_2_2_0}")
+TLD_2_2_0=$(printf "%.4f" "${TLD_2_2_0}")
+SCORE_1_3_1=${SCORE_1_3_1}
+SCORE_2_2_0=${SCORE_2_2_0}
+EOF
 
 printf -- '-%.0s' {1..80}
 printf "\n"

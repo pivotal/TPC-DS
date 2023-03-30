@@ -54,6 +54,9 @@ export RUN_MULTI_USER_REPORTS="true"
 # step 09_score
 export RUN_SCORE="true"
 
+# step 10_record
+export RUN_RECORD="true"
+
 # misc options
 export SINGLE_USER_ITERATIONS="1"
 export EXPLAIN_ANALYZE="false"
