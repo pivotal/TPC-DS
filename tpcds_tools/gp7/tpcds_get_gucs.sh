@@ -12,14 +12,12 @@ gpconfig -s gp_resource_manager
 gpconfig -s gp_resource_group_bypass
 gpconfig -s gp_resource_group_queuing_timeout
 
-gpconfig -s gp_resource_group_cpu_ceiling_enforcement
 gpconfig -s gp_resource_group_cpu_limit
 gpconfig -s gp_resource_group_cpu_priority
 
 gpconfig -s gp_resgroup_memory_policy
 gpconfig -s gp_workfile_compression
 
-gpconfig -s memory_spill_ratio
 gpconfig -s max_statement_mem
 gpconfig -s statement_mem
 
