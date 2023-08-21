@@ -25,18 +25,18 @@ EOF
     # don't overwrite the master.  Only needed on single node installs
     shortname=$(echo "${ext_host}" | awk -F '.' '{print $1}')
     if [ "${MASTER_HOST}" != "${shortname}" ]; then
-      bashrc_exists=$(ssh -n "${ext_host}" "find ~ -name .bashrc | grep -c .")
+      bashrc_exists=$(ssh "${ADDITION_SSH_OPTIONS}" -n "${ext_host}" "find ~ -name .bashrc | grep -c .")
       if [ "${bashrc_exists}" -eq 0 ]; then
         echo "copy new .bashrc to ${ext_host}:~${ADMIN_USER}"
         scp "${PWD}"/segment_bashrc "${ext_host}":~"${ADMIN_USER}"/.bashrc
       else
-        count=$(ssh -n "${ext_host}" "grep -c greenplum_path ~/.bashrc || true")
+        count=$(ssh "${ADDITION_SSH_OPTIONS}" -n "${ext_host}" "grep -c greenplum_path ~/.bashrc || true")
         if [ "${count}" -eq 0 ]; then
           echo "Adding greenplum_path to ${ext_host} .bashrc"
           # shellcheck disable=SC2029
           ssh "${ext_host}" "echo \"source ${GREENPLUM_PATH}\" >> ~/.bashrc"
         fi
-        count=$(ssh -n "${ext_host}" "grep -c LD_PRELOAD ~/.bashrc || true")
+        count=$(ssh "${ADDITION_SSH_OPTIONS}" -n "${ext_host}" "grep -c LD_PRELOAD ~/.bashrc || true")
         if [ "${count}" -eq 0 ]; then
           echo "Adding LD_PRELOAD to ${ext_host} .bashrc"
           # shellcheck disable=SC2029
