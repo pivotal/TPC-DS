@@ -12,8 +12,8 @@ filter="gpdb"
 function copy_script() {
   echo "copy the start and stop scripts to the segment hosts in the cluster"
   while IFS= read -r i; do
-    echo "scp start_gpfdist.sh stop_gpfdist.sh ${i}:"
-    scp "${PWD}"/start_gpfdist.sh "${PWD}"/stop_gpfdist.sh "${i}": &
+    echo "scp -q start_gpfdist.sh stop_gpfdist.sh ${i}:"
+    scp -q "${PWD}"/start_gpfdist.sh "${PWD}"/stop_gpfdist.sh "${i}": &
   done < "${TPC_DS_DIR}"/segment_hosts.txt
   wait
 }

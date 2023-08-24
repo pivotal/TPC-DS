@@ -34,7 +34,7 @@ function kill_orphaned_data_gen() {
 function copy_generate_data() {
   echo "copy generate_data.sh to segment hosts"
   while IFS= read -r i; do
-    scp "${PWD}"/generate_data.sh "${i}": &
+    scp -q "${PWD}"/generate_data.sh "${i}": &
   done < "${TPC_DS_DIR}"/segment_hosts.txt
   wait
 }
