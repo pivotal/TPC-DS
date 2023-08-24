@@ -10,11 +10,6 @@ export PGPORT="5432"
 # Add additional PostgreSQL refer:
 # https://www.postgresql.org/docs/current/libpq-envars.html
 
-# when OS configured with pre-login messages causing string pollution in
-# command output value; we should use ssh quite mode is we are expecting
-# command output. Additional flags can be added
-export ADDITION_SSH_OPTIONS="-q"
-
 # benchmark options
 export GEN_DATA_SCALE="1"
 export MULTI_USER_COUNT="2"
