@@ -21,7 +21,7 @@ function copy_script() {
 function stop_gpfdist() {
   echo "stop gpfdist on all ports"
   while IFS= read -r i; do
-    ssh -n -f "${i}" "bash -c 'cd ~/; ./stop_gpfdist.sh'" &
+    ssh -q -n -f "${i}" "bash -c 'cd ~/; ./stop_gpfdist.sh'" &
   done < "${TPC_DS_DIR}"/segment_hosts.txt
   wait
 }
@@ -43,7 +43,7 @@ function start_gpfdist() {
     GEN_DATA_PATH="${GEN_DATA_PATH}/dsbenchmark"
     PORT=$((GPFDIST_PORT + CHILD))
     echo "executing on ${EXT_HOST} ./start_gpfdist.sh $PORT ${GEN_DATA_PATH}"
-    ssh -n -f "${EXT_HOST}" "bash -c 'cd ~${ADMIN_USER}; ./start_gpfdist.sh $PORT ${GEN_DATA_PATH}'" &
+    ssh -q -n -f "${EXT_HOST}" "bash -c 'cd ~${ADMIN_USER}; ./start_gpfdist.sh $PORT ${GEN_DATA_PATH}'" &
   done
   wait
 }
