@@ -28,7 +28,7 @@ EOF
       bashrc_exists=$(ssh -q -n "${ext_host}" "find ~ -name .bashrc | grep -c .")
       if [ "${bashrc_exists}" -eq 0 ]; then
         echo "copy new .bashrc to ${ext_host}:~${ADMIN_USER}"
-        scp "${PWD}"/segment_bashrc "${ext_host}":~"${ADMIN_USER}"/.bashrc
+        scp -q "${PWD}"/segment_bashrc "${ext_host}":~"${ADMIN_USER}"/.bashrc
       else
         count=$(ssh -q -n "${ext_host}" "grep -c greenplum_path ~/.bashrc || true")
         if [ "${count}" -eq 0 ]; then
