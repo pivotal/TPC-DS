@@ -26,7 +26,7 @@ function kill_orphaned_data_gen() {
   echo "kill any orphaned dsdgen processes on segment hosts"
   # always return true even if no processes were killed
   while IFS= read -r i; do
-    ssh "${i}" "pkill dsdgen" || true &
+    ssh -q "${i}" "pkill dsdgen" || true &
   done < "${TPC_DS_DIR}"/segment_hosts.txt
   wait
 }
@@ -58,9 +58,9 @@ function gen_data() {
     EXT_HOST=$(echo "${i}" | awk -F '|' '{print $2}')
     GEN_DATA_PATH=$(echo "${i}" | awk -F '|' '{print $3}')
     GEN_DATA_PATH="${GEN_DATA_PATH}/dsbenchmark"
-    echo "ssh -n -f ${EXT_HOST} \"bash -c \'cd ~/; ./generate_data.sh ${GEN_DATA_SCALE} ${CHILD} ${PARALLEL} ${GEN_DATA_PATH} &> generate_data.${CHILD}.log &\'\""
+    echo "ssh -q -n -f ${EXT_HOST} \"bash -c \'cd ~/; ./generate_data.sh ${GEN_DATA_SCALE} ${CHILD} ${PARALLEL} ${GEN_DATA_PATH} &> generate_data.${CHILD}.log &\'\""
 
-    ssh -n -f "${EXT_HOST}" "bash -c 'cd ~/; ./generate_data.sh ${GEN_DATA_SCALE} ${CHILD} ${PARALLEL} ${GEN_DATA_PATH} &> generate_data.${CHILD}.log &'" &
+    ssh -q -n -f "${EXT_HOST}" "bash -c 'cd ~/; ./generate_data.sh ${GEN_DATA_SCALE} ${CHILD} ${PARALLEL} ${GEN_DATA_PATH} &> generate_data.${CHILD}.log &'" &
   done
   wait
 }

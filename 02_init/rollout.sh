@@ -34,13 +34,13 @@ EOF
         if [ "${count}" -eq 0 ]; then
           echo "Adding greenplum_path to ${ext_host} .bashrc"
           # shellcheck disable=SC2029
-          ssh "${ext_host}" "echo \"source ${GREENPLUM_PATH}\" >> ~/.bashrc"
+          ssh -q "${ext_host}" "echo \"source ${GREENPLUM_PATH}\" >> ~/.bashrc"
         fi
         count=$(ssh -q -n "${ext_host}" "grep -c LD_PRELOAD ~/.bashrc || true")
         if [ "${count}" -eq 0 ]; then
           echo "Adding LD_PRELOAD to ${ext_host} .bashrc"
           # shellcheck disable=SC2029
-          ssh "${ext_host}" "echo \"export LD_PRELOAD=${LD_PRELOAD}\" >> ~/.bashrc"
+          ssh -q "${ext_host}" "echo \"export LD_PRELOAD=${LD_PRELOAD}\" >> ~/.bashrc"
         fi
       fi
     fi
