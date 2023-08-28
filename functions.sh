@@ -111,7 +111,14 @@ function source_bashrc() {
 ####  Exported functions  ######################################################
 ################################################################################
 function get_pwd() {
-  dirname "$(readlink -e "${1}")"
+  # Handle relative vs absolute path
+  [ "${1:0:1}" == '/' ] && x="${1}" || x="${PWD}/${1}"
+  # Change to dirname of x
+  cd "${x%/*}"
+  # Combine new pwd with basename of x
+  # shellcheck disable=SC2005
+  echo "$(dirname "$(pwd -P)/${x##*/}")"
+  cd "${OLDPWD}"
 }
 export -f get_pwd
 
@@ -131,23 +138,21 @@ function get_gpfdist_port() {
 export -f get_gpfdist_port
 
 function get_version() {
-  #need to call source_bashrc first
-  VERSION=$(psql -v ON_ERROR_STOP=1 -t -A -c "SELECT CASE WHEN POSITION ('Greenplum Database 4.3' IN version) > 0 THEN 'gpdb_4_3' WHEN POSITION ('Greenplum Database 5' IN version) > 0 THEN 'gpdb_5' WHEN POSITION ('Greenplum Database 6' IN version) > 0 THEN 'gpdb_6' WHEN POSITION ('Greenplum Database 7' IN version) > 0 THEN 'gpdb_7' ELSE 'postgresql' END FROM version();")
-  if [[ ${VERSION} =~ "gpdb" ]]; then
-    quicklz_test=$(psql -v ON_ERROR_STOP=1 -t -A -c "SELECT COUNT(1) FROM pg_compression WHERE compname = 'quicklz'")
-    if [ "${quicklz_test}" -eq "1" ]; then
-      SMALL_STORAGE="appendonly=true, orientation=column"
-      MEDIUM_STORAGE="appendonly=true, orientation=column"
-      LARGE_STORAGE="appendonly=true, orientation=column, compresstype=quicklz"
-    else
-      SMALL_STORAGE="appendonly=true, orientation=column"
-      MEDIUM_STORAGE="appendonly=true, orientation=column"
-      LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4"
-    fi
+  quicklz_test=$(psql -v ON_ERROR_STOP=1 -t -A -c "SELECT COUNT(1) FROM pg_compression WHERE compname = 'quicklz'")
+  zlib_test=$(psql -v ON_ERROR_STOP=1 -t -A -c "SELECT COUNT(1) FROM pg_compression WHERE compname = 'zlib'")
+  zstd_test=$(psql -v ON_ERROR_STOP=1 -t -A -c "SELECT COUNT(1) FROM pg_compression WHERE compname = 'zstd'")
+
+  SMALL_STORAGE="appendonly=true, orientation=column"
+  MEDIUM_STORAGE="appendonly=true, orientation=column"
+
+  if [ "${zstd_test}" -eq "1" ]; then
+    LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zstd"
+  elif [ "${quicklz_test}" -eq "1" ]; then
+    LARGE_STORAGE="appendonly=true, orientation=column, compresstype=quicklz"
+  elif [ "${zlib_test}" -eq "1" ]; then
+    LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4"
   else
-    SMALL_STORAGE=""
-    MEDIUM_STORAGE=""
-    LARGE_STORAGE=""
+    LARGE_STORAGE="appendonly=rtue, orientation=column"
   fi
 
   export SMALL_STORAGE
