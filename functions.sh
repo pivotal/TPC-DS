@@ -138,6 +138,13 @@ function get_gpfdist_port() {
 export -f get_gpfdist_port
 
 function get_version() {
+  VERSION=$(psql -v ON_ERROR_STOP=1 -t -A -c \
+    "SELECT CASE WHEN POSITION ('Greenplum Database 4.3' IN version) > 0 THEN 'gpdb_4_3' \
+    WHEN POSITION ('Greenplum Database 5' IN version) > 0 THEN 'gpdb_5' \
+    WHEN POSITION ('Greenplum Database 6' IN version) > 0 THEN 'gpdb_6' \
+    WHEN POSITION ('Greenplum Database 7' IN version) > 0 THEN 'gpdb_7' \
+    ELSE 'postgresql' END FROM version();")
+
   quicklz_test=$(psql -v ON_ERROR_STOP=1 -t -A -c "SELECT COUNT(1) FROM pg_compression WHERE compname = 'quicklz'")
   zlib_test=$(psql -v ON_ERROR_STOP=1 -t -A -c "SELECT COUNT(1) FROM pg_compression WHERE compname = 'zlib'")
   zstd_test=$(psql -v ON_ERROR_STOP=1 -t -A -c "SELECT COUNT(1) FROM pg_compression WHERE compname = 'zstd'")
