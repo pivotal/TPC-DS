@@ -145,6 +145,7 @@ TPC-DS uses `psql` command, which interally uses `libpq`, to connect to the data
 # benchmark options
 GEN_DATA_SCALE="1"
 MULTI_USER_COUNT="2"
+HEAP_ONLY="false"
 ```
 
 These are the benchmark controlling variables:
@@ -153,7 +154,9 @@ These are the benchmark controlling variables:
 - `MULTI_USER_COUNT`: default `2`.
   It's also usually referred as `CU`, i.e. concurrent user.
   It controls how many concurrent streams to run during the throughput run.
-
+- `HEAP_ONLY`: default `false`.
+  When `false`, the benchmark will run with `append-optimized` table storage type.
+  When `true`, the benchmark will run with heap table storage type.
 
 If evaluating Greenplum cluster across different platforms, we recommend to change this section to 3TB with 5CU:
 ```shell
