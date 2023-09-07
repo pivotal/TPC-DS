@@ -39,6 +39,7 @@ function check_variables() {
   check_variable "MULTI_USER_COUNT"
   check_variable "GEN_DATA_SCALE"
   check_variable "SINGLE_USER_ITERATIONS"
+  check_varaible "HEAP_ONLY"
   check_variable "GPFDIST_LOCATION"
   #00
   check_variable "RUN_COMPILE_TPCDS"
@@ -145,21 +146,28 @@ function get_version() {
     WHEN POSITION ('Greenplum Database 7' IN version) > 0 THEN 'gpdb_7' \
     ELSE 'postgresql' END FROM version();")
 
-  quicklz_test=$(psql -v ON_ERROR_STOP=1 -t -A -c "SELECT COUNT(1) FROM pg_compression WHERE compname = 'quicklz'")
-  zlib_test=$(psql -v ON_ERROR_STOP=1 -t -A -c "SELECT COUNT(1) FROM pg_compression WHERE compname = 'zlib'")
-  zstd_test=$(psql -v ON_ERROR_STOP=1 -t -A -c "SELECT COUNT(1) FROM pg_compression WHERE compname = 'zstd'")
-
-  SMALL_STORAGE="appendonly=true, orientation=column"
-  MEDIUM_STORAGE="appendonly=true, orientation=column"
-
-  if [ "${zstd_test}" -eq "1" ]; then
-    LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zstd"
-  elif [ "${quicklz_test}" -eq "1" ]; then
-    LARGE_STORAGE="appendonly=true, orientation=column, compresstype=quicklz"
-  elif [ "${zlib_test}" -eq "1" ]; then
-    LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4"
+  if "${HEAP_ONLY}" -eq "true" ]; then
+    HEAP_STORAGE="appendonly=false"
+    SMALL_STORAGE="${HEAP_STORAGE}"
+    MEDIUM_STORAGE="${HEAP_STORAGE}"
+    LARGE_STORAGE="${HEAP_STORAGE}"
   else
-    LARGE_STORAGE="appendonly=rtue, orientation=column"
+    quicklz_test=$(psql -v ON_ERROR_STOP=1 -t -A -c "SELECT COUNT(1) FROM pg_compression WHERE compname = 'quicklz'")
+    zlib_test=$(psql -v ON_ERROR_STOP=1 -t -A -c "SELECT COUNT(1) FROM pg_compression WHERE compname = 'zlib'")
+    zstd_test=$(psql -v ON_ERROR_STOP=1 -t -A -c "SELECT COUNT(1) FROM pg_compression WHERE compname = 'zstd'")
+
+    SMALL_STORAGE="appendonly=true, orientation=column"
+    MEDIUM_STORAGE="appendonly=true, orientation=column"
+
+    if [ "${zstd_test}" -eq "1" ]; then
+      LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zstd"
+    elif [ "${quicklz_test}" -eq "1" ]; then
+      LARGE_STORAGE="appendonly=true, orientation=column, compresstype=quicklz"
+    elif [ "${zlib_test}" -eq "1" ]; then
+      LARGE_STORAGE="appendonly=true, orientation=column, compresstype=zlib, compresslevel=4"
+    else
+      LARGE_STORAGE="appendonly=true, orientation=column"
+    fi
   fi
 
   export SMALL_STORAGE
