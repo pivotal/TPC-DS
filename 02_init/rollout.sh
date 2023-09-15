@@ -62,17 +62,6 @@ function check_gucs() {
     fi
   fi
 
-  echo "check optimizer"
-  counter=$(
-    psql -v ON_ERROR_STOP=1 -q -t -A -c "show optimizer" | grep -ci "on" || true
-    exit "${PIPESTATUS[0]}"
-  )
-  if [ "${counter}" -eq "0" ]; then
-    echo "enabling optimizer"
-    gpconfig -c optimizer -v on --masteronly
-    update_config="1"
-  fi
-
   echo "check analyze_root_partition"
   counter=$(
     psql -v ON_ERROR_STOP=1 -q -t -A -c "show optimizer_analyze_root_partition" | grep -ci "on" || true

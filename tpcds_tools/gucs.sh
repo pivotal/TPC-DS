@@ -24,7 +24,6 @@ max_statement_mem \
 statement_mem \
 \
 runaway_detector_activation_percent \
-optimizer_enable_associativity \
 \
 gp_dispatch_keepalives_idle \
 gp_dispatch_keepalives_interval \
@@ -49,7 +48,6 @@ gucs_common=(\
 [statement_mem]="10GB" \
 \
 [runaway_detector_activation_percent]="100" \
-[optimizer_enable_associativity]="on" \
 )
 
 gucs_mirrorless=(\

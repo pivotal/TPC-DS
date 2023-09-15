@@ -58,7 +58,7 @@ _get_database_version() {
 _get_deployment_type() {
   printf 'mirrorless'
 }
-[[ "$(set_gucs)" == *"optimizer_enable_associativity on
+[[ "$(set_gucs)" == *"runaway_detector_activation_percent 100
 gp_dispatch_keepalives_idle 20"* ]] && echo pass || echo "expect GPDB7 set GUC values"
 
 _reset_gpconfig() {
@@ -71,7 +71,7 @@ _get_deployment_type() {
   printf 'mirrored'
 }
 [[ "$(reset_gucs)" == *"gp_resource_group_memory_limit"* ]] && echo pass || echo "expect GPDB6 reset mirrored GUC values"
-[[ "$(reset_gucs)" == *"optimizer_enable_associativity
+[[ "$(reset_gucs)" == *"runaway_detector_activation_percent
 skip GUC (GP6, mirrored): gp_dispatch_keepalives_idle"* ]] && echo pass || echo "expect GPDB6 skip reset mirrorless GUC values"
 
 _execute_psql() {
