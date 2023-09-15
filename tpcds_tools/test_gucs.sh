@@ -77,28 +77,64 @@ skip GUC (GP6, mirrored): gp_dispatch_keepalives_idle"* ]] && echo pass || echo 
 _execute_psql() {
   printf "$1\n"
 }
-[[ "$(get_resource_group)" == *"SELECT * FROM gp_toolkit.gp_resgroup_config order by groupid"* ]] && echo pass || echo "expect to query the gp_toolkit.gp_resgroup_config and order by groupid"
+[[ "$(get_resource_groups)" == *"SELECT * FROM gp_toolkit.gp_resgroup_config order by groupid"* ]] && echo pass || echo "expect to query the gp_toolkit.gp_resgroup_config and order by groupid"
 
-_execute_psql() {
-  printf "$1\n"
+_set_resource_group() {
+  printf "$1 SET $2 $3\n"
 }
 _get_database_version() {
   printf '7'
 }
-[[ "$(set_resource_group)" == *"CPU_MAX_PERCENT 100"* ]] && echo pass || echo "expect GP7 with CPU_MAX_PERCENT in resource group"
+[[ "$(set_resource_groups)" == *"default_group SET CONCURRENCY 5"* ]] && echo pass || echo "expect set GP7 with CONCURRENCY in default_group resource group"
+[[ "$(set_resource_groups)" == *"default_group SET CPU_MAX_PERCENT 100"* ]] && echo pass || echo "expect set GP7 with CPU_MAX_PERCENT in default_group resource group"
+[[ "$(set_resource_groups)" == *"default_group SET MEMORY_LIMIT 25000"* ]] && echo pass || echo "expect set GP7 with MEMORY_LIMIT in default_group resource group"
+[[ "$(set_resource_groups)" == *"admin_group SET CONCURRENCY 5"* ]] && echo pass || echo "expect set GP7 with CONCURRENCY in admin_group resource group"
+[[ "$(set_resource_groups)" == *"admin_group SET CPU_MAX_PERCENT 100"* ]] && echo pass || echo "expect set GP7 with CPU_MAX_PERCENT in admin_group resource group"
+[[ "$(set_resource_groups)" == *"admin_group SET MEMORY_LIMIT 25000"* ]] && echo pass || echo "expect set GP7 with MEMORY_LIMIT in admin_group resource group"
+[[ "$(set_resource_groups)" == *"system_group SET CPU_MAX_PERCENT 100"* ]] && echo pass || echo "expect set GP7 with CPU_MAX_PERCENT in system_group resource group"
 
-_execute_psql() {
-  printf "$1\n"
+_set_resource_group() {
+  printf "$1 SET $2 $3\n"
 }
 _get_database_version() {
   printf '6'
 }
-[[ "$(set_resource_group)" == *"admin_group set MEMORY_SHARED_QUOTA 90"* ]] && echo pass || echo "expect GP6 with CPU_RATE_LIMIT in resource group"
+[[ "$(set_resource_groups)" == *"default_group SET CONCURRENCY 5"* ]] && echo pass || echo "expect set GP6 with CONCURRENCY in default_group resource group"
+[[ "$(set_resource_groups)" == *"default_group SET CPU_RATE_LIMIT 90"* ]] && echo pass || echo "expect set GP6 with CPU_RATE_LIMIT in default_group resource group"
+[[ "$(set_resource_groups)" == *"default_group SET MEMORY_SHARED_QUOTA 90"* ]] && echo pass || echo "expect set GP6 with MEMORY_SHARED_QUOTA in default_group resource group"
+[[ "$(set_resource_groups)" == *"admin_group SET CONCURRENCY 5"* ]] && echo pass || echo "expect set GP6 with CONCURRENCY in admin_group resource group"
+[[ "$(set_resource_groups)" == *"admin_group SET CPU_RATE_LIMIT 10"* ]] && echo pass || echo "expect set GP6 with CPU_RATE_LIMIT in admin_group resource group"
+[[ "$(set_resource_groups)" == *"admin_group SET MEMORY_LIMIT 10"* ]] && echo pass || echo "expect set GP6 with MEMORY_LIMIT in admin_group resource group"
+[[ "$(set_resource_groups)" == *"admin_group SET MEMORY_SHARED_QUOTA 90"* ]] && echo pass || echo "expect set GP6 with MEMORY_SHARED_QUOTA in admin_group resource group"
+[[ "$(set_resource_groups)" == *"admin_group SET MEMORY_SPILL_RATIO 90"* ]] && echo pass || echo "expect set GP6 with MEMORY_SPILL_RATIO in admin_group resource group"
 
-_execute_psql() {
-  printf "$1\n"
+_set_resource_group() {
+  printf "$1 SET $2 $3\n"
 }
 _get_database_version() {
   printf '6'
 }
-[[ "$(reset_resource_groups)" == *"admin_group set MEMORY_SHARED_QUOTA 80"* ]]
+# based on pg_resgroupcapability.h
+[[ "$(reset_resource_groups)" == *"default_group SET CONCURRENCY 20"* ]] && echo pass || echo "expect reset GP6 with CONCURRENCY in default_group resource group"
+[[ "$(reset_resource_groups)" == *"default_group SET CPU_RATE_LIMIT 30"* ]] && echo pass || echo "expect reset GP6 with CPU_RATE_LIMIT in default_group resource group"
+[[ "$(reset_resource_groups)" == *"default_group SET MEMORY_SHARED_QUOTA 80"* ]] && echo pass || echo "expect reset GP6 with MEMORY_SHARED_QUOTA in default_group resource group"
+[[ "$(reset_resource_groups)" == *"admin_group SET CONCURRENCY 10"* ]] && echo pass || echo "expect reset GP6 with CONCURRENCY in admin_group resource group"
+[[ "$(reset_resource_groups)" == *"admin_group SET CPU_RATE_LIMIT 10"* ]] && echo pass || echo "expect reset GP6 with CPU_RATE_LIMIT in admin_group resource group"
+[[ "$(reset_resource_groups)" == *"admin_group SET MEMORY_LIMIT 10"* ]] && echo pass || echo "expect reset GP6 with MEMORY_LIMIT in admin_group resource group"
+[[ "$(reset_resource_groups)" == *"admin_group SET MEMORY_SHARED_QUOTA 80"* ]] && echo pass || echo "expect reset GP6 with MEMORY_SHARED_QUOTA in admin_group resource group"
+[[ "$(reset_resource_groups)" == *"admin_group SET MEMORY_SPILL_RATIO 0"* ]] && echo pass || echo "expect reset GP6 with MEMORY_SPILL_RATIO in admin_group resource group"
+
+_set_resource_group() {
+  printf "$1 SET $2 $3\n"
+}
+_get_database_version() {
+  printf '7'
+}
+# based on pg_resgroupcapability.dat
+[[ "$(reset_resource_groups)" == *"default_group SET CONCURRENCY 20"* ]] && echo pass || echo "expect reset GP7 with CONCURRENCY in default_group resource group"
+[[ "$(reset_resource_groups)" == *"default_group SET CPU_MAX_PERCENT 20"* ]] && echo pass || echo "expect reset GP7 with CPU_MAX_PERCENT in default_group resource group"
+[[ "$(reset_resource_groups)" == *"default_group SET MEMORY_LIMIT -1"* ]] && echo pass || echo "expect reset GP7 with MEMORY_LIMIT in default_group resource group"
+[[ "$(reset_resource_groups)" == *"admin_group SET CONCURRENCY 10"* ]] && echo pass || echo "expect reset GP7 with CONCURRENCY in admin_group resource group"
+[[ "$(reset_resource_groups)" == *"admin_group SET CPU_MAX_PERCENT 10"* ]] && echo pass || echo "expect reset GP7 with CPU_MAX_PERCENT in admin_group resource group"
+[[ "$(reset_resource_groups)" == *"admin_group SET MEMORY_LIMIT -1"* ]] && echo pass || echo "expect reset GP7 with MEMORY_LIMIT in admin_group resource group"
+[[ "$(reset_resource_groups)" == *"system_group SET CPU_MAX_PERCENT 10"* ]] && echo pass || echo "expect reset GP7 with CPU_MAX_PERCENT in system_group resource group"

@@ -76,35 +76,35 @@ reset_gucs() {
   _gucs "reset"
 }
 
-set_resource_group() {
+set_resource_groups() {
   _check_minimal_bash_version
 
-  _set_resource_group_common
+  _set_resource_groups_common
 
   local version=$(_get_database_version)
   if [ "${version}" == "7" ]; then
-    _set_resource_group_gp7
+    _set_resource_groups_gp7
   elif [ "${version}" == "6" ]; then
-    _set_resource_group_gp6
+    _set_resource_groups_gp6
   fi
 }
 
-get_resource_group() {
+get_resource_groups() {
   _check_minimal_bash_version
 
-  _get_resource_group
+  _get_resource_groups
 }
 
 reset_resource_groups() {
   _check_minimal_bash_version
 
-  _reset_resource_group_common
+  _reset_resource_groups_common
 
   local version=$(_get_database_version)
   if [ "${version}" == "7" ]; then
-    _reset_resource_group_gp7
+    _reset_resource_groups_gp7
   elif [ "${version}" == "6" ]; then
-    _reset_resource_group_gp6
+    _reset_resource_groups_gp6
   fi
 }
 
@@ -170,46 +170,54 @@ _get_database_version() {
   printf "${version}"
 }
 
-_set_resource_group_common() {
-  _execute_psql "ALTER RESOURCE GROUP admin_group set CONCURRENCY 5;"
-  _execute_psql "ALTER RESOURCE GROUP default_group SET CONCURRENCY 5"
+_set_resource_groups_common() {
+  _set_resource_group "default_group" "CONCURRENCY" "5"
+  _set_resource_group "admin_group" "CONCURRENCY" "5"
 }
 
-_set_resource_group_gp7() {
-  _execute_psql "ALTER RESOURCE GROUP admin_group set CPU_MAX_PERCENT 100;"
-  _execute_psql "ALTER RESOURCE GROUP admin_group set MEMORY_LIMIT 25000;"
-  _execute_psql "ALTER RESOURCE GROUP default_group set CPU_MAX_PERCENT 100;"
-  _execute_psql "ALTER RESOURCE GROUP default_group set MEMORY_LIMIT 25000;"
-  _execute_psql "ALTER RESOURCE GROUP system_group set CPU_MAX_PERCENT 100;"
+_set_resource_groups_gp7() {
+  _set_resource_group "default_group" "CPU_MAX_PERCENT" "100"
+  _set_resource_group "default_group" "MEMORY_LIMIT" "25000"
+  _set_resource_group "admin_group" "CPU_MAX_PERCENT" "100"
+  _set_resource_group "admin_group" "MEMORY_LIMIT" "25000"
+  _set_resource_group "system_group" "CPU_MAX_PERCENT" "100"
 }
 
-_set_resource_group_gp6() {
-  _execute_psql "ALTER RESOURCE GROUP admin_group SET CPU_RATE_LIMIT 10"
-  _execute_psql "ALTER RESOURCE GROUP admin_group SET MEMORY_LIMIT 10"
-  _execute_psql "ALTER RESOURCE GROUP admin_group SET MEMORY_SHARED_QUOTA 90"
-  _execute_psql "ALTER RESOURCE GROUP admin_group SET MEMORY_SPILL_RATIO 90"
-  _execute_psql "ALTER RESOURCE GROUP default_group SET CPU_RATE_LIMIT 90"
-  _execute_psql "ALTER RESOURCE GROUP default_group SET MEMORY_LIMIT 0"
-  _execute_psql "ALTER RESOURCE GROUP default_group SET MEMORY_SHARED_QUOTA 90"
-  _execute_psql "ALTER RESOURCE GROUP default_group SET MEMORY_SPILL_RATIO 0"
+_set_resource_groups_gp6() {
+  _set_resource_group "default_group" "CPU_RATE_LIMIT" "90"
+  _set_resource_group "default_group" "MEMORY_SHARED_QUOTA" "90"
+  _set_resource_group "admin_group" "CPU_RATE_LIMIT" "10"
+  _set_resource_group "admin_group" "MEMORY_LIMIT" "10"
+  _set_resource_group "admin_group" "MEMORY_SHARED_QUOTA" "90"
+  _set_resource_group "admin_group" "MEMORY_SPILL_RATIO" "90"
 }
 
-_reset_resource_group_common() {
+_reset_resource_groups_common() {
   #
-  echo ""
+  _set_resource_group "default_group" "CONCURRENCY" "20"
+  _set_resource_group "admin_group" "CONCURRENCY" "10"
 }
 
-_reset_resource_group_gp6() {
+_reset_resource_groups_gp6() {
   #
-  echo ""
+  _set_resource_group "default_group" "CPU_RATE_LIMIT" "30"
+  _set_resource_group "default_group" "MEMORY_SHARED_QUOTA" "80"
+  _set_resource_group "admin_group" "CPU_RATE_LIMIT" "10"
+  _set_resource_group "admin_group" "MEMORY_LIMIT" "10"
+  _set_resource_group "admin_group" "MEMORY_SHARED_QUOTA" "80"
+  _set_resource_group "admin_group" "MEMORY_SPILL_RATIO" "0"
 }
 
-_reset_resource_group_gp7() {
+_reset_resource_groups_gp7() {
   #
-  echo ""
+  _set_resource_group "default_group" "CPU_MAX_PERCENT" "20"
+  _set_resource_group "default_group" "MEMORY_LIMIT" "-1"
+  _set_resource_group "admin_group" "CPU_MAX_PERCENT" "10"
+  _set_resource_group "admin_group" "MEMORY_LIMIT" "-1"
+  _set_resource_group "system_group" "CPU_MAX_PERCENT" "10"
 }
 
-_get_resource_group() {
+_get_resource_groups() {
   _execute_psql "SELECT * FROM gp_toolkit.gp_resgroup_config order by groupid"
 }
 
@@ -247,4 +255,11 @@ _reset_gpconfig() {
 _execute_psql() {
   local statement="$1"
   psql -v ON_ERROR_STOP=1 -t -A -c "${statement}" postgres
+}
+
+_set_resource_group() {
+  local group="$1"
+  local key="$2"
+  local value="$3"
+  _execute_psql "ALTER RESOURCE GROUP ${group} SET ${key} ${value}"
 }
