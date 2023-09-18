@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-BASH_MAJOR_VERSION=BASH_VERSINFO[0]
+BASH_MAJOR_VERSION="BASH_VERSINFO[0]"
 
 # GUC settings are order sensitive
 # this is the global order the GUCs will apply
@@ -7,58 +7,58 @@ BASH_MAJOR_VERSION=BASH_VERSINFO[0]
 # otherwise, the gpdb won't be able to start
 declare -a gucs_order
 
-gucs_order=(\
-gp_interconnect_queue_depth \
-gp_interconnect_snd_queue_depth \
-\
-gp_resource_manager \
-\
-gp_resource_group_cpu_limit \
-gp_resource_group_cpu_priority \
-gp_resource_group_memory_limit \
-\
-gp_resgroup_memory_policy \
-gp_workfile_compression \
-\
-max_statement_mem \
-statement_mem \
-\
-runaway_detector_activation_percent \
-\
-gp_dispatch_keepalives_idle \
-gp_dispatch_keepalives_interval \
-gp_dispatch_keepalives_count \
+gucs_order=(
+  gp_interconnect_queue_depth
+  gp_interconnect_snd_queue_depth
+
+  gp_resource_manager
+
+  gp_resource_group_cpu_limit
+  gp_resource_group_cpu_priority
+  gp_resource_group_memory_limit
+
+  gp_resgroup_memory_policy
+  gp_workfile_compression
+
+  max_statement_mem
+  statement_mem
+
+  runaway_detector_activation_percent
+
+  gp_dispatch_keepalives_idle
+  gp_dispatch_keepalives_interval
+  gp_dispatch_keepalives_count
 )
 
 declare -A gucs_common gucs_mirrorless gucs_gp7 gucs_gp6
 
-gucs_common=(\
-[gp_interconnect_queue_depth]="16" \
-[gp_interconnect_snd_queue_depth]="16" \
-\
-[gp_resource_manager]="group" \
-\
-[gp_resource_group_cpu_limit]="0.95" \
-[gp_resource_group_cpu_priority]="1" \
-\
-[gp_resgroup_memory_policy]="auto" \
-[gp_workfile_compression]="off" \
-\
-[max_statement_mem]="20GB" \
-[statement_mem]="10GB" \
-\
-[runaway_detector_activation_percent]="100" \
+gucs_common=(
+  [gp_interconnect_queue_depth]="16"
+  [gp_interconnect_snd_queue_depth]="16"
+
+  [gp_resource_manager]="group"
+
+  [gp_resource_group_cpu_limit]="0.95"
+  [gp_resource_group_cpu_priority]="1"
+
+  [gp_resgroup_memory_policy]="auto"
+  [gp_workfile_compression]="off"
+
+  [max_statement_mem]="20GB"
+  [statement_mem]="10GB"
+
+  [runaway_detector_activation_percent]="100"
 )
 
-gucs_mirrorless=(\
-[gp_dispatch_keepalives_idle]="20" \
-[gp_dispatch_keepalives_interval]="20" \
-[gp_dispatch_keepalives_count]="44" \
+gucs_mirrorless=(
+  [gp_dispatch_keepalives_idle]="20"
+  [gp_dispatch_keepalives_interval]="20"
+  [gp_dispatch_keepalives_count]="44"
 )
 
 gucs_gp7=()
-gucs_gp6=(\
-[gp_resource_group_memory_limit]="0.9" \
+gucs_gp6=(
+  [gp_resource_group_memory_limit]="0.9"
 )
 
 # configure the GPDB ready for TPC_DS testing
@@ -81,7 +81,8 @@ set_resource_groups() {
 
   _set_resource_groups_common
 
-  local version=$(_get_database_version)
+  local version
+  version=$(_get_database_version)
   if [ "${version}" == "7" ]; then
     _set_resource_groups_gp7
   elif [ "${version}" == "6" ]; then
@@ -100,7 +101,8 @@ reset_resource_groups() {
 
   _reset_resource_groups_common
 
-  local version=$(_get_database_version)
+  local version
+  version=$(_get_database_version)
   if [ "${version}" == "7" ]; then
     _reset_resource_groups_gp7
   elif [ "${version}" == "6" ]; then
@@ -115,14 +117,16 @@ _gucs() {
   local action=$1
 
   if [ "${action}" != "set" ] && [ "${action}" != "reset" ] && [ "${action}" != "get" ]; then
-    printf "unknown action: ${action}\n"
+    printf "unknown action: %s\n" "${action}"
     return 1
   fi
 
   _check_minimal_bash_version
 
-  local version=$(_get_database_version)
-  local deployment_type=$(_get_deployment_type)
+  local version
+  version=$(_get_database_version)
+  local deployment_type
+  deployment_type=$(_get_deployment_type)
 
   for guc in "${gucs_order[@]}"; do
     if [ "${gucs_common[${guc}]}" != "" ]; then
@@ -134,7 +138,7 @@ _gucs() {
     elif [ "${gucs_gp6[${guc}]}" != "" ] && [ "${version}" == "6" ]; then
       _gpconfig "${action}" "${guc}" "${gucs_gp6[${guc}]}"
     else
-      printf "skip GUC (GP${version}, ${deployment_type}): ${guc}\n"
+      printf "skip GUC (GP%s, %s): %s\n" "${version}" "${deployment_type}" "${guc}"
     fi
   done
 
@@ -142,32 +146,33 @@ _gucs() {
 }
 
 _check_minimal_bash_version() {
-  if ((BASH_MAJOR_VERSION < 4))
-  then
+  if ((BASH_MAJOR_VERSION < 4)); then
     echo "require bash 4.0 to run"
     exit 1
   fi
 }
 
 _get_deployment_type() {
-  local deployment_type=$(_execute_psql \
-  "SELECT CASE WHEN count(*) = 0 THEN 'mirroless' \
+  local deployment_type
+  deployment_type=$(_execute_psql \
+    "SELECT CASE WHEN count(*) = 0 THEN 'mirroless' \
   ELSE 'mirrored' END \
   FROM gp_segment_configuration \
   WHERE role='m';")
 
-  printf "${deployment_type}"
+  printf "%s" "${deployment_type}"
 }
 
 _get_database_version() {
-  local version=$(_execute_psql \
-  "SELECT CASE WHEN POSITION ('Greenplum Database 4.3' IN version) > 0 THEN '4' \
+  local version
+  version=$(_execute_psql \
+    "SELECT CASE WHEN POSITION ('Greenplum Database 4.3' IN version) > 0 THEN '4' \
   WHEN POSITION ('Greenplum Database 5' IN version) > 0 THEN '5' \
   WHEN POSITION ('Greenplum Database 6' IN version) > 0 THEN '6' \
   WHEN POSITION ('Greenplum Database 7' IN version) > 0 THEN '7' \
   ELSE 'unknown' END FROM version();")
 
-  printf "${version}"
+  printf "%s" "${version}"
 }
 
 _set_resource_groups_common() {
@@ -232,7 +237,7 @@ _gpconfig() {
   elif [ "${action}" == "reset" ]; then
     _reset_gpconfig "${guc}"
   else
-    printf "unknown action: ${action} for GUC: ${action} (with optional value: ${value})\n"
+    printf "unknown action: %s for GUC: %s (with optional value: %s)\n" "${action}" "${guc}" "${value}"
   fi
 }
 
