@@ -5,10 +5,15 @@ SHELL := /bin/bash
 export SUPER_LINTER_VERSION='v4.8.5'
 export EXCLUDED_DIRECTORY='00_compile_tpcds/t.*/.*'
 
-.PHONY: dependencies
-dependencies:
+.PHONY: centos
+centos:
 	sudo yum -y install epel-release
 	sudo yum install ShellCheck
+
+.PHONY: macos
+macos:
+	brew install shellcheck
+	brew install shfmt
 
 .PHONY: shfmt
 shfmt:
