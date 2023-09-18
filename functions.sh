@@ -146,6 +146,8 @@ function get_version() {
     WHEN POSITION ('Greenplum Database 7' IN version) > 0 THEN 'gpdb_7' \
     ELSE 'postgresql' END FROM version();")
 
+  export VERSION
+
   if [ "${HEAP_ONLY}" == "true" ]; then
     HEAP_STORAGE="appendonly=false"
     SMALL_STORAGE="${HEAP_STORAGE}"
