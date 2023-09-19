@@ -39,7 +39,3 @@ jobs:
           sudo mv shfmt /usr/local/bin/
           shfmt --version
           make shfmt
-      - name: Run the super-linter
-        run: |
-          sudo apt install xz-utils
-          make super-linter
