@@ -155,7 +155,7 @@ _check_minimal_bash_version() {
 _get_deployment_type() {
   local deployment_type
   deployment_type=$(_execute_psql \
-    "SELECT CASE WHEN count(*) = 0 THEN 'mirroless' \
+    "SELECT CASE WHEN count(*) = 0 THEN 'mirrorless' \
   ELSE 'mirrored' END \
   FROM gp_segment_configuration \
   WHERE role='m';")
