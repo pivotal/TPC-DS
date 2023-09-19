@@ -16,9 +16,9 @@ _execute_psql() {
 [ "$(_get_database_version)" == "6" ] && echo pass || echo expect to get database version 6
 
 _execute_psql() {
-  printf 'mirrorless'
+  echo "$1"
 }
-[ "$(_get_deployment_type)" == "mirrorless" ] && echo pass || echo expect to get deployment type as mirrorless
+[[ "$(_get_deployment_type)" == *"SELECT CASE WHEN count(*) = 0 THEN 'mirrorless'"* ]] && echo pass || echo expect to get deployment type as mirrorless
 
 _get_gpconfig() {
   echo "$1"
@@ -52,6 +52,9 @@ skip GUC (GP7, mirrorless): gp_resource_group_memory_limit
 gp_resgroup_memory_policy"* ]] && echo pass || echo "expect GPDB7 GUC, without the gp_resource_group_memory_limit"
 [[ "$(get_gucs)" == *"max_statement_mem
 statement_mem"* ]] && echo pass || echo "expect max_statement_mem before statement_mem in GP7"
+[[ "$(get_gucs)" == *"gp_dispatch_keepalives_idle
+gp_dispatch_keepalives_interval
+gp_dispatch_keepalives_count"* ]] && echo pass || echo "expect output mirrorless GUCs"
 
 _set_gpconfig() {
   echo "$1 $2"
