@@ -108,6 +108,7 @@ _get_database_version() {
 }
 [[ "$(set_resource_groups)" == *"default_group SET CONCURRENCY 5"* ]] && echo pass || echo "expect set GP6 with CONCURRENCY in default_group resource group"
 [[ "$(set_resource_groups)" == *"default_group SET CPU_RATE_LIMIT 90"* ]] && echo pass || echo "expect set GP6 with CPU_RATE_LIMIT in default_group resource group"
+[[ "$(set_resource_groups)" == *"default_group SET MEMORY_LIMIT 90"* ]] && echo pass || echo "expect set GP6 with MEMORY_LIMIT in default_group resource group"
 [[ "$(set_resource_groups)" == *"default_group SET MEMORY_SHARED_QUOTA 90"* ]] && echo pass || echo "expect set GP6 with MEMORY_SHARED_QUOTA in default_group resource group"
 [[ "$(set_resource_groups)" == *"admin_group SET CONCURRENCY 5"* ]] && echo pass || echo "expect set GP6 with CONCURRENCY in admin_group resource group"
 [[ "$(set_resource_groups)" == *"admin_group SET CPU_RATE_LIMIT 10"* ]] && echo pass || echo "expect set GP6 with CPU_RATE_LIMIT in admin_group resource group"
@@ -124,6 +125,7 @@ _get_database_version() {
 # based on pg_resgroupcapability.h
 [[ "$(reset_resource_groups)" == *"default_group SET CONCURRENCY 20"* ]] && echo pass || echo "expect reset GP6 with CONCURRENCY in default_group resource group"
 [[ "$(reset_resource_groups)" == *"default_group SET CPU_RATE_LIMIT 30"* ]] && echo pass || echo "expect reset GP6 with CPU_RATE_LIMIT in default_group resource group"
+[[ "$(reset_resource_groups)" == *"default_group SET MEMORY_LIMIT 30"* ]] && echo pass || echo "expect reset GP6 with MEMORY_LIMIT in default_group resource group"
 [[ "$(reset_resource_groups)" == *"default_group SET MEMORY_SHARED_QUOTA 80"* ]] && echo pass || echo "expect reset GP6 with MEMORY_SHARED_QUOTA in default_group resource group"
 [[ "$(reset_resource_groups)" == *"admin_group SET CONCURRENCY 10"* ]] && echo pass || echo "expect reset GP6 with CONCURRENCY in admin_group resource group"
 [[ "$(reset_resource_groups)" == *"admin_group SET CPU_RATE_LIMIT 10"* ]] && echo pass || echo "expect reset GP6 with CPU_RATE_LIMIT in admin_group resource group"

@@ -190,6 +190,7 @@ _set_resource_groups_gp7() {
 
 _set_resource_groups_gp6() {
   _set_resource_group "default_group" "CPU_RATE_LIMIT" "90"
+  _set_resource_group "default_group" "MEMORY_LIMIT" "90"
   _set_resource_group "default_group" "MEMORY_SHARED_QUOTA" "90"
   _set_resource_group "admin_group" "CPU_RATE_LIMIT" "10"
   _set_resource_group "admin_group" "MEMORY_LIMIT" "10"
@@ -206,6 +207,7 @@ _reset_resource_groups_common() {
 _reset_resource_groups_gp6() {
   #
   _set_resource_group "default_group" "CPU_RATE_LIMIT" "30"
+  _set_resource_group "default_group" "MEMORY_LIMIT" "30"
   _set_resource_group "default_group" "MEMORY_SHARED_QUOTA" "80"
   _set_resource_group "admin_group" "CPU_RATE_LIMIT" "10"
   _set_resource_group "admin_group" "MEMORY_LIMIT" "10"
