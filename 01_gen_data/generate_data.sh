@@ -7,6 +7,7 @@ GEN_DATA_SCALE=${1}
 CHILD=${2}
 PARALLEL=${3}
 GEN_DATA_PATH=${4}
+RNGSEED=${5}
 SINGLE_SEGMENT="0"
 DATA_DIRECTORY="${GEN_DATA_PATH}"
 
@@ -29,7 +30,7 @@ if [ "${PARALLEL}" -eq "1" ]; then
 fi
 
 cd "${PWD}"
-"${PWD}/dsdgen" -scale "${GEN_DATA_SCALE}" -dir "${DATA_DIRECTORY}" -parallel "${PARALLEL}" -child "${CHILD}" -terminate n
+"${PWD}/dsdgen" -scale "${GEN_DATA_SCALE}" -dir "${DATA_DIRECTORY}" -parallel "${PARALLEL}" -child "${CHILD}" -rngseed "${RNGSEED}" -terminate n
 
 # make sure there is a file in each directory so that gpfdist doesn't throw an error
 declare -a tables=("call_center" "catalog_page" "catalog_returns" "catalog_sales" "customer" "customer_address" "customer_demographics" "date_dim" "household_demographics" "income_band" "inventory" "item" "promotion" "reason" "ship_mode" "store" "store_returns" "store_sales" "time_dim" "warehouse" "web_page" "web_returns" "web_sales" "web_site")
@@ -46,7 +47,7 @@ done
 if [ "$SINGLE_SEGMENT" -eq "1" ]; then
   CHILD="2"
   #build the second list of files
-  "${PWD}"/dsdgen -scale "${GEN_DATA_SCALE}" -dir "${DATA_DIRECTORY}" -parallel "${PARALLEL}" -child "${CHILD}" -terminate n
+  "${PWD}"/dsdgen -scale "${GEN_DATA_SCALE}" -dir "${DATA_DIRECTORY}" -parallel "${PARALLEL}" -child "${CHILD}" -rngseed "${RNGSEED}" -terminate n
 
   # make sure there is a file in each directory so that gpfdist doesn't throw an error
   declare -a tables=("call_center" "catalog_page" "catalog_returns" "catalog_sales" "customer" "customer_address" "customer_demographics" "date_dim" "household_demographics" "income_band" "inventory" "item" "promotion" "reason" "ship_mode" "store" "store_returns" "store_sales" "time_dim" "warehouse" "web_page" "web_returns" "web_sales" "web_site")

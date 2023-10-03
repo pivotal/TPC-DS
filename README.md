@@ -91,6 +91,8 @@ ADMIN_USER="gpadmin"
 # benchmark options
 GEN_DATA_SCALE="1"
 MULTI_USER_COUNT="2"
+RNGSEED="1"
+HEAP_ONLY="false"
 
 # step options
 RUN_COMPILE_TPCDS="true"
@@ -145,6 +147,7 @@ TPC-DS uses `psql` command, which interally uses `libpq`, to connect to the data
 # benchmark options
 GEN_DATA_SCALE="1"
 MULTI_USER_COUNT="2"
+RNGSEED="1"
 HEAP_ONLY="false"
 ```
 
@@ -154,6 +157,9 @@ These are the benchmark controlling variables:
 - `MULTI_USER_COUNT`: default `2`.
   It's also usually referred as `CU`, i.e. concurrent user.
   It controls how many concurrent streams to run during the throughput run.
+- `RNGSEED`: default `1`.
+  This will generate deterministic data and queries, to reduce variance between runs due to data and query variations.
+  Change this value to generate a different distribution to avoid over-tuning for a specific distribution.
 - `HEAP_ONLY`: default `false`.
   When `false`, the benchmark will run with `append-optimized` table storage type.
   When `true`, the benchmark will run with heap table storage type.
