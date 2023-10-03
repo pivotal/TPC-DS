@@ -13,6 +13,7 @@ export PGPORT="5432"
 # benchmark options
 export GEN_DATA_SCALE="1"
 export MULTI_USER_COUNT="2"
+export RNGSEED="1"
 export HEAP_ONLY="false"
 
 # step options

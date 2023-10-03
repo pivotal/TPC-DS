@@ -39,6 +39,7 @@ function check_variables() {
   check_variable "MULTI_USER_COUNT"
   check_variable "GEN_DATA_SCALE"
   check_variable "SINGLE_USER_ITERATIONS"
+  check_variable "RNGSEED"
   check_variable "HEAP_ONLY"
   check_variable "GPFDIST_LOCATION"
   #00
