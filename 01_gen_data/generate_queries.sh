@@ -16,6 +16,7 @@ fi
 
 rm -f "${PWD}"/query_0.sql
 
+log_time "${PWD}/dsqgen -input ${PWD}/query_templates/templates.lst -directory ${PWD}/query_templates -dialect pivotal -scale ${GEN_DATA_SCALE} -rngseed ${RNGSEED} -verbose y -output ${PWD}"
 "${PWD}"/dsqgen -input "${PWD}"/query_templates/templates.lst -directory "${PWD}"/query_templates -dialect pivotal -scale "${GEN_DATA_SCALE}" -rngseed "${RNGSEED}" -verbose y -output "${PWD}"
 
 rm -f "${TPC_DS_DIR}"/05_sql/*."${BENCH_ROLE}".*.sql*

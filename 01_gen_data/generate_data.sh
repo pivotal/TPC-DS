@@ -30,6 +30,7 @@ if [ "${PARALLEL}" -eq "1" ]; then
 fi
 
 cd "${PWD}"
+log_time "${PWD}/dsdgen -scale ${GEN_DATA_SCALE} -dir ${DATA_DIRECTORY} -parallel ${PARALLEL} -child ${CHILD} -rngseed ${RNGSEED} -terminate n"
 "${PWD}/dsdgen" -scale "${GEN_DATA_SCALE}" -dir "${DATA_DIRECTORY}" -parallel "${PARALLEL}" -child "${CHILD}" -rngseed "${RNGSEED}" -terminate n
 
 # make sure there is a file in each directory so that gpfdist doesn't throw an error
@@ -47,6 +48,7 @@ done
 if [ "$SINGLE_SEGMENT" -eq "1" ]; then
   CHILD="2"
   #build the second list of files
+  log_time "${PWD}/dsdgen -scale ${GEN_DATA_SCALE} -dir ${DATA_DIRECTORY} -parallel ${PARALLEL} -child ${CHILD} -rngseed ${RNGSEED} -terminate n"
   "${PWD}"/dsdgen -scale "${GEN_DATA_SCALE}" -dir "${DATA_DIRECTORY}" -parallel "${PARALLEL}" -child "${CHILD}" -rngseed "${RNGSEED}" -terminate n
 
   # make sure there is a file in each directory so that gpfdist doesn't throw an error
