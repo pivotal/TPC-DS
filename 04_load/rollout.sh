@@ -117,4 +117,7 @@ max_id=$(find "${PWD}" -name "*.sql" -prune | sort | tail -1)
 id=$(basename "${max_id}" | awk -F '.' '{print $1}' | sed 's/^0*//')
 print_log "${id}" "${schema_name}" "${table_name}" 0
 
+log_time "collecting schema and statistics dump using gpsd ..."
+gpsd "${dbname}" > "${TPC_DS_DIR}/log/gpsd.${dbname}.sql"
+
 echo "Finished ${step}"
