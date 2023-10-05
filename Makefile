@@ -1,6 +1,6 @@
-all: lint
-
-SHELL := /bin/bash
+.PHONY: list
+list:
+	@cat $(firstword $(MAKEFILE_LIST)) | grep -e '^[^#.][a-zA-Z0-9_]*:$$' | cut -d ':' -f 1 | grep -v "$(firstword $(MAKEFILE_LIST))" | sort
 
 .PHONY: centos
 centos:
