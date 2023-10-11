@@ -70,4 +70,4 @@ printf "Score\t\t\t%d\n" "${SCORE_2_2_0}"
 printf -- '-%.0s' {1..80}
 printf "\n"
 
-echo "Finished ${step}"
+end_step $step

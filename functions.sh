@@ -180,6 +180,7 @@ function get_version() {
 export -f get_version
 
 function init_log() {
+  print_step_header "${1}"
   logfile="rollout_${1}.log"
   rm -f "${TPC_DS_DIR}/log/${logfile}"
 }
@@ -224,6 +225,7 @@ export -f print_log
 function end_step() {
   local logfile=end_${1}.log
   touch "${TPC_DS_DIR}/log/${logfile}"
+  print_step_footer "${1}"
 }
 export -f end_step
 
@@ -240,3 +242,37 @@ function create_hosts_file() {
   psql -v ON_ERROR_STOP=1 -t -A -c "${SQL_QUERY}" -o "${TPC_DS_DIR}"/segment_hosts.txt
 }
 export -f create_hosts_file
+
+function print_step_header() {
+  STEP=${1}
+  SECONDS=0
+
+  cat << EOF
+
+######################################################################
+                                START
+----------------------------------------------------------------------
+STEP .......... : ${STEP}
+TIMESTAMP ..... : $(date)
+----------------------------------------------------------------------
+
+EOF
+}
+export -f print_step_header
+
+function print_step_footer() {
+  STEP=${1}
+  secs=$SECONDS
+
+  cat << EOF
+
+----------------------------------------------------------------------
+                               FINISHED
+----------------------------------------------------------------------
+STEP .......... : ${STEP}
+TIMESTAMP ..... : $(date)
+ELAPSED TIME .. : $(printf '%02dh:%02dm:%02ds\n' $((secs / 3600)) $((secs % 3600 / 60)) $((secs % 60)))
+######################################################################
+EOF
+}
+export -f print_step_footer

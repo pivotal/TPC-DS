@@ -98,4 +98,4 @@ cd "${PWD}"
 
 print_log "1" "tpcds" "gen_data" "0"
 
-echo "Finished ${step}"
+end_step $step

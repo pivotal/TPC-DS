@@ -44,4 +44,4 @@ copy_tpc
 copy_queries
 print_log "1" "${schema_name}" "${table_name}" "0"
 
-echo "Finished ${step}"
+end_step $step
