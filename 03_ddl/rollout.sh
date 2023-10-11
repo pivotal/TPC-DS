@@ -97,4 +97,4 @@ psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${SetSearchPath}"
 
 print_log "${id}" "${schema_name}" "${table_name}" "0"
 
-echo "Finished ${step}"
+end_step $step

@@ -30,4 +30,4 @@ for i in "${PWD}"/*."${BENCH_ROLE}".*.sql; do
   done
 done
 
-echo "Finished ${step}"
+end_step $step

@@ -120,4 +120,4 @@ print_log "${id}" "${schema_name}" "${table_name}" 0
 log_time "collecting schema and statistics dump using gpsd ..."
 gpsd "${dbname}" > "${TPC_DS_DIR}/log/gpsd.${dbname}.sql"
 
-echo "Finished ${step}"
+end_step $step

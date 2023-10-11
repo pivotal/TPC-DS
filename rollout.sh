@@ -41,7 +41,6 @@ echo "RUN_MULTI_USER_REPORTS: ${RUN_MULTI_USER_REPORTS}"
 echo "BENCH_ROLE: ${BENCH_ROLE}"
 echo "GPFDIST_LOCATION: ${GPFDIST_LOCATION}"
 echo "############################################################################"
-echo ""
 
 # We assume that the flag variable names are consistent with the corresponding directory names.
 # For example, `00_compile_tpcds directory` name will be used to get `true` or `false` value from `RUN_COMPILE_TPCDS` in `tpcds_variables.sh`.
@@ -55,10 +54,11 @@ for i in "${PWD}"/0*/; do
   run_flag=${!flag_name}
 
   if [ "${run_flag}" == "true" ]; then
-    echo "Run ${i}/rollout.sh"
-    "${i}"/rollout.sh
+    echo ""
+    echo "Run ${i}rollout.sh"
+    "${i}"rollout.sh
   elif [ "${run_flag}" == "false" ]; then
-    echo "Skip ${i}/rollout.sh"
+    echo "Skip ${i}rollout.sh"
   else
     echo "Aborting script because ${flag_name} is not properly specified: must be either \"true\" or \"false\"."
     exit 1
