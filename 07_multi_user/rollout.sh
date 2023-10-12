@@ -4,7 +4,7 @@ set -e
 
 PWD=$(get_pwd "${BASH_SOURCE[0]}")
 
-step="multi_user_reports"
+step="multi_user"
 init_log "${step}"
 
 if [ "${MULTI_USER_COUNT}" -eq "0" ]; then

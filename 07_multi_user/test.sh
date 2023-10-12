@@ -8,7 +8,8 @@ session_id="${1}"
 
 step="testing_${session_id}"
 
-init_log "${step}"
+logfile="rollout_${step}.log"
+rm -f "${TPC_DS_DIR}/log/${logfile}"
 
 sql_dir="${PWD}/${session_id}"
 
@@ -92,4 +93,5 @@ for i in "${sql_dir}"/*.sql; do
   print_log "${id}" "${schema_name}" "${table_name}" "${tuples}"
 done
 
-end_step "${step}"
+logfile=end_${step}.log
+touch "${TPC_DS_DIR}/log/${logfile}"
