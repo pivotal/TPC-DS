@@ -78,9 +78,7 @@ if [ "${GEN_NEW_DATA}" == "true" ]; then
   echo "Now generating data.  This may take a while."
   minutes=0
   echo -ne "Generating data duration: "
-  tput sc
   while [ "$count" -gt "0" ]; do
-    tput rc
     echo -ne "${minutes} minute(s)"
     sleep 60
     minutes=$((minutes + 1))
