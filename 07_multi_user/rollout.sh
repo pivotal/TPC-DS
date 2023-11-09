@@ -75,9 +75,7 @@ done
 echo "Now executing queries. This may take a while."
 minutes=0
 echo -n "Multi-user query duration: "
-tput sc
 while [ "$(get_running_jobs_count)" -gt 0 ]; do
-  tput rc
   echo -n "${minutes} minute(s)"
   sleep 60
   minutes=$((minutes + 1))
