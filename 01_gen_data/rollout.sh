@@ -79,7 +79,7 @@ if [ "${GEN_NEW_DATA}" == "true" ]; then
   minutes=0
   echo -ne "Generating data duration: "
   while [ "$count" -gt "0" ]; do
-    echo -ne "${minutes} minute(s)"
+    echo -ne "${minutes} minute(s)\n"
     sleep 60
     minutes=$((minutes + 1))
     get_count_generate_data
