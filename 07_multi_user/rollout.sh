@@ -76,7 +76,7 @@ echo "Now executing queries. This may take a while."
 minutes=0
 echo -n "Multi-user query duration: "
 while [ "$(get_running_jobs_count)" -gt 0 ]; do
-  echo -n "${minutes} minute(s)"
+  echo -n "${minutes} minute(s)\n"
   sleep 60
   minutes=$((minutes + 1))
 done
