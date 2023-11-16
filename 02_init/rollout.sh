@@ -33,6 +33,10 @@ EOF
         count=$(ssh -q -n "${ext_host}" "grep -c greenplum_path ~/.bashrc || true")
         if [ "${count}" -eq 0 ]; then
           echo "Adding greenplum_path to ${ext_host} .bashrc"
+          if [[ -z $GREENPLUM_PATH ]]; then
+            echo "Need export GREENPLUM_PATH variable"
+            exit 1
+          fi
           # shellcheck disable=SC2029
           ssh -q -n "${ext_host}" "echo \"source ${GREENPLUM_PATH}\" >> ~/.bashrc"
         fi
