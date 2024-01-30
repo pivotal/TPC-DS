@@ -9,7 +9,7 @@ This repo contains automation of running the DS benchmark against an existing Gr
 ## Context
 ### Supported Greenplum Versions
 
-- [VMware Greenplum](https://network.tanzu.vmware.com/products/vmware-tanzu-greenplum/) `4.3.x`, `5.x`, `6.x`
+- [VMware Greenplum](https://network.tanzu.vmware.com/products/vmware-tanzu-greenplum/) `4.3.x`, `5.x`, `6.x`, `7.x`
 - [Open Source Greenplum Databases](https://network.tanzu.vmware.com/products/greenplum-database/) `5.x`, `6.x`
 
 ### Supported TPC-DS Versions
@@ -86,7 +86,7 @@ This is the default example at [tpcds_variables.sh](https://github.com/pivotal/T
 
 ```shell
 # environment options
-ADMIN_USER="gpadmin"
+USER=`whoami`
 
 # benchmark options
 GEN_DATA_SCALE="1"
@@ -118,11 +118,11 @@ RANDOM_DISTRIBUTION="false"
 
 ```shell
 # environment options
-ADMIN_USER="gpadmin"
+USER="gpadmin"
 ```
 
 These are the setup related variables:
-- `ADMIN_USER`: default `gpadmin`.
+- `USER`: default `gpadmin`.
   It is the default database administrator account, as well as the user accessible to all `mdw` and `sdw1..n` machines.
 
   Note: The benchmark related files for each segment node are located in the segment's `${PGDATA}/dsbenchmark` directory.
