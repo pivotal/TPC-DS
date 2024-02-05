@@ -33,7 +33,7 @@ function check_variables() {
     exit 1
   fi
 
-  check_variable "ADMIN_USER"
+  check_variable "USER"
   check_variable "EXPLAIN_ANALYZE"
   check_variable "RANDOM_DISTRIBUTION"
   check_variable "MULTI_USER_COUNT"
@@ -66,20 +66,9 @@ function check_variables() {
   check_variable "BENCH_ROLE"
 }
 
-function check_admin_user() {
-  echo "############################################################################"
-  echo "Ensure ${ADMIN_USER} is executing this script."
-  echo "############################################################################"
-  echo ""
-  if [ "$(whoami)" != "${ADMIN_USER}" ]; then
-    echo "Script must be executed as ${ADMIN_USER}!"
-    exit 1
-  fi
-}
-
 function print_header() {
   echo "############################################################################"
-  echo "ADMIN_USER: ${ADMIN_USER}"
+  echo "USER: ${USER}"
   echo "MULTI_USER_COUNT: ${MULTI_USER_COUNT}"
   echo "############################################################################"
   echo ""
@@ -98,11 +87,18 @@ function source_bashrc() {
   count=$(grep -E -c "source .*/greenplum_path.sh|\. .*/greenplum_path.sh" "${startup_file}" || true)
   if [ "${count}" -eq 0 ]; then
     echo "${HOME}/.bashrc does not contain greenplum_path.sh"
-    echo "Please update your ${startup_file} for ${ADMIN_USER} and try again."
-    exit 1
+    echo "Adding greenplum_path to ${startup_file}"
+    echo "updating your ${startup_file} for ${USER}."
+
+    if [[ -z $GREENPLUM_PATH ]]; then
+      echo "Need export GREENPLUM_PATH variable"
+      exit 1
+    fi
+    # shellcheck disable=SC2029
+    echo \"source ${GREENPLUM_PATH}\" >> ~/.bashrc
   elif [ "${count}" -gt 1 ]; then
     echo "${HOME}/.bashrc contains multiple greenplum_path.sh entries"
-    echo "Please update your ${startup_file} for ${ADMIN_USER} and try again."
+    echo "Please update your ${startup_file} for ${USER} and try again."
     exit 1
   else
     get_version
