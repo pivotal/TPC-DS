@@ -1,6 +1,7 @@
 # shellcheck disable=SC2148
 # environment options
-export USER=`whoami`
+USER=`whoami`
+export USER
 export BENCH_ROLE="dsbench"
 
 # to connect directly to GP

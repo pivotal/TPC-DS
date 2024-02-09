@@ -9,7 +9,8 @@ fi
 # Make sure USER is specified
 if [ -z "${!USER}" ]; then
   echo "Default USER is current user"
-  export USER=`whoami`
+  USER=`whoami`
+  export USER
 fi
 
 get_ram() {
