@@ -8,6 +8,7 @@ init_log "${step}"
 get_version
 
 filter="gpdb"
+user=`whoami`
 
 #Create tables
 for i in "${PWD}"/*."${filter}".*.sql; do
@@ -77,7 +78,7 @@ DropRole="DROP ROLE IF EXISTS ${BENCH_ROLE}"
 CreateRole="CREATE ROLE ${BENCH_ROLE}"
 GrantSchemaPrivileges="GRANT ALL PRIVILEGES ON SCHEMA tpcds TO ${BENCH_ROLE}"
 GrantTablePrivileges="GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA tpcds TO ${BENCH_ROLE}"
-SetSearchPath="ALTER database gpadmin SET search_path=tpcds, \"\${user}\", public"
+SetSearchPath="ALTER database ${user} SET search_path=tpcds, \"\${user}\", public"
 
 start_log
 
@@ -92,7 +93,7 @@ if [ "${BENCH_ROLE}" != "gpadmin" ]; then
   psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${GrantTablePrivileges}"
 fi
 
-log_time "Set search_path for database gpadmin"
+log_time "Set search_path for database ${user}"
 psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${SetSearchPath}"
 
 print_log "${id}" "${schema_name}" "${table_name}" "0"

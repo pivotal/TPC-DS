@@ -16,6 +16,7 @@ export TPC_DS_DIR
 
 # Check that pertinent variables are set in the variable file.
 check_variables
+# Output user and multi-user count to standard out
 print_header
 
 # run the benchmark
