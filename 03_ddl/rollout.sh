@@ -8,7 +8,7 @@ init_log "${step}"
 get_version
 
 filter="gpdb"
-user=`whoami`
+user=$(whoami)
 
 #Create tables
 for i in "${PWD}"/*."${filter}".*.sql; do
