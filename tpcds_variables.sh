@@ -1,6 +1,12 @@
 # shellcheck disable=SC2148
 # environment options
-USER=`whoami`
+# user should have equivalent access privilege of gpadmin. eg.
+# 1. Access privilege on gpdata directory and sub-directory on each node.
+# 2. Should have read access to log folder across nodes.
+# 3. Access privilege similar of gpadmin on databases.
+# 4. Proper authentications set up in pg_hba.conf
+
+USER=$(whoami)
 export USER
 export BENCH_ROLE="dsbench"
 
