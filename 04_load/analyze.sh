@@ -9,7 +9,7 @@ max_id=$(basename "${max_id}" | awk -F '.' '{print $1}')
 
 dbname="${PGDATABASE}"
 if [ "${dbname}" == "" ]; then
-  dbname="$USER"
+  dbname="$ADMIN_USER"
 fi
 
 if [ "${PGPORT}" == "" ]; then

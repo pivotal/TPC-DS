@@ -43,7 +43,7 @@ function start_gpfdist() {
     GEN_DATA_PATH="${GEN_DATA_PATH}/dsbenchmark"
     PORT=$((GPFDIST_PORT + CHILD))
     echo "executing on ${EXT_HOST} ./start_gpfdist.sh $PORT ${GEN_DATA_PATH}"
-    ssh -q -n -f "${EXT_HOST}" "bash -c 'cd ~${USER}; ./start_gpfdist.sh $PORT ${GEN_DATA_PATH}'" &
+    ssh -q -n -f "${EXT_HOST}" "bash -c 'cd ~${ADMIN_USER}; ./start_gpfdist.sh $PORT ${GEN_DATA_PATH}'" &
   done
   wait
 }
@@ -82,7 +82,7 @@ stop_gpfdist
 
 dbname="$PGDATABASE"
 if [ "${dbname}" == "" ]; then
-  dbname="${USER}"
+  dbname="${ADMIN_USER}"
 fi
 
 if [ "${PGPORT}" == "" ]; then
@@ -118,6 +118,6 @@ id=$(basename "${max_id}" | awk -F '.' '{print $1}' | sed 's/^0*//')
 print_log "${id}" "${schema_name}" "${table_name}" 0
 
 log_time "collecting schema and statistics dump using gpsd ..."
-gpsd -U "${USER}" "${dbname}" > "${TPC_DS_DIR}/log/gpsd.${dbname}.sql"
+gpsd -U "${ADMIN_USER}" "${dbname}" > "${TPC_DS_DIR}/log/gpsd.${dbname}.sql"
 
 end_step $step

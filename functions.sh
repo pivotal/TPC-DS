@@ -33,7 +33,7 @@ function check_variables() {
     exit 1
   fi
 
-  check_variable "USER"
+  check_variable "ADMIN_USER"
   check_variable "EXPLAIN_ANALYZE"
   check_variable "RANDOM_DISTRIBUTION"
   check_variable "MULTI_USER_COUNT"
@@ -68,7 +68,7 @@ function check_variables() {
 
 function print_header() {
   echo "############################################################################"
-  echo "USER: ${USER}"
+  echo "ADMIN_USER: ${ADMIN_USER}"
   echo "MULTI_USER_COUNT: ${MULTI_USER_COUNT}"
   echo "############################################################################"
   echo ""
@@ -88,7 +88,7 @@ function source_bashrc() {
   if [ "${count}" -eq 0 ]; then
     echo "${HOME}/.bashrc does not contain greenplum_path.sh"
     echo "Adding greenplum_path to ${startup_file}"
-    echo "updating your ${startup_file} for ${USER}."
+    echo "updating your ${startup_file} for ${ADMIN_USER}."
 
     if [[ -z $GREENPLUM_PATH ]]; then
       echo "Need export GREENPLUM_PATH variable"
@@ -98,7 +98,7 @@ function source_bashrc() {
     echo \"source ${GREENPLUM_PATH}\" >> ~/.bashrc
   elif [ "${count}" -gt 1 ]; then
     echo "${HOME}/.bashrc contains multiple greenplum_path.sh entries"
-    echo "Please update your ${startup_file} for ${USER} and try again."
+    echo "Please update your ${startup_file} for ${ADMIN_USER} and try again."
     exit 1
   else
     get_version
