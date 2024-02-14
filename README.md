@@ -36,6 +36,13 @@ These are the combined versions of TPC-DS and Greenplum:
 3. `root` access on the master node `mdw` for installing dependencies
 4. `ssh` connections between `mdw` and the segment nodes `sdw1..n`
 
+User other than gpadmin can also execute this script provided `user` should have equivalent access privilege of gpadmin. eg.
+1. Access privilege on gpdata directory and sub-directory on each node
+2. Should have read access to log folder across nodes
+3. `user` database is created
+4. Proper authentications set up in pg_hba.conf
+
+
 All the following examples are using standard host name convention of Greenplum using `mdw` for master node, and `sdw1..n` for the segment nodes.
 
 ### TPC-DS Tools Dependencies
@@ -68,7 +75,7 @@ mv TPC-DS-3.6.0 TPC-DS
 
 ## Usage
 
-To run the benchmark, login as `gpadmin` on `mdw:
+To run the benchmark, login as `gpadmin` on `mdw`:
 
 ```
 ssh gpadmin@mdw
@@ -86,7 +93,7 @@ This is the default example at [tpcds_variables.sh](https://github.com/pivotal/T
 
 ```shell
 # environment options
-USER=`whoami`
+ADMIN_USER=`whoami`
 
 # benchmark options
 GEN_DATA_SCALE="1"
