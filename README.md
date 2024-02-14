@@ -36,10 +36,10 @@ These are the combined versions of TPC-DS and Greenplum:
 3. `root` access on the master node `mdw` for installing dependencies
 4. `ssh` connections between `mdw` and the segment nodes `sdw1..n`
 
-User other than gpadmin can also execute this script provided `user` should have equivalent access privilege of gpadmin. eg.
+User other than gpadmin can also execute this script provided `ADMIN_USER` should have equivalent access privilege of gpadmin. eg.
 1. Access privilege on gpdata directory and sub-directory on each node
-2. Should have read access to log folder across nodes
-3. `user` database is created
+2. Should have read access to `TPC-DS/log` folder across nodes
+3. `ADMIN_USER` database is created
 4. Proper authentications set up in pg_hba.conf
 
 
@@ -125,11 +125,11 @@ RANDOM_DISTRIBUTION="false"
 
 ```shell
 # environment options
-USER="gpadmin"
+ADMIN_USER="gpadmin"
 ```
 
 These are the setup related variables:
-- `USER`: default `gpadmin`.
+- `ADMIN_USER`: default `gpadmin`.
   It is the default database administrator account, as well as the user accessible to all `mdw` and `sdw1..n` machines.
 
   Note: The benchmark related files for each segment node are located in the segment's `${PGDATA}/dsbenchmark` directory.
