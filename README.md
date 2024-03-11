@@ -68,9 +68,9 @@ Visit the repo at https://github.com/pivotal/TPC-DS/releases and download the ta
 
 ```bash
 ssh gpadmin@mdw
-curl -LO https://github.com/pivotal/TPC-DS/archive/refs/tags/v3.6.0.tar.gz
-tar xzf v3.6.0.tar.gz
-mv TPC-DS-3.6.0 TPC-DS
+curl -LO https://github.com/pivotal/TPC-DS/archive/refs/tags/v3.7.0.tar.gz
+tar xzf v3.7.0.tar.gz
+mv TPC-DS-3.7.0 TPC-DS
 ```
 
 ## Usage
