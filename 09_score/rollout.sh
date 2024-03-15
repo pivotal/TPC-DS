@@ -8,9 +8,20 @@ init_log ${step}
 
 LOAD_TIME=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select round(sum(extract('epoch' from duration))) from tpcds_reports.load where tuples > 0")
 ANALYZE_TIME=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select round(sum(extract('epoch' from duration))) from tpcds_reports.load where tuples = 0")
-QUERIES_TIME=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select round(sum(extract('epoch' from duration))) from (SELECT split_part(description, '.', 2) AS id, min(duration) AS duration FROM tpcds_reports.sql GROUP BY split_part(description, '.', 2)) as sub")
-CONCURRENT_QUERY_TIME=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select round(sum(extract('epoch' from duration))) from tpcds_testing.sql")
-THROUGHPUT_ELAPSED_TIME=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select max(end_epoch_seconds) - min(start_epoch_seconds) from tpcds_testing.sql")
+
+if [ ${RUN_SQL} == "true" ]; then
+  QUERIES_TIME=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select round(sum(extract('epoch' from duration))) from (SELECT split_part(description, '.', 2) AS id, min(duration) AS duration FROM tpcds_reports.sql GROUP BY split_part(description, '.', 2)) as sub")
+else
+  QUERIES_TIME=0
+fi
+
+if [ ${RUN_MULTI_USER} == "true" ]; then
+  CONCURRENT_QUERY_TIME=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select round(sum(extract('epoch' from duration))) from tpcds_testing.sql")
+  THROUGHPUT_ELAPSED_TIME=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select max(end_epoch_seconds) - min(start_epoch_seconds) from tpcds_testing.sql")
+else
+  CONCURRENT_QUERY_TIME=0
+  THROUGHPUT_ELAPSED_TIME=0
+fi
 
 S_Q=${MULTI_USER_COUNT}
 SF=${GEN_DATA_SCALE}
@@ -29,7 +40,7 @@ TLD_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select cast(0.01 as decimal) * 
 
 # Calculate scores using aggregation functions in psql
 SCORE_1_3_1=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select floor(cast(${Q_1_3_1} as decimal) * cast(${SF} as decimal) / (cast(${TPT_1_3_1} as decimal) + cast(${TTT_1_3_1} as decimal) + cast(${TLD_1_3_1} as decimal)))")
-SCORE_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select floor(cast(${Q_2_2_0} as decimal) * cast(${SF} as decimal) / exp((ln(cast(${TPT_2_2_0} as decimal)) + ln(cast(${TTT_2_2_0} as decimal)) + ln(cast(${TLD_2_2_0} as decimal))) / cast(3.0 as decimal)))")
+SCORE_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select floor(cast(${Q_2_2_0} as decimal) * cast(${SF} as decimal) / exp((ln(nullif(cast(${TPT_2_2_0} as decimal), 0)) + ln(nullif(cast(${TTT_2_2_0} as decimal), 0)) + ln(cast(${TLD_2_2_0} as decimal))) / cast(3.0 as decimal)))")
 
 printf -- '-%.0s' {1..80}
 printf "\n"
