@@ -77,7 +77,7 @@ DropRole="DROP ROLE IF EXISTS ${BENCH_ROLE}"
 CreateRole="CREATE ROLE ${BENCH_ROLE}"
 GrantSchemaPrivileges="GRANT ALL PRIVILEGES ON SCHEMA tpcds TO ${BENCH_ROLE}"
 GrantTablePrivileges="GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA tpcds TO ${BENCH_ROLE}"
-SetSearchPath="ALTER database ${ADMIN_USER} SET search_path=tpcds, \"\${user}\", public"
+SetSearchPath="ALTER database ${ADMIN_USER} SET search_path=tpcds, \"\${ADMIN_USER}\", public"
 
 start_log
 
