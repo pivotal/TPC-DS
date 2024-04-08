@@ -1,16 +1,27 @@
 # shellcheck disable=SC2148
 # environment options
-export ADMIN_USER="gpadmin"
+# ADMIN_USER should have equivalent access privilege of gpadmin. eg.
+# 1. Access privilege on gpdata directory and sub-directory on each node.
+# 2. Should have read access to log folder across nodes.
+# 3. user database is created
+# 4. Proper authentications set up in pg_hba.conf
+
+ADMIN_USER=$(whoami)
+export ADMIN_USER
 export BENCH_ROLE="dsbench"
 
 # to connect directly to GP
-export PSQL_OPTIONS="-p 5432"
+export PGPORT="5432"
 # to connect through pgbouncer
-#export PSQL_OPTIONS="-p 6543 -U dsbench"
+# export PGPORT="6543"
+# Add additional PostgreSQL refer:
+# https://www.postgresql.org/docs/current/libpq-envars.html
 
 # benchmark options
 export GEN_DATA_SCALE="1"
 export MULTI_USER_COUNT="2"
+export RNGSEED="1"
+export HEAP_ONLY="false"
 
 # step options
 # step 00_compile_tpcds
@@ -29,12 +40,7 @@ export GEN_NEW_DATA="true"
 export RUN_INIT="true"
 
 # step 03_ddl
-# To run another TPC-DS with a different BENCH_ROLE using existing tables and data
-# change BENCH_ROLE and set RUN_DDL to true and DROP_EXISTING_TABLES to false
-# DROP_EXISTING_TABLES only takes affect when RUN_DDL is true, and the default setting
-# should true under normal circumstances
 export RUN_DDL="true"
-export DROP_EXISTING_TABLES="true"
 
 # step 04_load
 export RUN_LOAD="true"
@@ -63,6 +69,8 @@ export RANDOM_DISTRIBUTION="false"
 # Set gpfdist location where gpfdist will run p (primary) or m (mirror)
 export GPFDIST_LOCATION="p"
 
-export OSVERSION=$(uname)
-export MASTER_HOST=$(hostname -s)
+OSVERSION=$(uname)
+MASTER_HOST=$(hostname -s)
+export OSVERSION
+export MASTER_HOST
 export LD_PRELOAD=/lib64/libz.so.1 ps

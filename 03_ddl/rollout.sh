@@ -1,88 +1,83 @@
 #!/bin/bash
 set -e
 
-PWD=$(get_pwd ${BASH_SOURCE[0]})
+PWD=$(get_pwd "${BASH_SOURCE[0]}")
 
 step="ddl"
-init_log ${step}
+init_log "${step}"
 get_version
 
 filter="gpdb"
 
-if [ "${DROP_EXISTING_TABLES}" == "true" ]; then
-  #Create tables
-  for i in ${PWD}/*.${filter}.*.sql; do
-    start_log
-    id=$(echo ${i} | awk -F '.' '{print $1}')
-    export id
-    schema_name=$(echo ${i} | awk -F '.' '{print $2}')
-    export schema_name
-    table_name=$(echo ${i} | awk -F '.' '{print $3}')
-    export table_name
+#Create tables
+for i in "${PWD}"/*."${filter}".*.sql; do
+  start_log
+  id=$(basename "${i}" | awk -F '.' '{print $1}')
+  schema_name=$(basename "${i}" | awk -F '.' '{print $2}')
+  table_name=$(basename "${i}" | awk -F '.' '{print $3}')
 
-    if [ "${RANDOM_DISTRIBUTION}" == "true" ]; then
-      DISTRIBUTED_BY="DISTRIBUTED RANDOMLY"
-    else
-      for z in $(cat ${PWD}/distribution.txt); do
-        table_name2=$(echo ${z} | awk -F '|' '{print $2}')
-        if [ "${table_name2}" == "${table_name}" ]; then
-          distribution=$(echo ${z} | awk -F '|' '{print $3}')
-        fi
-      done
-      DISTRIBUTED_BY="DISTRIBUTED BY (${distribution})"
-    fi
-
-    log_time "psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f ${i} -v SMALL_STORAGE=\"${SMALL_STORAGE}\" -v MEDIUM_STORAGE=\"${MEDIUM_STORAGE}\" -v LARGE_STORAGE=\"${LARGE_STORAGE}\" -v DISTRIBUTED_BY=\"${DISTRIBUTED_BY}\""
-    psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f ${i} -v SMALL_STORAGE="${SMALL_STORAGE}" -v MEDIUM_STORAGE="${MEDIUM_STORAGE}" -v LARGE_STORAGE="${LARGE_STORAGE}" -v DISTRIBUTED_BY="${DISTRIBUTED_BY}"
-
-    print_log
-  done
-
-  #external tables are the same for all gpdb
-  get_gpfdist_port
-
-  for i in ${PWD}/*.ext_tpcds.*.sql; do
-    start_log
-
-    id=$(echo ${i} | awk -F '.' '{print $1}')
-    schema_name=$(echo ${i} | awk -F '.' '{print $2}')
-    table_name=$(echo ${i} | awk -F '.' '{print $3}')
-
-    counter=0
-
-    if [ "${VERSION}" == "gpdb_6" ]; then
-      SQL_QUERY="select rank() over(partition by g.hostname order by g.datadir), g.hostname from gp_segment_configuration g where g.content >= 0 and g.role = '${GPFDIST_LOCATION}' order by g.hostname"
-    else
-      SQL_QUERY="select rank() over (partition by g.hostname order by p.fselocation), g.hostname from gp_segment_configuration g join pg_filespace_entry p on g.dbid = p.fsedbid join pg_tablespace t on t.spcfsoid = p.fsefsoid where g.content >= 0 and g.role = '${GPFDIST_LOCATION}' and t.spcname = 'pg_default' order by g.hostname"
-    fi
-    for x in $(psql -v ON_ERROR_STOP=1 -q -A -t -c "${SQL_QUERY}"); do
-      CHILD=$(echo ${x} | awk -F '|' '{print $1}')
-      EXT_HOST=$(echo ${x} | awk -F '|' '{print $2}')
-      PORT=$((GPFDIST_PORT + CHILD))
-
-      if [ "${counter}" -eq "0" ]; then
-        LOCATION="'"
-      else
-        LOCATION+="', '"
+  if [ "${RANDOM_DISTRIBUTION}" == "true" ]; then
+    DISTRIBUTED_BY="DISTRIBUTED RANDOMLY"
+  else
+    while IFS= read -r z; do
+      table_name2=$(echo "${z}" | awk -F '|' '{print $2}')
+      if [ "${table_name2}" == "${table_name}" ]; then
+        distribution=$(echo "${z}" | awk -F '|' '{print $3}')
       fi
-      LOCATION+="gpfdist://${EXT_HOST}:${PORT}/${table_name}_[0-9]*_[0-9]*.dat"
+    done < "${PWD}"/distribution.txt
+    DISTRIBUTED_BY="DISTRIBUTED BY (${distribution})"
+  fi
 
-      counter=$((counter + 1))
-    done
-    LOCATION+="'"
+  log_time "psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f ${i} -v SMALL_STORAGE=\"${SMALL_STORAGE}\" -v MEDIUM_STORAGE=\"${MEDIUM_STORAGE}\" -v LARGE_STORAGE=\"${LARGE_STORAGE}\" -v DISTRIBUTED_BY=\"${DISTRIBUTED_BY}\""
+  psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f "${i}" -v SMALL_STORAGE="${SMALL_STORAGE}" -v MEDIUM_STORAGE="${MEDIUM_STORAGE}" -v LARGE_STORAGE="${LARGE_STORAGE}" -v DISTRIBUTED_BY="${DISTRIBUTED_BY}"
 
-    log_time "psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f ${i} -v LOCATION=\"${LOCATION}\""
-    psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f ${i} -v LOCATION="${LOCATION}"
+  print_log "${id}" "${schema_name}" "${table_name}" "0"
+done
 
-    print_log
+#external tables are the same for all gpdb
+get_gpfdist_port
+
+for i in "${PWD}"/*.ext_tpcds.*.sql; do
+  start_log
+
+  id=$(basename "${i}" | awk -F '.' '{print $1}')
+  schema_name=$(basename "${i}" | awk -F '.' '{print $2}')
+  table_name=$(basename "${i}" | awk -F '.' '{print $3}')
+
+  counter=0
+
+  if [ "${VERSION}" == "gpdb_6" ] || [ "${VERSION}" == "gpdb_7" ]; then
+    SQL_QUERY="select rank() over(partition by g.hostname order by g.datadir), g.hostname from gp_segment_configuration g where g.content >= 0 and g.role = '${GPFDIST_LOCATION}' order by g.hostname"
+  else
+    SQL_QUERY="select rank() over (partition by g.hostname order by p.fselocation), g.hostname from gp_segment_configuration g join pg_filespace_entry p on g.dbid = p.fsedbid join pg_tablespace t on t.spcfsoid = p.fsefsoid where g.content >= 0 and g.role = '${GPFDIST_LOCATION}' and t.spcname = 'pg_default' order by g.hostname"
+  fi
+  for x in $(psql -v ON_ERROR_STOP=1 -q -A -t -c "${SQL_QUERY}"); do
+    CHILD=$(echo "${x}" | awk -F '|' '{print $1}')
+    EXT_HOST=$(echo "${x}" | awk -F '|' '{print $2}')
+    PORT=$((GPFDIST_PORT + CHILD))
+
+    if [ "${counter}" -eq "0" ]; then
+      LOCATION="'"
+    else
+      LOCATION+="', '"
+    fi
+    LOCATION+="gpfdist://${EXT_HOST}:${PORT}/${table_name}_[0-9]*_[0-9]*.dat"
+
+    counter=$((counter + 1))
   done
-fi
+  LOCATION+="'"
+
+  log_time "psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f ${i} -v LOCATION=\"${LOCATION}\""
+  psql -v ON_ERROR_STOP=1 -q -a -P pager=off -f "${i}" -v LOCATION="${LOCATION}"
+
+  print_log "${id}" "${schema_name}" "${table_name}" "0"
+done
 
 DropRole="DROP ROLE IF EXISTS ${BENCH_ROLE}"
 CreateRole="CREATE ROLE ${BENCH_ROLE}"
 GrantSchemaPrivileges="GRANT ALL PRIVILEGES ON SCHEMA tpcds TO ${BENCH_ROLE}"
 GrantTablePrivileges="GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA tpcds TO ${BENCH_ROLE}"
-SetSearchPath="ALTER database ${PGDATABASE} SET search_path=tpcds, \"\${user}\", public"
+SetSearchPath="ALTER database ${ADMIN_USER} SET search_path=tpcds, \"\${ADMIN_USER}\", public"
 
 start_log
 
@@ -97,9 +92,10 @@ if [ "${BENCH_ROLE}" != "${ADMIN_USER}" ]; then
   psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${GrantTablePrivileges}"
 fi
 
-log_time "Set search_path for database ${PGDATABASE}"
+log_time "Set search_path for database ${ADMIN_USER}"
+
 psql -v ON_ERROR_STOP=0 -q -P pager=off -c "${SetSearchPath}"
 
-print_log
+print_log "${id}" "${schema_name}" "${table_name}" "0"
 
-echo "Finished ${step}"
+end_step $step

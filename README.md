@@ -9,7 +9,7 @@ This repo contains automation of running the DS benchmark against an existing Gr
 ## Context
 ### Supported Greenplum Versions
 
-- [VMware Tanzu Greenplum](https://network.tanzu.vmware.com/products/vmware-tanzu-greenplum/) `4.3.x`, `5.x`, `6.x`
+- [VMware Greenplum](https://network.tanzu.vmware.com/products/vmware-tanzu-greenplum/) `4.3.x`, `5.x`, `6.x`, `7.x`
 - [Open Source Greenplum Databases](https://network.tanzu.vmware.com/products/greenplum-database/) `5.x`, `6.x`
 
 ### Supported TPC-DS Versions
@@ -35,6 +35,13 @@ These are the combined versions of TPC-DS and Greenplum:
 2. `${PGDATABASE}` database(default `gpadmin`) is created
 3. `root` access on the master node `mdw` for installing dependencies
 4. `ssh` connections between `mdw` and the segment nodes `sdw1..n`
+
+User other than gpadmin can also execute this script provided `ADMIN_USER` should have equivalent access privilege of gpadmin. eg.
+1. Access privilege on gpdata directory and sub-directory on each node
+2. Should have read access to `TPC-DS/log` folder across nodes
+3. `ADMIN_USER` database is created
+4. Proper authentications set up in pg_hba.conf
+
 
 All the following examples are using standard host name convention of Greenplum using `mdw` for master node, and `sdw1..n` for the segment nodes.
 
@@ -65,6 +72,7 @@ curl -LO https://github.com/pivotal/TPC-DS/archive/refs/tags/v3.3.0.tar.gz
 tar xzf v3.3.0.tar.gz
 mv TPC-DS-3.3.0 TPC-DS
 ```
+**NOTE:** default `ADMIN_USER` is assumed to be `gpadmin`
 
 ## Usage
 
@@ -75,6 +83,7 @@ ssh ${ADMIN_USER}@mdw
 cd ~/TPC-DS
 ./tpcds.sh
 ```
+**NOTE:** default `ADMIN_USER` is assumed to be `gpadmin`
 
 By default, it will run a scale 1 (1G) and with 2 concurrent users, from data generation to score computation.
 
@@ -86,11 +95,13 @@ This is the default example at [tpcds_variables.sh](https://github.com/pivotal/T
 
 ```shell
 # environment options
-ADMIN_USER="gpadmin"
+ADMIN_USER=`whoami`
 
 # benchmark options
 GEN_DATA_SCALE="1"
 MULTI_USER_COUNT="2"
+RNGSEED="1"
+HEAP_ONLY="false"
 
 # step options
 RUN_COMPILE_TPCDS="true"
@@ -128,12 +139,25 @@ These are the setup related variables:
 
 In most cases, we just leave them to the default.
 
+#### PSQL Environment Options
+
+```shell
+export PGPORT="6543"
+# Add additional PostgreSQL refer:
+# https://www.postgresql.org/docs/current/libpq-envars.html
+```
+
+TPC-DS uses `psql` command, which interally uses `libpq`, to connect to the database.
+`libpq` provides environment variables that can override the default connection parameter values, which will be used by PQconnectdb, PQsetdbLogin and PQsetdb if no value is directly specified by the calling code.
+
 #### Benchmark Options
 
 ```shell
 # benchmark options
 GEN_DATA_SCALE="1"
 MULTI_USER_COUNT="2"
+RNGSEED="1"
+HEAP_ONLY="false"
 ```
 
 These are the benchmark controlling variables:
@@ -142,7 +166,12 @@ These are the benchmark controlling variables:
 - `MULTI_USER_COUNT`: default `2`.
   It's also usually referred as `CU`, i.e. concurrent user.
   It controls how many concurrent streams to run during the throughput run.
-
+- `RNGSEED`: default `1`.
+  This will generate deterministic data and queries, to reduce variance between runs due to data and query variations.
+  Change this value to generate a different distribution to avoid over-tuning for a specific distribution.
+- `HEAP_ONLY`: default `false`.
+  When `false`, the benchmark will run with `append-optimized` table storage type.
+  When `true`, the benchmark will run with heap table storage type.
 
 If evaluating Greenplum cluster across different platforms, we recommend to change this section to 3TB with 5CU:
 ```shell
@@ -245,6 +274,23 @@ Example of running the benchmark as `root` as a background process:
 ```bash
 nohup ./tpcds.sh &> tpcds.log &
 ```
+
+## Minumum Required Query Streams
+
+According to https://www.tpc.org/tpcds/presentations/the_making_of_tpcds.pdf,
+but not in the TPC-DS specification,
+figure 12 indicates the following minimum query streams by the scale factor.
+
+| Scale Factor | Minimum Number of Streams |
+|-|-|
+| 100 | 3 |
+| 300 | 5 |
+| 1,000 | 7 |
+| 3,000 | 9 |
+| 10,000 | 11 |
+| 30,000 | 13 |
+| 100,000 | 15 |
+
 
 ## Benchmark Minor Modifications
 

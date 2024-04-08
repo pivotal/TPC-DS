@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-PWD=$(get_pwd ${BASH_SOURCE[0]})
+PWD=$(get_pwd "${BASH_SOURCE[0]}")
 
 step="score"
 init_log ${step}
@@ -31,13 +31,26 @@ TLD_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select cast(0.01 as decimal) * 
 SCORE_1_3_1=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select floor(cast(${Q_1_3_1} as decimal) * cast(${SF} as decimal) / (cast(${TPT_1_3_1} as decimal) + cast(${TTT_1_3_1} as decimal) + cast(${TLD_1_3_1} as decimal)))")
 SCORE_2_2_0=$(psql -v ON_ERROR_STOP=1 -q -t -A -c "select floor(cast(${Q_2_2_0} as decimal) * cast(${SF} as decimal) / exp((ln(cast(${TPT_2_2_0} as decimal)) + ln(cast(${TTT_2_2_0} as decimal)) + ln(cast(${TLD_2_2_0} as decimal))) / cast(3.0 as decimal)))")
 
+printf -- '-%.0s' {1..80}
+printf "\n"
+printf "Linux Kernel Version: %s\n" "$(uname -a)"
+printf "Greenplum Version: %s\n" "$("${GPHOME}"/bin/postgres --gp-version)"
+
+printf -- '-%.0s' {1..80}
+printf "\n"
+printf "Postgres Configuration:\n %s\n" "$("${GPHOME}"/bin/pg_config)"
+
+printf -- '-%.0s' {1..80}
+printf "\n"
 printf "Number of Streams (Sq)\t%d\n" "${S_Q}"
 printf "Scale Factor (SF)\t%d\n" "${SF}"
-printf "Load\t\t\t%d\n" "${LOAD_TIME}"
-printf "Analyze\t\t\t%d\n" "${ANALYZE_TIME}"
-printf "1 User Queries\t\t%d\n" "${QUERIES_TIME}"
-printf "Concurrent Queries\t%d\n" "${CONCURRENT_QUERY_TIME}"
-printf "Throughput Test Elapsed Time\t%d\n" "${THROUGHPUT_ELAPSED_TIME}"
+printf "Load (seconds)\t\t\t%d\n" "${LOAD_TIME}"
+printf "Analyze (seconds)\t\t\t%d\n" "${ANALYZE_TIME}"
+printf "1 User Queries (seconds)\t\t%d\n" "${QUERIES_TIME}"
+printf "Sum of Elapse Time for all Concurrent Queries (seconds)\t%d\n" "${CONCURRENT_QUERY_TIME}"
+printf "Throughput Test Elapsed Time (seconds)\t%d\n" "${THROUGHPUT_ELAPSED_TIME}"
+
+printf -- '-%.0s' {1..80}
 printf "\n"
 printf "TPC-DS v1.3.1 (QphDS@SF = floor(SF * Q / sum(TPT, TTT, TLD)))\n"
 printf "Q (3 * Sq * 99)\t\t%d\n" "${Q_1_3_1}"
@@ -45,6 +58,8 @@ printf "TPT (seconds)\t\t%d\n" "${TPT_1_3_1}"
 printf "TTT (seconds)\t\t%d\n" "${TTT_1_3_1}"
 printf "TLD (seconds)\t\t%d\n" "${TLD_1_3_1}"
 printf "Score\t\t\t%d\n" "${SCORE_1_3_1}"
+
+printf -- '-%.0s' {1..80}
 printf "\n"
 printf "TPC-DS v2.2.0 (QphDS@SF = floor(SF * Q / geomean(TPT, TTT, TLD)))\n"
 printf "Q (Sq * 99)\t\t%d\n" "${Q_2_2_0}"
@@ -52,5 +67,7 @@ printf "TPT (hours)\t\t%.3f\n" "${TPT_2_2_0}"
 printf "TTT (hours)\t\t%.3f\n" "${TTT_2_2_0}"
 printf "TLD (hours)\t\t%.3f\n" "${TLD_2_2_0}"
 printf "Score\t\t\t%d\n" "${SCORE_2_2_0}"
+printf -- '-%.0s' {1..80}
+printf "\n"
 
-echo "Finished ${step}"
+end_step $step
