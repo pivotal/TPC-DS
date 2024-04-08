@@ -16,6 +16,8 @@ export PGPORT="5432"
 # export PGPORT="6543"
 # Add additional PostgreSQL refer:
 # https://www.postgresql.org/docs/current/libpq-envars.html
+export PGOPTIONS=""
+export PGDATABASE="${ADMIN_USER}"
 
 # benchmark options
 export GEN_DATA_SCALE="1"

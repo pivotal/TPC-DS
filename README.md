@@ -68,9 +68,9 @@ Visit the repo at https://github.com/pivotal/TPC-DS/releases and download the ta
 
 ```bash
 ssh ${ADMIN_USER}@mdw
-curl -LO https://github.com/pivotal/TPC-DS/archive/refs/tags/v3.3.0.tar.gz
-tar xzf v3.3.0.tar.gz
-mv TPC-DS-3.3.0 TPC-DS
+curl -LO https://github.com/pivotal/TPC-DS/archive/refs/tags/v3.7.0.tar.gz
+tar xzf v3.7.0.tar.gz
+mv TPC-DS-3.7.0 TPC-DS
 ```
 **NOTE:** default `ADMIN_USER` is assumed to be `gpadmin`
 
@@ -96,6 +96,9 @@ This is the default example at [tpcds_variables.sh](https://github.com/pivotal/T
 ```shell
 # environment options
 ADMIN_USER=`whoami`
+BENCH_ROLE="dsbench"
+PGOPTIONS=""
+PGDATABASE=`whoami`
 
 # benchmark options
 GEN_DATA_SCALE="1"
@@ -145,6 +148,8 @@ In most cases, we just leave them to the default.
 export PGPORT="6543"
 # Add additional PostgreSQL refer:
 # https://www.postgresql.org/docs/current/libpq-envars.html
+export PGOPTIONS=""
+export PGDATABASE="${ADMIN_USER}"
 ```
 
 TPC-DS uses `psql` command, which interally uses `libpq`, to connect to the database.
