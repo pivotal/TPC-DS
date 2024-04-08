@@ -89,6 +89,22 @@ By default, it will run a scale 1 (1G) and with 2 concurrent users, from data ge
 
 ### Configuration Options
 
+We must set some environment variables by changing the `~/.bashrc`, the following
+is an example:
+
+```bash
+# source greenplum environment
+source /path/to/greenplum_path.sh
+source /path/to/gpAux/gpdemo/gpdemo-env.sh
+
+# psql environment options
+export PGHOST=localhost # feel free to change it
+export PGPORT=$PGPORT # feel free to change it, PGPORT from gpdemo-env.sh
+export PGUSER=$USER # feel free to change it
+export PGDATABASE=gpadmin # NOTE please don't change it!
+export GPFDIST_PORT=28500 # feel free to change it
+```
+
 By changing the `tpcds_variables.sh`, we can control how this benchmark will run.
 
 This is the default example at [tpcds_variables.sh](https://github.com/pivotal/TPC-DS/blob/main/tpcds_variables.sh)
